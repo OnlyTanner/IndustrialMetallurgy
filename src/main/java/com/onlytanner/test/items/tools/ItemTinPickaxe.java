@@ -6,13 +6,12 @@ import com.onlytanner.test.init.ModItems;
 
 import net.minecraft.item.ItemPickaxe;
 
-public class ItemTinPickaxe extends ItemPickaxe
-{
-	public ItemTinPickaxe() 
-	{
-		super(ModItems.TIN);
-		setUnlocalizedName(Reference.TestModItems.TIN_PICKAXE.getUnlocalizedName());
-		setRegistryName(Reference.TestModItems.TIN_PICKAXE.getRegistryName());
-		setCreativeTab(TestMod.TOOLS_TAB);
-	}
+public class ItemTinPickaxe extends ItemPickaxe {
+
+    public ItemTinPickaxe() {
+        super(ModItems.TIN);
+        setUnlocalizedName(Reference.TestModItems.TIN_PICKAXE.getUnlocalizedName());
+        setRegistryName(Reference.TestModItems.TIN_PICKAXE.getRegistryName());
+        setCreativeTab(TestMod.TOOLS_TAB);
+    }
 }

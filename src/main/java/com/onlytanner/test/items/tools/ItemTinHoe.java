@@ -6,13 +6,12 @@ import com.onlytanner.test.init.ModItems;
 
 import net.minecraft.item.ItemHoe;
 
-public class ItemTinHoe extends ItemHoe
-{
-	public ItemTinHoe() 
-	{
-		super(ModItems.TIN);
-		setUnlocalizedName(Reference.TestModItems.TIN_HOE.getUnlocalizedName());
-		setRegistryName(Reference.TestModItems.TIN_HOE.getRegistryName());
-		setCreativeTab(TestMod.TOOLS_TAB);
-	}
+public class ItemTinHoe extends ItemHoe {
+
+    public ItemTinHoe() {
+        super(ModItems.TIN);
+        setUnlocalizedName(Reference.TestModItems.TIN_HOE.getUnlocalizedName());
+        setRegistryName(Reference.TestModItems.TIN_HOE.getRegistryName());
+        setCreativeTab(TestMod.TOOLS_TAB);
+    }
 }

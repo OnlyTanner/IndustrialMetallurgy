@@ -6,13 +6,12 @@ import com.onlytanner.test.init.ModItems;
 
 import net.minecraft.item.ItemAxe;
 
-public class ItemBronzeAxe extends ItemAxe
-{
-	public ItemBronzeAxe() 
-	{
-		super(ModItems.BRONZE, ModItems.BRONZE.getDamageVsEntity(), ModItems.BRONZE.getEfficiencyOnProperMaterial());
-		setUnlocalizedName(Reference.TestModItems.BRONZE_AXE.getUnlocalizedName());
-		setRegistryName(Reference.TestModItems.BRONZE_AXE.getRegistryName());
-		setCreativeTab(TestMod.TOOLS_TAB);
-	}
+public class ItemBronzeAxe extends ItemAxe {
+
+    public ItemBronzeAxe() {
+        super(ModItems.BRONZE, ModItems.BRONZE.getDamageVsEntity(), ModItems.BRONZE.getEfficiencyOnProperMaterial());
+        setUnlocalizedName(Reference.TestModItems.BRONZE_AXE.getUnlocalizedName());
+        setRegistryName(Reference.TestModItems.BRONZE_AXE.getRegistryName());
+        setCreativeTab(TestMod.TOOLS_TAB);
+    }
 }

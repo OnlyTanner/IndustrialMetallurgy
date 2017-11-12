@@ -5,12 +5,11 @@ import com.onlytanner.test.TestMod;
 
 import net.minecraft.item.Item;
 
-public class ItemBrassIngot extends Item 
-{
-	public ItemBrassIngot()
-	{
-		setUnlocalizedName(Reference.TestModItems.BRASS_INGOT.getUnlocalizedName());
-		setRegistryName(Reference.TestModItems.BRASS_INGOT.getRegistryName());
-		setCreativeTab(TestMod.RESOURCES_TAB);
-	}
+public class ItemBrassIngot extends Item {
+
+    public ItemBrassIngot() {
+        setUnlocalizedName(Reference.TestModItems.BRASS_INGOT.getUnlocalizedName());
+        setRegistryName(Reference.TestModItems.BRASS_INGOT.getRegistryName());
+        setCreativeTab(TestMod.RESOURCES_TAB);
+    }
 }

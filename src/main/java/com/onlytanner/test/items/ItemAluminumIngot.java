@@ -5,12 +5,11 @@ import com.onlytanner.test.TestMod;
 
 import net.minecraft.item.Item;
 
-public class ItemAluminumIngot extends Item 
-{
-	public ItemAluminumIngot()
-	{
-		setUnlocalizedName(Reference.TestModItems.ALUMINUM_INGOT.getUnlocalizedName());
-		setRegistryName(Reference.TestModItems.ALUMINUM_INGOT.getRegistryName());
-		setCreativeTab(TestMod.RESOURCES_TAB);
-	}
+public class ItemAluminumIngot extends Item {
+
+    public ItemAluminumIngot() {
+        setUnlocalizedName(Reference.TestModItems.ALUMINUM_INGOT.getUnlocalizedName());
+        setRegistryName(Reference.TestModItems.ALUMINUM_INGOT.getRegistryName());
+        setCreativeTab(TestMod.RESOURCES_TAB);
+    }
 }

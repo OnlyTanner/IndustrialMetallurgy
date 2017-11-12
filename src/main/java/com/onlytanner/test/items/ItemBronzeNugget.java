@@ -5,12 +5,11 @@ import com.onlytanner.test.TestMod;
 
 import net.minecraft.item.Item;
 
-public class ItemBronzeNugget extends Item 
-{
-	public ItemBronzeNugget()
-	{
-		setUnlocalizedName(Reference.TestModItems.BRONZE_NUGGET.getUnlocalizedName());
-		setRegistryName(Reference.TestModItems.BRONZE_NUGGET.getRegistryName());
-		setCreativeTab(TestMod.RESOURCES_TAB);
-	}
+public class ItemBronzeNugget extends Item {
+
+    public ItemBronzeNugget() {
+        setUnlocalizedName(Reference.TestModItems.BRONZE_NUGGET.getUnlocalizedName());
+        setRegistryName(Reference.TestModItems.BRONZE_NUGGET.getRegistryName());
+        setCreativeTab(TestMod.RESOURCES_TAB);
+    }
 }

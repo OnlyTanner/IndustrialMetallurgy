@@ -6,13 +6,12 @@ import com.onlytanner.test.init.ModItems;
 
 import net.minecraft.item.ItemSword;
 
-public class ItemTinSword extends ItemSword
-{
-	public ItemTinSword() 
-	{
-		super(ModItems.TIN);
-		setUnlocalizedName(Reference.TestModItems.TIN_SWORD.getUnlocalizedName());
-		setRegistryName(Reference.TestModItems.TIN_SWORD.getRegistryName());
-		setCreativeTab(TestMod.TOOLS_TAB);
-	}
+public class ItemTinSword extends ItemSword {
+
+    public ItemTinSword() {
+        super(ModItems.TIN);
+        setUnlocalizedName(Reference.TestModItems.TIN_SWORD.getUnlocalizedName());
+        setRegistryName(Reference.TestModItems.TIN_SWORD.getRegistryName());
+        setCreativeTab(TestMod.TOOLS_TAB);
+    }
 }

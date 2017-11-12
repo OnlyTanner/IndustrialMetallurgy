@@ -16,21 +16,19 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemFishFood;
 import net.minecraft.item.ItemStack;
 
-public class CrusherRecipes
-{
+public class CrusherRecipes {
+
     private static final CrusherRecipes CRUSHING_BASE = new CrusherRecipes();
     private final Map<ItemStack, ItemStack> crushingList = Maps.<ItemStack, ItemStack>newHashMap();
 
     /**
      * Returns an instance of CrusherRecipes.
      */
-    public static CrusherRecipes instance()
-    {
+    public static CrusherRecipes instance() {
         return CRUSHING_BASE;
     }
 
-    private CrusherRecipes()
-    {
+    private CrusherRecipes() {
         this.addCrushingRecipe(new ItemStack(ModBlocks.bauxite_ore), new ItemStack(ModItems.crushed_bauxite_ore, 2));
         this.addCrushingRecipe(new ItemStack(ModBlocks.cassiterite_ore), new ItemStack(ModItems.crushed_cassiterite_ore, 2));
         this.addCrushingRecipe(new ItemStack(ModBlocks.chromite_ore), new ItemStack(ModItems.crushed_chromite_ore, 2));
@@ -53,9 +51,11 @@ public class CrusherRecipes
     /**
      * Adds a crushing recipe using an ItemStack as the input for the recipe.
      */
-    public void addCrushingRecipe(ItemStack input, ItemStack stack)
-    {
-        if (getCrushingResult(input) != null) { net.minecraftforge.fml.common.FMLLog.info("Ignored crushing recipe with conflicting input: " + input + " = " + stack); return; }
+    public void addCrushingRecipe(ItemStack input, ItemStack stack) {
+        if (getCrushingResult(input) != null) {
+            net.minecraftforge.fml.common.FMLLog.info("Ignored crushing recipe with conflicting input: " + input + " = " + stack);
+            return;
+        }
         this.crushingList.put(input, stack);
     }
 
@@ -63,13 +63,10 @@ public class CrusherRecipes
      * Returns the crushing result of an item.
      */
     @Nullable
-    public ItemStack getCrushingResult(ItemStack stack)
-    {
-        for (Entry<ItemStack, ItemStack> entry : this.crushingList.entrySet())
-        {
-            if (this.compareItemStacks(stack, (ItemStack)entry.getKey()))
-            {
-                return (ItemStack)entry.getValue();
+    public ItemStack getCrushingResult(ItemStack stack) {
+        for (Entry<ItemStack, ItemStack> entry : this.crushingList.entrySet()) {
+            if (this.compareItemStacks(stack, (ItemStack) entry.getKey())) {
+                return (ItemStack) entry.getValue();
             }
         }
 
@@ -77,15 +74,14 @@ public class CrusherRecipes
     }
 
     /**
-     * Compares two itemstacks to ensure that they are the same. This checks both the item and the metadata of the item.
+     * Compares two itemstacks to ensure that they are the same. This checks
+     * both the item and the metadata of the item.
      */
-    private boolean compareItemStacks(ItemStack stack1, ItemStack stack2)
-    {
+    private boolean compareItemStacks(ItemStack stack1, ItemStack stack2) {
         return stack2.getItem() == stack1.getItem() && (stack2.getMetadata() == 32767 || stack2.getMetadata() == stack1.getMetadata());
     }
 
-    public Map<ItemStack, ItemStack> getCrushingList()
-    {
+    public Map<ItemStack, ItemStack> getCrushingList() {
         return this.crushingList;
     }
 }

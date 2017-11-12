@@ -6,13 +6,12 @@ import com.onlytanner.test.init.ModItems;
 
 import net.minecraft.item.ItemAxe;
 
-public class ItemTitaniumAxe extends ItemAxe
-{
-	public ItemTitaniumAxe() 
-	{
-		super(ModItems.TITANIUM, ModItems.TITANIUM.getDamageVsEntity(), ModItems.TITANIUM.getEfficiencyOnProperMaterial());
-		setUnlocalizedName(Reference.TestModItems.TITANIUM_AXE.getUnlocalizedName());
-		setRegistryName(Reference.TestModItems.TITANIUM_AXE.getRegistryName());
-		setCreativeTab(TestMod.TOOLS_TAB);
-	}
+public class ItemTitaniumAxe extends ItemAxe {
+
+    public ItemTitaniumAxe() {
+        super(ModItems.TITANIUM, ModItems.TITANIUM.getDamageVsEntity(), ModItems.TITANIUM.getEfficiencyOnProperMaterial());
+        setUnlocalizedName(Reference.TestModItems.TITANIUM_AXE.getUnlocalizedName());
+        setRegistryName(Reference.TestModItems.TITANIUM_AXE.getRegistryName());
+        setCreativeTab(TestMod.TOOLS_TAB);
+    }
 }

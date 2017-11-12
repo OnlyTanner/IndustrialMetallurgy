@@ -6,13 +6,12 @@ import com.onlytanner.test.init.ModItems;
 
 import net.minecraft.item.ItemAxe;
 
-public class ItemNitinolAxe extends ItemAxe
-{
-	public ItemNitinolAxe() 
-	{
-		super(ModItems.NITINOL, ModItems.NITINOL.getDamageVsEntity(), ModItems.NITINOL.getEfficiencyOnProperMaterial());
-		setUnlocalizedName(Reference.TestModItems.NITINOL_AXE.getUnlocalizedName());
-		setRegistryName(Reference.TestModItems.NITINOL_AXE.getRegistryName());
-		setCreativeTab(TestMod.TOOLS_TAB);
-	}
+public class ItemNitinolAxe extends ItemAxe {
+
+    public ItemNitinolAxe() {
+        super(ModItems.NITINOL, ModItems.NITINOL.getDamageVsEntity(), ModItems.NITINOL.getEfficiencyOnProperMaterial());
+        setUnlocalizedName(Reference.TestModItems.NITINOL_AXE.getUnlocalizedName());
+        setRegistryName(Reference.TestModItems.NITINOL_AXE.getRegistryName());
+        setCreativeTab(TestMod.TOOLS_TAB);
+    }
 }

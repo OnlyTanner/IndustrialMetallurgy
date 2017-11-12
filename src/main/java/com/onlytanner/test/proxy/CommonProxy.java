@@ -1,6 +1,6 @@
 package com.onlytanner.test.proxy;
 
-public interface CommonProxy 
-{
-	public void init();
+public interface CommonProxy {
+
+    public void init();
 }

@@ -6,13 +6,12 @@ import com.onlytanner.test.init.ModItems;
 
 import net.minecraft.item.ItemSpade;
 
-public class ItemBrassShovel extends ItemSpade
-{
-	public ItemBrassShovel() 
-	{
-		super(ModItems.BRASS);
-		setUnlocalizedName(Reference.TestModItems.BRASS_SHOVEL.getUnlocalizedName());
-		setRegistryName(Reference.TestModItems.BRASS_SHOVEL.getRegistryName());
-		setCreativeTab(TestMod.TOOLS_TAB);
-	}
+public class ItemBrassShovel extends ItemSpade {
+
+    public ItemBrassShovel() {
+        super(ModItems.BRASS);
+        setUnlocalizedName(Reference.TestModItems.BRASS_SHOVEL.getUnlocalizedName());
+        setRegistryName(Reference.TestModItems.BRASS_SHOVEL.getRegistryName());
+        setCreativeTab(TestMod.TOOLS_TAB);
+    }
 }

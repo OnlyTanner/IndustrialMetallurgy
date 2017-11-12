@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": {"model": "testmod:lit_forge_tier1"},
+        "facing=east":  {"model": "testmod:lit_forge_tier1", "y": 90 },
+        "facing=south": {"model": "testmod:lit_forge_tier1", "y": 180 },
+        "facing=west":  {"model": "testmod:lit_forge_tier1", "y": 270 }
+    }
+}

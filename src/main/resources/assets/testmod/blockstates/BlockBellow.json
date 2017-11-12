@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "testmod:bellow" }, 
+        "facing=east":  { "model": "testmod:bellow", "y": 90  }, 
+        "facing=south": { "model": "testmod:bellow", "y": 180 }, 
+        "facing=west":  { "model": "testmod:bellow", "y": 270 } 
+    }
+}

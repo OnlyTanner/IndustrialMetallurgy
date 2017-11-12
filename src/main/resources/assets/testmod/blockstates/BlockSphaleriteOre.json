@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": { "model": "testmod:sphalerite_ore" }
+    }
+}

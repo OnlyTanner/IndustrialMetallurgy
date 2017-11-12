@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": {"model": "testmod:iron_forge"},
+        "facing=east":  {"model": "testmod:iron_forge", "y": 90 },
+        "facing=south": {"model": "testmod:iron_forge", "y": 180 },
+        "facing=west":  {"model": "testmod:iron_forge", "y": 270 }
+    }
+}

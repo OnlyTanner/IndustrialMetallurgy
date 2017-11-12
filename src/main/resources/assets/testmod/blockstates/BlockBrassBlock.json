@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": { "model": "testmod:brass_block" }
+    }
+}

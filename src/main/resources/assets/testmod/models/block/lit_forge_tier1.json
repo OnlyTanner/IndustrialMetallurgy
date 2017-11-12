@@ -1,0 +1,11 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "testmod:blocks/iron_forge_top_on",
+		"bottom": "blocks/iron_block",
+        "north": "testmod:blocks/iron_forge_front_on",
+        "east": "testmod:blocks/iron_forge_side",
+		"west": "testmod:blocks/iron_forge_side",
+		"south": "blocks/iron_block"
+    }
+}

@@ -1,0 +1,15 @@
+[
+{
+  "modid": "testmod",
+  "name": "Test Mod",
+  "description": "It's a test.",
+  "version": "1.0-alpha",
+  "mcversion": "1.10.2",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Onlytanner"],
+  "logoFile": "mod_logo.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]

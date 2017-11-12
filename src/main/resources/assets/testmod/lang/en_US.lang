@@ -1,0 +1,150 @@
+item.aluminum_ingot.name=Aluminum Ingot
+item.brass_ingot.name=Brass Ingot
+item.bronze_ingot.name=Bronze Ingot
+item.chromium_ingot.name=Chromium Ingot
+item.copper_ingot.name=Copper Ingot
+item.invar_ingot.name=Invar Ingot
+item.nichrome_ingot.name=Nichrome Ingot
+item.nickel_ingot.name=Nickel Ingot
+item.nitinol_ingot.name=Nitinol Ingot
+item.steel_ingot.name=Steel Ingot
+item.tin_ingot.name=Tin Ingot
+item.titanium_ingot.name=Titanium Ingot
+item.zinc_ingot.name=Zinc Ingot
+
+item.aluminum_nugget.name=Aluminum Nugget
+item.brass_nugget.name=Brass Nugget
+item.bronze_nugget.name=Bronze Nugget
+item.chromium_nugget.name=Chromium Nugget
+item.copper_nugget.name=Copper Nugget
+item.invar_nugget.name=Invar Nugget
+item.iron_nugget.name=Iron Nugget
+item.nichrome_nugget.name=Nichrome Nugget
+item.nickel_nugget.name=Nickel Nugget
+item.nitinol_nugget.name=Nitinol Nugget
+item.steel_nugget.name=Steel Nugget
+item.tin_nugget.name=Tin Nugget
+item.titanium_nugget.name=Titanium Nugget
+item.zinc_nugget.name=Zinc Nugget
+
+item.aluminum_sword.name=Aluminum Sword
+item.aluminum_pickaxe.name=Aluminum Pickaxe
+item.aluminum_shovel.name=Aluminum Shovel
+item.aluminum_axe.name=Aluminum Axe
+item.aluminum_hoe.name=Aluminum Hoe
+
+item.brass_sword.name=Brass Sword
+item.brass_pickaxe.name=Brass Pickaxe
+item.brass_shovel.name=Brass Shovel
+item.brass_axe.name=Brass Axe
+item.brass_hoe.name=Brass Hoe
+
+item.bronze_sword.name=Bronze Sword
+item.bronze_pickaxe.name=Bronze Pickaxe
+item.bronze_shovel.name=Bronze Shovel
+item.bronze_axe.name=Bronze Axe
+item.bronze_hoe.name=Bronze Hoe
+
+item.chromium_sword.name=Chromium Sword 
+item.chromium_pickaxe.name=Chromium Pickaxe 
+item.chromium_shovel.name=Chromium Shovel
+item.chromium_axe.name=Chromium Axe
+item.chromium_hoe.name=Chromium Hoe
+
+item.copper_sword.name=Copper Sword
+item.copper_pickaxe.name=Copper Pickaxe
+item.copper_shovel.name=Copper Shovel
+item.copper_axe.name=Copper Axe
+item.copper_hoe.name=Copper Hoe
+
+item.invar_sword.name=Invar Sword
+item.invar_pickaxe.name=Invar Pickaxe
+item.invar_shovel.name=Invar Shovel
+item.invar_axe.name=Invar Axe
+item.invar_hoe.name=Invar Hoe
+
+item.nichrome_sword.name=Nichrome Sword
+item.nichrome_pickaxe.name=Nichrome Pickaxe
+item.nichrome_shovel.name=Nichrome Shovel
+item.nichrome_axe.name=Nichrome Axe
+item.nichrome_hoe.name=Nichrome Hoe
+
+item.nickel_sword.name=Nickel Sword
+item.nickel_pickaxe.name=Nickel Pickaxe
+item.nickel_shovel.name=Nickel Shovel
+item.nickel_axe.name=Nickel Axe
+item.nickel_hoe.name=Nickel Hoe
+
+item.nitinol_sword.name=Nitinol Sword
+item.nitinol_pickaxe.name=Nitinol Pickaxe
+item.nitinol_shovel.name=Nitinol Shovel
+item.nitinol_axe.name=Nitinol Axe
+item.nitinol_hoe.name=Nitinol Hoe
+
+item.steel_sword.name=Steel Sword
+item.steel_pickaxe.name=Steel Pickaxe
+item.steel_shovel.name=Steel Shovel
+item.steel_axe.name=Steel Axe
+item.steel_hoe.name=Steel Hoe
+
+item.tin_sword.name=Tin Sword
+item.tin_pickaxe.name=Tin Pickaxe
+item.tin_shovel.name=Tin Shovel
+item.tin_axe.name=Tin Axe
+item.tin_hoe.name=Tin Hoe
+
+item.titanium_sword.name=Titanium Sword
+item.titanium_pickaxe.name=Titanium Pickaxe
+item.titanium_shovel.name=Titanium Shovel
+item.titanium_axe.name=Titanium Axe
+item.titanium_hoe.name=Titanium Hoe
+
+item.zinc_sword.name=Zinc Sword
+item.zinc_pickaxe.name=Zinc Pickaxe
+item.zinc_shovel.name=Zinc Shovel
+item.zinc_axe.name=Zinc Axe
+item.zinc_hoe.name=Zinc Hoe
+
+tile.cuprite_ore.name=Cuprite Ore
+tile.cassiterite_ore.name=Cassiterite Ore
+tile.chromite_ore.name=Chromite Ore
+tile.sphalerite_ore.name=Sphalerite Ore
+tile.bauxite_ore.name=Bauxite Ore
+tile.garnierite_ore.name=Garnierite Ore
+tile.rutile_ore.name=Rutile Ore
+
+item.crushed_bauxite_ore.name=Crushed Bauxite Ore
+item.crushed_cassiterite_ore.name=Crushed Cassiterite Ore
+item.crushed_chromite_ore.name=Crushed Chromite Ore
+item.crushed_cuprite_ore.name=Crushed Cuprite Ore
+item.crushed_garnierite_ore.name=Crushed Garnierite Ore
+item.crushed_gold_ore.name=Crushed Gold Ore
+item.crushed_iron_ore.name=Crushed Iron Ore
+item.crushed_rutile_ore.name=Crushed Rutile Ore
+item.crushed_sphalerite_ore.name=Crushed Sphalerite Ore
+
+tile.aluminum_block.name=Block of Aluminum
+tile.brass_block.name=Block of Brass
+tile.bronze_block.name=Block of Bronze
+tile.chromium_block.name=Block of Chromium
+tile.copper_block.name=Block of Copper
+tile.invar_block.name=Block of Invar
+tile.nichrome_block.name=Block of Nichrome
+tile.nickel_block.name=Block of Nickel
+tile.nitinol_block.name=Block of Nitinol
+tile.steel_block.name=Block of Steel
+tile.tin_block.name=Block of Tin
+tile.titanium_block.name=Block of Titanium
+tile.zinc_block.name=Block of Zinc
+
+item.refractory_composite.name=Refractory Composite
+item.refractory_brick.name=Refractory Brick
+tile.refractory_bricks.name=Refractory Bricks
+tile.iron_forge_core.name=Iron Forge Core
+tile.forge_tier1.name=Iron Forge (Tier 1)
+tile.bellow.name=Bellow
+tile.crusher.name=Crusher
+
+itemGroup.tabTestModResources=TMPI: Resources
+itemGroup.tabTestModTools=TMPI: Tools
+itemGroup.tabTestModSmelting=TMPI: Smelting

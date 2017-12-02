@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiCrusher extends GuiContainer {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.MOD_ID, "/textures/gui/container/crusher.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/gui/container/crusher.png");
     private TileEntityCrusher tileEntityCrusher;
 
     public GuiCrusher(InventoryPlayer invPlayer, TileEntityCrusher tile) {

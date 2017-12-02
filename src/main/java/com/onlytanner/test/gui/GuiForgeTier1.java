@@ -22,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiForgeTier1 extends GuiContainer {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.MOD_ID, "/textures/gui/container/forge.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/gui/container/forge.png");
     private TileEntityForgeTier1 tileEntityForgeTier1;
 
     public GuiForgeTier1(InventoryPlayer invPlayer, TileEntityForgeTier1 tile) {

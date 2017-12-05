@@ -5,9 +5,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
       <group>
-        <file>file:/D:/Software/Java/MC/src/main/java/com/onlytanner/test/blocks/BlockAluminumBlock.java</file>
+        <file>file:/D:/Software/Java/MC/src/main/java/com/onlytanner/test/Reference.java</file>
       </group>
     </open-files>
     <editor-bookmarks lastBookmarkId="0" xmlns="http://www.netbeans.org/ns/editor-bookmarks/2"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+      <group>
+        <file>file:/D:/Software/Java/MC/src/main/java/com/onlytanner/test/handler/MultiblockHandler.java</file>
+        <file>file:/D:/Software/Java/MC/src/main/java/com/onlytanner/test/blocks/multiblocks/MultiblockCokeOven.java</file>
+        <file>file:/D:/Software/Java/MC/src/main/java/com/onlytanner/test/Reference.java</file>
+      </group>
+    </open-files>
   </auxiliary>
 </gradle-project-properties>

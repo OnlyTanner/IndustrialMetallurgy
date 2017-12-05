@@ -8,6 +8,7 @@ import com.onlytanner.test.items.ItemBronzeIngot;
 import com.onlytanner.test.items.ItemBronzeNugget;
 import com.onlytanner.test.items.ItemChromiumIngot;
 import com.onlytanner.test.items.ItemChromiumNugget;
+import com.onlytanner.test.items.ItemCoalCoke;
 import com.onlytanner.test.items.ItemCopperIngot;
 import com.onlytanner.test.items.ItemCopperNugget;
 import com.onlytanner.test.items.ItemCrushedBauxiteOre;
@@ -120,6 +121,7 @@ public class ModItems {
 
     public static Item refractory_composite;
     public static Item refractory_brick;
+    public static Item coal_coke;
 
     public static Item crushed_bauxite_ore;
     public static Item crushed_cassiterite_ore;
@@ -357,6 +359,7 @@ public class ModItems {
 
         refractory_composite = new ItemRefractoryComposite();
         refractory_brick = new ItemRefractoryBrick();
+        coal_coke = new ItemCoalCoke();
     }
 
     public static void register() {
@@ -471,6 +474,7 @@ public class ModItems {
 
         GameRegistry.register(refractory_composite);
         GameRegistry.register(refractory_brick);
+        GameRegistry.register(coal_coke);
     }
 
     public static void registerRenders() {
@@ -585,6 +589,7 @@ public class ModItems {
 
         registerRender(refractory_composite);
         registerRender(refractory_brick);
+        registerRender(coal_coke);
     }
 
     private static void registerRender(Item item) {

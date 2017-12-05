@@ -12,13 +12,13 @@ import com.onlytanner.test.blocks.BlockCassiteriteOre;
 import com.onlytanner.test.blocks.BlockChromiteOre;
 import com.onlytanner.test.blocks.BlockChromiumBlock;
 import com.onlytanner.test.blocks.BlockCobaltiteOre;
+import com.onlytanner.test.blocks.BlockCokeOven;
 import com.onlytanner.test.blocks.BlockCopperBlock;
 import com.onlytanner.test.blocks.BlockCrusher;
 import com.onlytanner.test.blocks.BlockCupriteOre;
 import com.onlytanner.test.blocks.BlockForgeTier1;
 import com.onlytanner.test.blocks.BlockGarnieriteOre;
 import com.onlytanner.test.blocks.BlockInvarBlock;
-import com.onlytanner.test.blocks.BlockIronForge;
 import com.onlytanner.test.blocks.BlockIronForgeCore;
 import com.onlytanner.test.blocks.BlockNichromeBlock;
 import com.onlytanner.test.blocks.BlockNickelBlock;
@@ -31,8 +31,10 @@ import com.onlytanner.test.blocks.BlockTinBlock;
 import com.onlytanner.test.blocks.BlockTitaniumBlock;
 import com.onlytanner.test.blocks.BlockWolframiteOre;
 import com.onlytanner.test.blocks.BlockZincBlock;
+import com.onlytanner.test.handler.GuiHandlerCokeOven;
 import com.onlytanner.test.handler.GuiHandlerCrusher;
 import com.onlytanner.test.handler.GuiHandlerForgeTier1;
+import com.onlytanner.test.tileentities.TileEntityCokeOven;
 import com.onlytanner.test.tileentities.TileEntityCrusher;
 import com.onlytanner.test.tileentities.TileEntityForgeTier1;
 
@@ -78,6 +80,8 @@ public class ModBlocks {
     public static BlockContainer lit_forge_tier1;
     public static Block bellow;
     public static BlockContainer crusher;
+    public static BlockContainer coke_oven;
+    public static BlockContainer lit_coke_oven;
 
     public static void init() {
         bauxite_ore = new BlockBauxiteOre();
@@ -110,6 +114,8 @@ public class ModBlocks {
         crusher = new BlockCrusher(false, Reference.TestModBlocks.CRUSHER.getUnlocalizedName(), Reference.TestModBlocks.CRUSHER.getRegistryName());
         lit_forge_tier1 = new BlockForgeTier1(true, Reference.TestModBlocks.LIT_FORGE_TIER1.getUnlocalizedName(), Reference.TestModBlocks.LIT_FORGE_TIER1.getRegistryName());
         bellow = new BlockBellow();
+        coke_oven = new BlockCokeOven(false, Reference.TestModBlocks.COKE_OVEN.getUnlocalizedName(), Reference.TestModBlocks.COKE_OVEN.getRegistryName());
+        lit_coke_oven = new BlockCokeOven(true, Reference.TestModBlocks.LIT_COKE_OVEN.getUnlocalizedName(), Reference.TestModBlocks.LIT_COKE_OVEN.getRegistryName());
     }
 
     public static void register() {
@@ -141,14 +147,18 @@ public class ModBlocks {
         registerBlock(forge_tier1);
         registerBlock(bellow);
         registerBlock(crusher);
+        registerBlock(coke_oven);
 
         GameRegistry.register(lit_forge_tier1);
+        GameRegistry.register(lit_coke_oven);
 
         GameRegistry.registerTileEntity(TileEntityForgeTier1.class, "forge_tier1");
         GameRegistry.registerTileEntity(TileEntityCrusher.class, "crusher");
+        GameRegistry.registerTileEntity(TileEntityCokeOven.class, "coke_oven");
         NetworkRegistry.INSTANCE.registerGuiHandler(TestMod.instance, GuiHandlerRegistry.getInstance());
         GuiHandlerRegistry.getInstance().registerGuiHandler(new GuiHandlerForgeTier1(), GuiHandlerForgeTier1.getGuiID());
         GuiHandlerRegistry.getInstance().registerGuiHandler(new GuiHandlerCrusher(), GuiHandlerCrusher.getGuiID());
+        GuiHandlerRegistry.getInstance().registerGuiHandler(new GuiHandlerCokeOven(), GuiHandlerCokeOven.getGuiID());
     }
 
     private static void registerBlock(Block block) {

@@ -144,6 +144,7 @@ tile.iron_forge_core.name=Iron Forge Core
 tile.forge_tier1.name=Iron Forge (Tier 1)
 tile.bellow.name=Bellow
 tile.crusher.name=Crusher
+tile.coke_oven.name=Coke Oven
 
 itemGroup.tabTestModResources=TMPI: Resources
 itemGroup.tabTestModTools=TMPI: Tools

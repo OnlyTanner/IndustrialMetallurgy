@@ -18,6 +18,7 @@ public class Reference {
     public static enum TestModItems {
         REFRACTORY_COMPOSITE("refractory_composite", "ItemRefractoryComposite"),
         REFRACTORY_BRICK("refractory_brick", "ItemRefractoryBrick"),
+        COAL_COKE("coal_coke", "ItemCoalCoke"),
         CRUSHED_BAUXITE_ORE("crushed_bauxite_ore", "ItemCrushedBauxiteOre"),
         CRUSHED_CASSITERITE_ORE("crushed_cassiterite_ore", "ItemCrushedCassiteriteOre"),
         CRUSHED_CHROMITE_ORE("crushed_chromite_ore", "ItemCrushedChromiteOre"),
@@ -167,6 +168,8 @@ public class Reference {
         IRON_FORGE("iron_forge", "BlockIronForge"),
         FORGE_TIER1("forge_tier1", "BlockForgeTier1"),
         LIT_FORGE_TIER1("lit_forge_tier1", "BlockLitForgeTier1"),
+        COKE_OVEN("coke_oven", "BlockCokeOven"),
+        LIT_COKE_OVEN("lit_coke_oven", "BlockLitCokeOven"),
         BELLOW("bellow", "BlockBellow"),
         CRUSHER("crusher", "BlockCrusher");
 

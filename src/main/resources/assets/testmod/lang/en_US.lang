@@ -108,10 +108,12 @@ item.zinc_hoe.name=Zinc Hoe
 tile.cuprite_ore.name=Cuprite Ore
 tile.cassiterite_ore.name=Cassiterite Ore
 tile.chromite_ore.name=Chromite Ore
+tile.cobaltite_ore.name=Cobaltite Ore
 tile.sphalerite_ore.name=Sphalerite Ore
 tile.bauxite_ore.name=Bauxite Ore
 tile.garnierite_ore.name=Garnierite Ore
 tile.rutile_ore.name=Rutile Ore
+tile.wolframite_ore.name=Wolframite Ore
 
 item.crushed_bauxite_ore.name=Crushed Bauxite Ore
 item.crushed_cassiterite_ore.name=Crushed Cassiterite Ore

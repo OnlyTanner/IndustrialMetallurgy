@@ -13,7 +13,7 @@ public class BlockWolframiteOre extends Block {
         setUnlocalizedName(Reference.TestModBlocks.WOLFRAMITE_ORE.getUnlocalizedName());
         setRegistryName(Reference.TestModBlocks.WOLFRAMITE_ORE.getRegistryName());
         setHardness(12.0F);
-        setHarvestLevel("pickaxe", 3);
+        setHarvestLevel("pickaxe", 4);
         setCreativeTab(TestMod.RESOURCES_TAB);
     }
 }

@@ -122,6 +122,7 @@ public class ModBlocks {
         registerBlock(cuprite_ore);
         registerBlock(cassiterite_ore);
         registerBlock(chromite_ore);
+        registerBlock(cobaltite_ore);
         registerBlock(sphalerite_ore);
         registerBlock(bauxite_ore);
         registerBlock(garnierite_ore);
@@ -172,6 +173,7 @@ public class ModBlocks {
         registerRender(cuprite_ore);
         registerRender(cassiterite_ore);
         registerRender(chromite_ore);
+        registerRender(cobaltite_ore);
         registerRender(sphalerite_ore);
         registerRender(bauxite_ore);
         registerRender(garnierite_ore);

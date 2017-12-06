@@ -30,16 +30,8 @@ public class GuiCokeOven extends GuiContainer {
         ySize = 166;
     }
 
-    // some [x,y] coordinates of graphical elements
-    final int COOK_BAR_XPOS = 79;
-    final int COOK_BAR_YPOS = 35;
-    final int COOK_BAR_ICON_U = 176;   // texture position of white arrow icon
-    final int COOK_BAR_ICON_V = 14;
-    final int COOK_BAR_WIDTH = 24;
-    final int COOK_BAR_HEIGHT = 17;
-
-    final int FLAME_XPOS = 57;
-    final int FLAME_YPOS = 19;
+    final int FLAME_XPOS = 85;
+    final int FLAME_YPOS = 36;
     final int FLAME_ICON_U = 176;   // texture position of flame icon
     final int FLAME_ICON_V = 0;
     final int FLAME_WIDTH = 14;
@@ -53,12 +45,6 @@ public class GuiCokeOven extends GuiContainer {
         // Draw the image
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-
-        // get cook progress as a double between 0 and 1
-        double cookProgress = tileEntityCokeOven.fractionOfCookTimeComplete();
-        // draw the cook progress bar
-        drawTexturedModalRect(guiLeft + COOK_BAR_XPOS, guiTop + COOK_BAR_YPOS, COOK_BAR_ICON_U, COOK_BAR_ICON_V,
-                (int) (cookProgress * COOK_BAR_WIDTH), COOK_BAR_HEIGHT);
 
         // draw the fuel remaining bar for each fuel slot flame
         for (int i = 0; i < tileEntityCokeOven.FUEL_SLOTS_COUNT; ++i) {
@@ -78,13 +64,6 @@ public class GuiCokeOven extends GuiContainer {
         fontRendererObj.drawString(tileEntityCokeOven.getDisplayName().getUnformattedText(), LABEL_XPOS, LABEL_YPOS, Color.darkGray.getRGB());
 
         List<String> hoveringText = new ArrayList<String>();
-
-        // If the mouse is over the progress bar add the progress bar hovering text
-        if (isInRect(guiLeft + COOK_BAR_XPOS, guiTop + COOK_BAR_YPOS, COOK_BAR_WIDTH, COOK_BAR_HEIGHT, mouseX, mouseY)) {
-            hoveringText.add("Progress:");
-            int cookPercentage = (int) (tileEntityCokeOven.fractionOfCookTimeComplete() * 100);
-            hoveringText.add(cookPercentage + "%");
-        }
 
         // If the mouse is over one of the burn time indicator add the burn time indicator hovering text
         for (int i = 0; i < tileEntityCokeOven.FUEL_SLOTS_COUNT; ++i) {

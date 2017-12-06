@@ -115,7 +115,7 @@ public class GuiForgeTier1 extends GuiContainer {
         if (isInRect(guiLeft + POINTER_XPOS, guiTop + getPointerLocationFromTemp(tileEntityForgeTier1),
                 POINTER_WIDTH, POINTER_HEIGHT, mouseX, mouseY)) {
             hoveringText.add("Temperature:");
-            hoveringText.add(tileEntityForgeTier1.getTemperatureOfCurrent() + "�F");
+            hoveringText.add(tileEntityForgeTier1.getTemperatureOfCurrent() + "\u00B0F");
         }
         // If hoveringText is not empty draw the hovering text
         if (!hoveringText.isEmpty()) {

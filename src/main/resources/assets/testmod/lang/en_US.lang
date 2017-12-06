@@ -2,6 +2,7 @@ item.aluminum_ingot.name=Aluminum Ingot
 item.brass_ingot.name=Brass Ingot
 item.bronze_ingot.name=Bronze Ingot
 item.chromium_ingot.name=Chromium Ingot
+item.cobalt_ingot.name=Cobalt Ingot
 item.copper_ingot.name=Copper Ingot
 item.invar_ingot.name=Invar Ingot
 item.nichrome_ingot.name=Nichrome Ingot
@@ -10,12 +11,14 @@ item.nitinol_ingot.name=Nitinol Ingot
 item.steel_ingot.name=Steel Ingot
 item.tin_ingot.name=Tin Ingot
 item.titanium_ingot.name=Titanium Ingot
+item.tungsten_ingot.name=Tungsten Ingot
 item.zinc_ingot.name=Zinc Ingot
 
 item.aluminum_nugget.name=Aluminum Nugget
 item.brass_nugget.name=Brass Nugget
 item.bronze_nugget.name=Bronze Nugget
 item.chromium_nugget.name=Chromium Nugget
+item.cobalt_nugget.name=Cobalt Nugget
 item.copper_nugget.name=Copper Nugget
 item.invar_nugget.name=Invar Nugget
 item.iron_nugget.name=Iron Nugget
@@ -25,6 +28,7 @@ item.nitinol_nugget.name=Nitinol Nugget
 item.steel_nugget.name=Steel Nugget
 item.tin_nugget.name=Tin Nugget
 item.titanium_nugget.name=Titanium Nugget
+item.tungsten_nugget.name=Tungsten Nugget
 item.zinc_nugget.name=Zinc Nugget
 
 item.aluminum_sword.name=Aluminum Sword
@@ -50,6 +54,12 @@ item.chromium_pickaxe.name=Chromium Pickaxe
 item.chromium_shovel.name=Chromium Shovel
 item.chromium_axe.name=Chromium Axe
 item.chromium_hoe.name=Chromium Hoe
+
+item.cobalt_sword.name=Cobalt Sword 
+item.cobalt_pickaxe.name=Cobalt Pickaxe 
+item.cobalt_shovel.name=Cobalt Shovel
+item.cobalt_axe.name=Cobalt Axe
+item.cobalt_hoe.name=Cobalt Hoe
 
 item.copper_sword.name=Copper Sword
 item.copper_pickaxe.name=Copper Pickaxe
@@ -99,6 +109,12 @@ item.titanium_shovel.name=Titanium Shovel
 item.titanium_axe.name=Titanium Axe
 item.titanium_hoe.name=Titanium Hoe
 
+item.tungsten_sword.name=Tungsten Sword 
+item.tungsten_pickaxe.name=Tungsten Pickaxe 
+item.tungsten_shovel.name=Tungsten Shovel
+item.tungsten_axe.name=Tungsten Axe
+item.tungsten_hoe.name=Tungsten Hoe
+
 item.zinc_sword.name=Zinc Sword
 item.zinc_pickaxe.name=Zinc Pickaxe
 item.zinc_shovel.name=Zinc Shovel
@@ -141,6 +157,7 @@ tile.zinc_block.name=Block of Zinc
 
 item.refractory_composite.name=Refractory Composite
 item.refractory_brick.name=Refractory Brick
+item.coal_coke.name=Coal Coke
 tile.refractory_bricks.name=Refractory Bricks
 tile.iron_forge_core.name=Iron Forge Core
 tile.forge_tier1.name=Iron Forge (Tier 1)

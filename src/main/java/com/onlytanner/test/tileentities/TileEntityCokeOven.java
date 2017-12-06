@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import com.onlytanner.test.blocks.BlockCokeOven;
 import com.onlytanner.test.container.ContainerCokeOven;
+import com.onlytanner.test.init.ModItems;
 import com.onlytanner.test.items.crafting.CokeOvenRecipes;
 
 import net.minecraft.block.state.IBlockState;
@@ -35,7 +36,7 @@ public class TileEntityCokeOven extends TileEntityLockable implements IInventory
     public static final int TOTAL_SLOTS_COUNT = FUEL_SLOTS_COUNT + OUTPUT_SLOTS_COUNT;
 
     public static final int FIRST_FUEL_SLOT = 0;
-    public static final int FIRST_OUTPUT_SLOT = FIRST_FUEL_SLOT + 1;
+    public static final int FIRST_OUTPUT_SLOT = 1;
 
     private ItemStack[] itemStacks = new ItemStack[TOTAL_SLOTS_COUNT];
 
@@ -48,18 +49,13 @@ public class TileEntityCokeOven extends TileEntityLockable implements IInventory
      * duration)
      */
     private int[] burnTimeInitialValue = new int[FUEL_SLOTS_COUNT];
-
-    /**
-     * The number of ticks the current item has been cooking
-     */
-    private short cookTime;
+    
     /**
      * The number of ticks required to cook an item
      */
     private static final short COOK_TIME_FOR_COMPLETION = 1600;  // vanilla value is 200 = 10 seconds
 
     private int cachedNumberOfBurningSlots = -1;
-    private short totalCookTime;
 
     /**
      * Returns the amount of fuel remaining on the currently burning item in the
@@ -104,16 +100,6 @@ public class TileEntityCokeOven extends TileEntityLockable implements IInventory
         return burningCount;
     }
 
-    /**
-     * Returns the amount of cook time completed on the currently cooking item.
-     *
-     * @return fraction remaining, between 0 - 1
-     */
-    public double fractionOfCookTimeComplete() {
-        double fraction = cookTime / (double) COOK_TIME_FOR_COMPLETION;
-        return MathHelper.clamp_double(fraction, 0.0, 1.0);
-    }
-
     // This method is called every tick to update the tile entity, i.e.
     // - see if the fuel has run out, and if so turn the furnace "off" and slowly uncook the current item (if any)
     // - see if any of the items have finished smelting
@@ -125,30 +111,13 @@ public class TileEntityCokeOven extends TileEntityLockable implements IInventory
         boolean flag1 = false;
 
         if (canSmelt()) {
-            int numberOfFuelBurning = burnFuel();
-            // If fuel is available, keep cooking the item, otherwise start "uncooking" it at double speed
-            if (numberOfFuelBurning > 0) {
-                cookTime += numberOfFuelBurning;
-            } else {
-                cookTime -= 2;
-            }
-
-            if (cookTime < 0) {
-                cookTime = 0;
-            }
-
-            // If cookTime has reached maxCookTime smelt the item and reset cookTime
-            if (cookTime >= COOK_TIME_FOR_COMPLETION) {
-                smeltItem();
-                cookTime = 0;
-            }
-        } else if (burnTimeRemaining[0] > 1) {
-            cookTime = 0;
             burnFuel();
-        } else {
-            cookTime = 0;
+            if (burnTimeRemaining[0] == 1)
+                if (itemStacks[FIRST_OUTPUT_SLOT] == null)
+                    itemStacks[FIRST_OUTPUT_SLOT] = new ItemStack(ModItems.coal_coke, 1);  
+                else
+                    itemStacks[FIRST_OUTPUT_SLOT] = new ItemStack(ModItems.coal_coke, itemStacks[FIRST_OUTPUT_SLOT].stackSize + 1);         
         }
-
         if (flag != this.isBurning()) {
             flag1 = true;
             BlockCokeOven.setState(this.isBurning(), this.worldObj, this.pos);
@@ -178,7 +147,7 @@ public class TileEntityCokeOven extends TileEntityLockable implements IInventory
     }
 
     public boolean isBurning() {
-        return cookTime > 1;
+        return burnTimeRemaining[0] > 0;
     }
 
     /**
@@ -232,37 +201,15 @@ public class TileEntityCokeOven extends TileEntityLockable implements IInventory
             if (itemstack == null) {
                 return false;
             }
-            if (this.itemStacks[FIRST_FUEL_SLOT] == null) {
+            if (this.itemStacks[FIRST_OUTPUT_SLOT] == null) {
                 return true;
             }
-            if (!this.itemStacks[FIRST_FUEL_SLOT].isItemEqual(itemstack)) {
+            if (!this.itemStacks[FIRST_OUTPUT_SLOT].isItemEqual(itemstack)) {
                 return false;
             }
             
             int result = itemStacks[FIRST_OUTPUT_SLOT].stackSize + itemstack.stackSize;
             return result <= getInventoryStackLimit() && result <= this.itemStacks[FIRST_OUTPUT_SLOT].getMaxStackSize(); //Forge BugFix: Make it respect stack sizes properly.
-        }
-    }
-
-    /**
-     * Turn one item from the furnace source stack into the appropriate smelted
-     * item in the furnace result stack
-     */
-    public void smeltItem() {
-        if (this.canSmelt()) {
-            ItemStack itemstack = CokeOvenRecipes.instance().getSmeltingResult(this.itemStacks[FIRST_FUEL_SLOT]);
-
-            if (this.itemStacks[FIRST_OUTPUT_SLOT] == null) {
-                this.itemStacks[FIRST_OUTPUT_SLOT] = itemstack.copy();
-            } else if (this.itemStacks[FIRST_OUTPUT_SLOT].getItem() == itemstack.getItem()) {
-                this.itemStacks[FIRST_OUTPUT_SLOT].stackSize += itemstack.stackSize;
-            }
-
-            --this.itemStacks[FIRST_FUEL_SLOT].stackSize;
-
-            if (this.itemStacks[FIRST_FUEL_SLOT].stackSize <= 0) {
-                this.itemStacks[FIRST_FUEL_SLOT] = null;
-            }
         }
     }
 
@@ -388,7 +335,6 @@ public class TileEntityCokeOven extends TileEntityLockable implements IInventory
         parentNBTTagCompound.setTag("Items", dataForAllSlots);
 
         // Save everything else
-        parentNBTTagCompound.setShort("CookTime", cookTime);
         parentNBTTagCompound.setTag("burnTimeRemaining", new NBTTagIntArray(burnTimeRemaining));
         parentNBTTagCompound.setTag("burnTimeInitial", new NBTTagIntArray(burnTimeInitialValue));
         return parentNBTTagCompound;
@@ -411,7 +357,6 @@ public class TileEntityCokeOven extends TileEntityLockable implements IInventory
         }
 
         // Load everything else.  Trim the arrays (or pad with 0) to make sure they have the correct number of elements
-        cookTime = nbtTagCompound.getShort("CookTime");
         burnTimeRemaining = Arrays.copyOf(nbtTagCompound.getIntArray("burnTimeRemaining"), FUEL_SLOTS_COUNT);
         burnTimeInitialValue = Arrays.copyOf(nbtTagCompound.getIntArray("burnTimeInitial"), FUEL_SLOTS_COUNT);
         cachedNumberOfBurningSlots = -1;
@@ -482,10 +427,6 @@ public class TileEntityCokeOven extends TileEntityLockable implements IInventory
                 return this.burnTimeInitialValue[0];
             case 1:
                 return this.burnTimeRemaining[0];
-            case 2:
-                return this.cookTime;
-            case 3:
-                return this.totalCookTime;
             default:
                 return 0;
         }
@@ -498,18 +439,12 @@ public class TileEntityCokeOven extends TileEntityLockable implements IInventory
                 break;
             case 1:
                 this.burnTimeRemaining[0] = value;
-                break;
-            case 2:
-                this.cookTime = (short) value;
-                break;
-            case 3:
-                this.totalCookTime = (short) value;
         }
     }
 
     @Override
     public int getFieldCount() {
-        return 4;
+        return 2;
     }
 
     // -----------------------------------------------------------------------------------------------------------

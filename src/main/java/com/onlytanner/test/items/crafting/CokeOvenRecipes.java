@@ -22,7 +22,8 @@ public class CokeOvenRecipes {
     }
 
     private CokeOvenRecipes() {
-        this.addSmeltingRecipe(new ItemStack(Items.COAL), new ItemStack(ModItems.coal_coke, 1));
+        this.addSmeltingRecipe(new ItemStack(Items.COAL), new ItemStack(ModItems.coal_coke));
+        this.addSmeltingRecipe(new ItemStack(Items.COAL, 1, 1), new ItemStack(ModItems.coal_coke));
     }
 
     /**

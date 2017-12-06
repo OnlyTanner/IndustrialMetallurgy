@@ -131,8 +131,13 @@ public class BlockCokeOven extends BlockContainer {
         TileEntity entity = worldIn.getTileEntity(pos);
         keepInventory = true;
 
-        worldIn.setBlockState(pos, ModBlocks.coke_oven.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
-        worldIn.setBlockState(pos, ModBlocks.coke_oven.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
+        if (active) {
+            worldIn.setBlockState(pos, ModBlocks.lit_coke_oven.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
+            worldIn.setBlockState(pos, ModBlocks.lit_coke_oven.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
+        } else {
+            worldIn.setBlockState(pos, ModBlocks.coke_oven.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
+            worldIn.setBlockState(pos, ModBlocks.coke_oven.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
+        }
 
         keepInventory = false;
         if (entity != null) {

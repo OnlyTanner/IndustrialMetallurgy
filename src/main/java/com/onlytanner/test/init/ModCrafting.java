@@ -18,7 +18,7 @@ public class ModCrafting {
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.refractory_bricks), "   ", "BB ", "BB ", 'B', ModItems.refractory_brick);
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.refractory_bricks), "   ", " BB", " BB", 'B', ModItems.refractory_brick);
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.iron_forge_core), "IBI", "B B", "IBI", 'I', Blocks.IRON_BLOCK, 'B', ModBlocks.refractory_bricks);
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.forge_tier1), "IFI", "FCF", "IFI", 'I', Items.IRON_INGOT, 'F', Blocks.FURNACE, 'C', ModBlocks.iron_forge_core);
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.forge_tier1), "IFI", "ICI", "IFI", 'I', Items.IRON_INGOT, 'F', Blocks.FURNACE, 'C', ModBlocks.iron_forge_core);
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.coke_oven), "BBB", "B B", "BBB", 'B', ModBlocks.refractory_bricks);
 
         GameRegistry.addShapelessRecipe(new ItemStack(ModItems.aluminum_ingot, 9), ModBlocks.aluminum_block);

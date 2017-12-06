@@ -1,5 +1,4 @@
 # Industrial Metallurgy #
-- - - - 
 
 ## About
 

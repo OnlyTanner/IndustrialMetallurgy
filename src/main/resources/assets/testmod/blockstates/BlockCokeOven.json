@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=north": {"model": "testmod:coke_oven"},
-        "facing=east":  {"model": "testmod:coke_oven", "y": 90 },
-        "facing=south": {"model": "testmod:coke_oven", "y": 180 },
-        "facing=west":  {"model": "testmod:coke_oven", "y": 270 }
-    }
-}

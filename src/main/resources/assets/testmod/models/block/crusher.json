@@ -1,8 +1,0 @@
-{
-    "parent": "block/orientable",
-    "textures": {
-        "top": "testmod:blocks/crusher_top_off",
-		"front": "testmod:blocks/crusher_front_off",
-        "side": "testmod:blocks/crusher_side"
-    }
-}

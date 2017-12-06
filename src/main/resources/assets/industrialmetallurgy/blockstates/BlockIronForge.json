@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": {"model": "industrialmetallurgy:iron_forge"},
+        "facing=east":  {"model": "industrialmetallurgy:iron_forge", "y": 90 },
+        "facing=south": {"model": "industrialmetallurgy:iron_forge", "y": 180 },
+        "facing=west":  {"model": "industrialmetallurgy:iron_forge", "y": 270 }
+    }
+}

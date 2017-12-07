@@ -4,7 +4,10 @@ import java.util.Random;
 
 import com.onlytanner.industrialmetallurgy.init.ModBlocks;
 
+import com.google.common.base.Predicate;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.state.pattern.BlockMatcher;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkGenerator;
@@ -29,12 +32,12 @@ public class ModWorldGen implements IWorldGenerator {
         gen_cuprite_ore = new WorldGenMinable(ModBlocks.cuprite_ore.getDefaultState(), 8);
         gen_cassiterite_ore = new WorldGenMinable(ModBlocks.cassiterite_ore.getDefaultState(), 8);
         gen_chromite_ore = new WorldGenMinable(ModBlocks.chromite_ore.getDefaultState(), 5);
-        gen_cobaltite_ore = new WorldGenMinable(ModBlocks.cobaltite_ore.getDefaultState(), 4);
+        gen_cobaltite_ore = new WorldGenMinable(ModBlocks.cobaltite_ore.getDefaultState(), 4, BlockMatcher.forBlock(Blocks.NETHERRACK));
         gen_sphalerite_ore = new WorldGenMinable(ModBlocks.sphalerite_ore.getDefaultState(), 8);
         gen_bauxite_ore = new WorldGenMinable(ModBlocks.bauxite_ore.getDefaultState(), 8);
         gen_garnierite_ore = new WorldGenMinable(ModBlocks.garnierite_ore.getDefaultState(), 8);
         gen_rutile_ore = new WorldGenMinable(ModBlocks.rutile_ore.getDefaultState(), 5);
-        gen_wolframite_ore = new WorldGenMinable(ModBlocks.wolframite_ore.getDefaultState(), 3);
+        gen_wolframite_ore = new WorldGenMinable(ModBlocks.wolframite_ore.getDefaultState(), 3, BlockMatcher.forBlock(Blocks.END_STONE));
     }
 
     @Override
@@ -50,10 +53,10 @@ public class ModWorldGen implements IWorldGenerator {
                 runGenerator(this.gen_rutile_ore, world, rand, chunk_X, chunk_Z, 3, 1, 30);
                 break;
             case -1: //Nether
-                runGenerator(this.gen_cobaltite_ore, world, rand, chunk_X, chunk_Z, 1, 1, 128);
+                runGenerator(this.gen_cobaltite_ore, world, rand, chunk_X, chunk_Z, 12, 1, 127);
                 break;
             case 1: //End
-                runGenerator(this.gen_wolframite_ore, world, rand, chunk_X, chunk_Z, 3, 20, 80);
+                runGenerator(this.gen_wolframite_ore, world, rand, chunk_X, chunk_Z, 50, 20, 80);
                 break;
         }
     }

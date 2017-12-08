@@ -11,6 +11,7 @@ import com.onlytanner.industrialmetallurgy.blocks.BlockBronzeBlock;
 import com.onlytanner.industrialmetallurgy.blocks.BlockCassiteriteOre;
 import com.onlytanner.industrialmetallurgy.blocks.BlockChromiteOre;
 import com.onlytanner.industrialmetallurgy.blocks.BlockChromiumBlock;
+import com.onlytanner.industrialmetallurgy.blocks.BlockCoalGenerator;
 import com.onlytanner.industrialmetallurgy.blocks.BlockCobaltiteOre;
 import com.onlytanner.industrialmetallurgy.blocks.BlockCokeOven;
 import com.onlytanner.industrialmetallurgy.blocks.BlockCopperBlock;
@@ -31,9 +32,11 @@ import com.onlytanner.industrialmetallurgy.blocks.BlockTinBlock;
 import com.onlytanner.industrialmetallurgy.blocks.BlockTitaniumBlock;
 import com.onlytanner.industrialmetallurgy.blocks.BlockWolframiteOre;
 import com.onlytanner.industrialmetallurgy.blocks.BlockZincBlock;
+import com.onlytanner.industrialmetallurgy.handler.GuiHandlerCoalGenerator;
 import com.onlytanner.industrialmetallurgy.handler.GuiHandlerCokeOven;
 import com.onlytanner.industrialmetallurgy.handler.GuiHandlerCrusher;
 import com.onlytanner.industrialmetallurgy.handler.GuiHandlerForgeTier1;
+import com.onlytanner.industrialmetallurgy.tileentities.TileEntityCoalGenerator;
 import com.onlytanner.industrialmetallurgy.tileentities.TileEntityCokeOven;
 import com.onlytanner.industrialmetallurgy.tileentities.TileEntityCrusher;
 import com.onlytanner.industrialmetallurgy.tileentities.TileEntityForgeTier1;
@@ -47,8 +50,8 @@ import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ModBlocks {
-
+public class ModBlocks 
+{
     public static Block refractory_bricks;
     public static Block iron_forge_core;
 
@@ -82,6 +85,8 @@ public class ModBlocks {
     public static BlockContainer crusher;
     public static BlockContainer coke_oven;
     public static BlockContainer lit_coke_oven;
+    public static BlockContainer coal_generator;
+    public static BlockContainer lit_coal_generator;
 
     public static void init() {
         bauxite_ore = new BlockBauxiteOre();
@@ -116,6 +121,8 @@ public class ModBlocks {
         bellow = new BlockBellow();
         coke_oven = new BlockCokeOven(false, Reference.IndustrialMetallurgyBlocks.COKE_OVEN.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.COKE_OVEN.getRegistryName());
         lit_coke_oven = new BlockCokeOven(true, Reference.IndustrialMetallurgyBlocks.LIT_COKE_OVEN.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.LIT_COKE_OVEN.getRegistryName());
+        coal_generator = new BlockCoalGenerator(false, Reference.IndustrialMetallurgyBlocks.COAL_GENERATOR.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.COAL_GENERATOR.getRegistryName());
+        lit_coal_generator = new BlockCoalGenerator(true, Reference.IndustrialMetallurgyBlocks.LIT_COAL_GENERATOR.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.LIT_COAL_GENERATOR.getRegistryName());
     }
 
     public static void register() {
@@ -149,17 +156,22 @@ public class ModBlocks {
         registerBlock(bellow);
         registerBlock(crusher);
         registerBlock(coke_oven);
+        registerBlock(coal_generator);
 
         GameRegistry.register(lit_forge_tier1);
         GameRegistry.register(lit_coke_oven);
+        GameRegistry.register(lit_coal_generator);
 
         GameRegistry.registerTileEntity(TileEntityForgeTier1.class, "forge_tier1");
         GameRegistry.registerTileEntity(TileEntityCrusher.class, "crusher");
         GameRegistry.registerTileEntity(TileEntityCokeOven.class, "coke_oven");
+        GameRegistry.registerTileEntity(TileEntityCoalGenerator.class, "coal_generator");
+        
         NetworkRegistry.INSTANCE.registerGuiHandler(IndustrialMetallurgy.instance, GuiHandlerRegistry.getInstance());
         GuiHandlerRegistry.getInstance().registerGuiHandler(new GuiHandlerForgeTier1(), GuiHandlerForgeTier1.getGuiID());
         GuiHandlerRegistry.getInstance().registerGuiHandler(new GuiHandlerCrusher(), GuiHandlerCrusher.getGuiID());
         GuiHandlerRegistry.getInstance().registerGuiHandler(new GuiHandlerCokeOven(), GuiHandlerCokeOven.getGuiID());
+        GuiHandlerRegistry.getInstance().registerGuiHandler(new GuiHandlerCoalGenerator(), GuiHandlerCoalGenerator.getGuiID());
     }
 
     private static void registerBlock(Block block) {
@@ -200,6 +212,8 @@ public class ModBlocks {
         registerRender(lit_forge_tier1);
         registerRender(bellow);
         registerRender(crusher);
+        registerRender(coal_generator);
+        registerRender(lit_coal_generator);
     }
 
     private static void registerRender(Block block) {

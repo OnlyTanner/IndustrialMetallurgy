@@ -178,7 +178,9 @@ public class Reference {
         COKE_OVEN("coke_oven", "BlockCokeOven"),
         LIT_COKE_OVEN("lit_coke_oven", "BlockLitCokeOven"),
         BELLOW("bellow", "BlockBellow"),
-        CRUSHER("crusher", "BlockCrusher");
+        CRUSHER("crusher", "BlockCrusher"),
+        COAL_GENERATOR("coal_generator", "BlockCoalGenerator"),
+        LIT_COAL_GENERATOR("lit_coal_generator", "BlockLitCoalGenerator");
 
         private String unlocalizedName;
         private String registryName;

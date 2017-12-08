@@ -2,10 +2,8 @@
     "parent": "block/orientable",
     "textures": {
         "top": "industrialmetallurgy:blocks/refractory_bricks",
-		"bottom": "industrialmetallurgy:blocks/refractory_bricks",
-        "north": "industrialmetallurgy:blocks/coke_oven_front_off",
-        "east": "industrialmetallurgy:blocks/refractory_bricks",
-		"west": "industrialmetallurgy:blocks/refractory_bricks",
-		"south": "industrialmetallurgy:blocks/refractory_bricks"
+		"front": "industrialmetallurgy:blocks/coke_oven_front_off",
+        "side": "industrialmetallurgy:blocks/refractory_bricks",
+		"bottom": "industrialmetallurgy:blocks/refractory_bricks"
     }
 }

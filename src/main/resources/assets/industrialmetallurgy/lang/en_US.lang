@@ -164,6 +164,7 @@ tile.forge_tier1.name=Iron Forge (Tier 1)
 tile.bellow.name=Bellow
 tile.crusher.name=Crusher
 tile.coke_oven.name=Coke Oven
+tile.coal_generator.name=Coal Generator
 
 itemGroup.tabIndustrialMetallurgyResources=Industrial Metallurgy: Resources
 itemGroup.tabIndustrialMetallurgyTools=Industrial Metallurgy: Tools

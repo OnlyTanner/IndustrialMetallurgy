@@ -52,7 +52,7 @@ public class BlockCoalGenerator extends BlockContainer {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return Item.getItemFromBlock(ModBlocks.forge_tier1);
+        return Item.getItemFromBlock(ModBlocks.coal_generator);
     }
 
     @Override
@@ -131,11 +131,11 @@ public class BlockCoalGenerator extends BlockContainer {
         keepInventory = true;
 
         if (active) {
-            worldIn.setBlockState(pos, ModBlocks.lit_forge_tier1.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
-            worldIn.setBlockState(pos, ModBlocks.lit_forge_tier1.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
+            worldIn.setBlockState(pos, ModBlocks.lit_coal_generator.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
+            worldIn.setBlockState(pos, ModBlocks.lit_coal_generator.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
         } else {
-            worldIn.setBlockState(pos, ModBlocks.forge_tier1.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
-            worldIn.setBlockState(pos, ModBlocks.forge_tier1.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
+            worldIn.setBlockState(pos, ModBlocks.coal_generator.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
+            worldIn.setBlockState(pos, ModBlocks.coal_generator.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
         }
 
         keepInventory = false;
@@ -186,7 +186,7 @@ public class BlockCoalGenerator extends BlockContainer {
     }
 
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-        return new ItemStack(ModBlocks.forge_tier1);
+        return new ItemStack(ModBlocks.coal_generator);
     }
 
     public EnumBlockRenderType getRenderType(IBlockState state) {

@@ -1,5 +1,6 @@
 package com.onlytanner.industrialmetallurgy.container;
 
+import com.onlytanner.industrialmetallurgy.tileentities.TileEntityBase;
 import com.onlytanner.industrialmetallurgy.tileentities.TileEntityCokeOven;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -102,7 +103,7 @@ public class ContainerCokeOven extends Container {
         if (sourceSlotIndex >= VANILLA_FIRST_SLOT_INDEX && sourceSlotIndex < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
             // This is a vanilla container slot so merge the stack into one of the forge slots
             // If the stack is smeltable try to merge merge the stack into the input slots
-            if (TileEntityCokeOven.getSmeltingResultForItem(sourceStack) != null) {
+            if (TileEntityBase.getSmeltingResultForItem(sourceStack, 1) != null) {
                 if (!mergeItemStack(sourceStack, FIRST_FUEL_SLOT_INDEX, FIRST_FUEL_SLOT_INDEX + FUEL_SLOTS_COUNT, false)) {
                     return null;
                 }

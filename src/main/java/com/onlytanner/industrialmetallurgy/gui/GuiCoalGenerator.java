@@ -36,7 +36,6 @@ public class GuiCoalGenerator extends GuiContainer {
     final int FLAME_ICON_V = 0;
     final int FLAME_WIDTH = 14;
     final int FLAME_HEIGHT = 14;
-    final int FLAME_X_SPACING = 18;
     
     final int ENERGY_BAR_XPOS = 152;
     final int ENERGY_BAR_YPOS = 8;
@@ -55,18 +54,15 @@ public class GuiCoalGenerator extends GuiContainer {
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
         
         // draw the fuel remaining bar for each fuel slot flame
-        for (int i = 0; i < tileEntityCoalGenerator.FUEL_SLOTS_COUNT; ++i) 
-        {
-            double burnRemaining = tileEntityCoalGenerator.fractionOfFuelRemaining(i);
-            int yOffset = (int) ((1.0 - burnRemaining) * FLAME_HEIGHT);
-            drawTexturedModalRect(guiLeft + FLAME_XPOS + FLAME_X_SPACING * i, 
-                                  guiTop + FLAME_YPOS + yOffset, FLAME_ICON_U, 
-                                  FLAME_ICON_V + yOffset, FLAME_WIDTH, 
-                                  FLAME_HEIGHT - yOffset);
-        }
+        double burnRemaining = tileEntityCoalGenerator.fractionOfFuelRemaining(0);
+        int yOffset = (int) ((1.0 - burnRemaining) * FLAME_HEIGHT);
+        drawTexturedModalRect(guiLeft + FLAME_XPOS, 
+                              guiTop + FLAME_YPOS + yOffset, FLAME_ICON_U, 
+                              FLAME_ICON_V + yOffset, FLAME_WIDTH, 
+                              FLAME_HEIGHT - yOffset);
         
-        double energy = tileEntityCoalGenerator.getEnergyToSplitShare();
-        int yOffset = (int) ((1.0 - energy) * ENERGY_BAR_HEIGHT);
+        double energy = tileEntityCoalGenerator.getFractionOfEnergyRemaining();
+        yOffset = (int) ((1.0 - energy) * ENERGY_BAR_HEIGHT);
         drawTexturedModalRect(guiLeft + ENERGY_BAR_XPOS, 
                               guiTop + ENERGY_BAR_YPOS + yOffset, ENERGY_BAR_ICON_U, 
                               ENERGY_BAR_ICON_V + yOffset, ENERGY_BAR_WIDTH, 
@@ -84,11 +80,9 @@ public class GuiCoalGenerator extends GuiContainer {
         List<String> hoveringText = new ArrayList<String>();
 
         // If the mouse is over one of the burn time indicator add the burn time indicator hovering text
-        for (int i = 0; i < TileEntityCoalGenerator.FUEL_SLOTS_COUNT; ++i) {
-            if (isInRect(guiLeft + FLAME_XPOS + FLAME_X_SPACING * i, guiTop + FLAME_YPOS, FLAME_WIDTH, FLAME_HEIGHT, mouseX, mouseY)) {
-                hoveringText.add("Fuel Time:");
-                hoveringText.add(tileEntityCoalGenerator.secondsOfFuelRemaining(i) + "s");
-            }
+        if (isInRect(guiLeft + FLAME_XPOS, guiTop + FLAME_YPOS, FLAME_WIDTH, FLAME_HEIGHT, mouseX, mouseY)) {
+            hoveringText.add("Fuel Time:");
+            hoveringText.add(tileEntityCoalGenerator.secondsOfFuelRemaining(0) + "s");
         }
         
         if (isInRect(guiLeft + ENERGY_BAR_XPOS, guiTop + ENERGY_BAR_YPOS, ENERGY_BAR_WIDTH, ENERGY_BAR_HEIGHT, mouseX, mouseY))

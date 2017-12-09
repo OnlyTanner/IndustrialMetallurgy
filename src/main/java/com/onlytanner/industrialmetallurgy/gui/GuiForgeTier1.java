@@ -105,11 +105,9 @@ public class GuiForgeTier1 extends GuiContainer {
         }
 
         // If the mouse is over one of the burn time indicator add the burn time indicator hovering text
-        for (int i = 0; i < TileEntityForgeTier1.FUEL_SLOTS_COUNT; ++i) {
-            if (isInRect(guiLeft + FLAME_XPOS + FLAME_X_SPACING * i, guiTop + FLAME_YPOS, FLAME_WIDTH, FLAME_HEIGHT, mouseX, mouseY)) {
-                hoveringText.add("Fuel Time:");
-                hoveringText.add(tileEntityForgeTier1.secondsOfFuelRemaining(i) + "s");
-            }
+        if (isInRect(guiLeft + FLAME_XPOS, guiTop + FLAME_YPOS, FLAME_WIDTH, FLAME_HEIGHT, mouseX, mouseY)) {
+            hoveringText.add("Fuel Time:");
+            hoveringText.add(tileEntityForgeTier1.secondsOfFuelRemaining(0) + "s");
         }
 
         if (isInRect(guiLeft + POINTER_XPOS, guiTop + getPointerLocationFromTemp(tileEntityForgeTier1),

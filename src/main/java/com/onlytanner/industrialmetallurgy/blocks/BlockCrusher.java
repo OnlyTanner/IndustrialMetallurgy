@@ -189,7 +189,7 @@ public class BlockCrusher extends BlockContainer {
     }
 
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-        return new ItemStack(ModBlocks.forge_tier1);
+        return new ItemStack(ModBlocks.crusher);
     }
 
     public EnumBlockRenderType getRenderType(IBlockState state) {

@@ -1,8 +1,8 @@
 {
     "variants": {
-        "facing=north": {"model": "industrialmetallurgy:forge_tier1"},
-        "facing=east":  {"model": "industrialmetallurgy:forge_tier1", "y": 90 },
-        "facing=south": {"model": "industrialmetallurgy:forge_tier1", "y": 180 },
-        "facing=west":  {"model": "industrialmetallurgy:forge_tier1", "y": 270 }
+        "facing=north": {"model": "industrialmetallurgy:coal_generator"},
+        "facing=east":  {"model": "industrialmetallurgy:coal_generator", "y": 90 },
+        "facing=south": {"model": "industrialmetallurgy:coal_generator", "y": 180 },
+        "facing=west":  {"model": "industrialmetallurgy:coal_generator", "y": 270 }
     }
 }

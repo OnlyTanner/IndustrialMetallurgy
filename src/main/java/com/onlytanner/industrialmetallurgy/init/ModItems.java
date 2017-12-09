@@ -13,6 +13,7 @@ import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemSpade;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -187,7 +188,13 @@ public class ModItems
         crushed_sphalerite_ore = new ItemBase(IndustrialMetallurgyItems.CRUSHED_SPHALERITE_ORE.getUnlocalizedName(), IndustrialMetallurgyItems.CRUSHED_SPHALERITE_ORE.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         crushed_wolframite_ore = new ItemBase(IndustrialMetallurgyItems.CRUSHED_WOLFRAMITE_ORE.getUnlocalizedName(), IndustrialMetallurgyItems.CRUSHED_WOLFRAMITE_ORE.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
 
-        alloy7201_ingot = new ItemBase(IndustrialMetallurgyItems.ALLOY7201_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.ALLOY7201_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
+        alloy7201_ingot = new ItemBase(IndustrialMetallurgyItems.ALLOY7201_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.ALLOY7201_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB) {
+            @Override
+            public boolean hasEffect(ItemStack stack)
+            {
+                return true;
+            }
+        };
         aluminum_ingot = new ItemBase(IndustrialMetallurgyItems.ALUMINUM_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.ALUMINUM_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         brass_ingot = new ItemBase(IndustrialMetallurgyItems.BRASS_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.BRASS_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         bronze_ingot = new ItemBase(IndustrialMetallurgyItems.BRONZE_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.BRONZE_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
@@ -204,7 +211,13 @@ public class ModItems
         tungsten_ingot = new ItemBase(IndustrialMetallurgyItems.TUNGSTEN_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.TUNGSTEN_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         zinc_ingot = new ItemBase(IndustrialMetallurgyItems.ZINC_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.ZINC_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
 
-        alloy7201_nugget = new ItemBase(IndustrialMetallurgyItems.ALLOY7201_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.ALLOY7201_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
+        alloy7201_nugget = new ItemBase(IndustrialMetallurgyItems.ALLOY7201_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.ALLOY7201_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB) {
+            @Override
+            public boolean hasEffect(ItemStack stack)
+            {
+                return true;
+            }
+        };
         aluminum_nugget = new ItemBase(IndustrialMetallurgyItems.ALUMINUM_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.ALUMINUM_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         brass_nugget = new ItemBase(IndustrialMetallurgyItems.BRASS_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.BRASS_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         bronze_nugget = new ItemBase(IndustrialMetallurgyItems.BRONZE_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.BRONZE_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
@@ -222,7 +235,13 @@ public class ModItems
         tungsten_nugget = new ItemBase(IndustrialMetallurgyItems.TUNGSTEN_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.TUNGSTEN_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         zinc_nugget = new ItemBase(IndustrialMetallurgyItems.ZINC_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.ZINC_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
 
-        alloy7201_pickaxe = new ItemPickaxeBase(IndustrialMetallurgyItems.ALLOY7201_PICKAXE.getUnlocalizedName(), IndustrialMetallurgyItems.ALLOY7201_PICKAXE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, ALLOY7201);
+        alloy7201_pickaxe = new ItemPickaxeBase(IndustrialMetallurgyItems.ALLOY7201_PICKAXE.getUnlocalizedName(), IndustrialMetallurgyItems.ALLOY7201_PICKAXE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, ALLOY7201) {
+            @Override
+            public boolean hasEffect(ItemStack stack)
+            {
+                return true;
+            }
+        };
         aluminum_pickaxe = new ItemPickaxeBase(IndustrialMetallurgyItems.ALUMINUM_PICKAXE.getUnlocalizedName(), IndustrialMetallurgyItems.ALUMINUM_PICKAXE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, ALUMINUM);
         brass_pickaxe = new ItemPickaxeBase(IndustrialMetallurgyItems.BRASS_PICKAXE.getUnlocalizedName(), IndustrialMetallurgyItems.BRASS_PICKAXE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, BRASS);
         bronze_pickaxe = new ItemPickaxeBase(IndustrialMetallurgyItems.BRONZE_PICKAXE.getUnlocalizedName(), IndustrialMetallurgyItems.BRONZE_PICKAXE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, BRONZE);
@@ -239,7 +258,13 @@ public class ModItems
         tungsten_pickaxe = new ItemPickaxeBase(IndustrialMetallurgyItems.TUNGSTEN_PICKAXE.getUnlocalizedName(), IndustrialMetallurgyItems.TUNGSTEN_PICKAXE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, TUNGSTEN);
         zinc_pickaxe = new ItemPickaxeBase(IndustrialMetallurgyItems.ZINC_PICKAXE.getUnlocalizedName(), IndustrialMetallurgyItems.ZINC_PICKAXE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, ZINC);
 
-        alloy7201_sword = new ItemSwordBase(IndustrialMetallurgyItems.ALLOY7201_SWORD.getUnlocalizedName(), IndustrialMetallurgyItems.ALLOY7201_SWORD.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, ALLOY7201);
+        alloy7201_sword = new ItemSwordBase(IndustrialMetallurgyItems.ALLOY7201_SWORD.getUnlocalizedName(), IndustrialMetallurgyItems.ALLOY7201_SWORD.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, ALLOY7201) {
+            @Override
+            public boolean hasEffect(ItemStack stack)
+            {
+                return true;
+            }
+        };
         aluminum_sword = new ItemSwordBase(IndustrialMetallurgyItems.ALUMINUM_SWORD.getUnlocalizedName(), IndustrialMetallurgyItems.ALUMINUM_SWORD.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, ALUMINUM);
         brass_sword = new ItemSwordBase(IndustrialMetallurgyItems.BRASS_SWORD.getUnlocalizedName(), IndustrialMetallurgyItems.BRASS_SWORD.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, BRASS);
         bronze_sword = new ItemSwordBase(IndustrialMetallurgyItems.BRONZE_SWORD.getUnlocalizedName(), IndustrialMetallurgyItems.BRONZE_SWORD.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, BRONZE);
@@ -256,7 +281,13 @@ public class ModItems
         tungsten_sword = new ItemSwordBase(IndustrialMetallurgyItems.TUNGSTEN_SWORD.getUnlocalizedName(), IndustrialMetallurgyItems.TUNGSTEN_SWORD.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, TUNGSTEN);
         zinc_sword = new ItemSwordBase(IndustrialMetallurgyItems.ZINC_SWORD.getUnlocalizedName(), IndustrialMetallurgyItems.ZINC_SWORD.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, ZINC);
 
-        alloy7201_shovel = new ItemShovelBase(IndustrialMetallurgyItems.ALLOY7201_SHOVEL.getUnlocalizedName(), IndustrialMetallurgyItems.ALLOY7201_SHOVEL.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, ALLOY7201);
+        alloy7201_shovel = new ItemShovelBase(IndustrialMetallurgyItems.ALLOY7201_SHOVEL.getUnlocalizedName(), IndustrialMetallurgyItems.ALLOY7201_SHOVEL.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, ALLOY7201) {
+            @Override
+            public boolean hasEffect(ItemStack stack)
+            {
+                return true;
+            }
+        };
         aluminum_shovel = new ItemShovelBase(IndustrialMetallurgyItems.ALUMINUM_SHOVEL.getUnlocalizedName(), IndustrialMetallurgyItems.ALUMINUM_SHOVEL.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, ALUMINUM);
         brass_shovel = new ItemShovelBase(IndustrialMetallurgyItems.BRASS_SHOVEL.getUnlocalizedName(), IndustrialMetallurgyItems.BRASS_SHOVEL.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, BRASS);
         bronze_shovel = new ItemShovelBase(IndustrialMetallurgyItems.BRONZE_SHOVEL.getUnlocalizedName(), IndustrialMetallurgyItems.BRONZE_SHOVEL.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, BRONZE);
@@ -273,7 +304,13 @@ public class ModItems
         tungsten_shovel = new ItemShovelBase(IndustrialMetallurgyItems.TUNGSTEN_SHOVEL.getUnlocalizedName(), IndustrialMetallurgyItems.TUNGSTEN_SHOVEL.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, TUNGSTEN);
         zinc_shovel = new ItemShovelBase(IndustrialMetallurgyItems.ZINC_SHOVEL.getUnlocalizedName(), IndustrialMetallurgyItems.ZINC_SHOVEL.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, ZINC);
         
-        alloy7201_axe = new ItemAxeBase(IndustrialMetallurgyItems.ALLOY7201_AXE.getUnlocalizedName(), IndustrialMetallurgyItems.ALLOY7201_AXE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, ALLOY7201);
+        alloy7201_axe = new ItemAxeBase(IndustrialMetallurgyItems.ALLOY7201_AXE.getUnlocalizedName(), IndustrialMetallurgyItems.ALLOY7201_AXE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, ALLOY7201) {
+            @Override
+            public boolean hasEffect(ItemStack stack)
+            {
+                return true;
+            }
+        };
         aluminum_axe = new ItemAxeBase(IndustrialMetallurgyItems.ALUMINUM_AXE.getUnlocalizedName(), IndustrialMetallurgyItems.ALUMINUM_AXE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, ALUMINUM);
         brass_axe = new ItemAxeBase(IndustrialMetallurgyItems.BRASS_AXE.getUnlocalizedName(), IndustrialMetallurgyItems.BRASS_AXE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, BRASS);
         bronze_axe = new ItemAxeBase(IndustrialMetallurgyItems.BRONZE_AXE.getUnlocalizedName(), IndustrialMetallurgyItems.BRONZE_AXE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, BRONZE);
@@ -290,7 +327,13 @@ public class ModItems
         tungsten_axe = new ItemAxeBase(IndustrialMetallurgyItems.TUNGSTEN_AXE.getUnlocalizedName(), IndustrialMetallurgyItems.TUNGSTEN_AXE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, TUNGSTEN);
         zinc_axe = new ItemAxeBase(IndustrialMetallurgyItems.ZINC_AXE.getUnlocalizedName(), IndustrialMetallurgyItems.ZINC_AXE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, ZINC);
 
-        alloy7201_hoe = new ItemHoeBase(IndustrialMetallurgyItems.ALLOY7201_HOE.getUnlocalizedName(), IndustrialMetallurgyItems.ALLOY7201_HOE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, ALLOY7201);
+        alloy7201_hoe = new ItemHoeBase(IndustrialMetallurgyItems.ALLOY7201_HOE.getUnlocalizedName(), IndustrialMetallurgyItems.ALLOY7201_HOE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, ALLOY7201) {
+            @Override
+            public boolean hasEffect(ItemStack stack)
+            {
+                return true;
+            }
+        };
         aluminum_hoe = new ItemHoeBase(IndustrialMetallurgyItems.ALUMINUM_HOE.getUnlocalizedName(), IndustrialMetallurgyItems.ALUMINUM_HOE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, ALUMINUM);
         brass_hoe = new ItemHoeBase(IndustrialMetallurgyItems.BRASS_HOE.getUnlocalizedName(), IndustrialMetallurgyItems.BRASS_HOE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, BRASS);
         bronze_hoe = new ItemHoeBase(IndustrialMetallurgyItems.BRONZE_HOE.getUnlocalizedName(), IndustrialMetallurgyItems.BRONZE_HOE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, BRONZE);

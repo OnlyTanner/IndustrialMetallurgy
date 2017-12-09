@@ -1,11 +1,9 @@
 {
     "parent": "block/orientable",
     "textures": {
-        "top": "industrialmetallurgy:blocks/iron_forge_top_on",
-		"bottom": "blocks/iron_block",
-        "north": "industrialmetallurgy:blocks/iron_forge_front_on",
-        "east": "industrialmetallurgy:blocks/iron_forge_side",
-		"west": "industrialmetallurgy:blocks/iron_forge_side",
-		"south": "blocks/iron_block"
+        "top": "industrialmetallurgy:blocks/bronze_block",
+		"bottom": "industrialmetallurgy:blocks/bronze_block",
+        "side": "industrialmetallurgy:blocks/coal_generator_side_on",
+		"front": "industrialmetallurgy:blocks/coal_generator_front_on"
     }
 }

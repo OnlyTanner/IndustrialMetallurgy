@@ -1,3 +1,4 @@
+item.alloy7201_ingot.name=Alloy7201 Ingot
 item.aluminum_ingot.name=Aluminum Ingot
 item.brass_ingot.name=Brass Ingot
 item.bronze_ingot.name=Bronze Ingot
@@ -14,6 +15,7 @@ item.titanium_ingot.name=Titanium Ingot
 item.tungsten_ingot.name=Tungsten Ingot
 item.zinc_ingot.name=Zinc Ingot
 
+item.alloy7201_nugget.name=Alloy7201 Nugget
 item.aluminum_nugget.name=Aluminum Nugget
 item.brass_nugget.name=Brass Nugget
 item.bronze_nugget.name=Bronze Nugget
@@ -30,6 +32,12 @@ item.tin_nugget.name=Tin Nugget
 item.titanium_nugget.name=Titanium Nugget
 item.tungsten_nugget.name=Tungsten Nugget
 item.zinc_nugget.name=Zinc Nugget
+
+item.alloy7201_sword.name=Alloy7201 Sword
+item.alloy7201_pickaxe.name=Alloy7201 Pickaxe
+item.alloy7201_shovel.name=Alloy7201 Shovel
+item.alloy7201_axe.name=Alloy7201 Axe
+item.alloy7201_hoe.name=Alloy7201 Hoe
 
 item.aluminum_sword.name=Aluminum Sword
 item.aluminum_pickaxe.name=Aluminum Pickaxe
@@ -134,12 +142,14 @@ tile.wolframite_ore.name=Wolframite Ore
 item.crushed_bauxite_ore.name=Crushed Bauxite Ore
 item.crushed_cassiterite_ore.name=Crushed Cassiterite Ore
 item.crushed_chromite_ore.name=Crushed Chromite Ore
+item.crushed_cobaltite_ore.name=Crushed Cobaltite Ore
 item.crushed_cuprite_ore.name=Crushed Cuprite Ore
 item.crushed_garnierite_ore.name=Crushed Garnierite Ore
 item.crushed_gold_ore.name=Crushed Gold Ore
 item.crushed_iron_ore.name=Crushed Iron Ore
 item.crushed_rutile_ore.name=Crushed Rutile Ore
 item.crushed_sphalerite_ore.name=Crushed Sphalerite Ore
+item.crushed_wolframite_ore.name=Crushed Wolframite Ore
 
 tile.aluminum_block.name=Block of Aluminum
 tile.brass_block.name=Block of Brass
@@ -158,6 +168,8 @@ tile.zinc_block.name=Block of Zinc
 item.refractory_composite.name=Refractory Composite
 item.refractory_brick.name=Refractory Brick
 item.coal_coke.name=Coal Coke
+item.crushed_coal.name=Crushed Coal
+item.crushed_diamond.name=Crushed Diamond
 tile.refractory_bricks.name=Refractory Bricks
 tile.iron_forge_core.name=Iron Forge Core
 tile.forge_tier1.name=Iron Forge (Tier 1)

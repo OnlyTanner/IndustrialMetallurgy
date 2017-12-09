@@ -32,12 +32,16 @@ public class CrusherRecipes {
         this.addCrushingRecipe(new ItemStack(ModBlocks.bauxite_ore), new ItemStack(ModItems.crushed_bauxite_ore, 2));
         this.addCrushingRecipe(new ItemStack(ModBlocks.cassiterite_ore), new ItemStack(ModItems.crushed_cassiterite_ore, 2));
         this.addCrushingRecipe(new ItemStack(ModBlocks.chromite_ore), new ItemStack(ModItems.crushed_chromite_ore, 2));
+        this.addCrushingRecipe(new ItemStack(ModBlocks.cobaltite_ore), new ItemStack(ModItems.crushed_cobaltite_ore, 2));
         this.addCrushingRecipe(new ItemStack(ModBlocks.cuprite_ore), new ItemStack(ModItems.crushed_cuprite_ore, 2));
         this.addCrushingRecipe(new ItemStack(ModBlocks.garnierite_ore), new ItemStack(ModItems.crushed_garnierite_ore, 2));
         this.addCrushingRecipe(new ItemStack(Blocks.GOLD_ORE), new ItemStack(ModItems.crushed_gold_ore, 2));
         this.addCrushingRecipe(new ItemStack(Blocks.IRON_ORE), new ItemStack(ModItems.crushed_iron_ore, 2));
         this.addCrushingRecipe(new ItemStack(ModBlocks.rutile_ore), new ItemStack(ModItems.crushed_rutile_ore, 2));
         this.addCrushingRecipe(new ItemStack(ModBlocks.sphalerite_ore), new ItemStack(ModItems.crushed_sphalerite_ore, 2));
+        this.addCrushingRecipe(new ItemStack(ModBlocks.wolframite_ore), new ItemStack(ModItems.crushed_wolframite_ore, 2));
+        this.addCrushingRecipe(new ItemStack(Items.COAL), new ItemStack(ModItems.crushed_coal));
+        this.addCrushingRecipe(new ItemStack(Items.DIAMOND), new ItemStack(ModItems.crushed_diamond));
         this.addCrushingRecipe(new ItemStack(Blocks.COAL_ORE), new ItemStack(Items.COAL, 2));
         this.addCrushingRecipe(new ItemStack(Blocks.REDSTONE_ORE), new ItemStack(Items.REDSTONE, 10));
         this.addCrushingRecipe(new ItemStack(Blocks.DIAMOND_ORE), new ItemStack(Items.DIAMOND, 2));
@@ -46,6 +50,8 @@ public class CrusherRecipes {
         this.addCrushingRecipe(new ItemStack(Blocks.STONE), new ItemStack(Blocks.COBBLESTONE));
         this.addCrushingRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.GRAVEL));
         this.addCrushingRecipe(new ItemStack(Blocks.GRAVEL), new ItemStack(Blocks.SAND));
+        this.addCrushingRecipe(new ItemStack(Items.BONE), new ItemStack(Items.DYE, 6, 15));
+        this.addCrushingRecipe(new ItemStack(Items.BLAZE_ROD), new ItemStack(Items.BLAZE_POWDER, 4));
     }
 
     /**

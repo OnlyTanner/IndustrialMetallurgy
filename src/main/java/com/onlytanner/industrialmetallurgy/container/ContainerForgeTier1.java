@@ -37,7 +37,7 @@ public class ContainerForgeTier1 extends Container {
 
     public final int FUEL_SLOTS_COUNT = 1;
     public final int INPUT_SLOTS_COUNT = 2;
-    public final int OUTPUT_SLOTS_COUNT = 2;
+    public final int OUTPUT_SLOTS_COUNT = 1;
     public final int FURNACE_SLOTS_COUNT = FUEL_SLOTS_COUNT + INPUT_SLOTS_COUNT + OUTPUT_SLOTS_COUNT;
 
     // slot index is the unique index for all slots in this container i.e. 0 - 35 for invPlayer then 36 - 49 for tileEntityForgeTier1
@@ -79,8 +79,7 @@ public class ContainerForgeTier1 extends Container {
         this.addSlotToContainer(new SlotFuel(inventory, FIRST_FUEL_SLOT_NUMBER, 14, 35)); //fuel slot
         this.addSlotToContainer(new Slot(inventory, FIRST_INPUT_SLOT_NUMBER, 48, 16)); //top input slot
         this.addSlotToContainer(new Slot(inventory, FIRST_INPUT_SLOT_NUMBER + 1, 48, 53)); //bottom input slot
-        this.addSlotToContainer(new SlotOutput(inventory, FIRST_OUTPUT_SLOT_NUMBER, 108, 26)); //output slot 1
-        this.addSlotToContainer(new SlotOutput(inventory, FIRST_OUTPUT_SLOT_NUMBER + 1, 108, 43)); //output slot 1
+        this.addSlotToContainer(new SlotOutput(inventory, FIRST_OUTPUT_SLOT_NUMBER, 108, 35)); //output slot 1
     }
 
     // Checks each tick to make sure the player is still able to access the inventory and if not closes the gui

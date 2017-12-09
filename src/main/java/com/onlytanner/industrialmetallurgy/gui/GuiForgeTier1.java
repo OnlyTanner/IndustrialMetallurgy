@@ -6,15 +6,15 @@ import java.util.List;
 
 import com.onlytanner.industrialmetallurgy.Reference;
 import com.onlytanner.industrialmetallurgy.container.ContainerForgeTier1;
-import com.onlytanner.industrialmetallurgy.items.crafting.ForgeRecipes;
 import com.onlytanner.industrialmetallurgy.tileentities.TileEntityForgeTier1;
+import com.onlytanner.industrialmetallurgy.tileentities.TileEntityForgeTier1.Mode;
+import java.io.IOException;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -23,15 +23,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class GuiForgeTier1 extends GuiContainer {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/gui/container/forge_tier1.png");
-    private TileEntityForgeTier1 tileEntityForgeTier1;
-
-    public GuiForgeTier1(InventoryPlayer invPlayer, TileEntityForgeTier1 tile) {
-        super(new ContainerForgeTier1(invPlayer, tile));
-        tileEntityForgeTier1 = tile;
-
-        xSize = 176;
-        ySize = 166;
-    }
+    private final TileEntityForgeTier1 tileEntityForgeTier1;
+    private final GuiButton changeMode;
+    private static final int CHANGE_MODE_BUTTON_ID = 76;
 
     // some [x,y] coordinates of graphical elements
     final int COOK_BAR_XPOS = 71;
@@ -54,7 +48,55 @@ public class GuiForgeTier1 extends GuiContainer {
     final int POINTER_ICON_V = 31;
     final int POINTER_WIDTH = 7;
     final int POINTER_HEIGHT = 7;
+    
+    final int BUTTON_XPOS = 7;
+    final int BUTTON_YPOS = 73;
+    final int ALLOY_ICON_XPOS = 176;
+    final int ALLOY_ICON_YPOS = 38;
+    final int SMELT_ICON_XPOS = 184;
+    final int SMELT_ICON_YPOS = 38;
+    final int BUTTON_SIZE = 8;
+    
+    public GuiForgeTier1(InventoryPlayer invPlayer, TileEntityForgeTier1 tile) {
+        super(new ContainerForgeTier1(invPlayer, tile));
+        tileEntityForgeTier1 = tile;
+        
+        xSize = 176;
+        ySize = 166;
+        
+        changeMode = new GuiButton(CHANGE_MODE_BUTTON_ID, BUTTON_XPOS, BUTTON_YPOS, "");
+    }
 
+    @Override
+    public void initGui()
+    {
+        super.initGui();
+        
+        changeMode.xPosition = guiLeft + BUTTON_XPOS;
+        changeMode.yPosition = guiTop + BUTTON_YPOS;
+        
+        changeMode.width = BUTTON_SIZE;
+        changeMode.height = BUTTON_SIZE;
+        
+        buttonList.add(changeMode);
+        
+        updateChangeModeButton();
+    }
+    
+    @Override
+    protected void actionPerformed(GuiButton button) throws IOException
+    {
+        if (button.id == CHANGE_MODE_BUTTON_ID)
+        {
+            if (tileEntityForgeTier1.mode == Mode.ALLOY)
+                tileEntityForgeTier1.mode = Mode.SMELT;
+            else
+                tileEntityForgeTier1.mode = Mode.ALLOY;
+        }
+        else
+            super.actionPerformed(button);
+    }
+    
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int x, int y) 
     {
@@ -115,6 +157,13 @@ public class GuiForgeTier1 extends GuiContainer {
             hoveringText.add("Temperature:");
             hoveringText.add(tileEntityForgeTier1.getTemperatureOfCurrent() + "\u00B0F");
         }
+        
+        if (isInRect(guiLeft + BUTTON_XPOS, guiTop + BUTTON_YPOS, BUTTON_SIZE, BUTTON_SIZE, mouseX, mouseY))
+            if(tileEntityForgeTier1.mode == Mode.ALLOY)
+                hoveringText.add("Alloy Mode");
+            else
+                hoveringText.add("Smelting Mode");
+        
         // If hoveringText is not empty draw the hovering text
         if (!hoveringText.isEmpty()) {
             drawHoveringText(hoveringText, mouseX - guiLeft, mouseY - guiTop, fontRendererObj);
@@ -125,6 +174,14 @@ public class GuiForgeTier1 extends GuiContainer {
 
     }
 
+    public void updateChangeModeButton()
+    {
+        if (tileEntityForgeTier1.mode == Mode.ALLOY)
+            drawTexturedModalRect(guiLeft + BUTTON_XPOS, guiTop + BUTTON_YPOS, ALLOY_ICON_XPOS, ALLOY_ICON_YPOS, BUTTON_SIZE, BUTTON_SIZE);
+        else
+            drawTexturedModalRect(guiLeft + BUTTON_XPOS, guiTop + BUTTON_YPOS, SMELT_ICON_XPOS, SMELT_ICON_YPOS, BUTTON_SIZE, BUTTON_SIZE);
+    }
+    
     // Returns true if the given x,y coordinates are within the given rectangle
     public static boolean isInRect(int x, int y, int xSize, int ySize, int mouseX, int mouseY) {
         return ((mouseX >= x && mouseX <= x + xSize) && (mouseY >= y && mouseY <= y + ySize));

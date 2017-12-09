@@ -13,11 +13,14 @@ import net.minecraft.world.EnumSkyBlock;
 
 public class TileEntityForgeTier1 extends TileEntityBase
 {
+    public enum Mode {ALLOY, SMELT};
     private int cachedNumberOfBurningSlots = -1;
+    public Mode mode;
 
     public TileEntityForgeTier1()
     {
         super(2, 2, 1);
+        this.mode = Mode.ALLOY;
     }
 
     @Override
@@ -26,7 +29,7 @@ public class TileEntityForgeTier1 extends TileEntityBase
         // If there is nothing to smelt or there is no room in the output, reset cookTime and return
         boolean flag = this.isBurning();
         boolean flag1 = false;
-
+        
         if (smeltItem(false)) {
             int numberOfFuelBurning = burnFuel();
             // If fuel is available, keep cooking the item, otherwise start "uncooking" it at double speed
@@ -75,6 +78,96 @@ public class TileEntityForgeTier1 extends TileEntityBase
             this.markDirty();
         }
     }
+    
+    public boolean smeltItem(boolean performSmelt)
+    {
+        if (mode == Mode.ALLOY)
+        {
+            //check for valid recipe based on inputs
+            ItemStack result = null;
+            if ((itemStacks[FIRST_INPUT_SLOT] == null || itemStacks[FIRST_INPUT_SLOT + 1] == null)) 
+                return false;
+            else
+                result = ForgeRecipes.getAlloyResult(itemStacks[FIRST_INPUT_SLOT], itemStacks[FIRST_INPUT_SLOT + 1]);
+            
+            //if recipe was valid, alter inputs and outputs appropriately
+            if (result != null)
+                if (itemStacks[FIRST_OUTPUT_SLOT] != null && 
+                    itemStacks[FIRST_OUTPUT_SLOT].stackSize < this.getInventoryStackLimit() && 
+                    itemStacks[FIRST_OUTPUT_SLOT].getItem().equals(result.getItem()))
+                    if (!performSmelt)
+                        return true;
+                    else
+                    {
+                        itemStacks[FIRST_OUTPUT_SLOT].stackSize += result.stackSize;
+                        if (--itemStacks[FIRST_INPUT_SLOT].stackSize <= 0)
+                            itemStacks[FIRST_OUTPUT_SLOT] = null;
+                        if (--itemStacks[FIRST_INPUT_SLOT + 1].stackSize <= 0)
+                            itemStacks[FIRST_OUTPUT_SLOT + 1] = null;
+                    }
+                else if (itemStacks[FIRST_OUTPUT_SLOT] == null)
+                    if (!performSmelt)
+                        return true;
+                    else
+                    {
+                        itemStacks[FIRST_OUTPUT_SLOT] = result.copy();
+                        if (--itemStacks[FIRST_INPUT_SLOT].stackSize <= 0)
+                            itemStacks[FIRST_OUTPUT_SLOT] = null;
+                        if (--itemStacks[FIRST_INPUT_SLOT + 1].stackSize <= 0)
+                            itemStacks[FIRST_OUTPUT_SLOT + 1] = null;
+                    }
+                else
+                    return false;
+            else
+                return false;
+        }
+        else 
+        {
+            //check for valid recipe based on inputs
+            ItemStack result = null;
+            if ((itemStacks[FIRST_INPUT_SLOT] == null && itemStacks[FIRST_INPUT_SLOT + 1] == null)) 
+                return false;
+            else if (itemStacks[FIRST_INPUT_SLOT] != null && itemStacks[FIRST_INPUT_SLOT + 1] == null)
+                result = getSmeltingResultForItem(itemStacks[FIRST_INPUT_SLOT], 1);
+            else if (itemStacks[FIRST_INPUT_SLOT] == null && itemStacks[FIRST_INPUT_SLOT + 1] != null)
+                result = getSmeltingResultForItem(itemStacks[FIRST_INPUT_SLOT + 1], 1);
+            else
+                if (itemStacks[FIRST_INPUT_SLOT].getItem().equals(itemStacks[FIRST_INPUT_SLOT + 1].getItem()))
+                    result = getSmeltingResultForItem(itemStacks[FIRST_INPUT_SLOT], 2);
+                else
+                    return false;
+            
+            //if recipe was valid, alter inputs and outputs appropriately
+            if (result != null)
+                if (itemStacks[FIRST_OUTPUT_SLOT] != null && 
+                    itemStacks[FIRST_OUTPUT_SLOT].stackSize < this.getInventoryStackLimit() && 
+                    itemStacks[FIRST_OUTPUT_SLOT].getItem().equals(result.getItem()))
+                    if (!performSmelt)
+                        return true;
+                    else
+                    {
+                        itemStacks[FIRST_OUTPUT_SLOT].stackSize += result.stackSize;
+                        if (--itemStacks[FIRST_INPUT_SLOT].stackSize <= 0)
+                            itemStacks[FIRST_OUTPUT_SLOT] = null;
+                    }
+                else if (itemStacks[FIRST_OUTPUT_SLOT] == null)
+                    if (!performSmelt)
+                        return true;
+                    else
+                    {
+                        itemStacks[FIRST_OUTPUT_SLOT] = result.copy();
+                        if (--itemStacks[FIRST_INPUT_SLOT + 1].stackSize <= 0)
+                            itemStacks[FIRST_OUTPUT_SLOT + 1] = null;
+                    }
+                else
+                    return false;
+            else
+                return false;
+        }
+        
+        markDirty();
+        return true;
+    }
 
     /**
      * for each fuel slot: decreases the burn time, checks if burnTimeRemaining
@@ -114,193 +207,6 @@ public class TileEntityForgeTier1 extends TileEntityBase
             markDirty();
         }
         return burningCount;
-    }
-
-    /**
-     * checks that there is an item to be smelted in one of the input slots and
-     * that there is room for the result in the output slots If desired,
-     * performs the smelt
-     *
-     * @param performSmelt if true, perform the smelt. if false, check whether
-     * smelting is possible, but don't change the inventory
-     * @return false if no items can be smelted, true otherwise
-     */
-    private boolean smeltItem(boolean performSmelt)
-    {
-        if (((itemStacks[FIRST_INPUT_SLOT] != null && itemStacks[FIRST_INPUT_SLOT + 1] != null) && itemStacks[FIRST_INPUT_SLOT].isItemEqual(itemStacks[FIRST_INPUT_SLOT + 1]))) {
-            return getResult(0, 2, performSmelt);
-        } else if (itemStacks[FIRST_INPUT_SLOT] != null && itemStacks[FIRST_INPUT_SLOT + 1] == null) {
-            return getResult(0, 1, performSmelt);
-        } else if (itemStacks[FIRST_INPUT_SLOT] == null && itemStacks[FIRST_INPUT_SLOT + 1] != null) {
-            return getResult(1, 1, performSmelt);
-        } else if (itemStacks[FIRST_INPUT_SLOT] != null && itemStacks[FIRST_INPUT_SLOT + 1] != null) {
-            return getResult(performSmelt);
-        } else {
-            return false;
-        }
-    }
-
-    private boolean getResult(int index, int numOfOutputs, boolean performSmelt)
-    {
-        ItemStack result = getSmeltingResultForItem(itemStacks[FIRST_INPUT_SLOT + index], numOfOutputs);
-
-        if ((itemStacks[FIRST_INPUT_SLOT] == null && itemStacks[FIRST_INPUT_SLOT + 1] == null) || result == null) {
-            return false;
-        }
-        if (!performSmelt
-                && (itemStacks[FIRST_OUTPUT_SLOT] == null || itemStacks[FIRST_OUTPUT_SLOT + 1] == null
-                || (itemStacks[FIRST_OUTPUT_SLOT] != null && itemStacks[FIRST_OUTPUT_SLOT].isItemEqual(result))
-                || (itemStacks[FIRST_OUTPUT_SLOT + 1] != null && itemStacks[FIRST_OUTPUT_SLOT + 1].isItemEqual(result)))) {
-            return true;
-        }
-
-        // alter input and output
-        if (numOfOutputs == 1) {
-            if (itemStacks[FIRST_INPUT_SLOT + index].stackSize <= 1) {
-                itemStacks[FIRST_INPUT_SLOT + index] = null;
-            } else {
-                itemStacks[FIRST_INPUT_SLOT + index].stackSize--;
-            }
-        } else if (itemStacks[FIRST_INPUT_SLOT + index].stackSize <= 1 && itemStacks[FIRST_INPUT_SLOT + index + 1].stackSize <= 1) {
-            itemStacks[FIRST_INPUT_SLOT + index] = null;
-            itemStacks[FIRST_INPUT_SLOT + index + 1] = null;
-        } else if (itemStacks[FIRST_INPUT_SLOT + index].stackSize <= 1 && itemStacks[FIRST_INPUT_SLOT + index + 1].stackSize > 1) {
-            itemStacks[FIRST_INPUT_SLOT + index] = null;
-            itemStacks[FIRST_INPUT_SLOT + index + 1].stackSize--;
-        } else if (itemStacks[FIRST_INPUT_SLOT + index].stackSize > 1 && itemStacks[FIRST_INPUT_SLOT + index + 1].stackSize <= 1) {
-            itemStacks[FIRST_INPUT_SLOT + index].stackSize--;
-            itemStacks[FIRST_INPUT_SLOT + index + 1] = null;
-        } else {
-            itemStacks[FIRST_INPUT_SLOT + index].stackSize--;
-            itemStacks[FIRST_INPUT_SLOT + index + 1].stackSize--;
-        }
-
-        if (itemStacks[FIRST_OUTPUT_SLOT] == null) {
-            itemStacks[FIRST_OUTPUT_SLOT] = result.copy(); // Use deep .copy() to avoid altering the recipe
-        } else if (itemStacks[FIRST_OUTPUT_SLOT].stackSize + result.stackSize <= this.getInventoryStackLimit()) {
-            if (itemStacks[FIRST_OUTPUT_SLOT].getItem() == result.getItem()) {
-                itemStacks[FIRST_OUTPUT_SLOT].stackSize += result.stackSize;
-            } else if (itemStacks[FIRST_OUTPUT_SLOT + 1] == null) {
-                itemStacks[FIRST_OUTPUT_SLOT + 1] = result.copy();
-            } else if (itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize + result.stackSize <= this.getInventoryStackLimit() && result.getItem() == itemStacks[FIRST_OUTPUT_SLOT + 1].getItem()) {
-                itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize += result.stackSize;
-            } else {
-                return false;
-            }
-        } else if (itemStacks[FIRST_OUTPUT_SLOT].stackSize + result.stackSize > this.getInventoryStackLimit() && itemStacks[FIRST_OUTPUT_SLOT].stackSize < this.getInventoryStackLimit()) {
-            if (itemStacks[FIRST_OUTPUT_SLOT].getItem() == result.getItem()) {
-                int temp = itemStacks[FIRST_OUTPUT_SLOT].stackSize;
-                itemStacks[FIRST_OUTPUT_SLOT].stackSize = this.getInventoryStackLimit();
-                if (itemStacks[FIRST_OUTPUT_SLOT + 1] == null) {
-                    itemStacks[FIRST_OUTPUT_SLOT + 1] = new ItemStack(result.getItem(), result.stackSize - (this.getInventoryStackLimit() - temp));
-                } else if (itemStacks[FIRST_OUTPUT_SLOT + 1].getItem() == result.getItem()) {
-                    itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize += this.getInventoryStackLimit() - temp;
-                } else {
-                    return false;
-                }
-            } else {
-                if (itemStacks[FIRST_OUTPUT_SLOT + 1] == null) {
-                    itemStacks[FIRST_OUTPUT_SLOT + 1] = result.copy();
-                } else if (itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize + result.stackSize <= this.getInventoryStackLimit() && result.getItem() == itemStacks[FIRST_OUTPUT_SLOT + 1].getItem()) {
-                    itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize += result.stackSize;
-                } else {
-                    return false;
-                }
-            }
-        } else if (itemStacks[FIRST_OUTPUT_SLOT].stackSize == this.getInventoryStackLimit()) {
-            if (itemStacks[FIRST_OUTPUT_SLOT + 1] == null) {
-                itemStacks[FIRST_OUTPUT_SLOT + 1] = result.copy();
-            } else if (itemStacks[FIRST_OUTPUT_SLOT + 1].getItem() == result.getItem() && itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize + result.stackSize <= this.getInventoryStackLimit()) {
-                itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize += result.stackSize;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-
-        markDirty();
-        return true;
-    }
-
-    private boolean getResult(boolean performSmelt)
-    {
-        ItemStack result = getAlloyResultForItem(itemStacks[FIRST_INPUT_SLOT], itemStacks[FIRST_INPUT_SLOT + 1]);
-
-        if ((itemStacks[FIRST_INPUT_SLOT] == null || itemStacks[FIRST_INPUT_SLOT + 1] == null) || result == null) {
-            return false;
-        }
-        if (!performSmelt
-                && (itemStacks[FIRST_OUTPUT_SLOT] == null || itemStacks[FIRST_OUTPUT_SLOT + 1] == null
-                || (itemStacks[FIRST_OUTPUT_SLOT] != null && itemStacks[FIRST_OUTPUT_SLOT].isItemEqual(result))
-                || (itemStacks[FIRST_OUTPUT_SLOT + 1] != null && itemStacks[FIRST_OUTPUT_SLOT + 1].isItemEqual(result)))) {
-            return true;
-        }
-
-        // alter input and output
-        ItemStack[] stack = ForgeRecipes.getReducedStacks(itemStacks[FIRST_INPUT_SLOT], itemStacks[FIRST_INPUT_SLOT + 1]);
-        if (itemStacks[FIRST_INPUT_SLOT].stackSize <= stack[0].stackSize) {
-            if (itemStacks[FIRST_INPUT_SLOT + 1].stackSize <= stack[1].stackSize) {
-                itemStacks[FIRST_INPUT_SLOT] = null;
-                itemStacks[FIRST_INPUT_SLOT + 1] = null;
-            } else {
-                itemStacks[FIRST_INPUT_SLOT] = null;
-                itemStacks[FIRST_INPUT_SLOT + 1] = new ItemStack(itemStacks[FIRST_INPUT_SLOT + 1].getItem(), itemStacks[FIRST_INPUT_SLOT + 1].stackSize - stack[1].stackSize);
-            }
-        } else if (itemStacks[FIRST_INPUT_SLOT + 1].stackSize <= stack[1].stackSize) {
-            itemStacks[FIRST_INPUT_SLOT] = new ItemStack(itemStacks[FIRST_INPUT_SLOT].getItem(), itemStacks[FIRST_INPUT_SLOT].stackSize - stack[0].stackSize);
-            itemStacks[FIRST_INPUT_SLOT + 1] = null;
-        } else {
-            itemStacks[FIRST_INPUT_SLOT] = new ItemStack(itemStacks[FIRST_INPUT_SLOT].getItem(), itemStacks[FIRST_INPUT_SLOT].stackSize - stack[0].stackSize);
-            itemStacks[FIRST_INPUT_SLOT + 1] = new ItemStack(itemStacks[FIRST_INPUT_SLOT + 1].getItem(), itemStacks[FIRST_INPUT_SLOT + 1].stackSize - stack[1].stackSize);
-        }
-
-        if (itemStacks[FIRST_OUTPUT_SLOT] == null) {
-            itemStacks[FIRST_OUTPUT_SLOT] = result.copy(); // Use deep .copy() to avoid altering the recipe
-        } else if (itemStacks[FIRST_OUTPUT_SLOT].stackSize + result.stackSize <= this.getInventoryStackLimit()) {
-            if (itemStacks[FIRST_OUTPUT_SLOT].getItem() == result.getItem()) {
-                itemStacks[FIRST_OUTPUT_SLOT].stackSize += result.stackSize;
-            } else if (itemStacks[FIRST_OUTPUT_SLOT + 1] == null) {
-                itemStacks[FIRST_OUTPUT_SLOT + 1] = result.copy();
-            } else if (itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize + result.stackSize <= this.getInventoryStackLimit() && result.getItem() == itemStacks[FIRST_OUTPUT_SLOT + 1].getItem()) {
-                itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize += result.stackSize;
-            } else {
-                return false;
-            }
-        } else if (itemStacks[FIRST_OUTPUT_SLOT].stackSize + result.stackSize > this.getInventoryStackLimit() && itemStacks[FIRST_OUTPUT_SLOT].stackSize < this.getInventoryStackLimit()) {
-            if (itemStacks[FIRST_OUTPUT_SLOT].getItem() == result.getItem()) {
-                int temp = itemStacks[FIRST_OUTPUT_SLOT].stackSize;
-                itemStacks[FIRST_OUTPUT_SLOT].stackSize = this.getInventoryStackLimit();
-                if (itemStacks[FIRST_OUTPUT_SLOT + 1] == null) {
-                    itemStacks[FIRST_OUTPUT_SLOT + 1] = new ItemStack(result.getItem(), result.stackSize - (this.getInventoryStackLimit() - temp));
-                } else if (itemStacks[FIRST_OUTPUT_SLOT + 1].getItem() == result.getItem()) {
-                    itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize += this.getInventoryStackLimit() - temp;
-                } else {
-                    return false;
-                }
-            } else {
-                if (itemStacks[FIRST_OUTPUT_SLOT + 1] == null) {
-                    itemStacks[FIRST_OUTPUT_SLOT + 1] = result.copy();
-                } else if (itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize + result.stackSize <= this.getInventoryStackLimit() && result.getItem() == itemStacks[FIRST_OUTPUT_SLOT + 1].getItem()) {
-                    itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize += result.stackSize;
-                } else {
-                    return false;
-                }
-            }
-        } else if (itemStacks[FIRST_OUTPUT_SLOT].stackSize == this.getInventoryStackLimit()) {
-            if (itemStacks[FIRST_OUTPUT_SLOT + 1] == null) {
-                itemStacks[FIRST_OUTPUT_SLOT + 1] = result.copy();
-            } else if (itemStacks[FIRST_OUTPUT_SLOT + 1].getItem() == result.getItem() && itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize + result.stackSize <= this.getInventoryStackLimit()) {
-                itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize += result.stackSize;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-
-        markDirty();
-        return false;
     }
 
     public int getTemperatureOfCurrent()

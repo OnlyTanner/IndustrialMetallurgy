@@ -53,6 +53,7 @@ public class Reference {
         STEEL_NUGGET("steel_nugget", "ItemSteelNugget"),
         TIN_NUGGET("tin_nugget", "ItemTinNugget"),
         TITANIUM_NUGGET("titanium_nugget", "ItemTitaniumNugget"),
+        TUNGSTEN_NUGGET("tungsten_nugget", "ItemTungstenNugget"),
         ZINC_NUGGET("zinc_nugget", "ItemZincNugget"),
         ALUMINUM_PICKAXE("aluminum_pickaxe", "ItemAluminumPickaxe"),
         BRASS_PICKAXE("brass_pickaxe", "ItemBrassPickaxe"),

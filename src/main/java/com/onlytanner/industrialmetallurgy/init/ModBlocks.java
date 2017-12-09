@@ -201,6 +201,8 @@ public class ModBlocks
         registerRender(lit_forge_tier1);
         //registerRender(bellow);
         registerRender(crusher);
+        registerRender(coke_oven);
+        registerRender(lit_coke_oven);
         registerRender(coal_generator);
         registerRender(lit_coal_generator);
     }

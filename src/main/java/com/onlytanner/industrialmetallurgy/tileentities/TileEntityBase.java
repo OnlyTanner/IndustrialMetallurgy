@@ -136,7 +136,10 @@ public abstract class TileEntityBase extends TileEntityLockable implements IInve
 
     public boolean isBurning()
     {
-        return cookTime > 1;
+        for (int i = 0; i < burnTimeRemaining.length; i++)
+            if (burnTimeRemaining[i] > 1)
+                return true;
+        return false;
     }
 
     // returns the smelting result for the given stack. Returns null if the given stack can not be smelted

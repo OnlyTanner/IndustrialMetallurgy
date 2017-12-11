@@ -5,13 +5,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
       <group>
-        <file>file:/D:/Software/Java/MC/src/main/java/com/onlytanner/industrialmetallurgy/container/ContainerCokeOven.java</file>
+        <file>file:/D:/Software/Java/MC/src/main/java/com/onlytanner/industrialmetallurgy/blocks/BlockCokeOven.java</file>
         <file>file:/D:/Software/Java/MC/src/main/java/com/onlytanner/industrialmetallurgy/init/ModItems.java</file>
-        <file>file:/D:/Software/Java/MC/src/main/java/com/onlytanner/industrialmetallurgy/items/crafting/CokeOvenRecipes.java</file>
+        <file>file:/D:/Software/Java/MC/src/main/resources/assets/industrialmetallurgy/lang/en_US.lang</file>
         <file>file:/D:/Software/Java/MC/src/main/java/com/onlytanner/industrialmetallurgy/init/ModBlocks.java</file>
         <file>file:/D:/Software/Java/MC/src/main/java/com/onlytanner/industrialmetallurgy/tileentities/TileEntityForgeTier1.java</file>
-        <file>file:/D:/Software/Java/MC/src/main/java/com/onlytanner/industrialmetallurgy/tileentities/TileEntityCokeOven.java</file>
-        <file>file:/D:/Software/Java/MC/src/main/java/com/onlytanner/industrialmetallurgy/gui/GuiForgeTier1.java</file>
         <file>file:/D:/Software/Java/MC/src/main/java/com/onlytanner/industrialmetallurgy/Reference.java</file>
         <file>file:/D:/Software/Java/MC/src/main/java/com/onlytanner/industrialmetallurgy/init/ModCrafting.java</file>
       </group>
@@ -24,6 +22,8 @@
         <file>file:/D:/Software/Java/MC/src/main/resources/assets/industrialmetallurgy/lang/en_US.lang</file>
         <file>file:/D:/Software/Java/MC/src/main/java/com/onlytanner/industrialmetallurgy/init/ModBlocks.java</file>
         <file>file:/D:/Software/Java/MC/src/main/java/com/onlytanner/industrialmetallurgy/tileentities/TileEntityForgeTier1.java</file>
+        <file>file:/D:/Software/Java/MC/src/main/java/com/onlytanner/industrialmetallurgy/container/ContainerForgeTier1.java</file>
+        <file>file:/D:/Software/Java/MC/src/main/java/com/onlytanner/industrialmetallurgy/gui/GuiForgeTier1.java</file>
         <file>file:/D:/Software/Java/MC/src/main/java/com/onlytanner/industrialmetallurgy/Reference.java</file>
         <file>file:/D:/Software/Java/MC/src/main/java/com/onlytanner/industrialmetallurgy/init/ModCrafting.java</file>
       </group>

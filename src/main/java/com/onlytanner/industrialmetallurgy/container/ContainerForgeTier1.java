@@ -2,6 +2,7 @@ package com.onlytanner.industrialmetallurgy.container;
 
 import com.onlytanner.industrialmetallurgy.items.crafting.ForgeRecipes;
 import com.onlytanner.industrialmetallurgy.tileentities.TileEntityForgeTier1;
+import com.onlytanner.industrialmetallurgy.tileentities.TileEntityForgeTier1.Mode;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

@@ -20,7 +20,6 @@ public class TileEntityForgeTier1 extends TileEntityBase
     public TileEntityForgeTier1()
     {
         super(2, 2, 1);
-        this.mode = Mode.ALLOY;
     }
 
     @Override
@@ -92,18 +91,22 @@ public class TileEntityForgeTier1 extends TileEntityBase
             
             //if recipe was valid, alter inputs and outputs appropriately
             if (result != null)
+            {
+                ItemStack[] stacks = ForgeRecipes.getReducedStacks(itemStacks[FIRST_INPUT_SLOT], itemStacks[FIRST_INPUT_SLOT + 1]);
                 if (itemStacks[FIRST_OUTPUT_SLOT] != null && 
-                    itemStacks[FIRST_OUTPUT_SLOT].stackSize < this.getInventoryStackLimit() && 
+                    itemStacks[FIRST_OUTPUT_SLOT].stackSize + result.stackSize <= this.getInventoryStackLimit() && 
                     itemStacks[FIRST_OUTPUT_SLOT].getItem().equals(result.getItem()))
                     if (!performSmelt)
                         return true;
                     else
                     {
                         itemStacks[FIRST_OUTPUT_SLOT].stackSize += result.stackSize;
-                        if (--itemStacks[FIRST_INPUT_SLOT].stackSize <= 0)
-                            itemStacks[FIRST_OUTPUT_SLOT] = null;
-                        if (--itemStacks[FIRST_INPUT_SLOT + 1].stackSize <= 0)
-                            itemStacks[FIRST_OUTPUT_SLOT + 1] = null;
+                        itemStacks[FIRST_INPUT_SLOT].stackSize = stacks[0].stackSize;
+                        itemStacks[FIRST_INPUT_SLOT + 1].stackSize = stacks[1].stackSize;
+                        if (itemStacks[FIRST_INPUT_SLOT].stackSize <= 0)
+                            itemStacks[FIRST_INPUT_SLOT] = null;
+                        if (itemStacks[FIRST_INPUT_SLOT + 1].stackSize <= 0)
+                            itemStacks[FIRST_INPUT_SLOT + 1] = null;
                     }
                 else if (itemStacks[FIRST_OUTPUT_SLOT] == null)
                     if (!performSmelt)
@@ -111,13 +114,16 @@ public class TileEntityForgeTier1 extends TileEntityBase
                     else
                     {
                         itemStacks[FIRST_OUTPUT_SLOT] = result.copy();
-                        if (--itemStacks[FIRST_INPUT_SLOT].stackSize <= 0)
-                            itemStacks[FIRST_OUTPUT_SLOT] = null;
-                        if (--itemStacks[FIRST_INPUT_SLOT + 1].stackSize <= 0)
-                            itemStacks[FIRST_OUTPUT_SLOT + 1] = null;
+                        itemStacks[FIRST_INPUT_SLOT].stackSize = stacks[0].stackSize;
+                        itemStacks[FIRST_INPUT_SLOT + 1].stackSize = stacks[1].stackSize;
+                        if (itemStacks[FIRST_INPUT_SLOT].stackSize <= 0)
+                            itemStacks[FIRST_INPUT_SLOT] = null;
+                        if (itemStacks[FIRST_INPUT_SLOT + 1].stackSize <= 0)
+                            itemStacks[FIRST_INPUT_SLOT + 1] = null;
                     }
                 else
                     return false;
+            }
             else
                 return false;
         }
@@ -140,15 +146,17 @@ public class TileEntityForgeTier1 extends TileEntityBase
             //if recipe was valid, alter inputs and outputs appropriately
             if (result != null)
                 if (itemStacks[FIRST_OUTPUT_SLOT] != null && 
-                    itemStacks[FIRST_OUTPUT_SLOT].stackSize < this.getInventoryStackLimit() && 
+                    itemStacks[FIRST_OUTPUT_SLOT].stackSize + result.stackSize <= this.getInventoryStackLimit() && 
                     itemStacks[FIRST_OUTPUT_SLOT].getItem().equals(result.getItem()))
                     if (!performSmelt)
                         return true;
                     else
                     {
                         itemStacks[FIRST_OUTPUT_SLOT].stackSize += result.stackSize;
-                        if (--itemStacks[FIRST_INPUT_SLOT].stackSize <= 0)
-                            itemStacks[FIRST_OUTPUT_SLOT] = null;
+                        if (itemStacks[FIRST_INPUT_SLOT] != null && --itemStacks[FIRST_INPUT_SLOT].stackSize <= 0)
+                            itemStacks[FIRST_INPUT_SLOT] = null;
+                        if (itemStacks[FIRST_INPUT_SLOT + 1] != null && --itemStacks[FIRST_INPUT_SLOT + 1].stackSize <= 0)
+                            itemStacks[FIRST_INPUT_SLOT + 1] = null;
                     }
                 else if (itemStacks[FIRST_OUTPUT_SLOT] == null)
                     if (!performSmelt)
@@ -156,8 +164,10 @@ public class TileEntityForgeTier1 extends TileEntityBase
                     else
                     {
                         itemStacks[FIRST_OUTPUT_SLOT] = result.copy();
-                        if (--itemStacks[FIRST_INPUT_SLOT + 1].stackSize <= 0)
-                            itemStacks[FIRST_OUTPUT_SLOT + 1] = null;
+                        if (itemStacks[FIRST_INPUT_SLOT] != null && --itemStacks[FIRST_INPUT_SLOT].stackSize <= 0)
+                            itemStacks[FIRST_INPUT_SLOT] = null;
+                        if (itemStacks[FIRST_INPUT_SLOT + 1] != null && --itemStacks[FIRST_INPUT_SLOT + 1].stackSize <= 0)
+                            itemStacks[FIRST_INPUT_SLOT + 1] = null;
                     }
                 else
                     return false;

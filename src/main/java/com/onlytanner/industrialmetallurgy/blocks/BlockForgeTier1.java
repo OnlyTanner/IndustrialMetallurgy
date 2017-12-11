@@ -7,7 +7,7 @@ import com.onlytanner.industrialmetallurgy.handler.GuiHandlerForgeTier1;
 import com.onlytanner.industrialmetallurgy.init.ModBlocks;
 import com.onlytanner.industrialmetallurgy.tileentities.TileEntityForgeTier1;
 
-import net.minecraft.block.Block;
+import com.onlytanner.industrialmetallurgy.tileentities.TileEntityForgeTier1.Mode;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -146,6 +146,7 @@ public class BlockForgeTier1 extends BlockContainer {
         }
     }
 
+    @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntityForgeTier1();
     }

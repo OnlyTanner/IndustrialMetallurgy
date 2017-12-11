@@ -3,11 +3,16 @@ package com.onlytanner.industrialmetallurgy.tileentities;
 import com.onlytanner.industrialmetallurgy.blocks.BlockCoalGenerator;
 
 import com.onlytanner.industrialmetallurgy.container.ContainerCoalGenerator;
+import java.util.Arrays;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagIntArray;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
@@ -15,7 +20,7 @@ import net.minecraft.util.EnumFacing;
 public class TileEntityCoalGenerator extends TileEntityBase implements IEnergyProvider
 {
     private final int MAX_CAPACITY = 500000;
-    private final ModEnergyStorage storage = new ModEnergyStorage(MAX_CAPACITY, 0, 80);
+    private ModEnergyStorage storage = new ModEnergyStorage(MAX_CAPACITY, 0, 80);
 
     public TileEntityCoalGenerator()
     {
@@ -117,6 +122,69 @@ public class TileEntityCoalGenerator extends TileEntityBase implements IEnergyPr
                 this.burnTimeInitialValue[0] = value;
                 break;
         }
+    }
+    
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound parentNBTTagCompound)
+    {
+        super.writeToNBT(parentNBTTagCompound); // The super call is required to save and load the tiles location
+
+        // Save the stored item stacks
+        // to use an analogy with Java, this code generates an array of hashmaps
+        // The itemStack in each slot is converted to an NBTTagCompound, which is effectively a hashmap of key->value pairs such
+        //   as slot=1, id=2353, count=1, etc
+        // Each of these NBTTagCompound are then inserted into NBTTagList, which is similar to an array.
+        NBTTagList dataForAllSlots = new NBTTagList();
+        for (int i = 0; i < this.itemStacks.length; ++i)
+        {
+            if (this.itemStacks[i] != null)
+            {
+                NBTTagCompound dataForThisSlot = new NBTTagCompound();
+                dataForThisSlot.setByte("Slot", (byte) i);
+                this.itemStacks[i].writeToNBT(dataForThisSlot);
+                dataForAllSlots.appendTag(dataForThisSlot);
+            }
+        }
+        
+        NBTTagCompound dataForStorage = new NBTTagCompound();
+        dataForStorage.setByte("Energy", (byte) 0);
+        storage.writeToNBT(dataForStorage);
+        
+        // the array of hashmaps is then inserted into the parent hashmap for the container
+        parentNBTTagCompound.setTag("Items", dataForAllSlots);
+        parentNBTTagCompound.setTag("Energy", dataForStorage);
+
+        // Save everything else
+        parentNBTTagCompound.setShort("CookTime", cookTime);
+        parentNBTTagCompound.setTag("burnTimeRemaining", new NBTTagIntArray(burnTimeRemaining));
+        parentNBTTagCompound.setTag("burnTimeInitial", new NBTTagIntArray(burnTimeInitialValue));
+        return parentNBTTagCompound;
+    }
+    
+    @Override
+    public void readFromNBT(NBTTagCompound nbtTagCompound)
+    {
+        super.readFromNBT(nbtTagCompound); // The super call is required to save and load the tiles location
+        final byte NBT_TYPE_COMPOUND = 10;       // See NBTBase.createNewByType() for a listing
+        NBTTagList dataForAllSlots = nbtTagCompound.getTagList("Items", NBT_TYPE_COMPOUND);
+
+        Arrays.fill(itemStacks, null);           // set all slots to empty
+        for (int i = 0; i < dataForAllSlots.tagCount(); ++i)
+        {
+            NBTTagCompound dataForOneSlot = dataForAllSlots.getCompoundTagAt(i);
+            byte slotNumber = dataForOneSlot.getByte("Slot");
+            if (slotNumber >= 0 && slotNumber < this.itemStacks.length)
+            {
+                this.itemStacks[slotNumber] = ItemStack.loadItemStackFromNBT(dataForOneSlot);
+            }
+        }
+
+        storage.readFromNBT((NBTTagCompound) nbtTagCompound.getTag("Energy"));
+        
+        // Load everything else.  Trim the arrays (or pad with 0) to make sure they have the correct number of elements
+        cookTime = nbtTagCompound.getShort("CookTime");
+        burnTimeRemaining = Arrays.copyOf(nbtTagCompound.getIntArray("burnTimeRemaining"), FUEL_SLOTS_COUNT);
+        burnTimeInitialValue = Arrays.copyOf(nbtTagCompound.getIntArray("burnTimeInitial"), FUEL_SLOTS_COUNT);
     }
 
     @Override

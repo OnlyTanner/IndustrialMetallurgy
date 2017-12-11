@@ -177,9 +177,9 @@ public class GuiForgeTier1 extends GuiContainer {
     public void updateChangeModeButton()
     {
         if (tileEntityForgeTier1.mode == Mode.ALLOY)
-            drawTexturedModalRect(guiLeft + BUTTON_XPOS, guiTop + BUTTON_YPOS, ALLOY_ICON_XPOS, ALLOY_ICON_YPOS, BUTTON_SIZE, BUTTON_SIZE);
+            changeMode.drawTexturedModalRect(guiLeft + BUTTON_XPOS, guiTop + BUTTON_YPOS, ALLOY_ICON_XPOS, ALLOY_ICON_YPOS, BUTTON_SIZE, BUTTON_SIZE);
         else
-            drawTexturedModalRect(guiLeft + BUTTON_XPOS, guiTop + BUTTON_YPOS, SMELT_ICON_XPOS, SMELT_ICON_YPOS, BUTTON_SIZE, BUTTON_SIZE);
+            changeMode.drawTexturedModalRect(guiLeft + BUTTON_XPOS, guiTop + BUTTON_YPOS, SMELT_ICON_XPOS, SMELT_ICON_YPOS, BUTTON_SIZE, BUTTON_SIZE);
     }
     
     // Returns true if the given x,y coordinates are within the given rectangle

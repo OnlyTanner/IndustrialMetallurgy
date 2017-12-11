@@ -5,9 +5,9 @@ import com.onlytanner.industrialmetallurgy.init.ModBlocks;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class IndustrialMetallurgySmeltingTab extends CreativeTabs {
+public class IndustrialMetallurgyMachinesTab extends CreativeTabs {
 
-    public IndustrialMetallurgySmeltingTab() {
+    public IndustrialMetallurgyMachinesTab() {
         super("tabIndustrialMetallurgySmelting");
     }
 

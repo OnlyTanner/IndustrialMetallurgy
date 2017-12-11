@@ -25,6 +25,15 @@ public class ModItems
     public static Item coal_coke;
     public static Item crushed_coal;
     public static Item crushed_diamond;
+    public static Item tungsten_carbide_dust;
+    public static Item memory_wire;
+    public static Item resistance_wire;
+    public static Item magnet_wire;
+    public static Item stator;
+    public static Item rotor;
+    public static Item electric_motor;
+    public static Item conducting_element;
+    public static Item heating_element;
 
     public static Item crushed_bauxite_ore;
     public static Item crushed_cassiterite_ore;
@@ -44,8 +53,10 @@ public class ModItems
     public static Item bronze_ingot;
     public static Item chromium_ingot;
     public static Item cobalt_ingot;
+    public static Item cobalt_steel_ingot;
     public static Item copper_ingot;
     public static Item invar_ingot;
+    public static Item kanthal_ingot;
     public static Item nichrome_ingot;
     public static Item nickel_ingot;
     public static Item nitinol_ingot;
@@ -53,6 +64,7 @@ public class ModItems
     public static Item tin_ingot;
     public static Item titanium_ingot;
     public static Item tungsten_ingot;
+    public static Item tungsten_steel_ingot;
     public static Item zinc_ingot;
 
     public static Item alloy7201_nugget;
@@ -61,9 +73,11 @@ public class ModItems
     public static Item bronze_nugget;
     public static Item chromium_nugget;
     public static Item cobalt_nugget;
+    public static Item cobalt_steel_nugget;
     public static Item copper_nugget;
     public static Item invar_nugget;
     public static Item iron_nugget;
+    public static Item kanthal_nugget;
     public static Item nichrome_nugget;
     public static Item nickel_nugget;
     public static Item nitinol_nugget;
@@ -71,6 +85,7 @@ public class ModItems
     public static Item tin_nugget;
     public static Item titanium_nugget;
     public static Item tungsten_nugget;
+    public static Item tungsten_steel_nugget;
     public static Item zinc_nugget;
 
     public static ItemPickaxe alloy7201_pickaxe;
@@ -165,14 +180,17 @@ public class ModItems
     public static final ToolMaterial COPPER = EnumHelper.addToolMaterial("COPPER", 1, 220, 5.0F, 1.0F, 10);
     public static final ToolMaterial CHROMIUM = EnumHelper.addToolMaterial("CHROMIUM", 3, 32, 20.0F, 1.0F, 25);
     public static final ToolMaterial COBALT = EnumHelper.addToolMaterial("COBALT", 4, 650, 15.0F, 2.0F, 15);
+    public static final ToolMaterial COBALT_STEEL = EnumHelper.addToolMaterial("COBALT_STEEL", 4, 1300, 18.0F, 2.0F, 20);
     public static final ToolMaterial INVAR = EnumHelper.addToolMaterial("INVAR", 2, 400, 6.0F, 1.0F, 8);
+    public static final ToolMaterial KANTHAL = EnumHelper.addToolMaterial("KANTHAL", 2, 550, 7.0F, 1.0F, 15);
     public static final ToolMaterial NICKEL = EnumHelper.addToolMaterial("NICKEL", 1, 220, 5.0F, 1.0F, 12);
     public static final ToolMaterial NICHROME = EnumHelper.addToolMaterial("NICHROME", 2, 800, 12.0F, 2.0F, 18);
     public static final ToolMaterial NITINOL = EnumHelper.addToolMaterial("NITINOL", 2, 1200, 8.0F, 2.0F, 15);
     public static final ToolMaterial STEEL = EnumHelper.addToolMaterial("STEEL", 2, 800, 9.0F, 2.0F, 17);
     public static final ToolMaterial TIN = EnumHelper.addToolMaterial("TIN", 1, 220, 5.0F, 1.0F, 10);
     public static final ToolMaterial TITANIUM = EnumHelper.addToolMaterial("TITANIUM", 2, 600, 7.0F, 2.0F, 16);
-    public static final ToolMaterial TUNGSTEN = EnumHelper.addToolMaterial("TUNGSTEN", 4, 1000, 14F, 2.0F, 20);
+    public static final ToolMaterial TUNGSTEN = EnumHelper.addToolMaterial("TUNGSTEN", 4, 1000, 14.0F, 2.0F, 20);
+    public static final ToolMaterial TUNGSTEN_STEEL = EnumHelper.addToolMaterial("TUNGSTEN_STEEL", 4, 3000, 20.0F, 2.0F, 30);
     public static final ToolMaterial ZINC = EnumHelper.addToolMaterial("ZINC", 1, 150, 5.0F, 1.0F, 12);
 
     public static void init() {
@@ -200,8 +218,10 @@ public class ModItems
         bronze_ingot = new ItemBase(IndustrialMetallurgyItems.BRONZE_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.BRONZE_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         chromium_ingot = new ItemBase(IndustrialMetallurgyItems.CHROMIUM_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.CHROMIUM_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         cobalt_ingot = new ItemBase(IndustrialMetallurgyItems.COBALT_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.COBALT_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
+        cobalt_steel_ingot = new ItemBase(IndustrialMetallurgyItems.COBALT_STEEL_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.COBALT_STEEL_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         copper_ingot = new ItemBase(IndustrialMetallurgyItems.COPPER_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.COPPER_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         invar_ingot = new ItemBase(IndustrialMetallurgyItems.INVAR_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.INVAR_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
+        kanthal_ingot = new ItemBase(IndustrialMetallurgyItems.KANTHAL_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.KANTHAL_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         nichrome_ingot = new ItemBase(IndustrialMetallurgyItems.NICHROME_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.NICHROME_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         nickel_ingot = new ItemBase(IndustrialMetallurgyItems.NICKEL_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.NICKEL_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         nitinol_ingot = new ItemBase(IndustrialMetallurgyItems.NITINOL_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.NITINOL_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
@@ -209,6 +229,7 @@ public class ModItems
         tin_ingot = new ItemBase(IndustrialMetallurgyItems.TIN_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.TIN_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         titanium_ingot = new ItemBase(IndustrialMetallurgyItems.TITANIUM_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.TITANIUM_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         tungsten_ingot = new ItemBase(IndustrialMetallurgyItems.TUNGSTEN_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.TUNGSTEN_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
+        tungsten_steel_ingot = new ItemBase(IndustrialMetallurgyItems.TUNGSTEN_STEEL_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.TUNGSTEN_STEEL_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         zinc_ingot = new ItemBase(IndustrialMetallurgyItems.ZINC_INGOT.getUnlocalizedName(), IndustrialMetallurgyItems.ZINC_INGOT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
 
         alloy7201_nugget = new ItemBase(IndustrialMetallurgyItems.ALLOY7201_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.ALLOY7201_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB) {
@@ -223,9 +244,11 @@ public class ModItems
         bronze_nugget = new ItemBase(IndustrialMetallurgyItems.BRONZE_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.BRONZE_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         chromium_nugget = new ItemBase(IndustrialMetallurgyItems.CHROMIUM_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.CHROMIUM_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         cobalt_nugget = new ItemBase(IndustrialMetallurgyItems.COBALT_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.COBALT_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
+        cobalt_steel_nugget = new ItemBase(IndustrialMetallurgyItems.COBALT_STEEL_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.COBALT_STEEL_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         copper_nugget = new ItemBase(IndustrialMetallurgyItems.COPPER_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.COPPER_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         invar_nugget = new ItemBase(IndustrialMetallurgyItems.INVAR_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.INVAR_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         iron_nugget = new ItemBase(IndustrialMetallurgyItems.IRON_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.IRON_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
+        kanthal_nugget = new ItemBase(IndustrialMetallurgyItems.KANTHAL_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.KANTHAL_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         nichrome_nugget = new ItemBase(IndustrialMetallurgyItems.NICHROME_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.NICHROME_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         nickel_nugget = new ItemBase(IndustrialMetallurgyItems.NICKEL_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.NICKEL_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         nitinol_nugget = new ItemBase(IndustrialMetallurgyItems.NITINOL_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.NITINOL_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
@@ -233,6 +256,7 @@ public class ModItems
         tin_nugget = new ItemBase(IndustrialMetallurgyItems.TIN_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.TIN_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         titanium_nugget = new ItemBase(IndustrialMetallurgyItems.TITANIUM_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.TITANIUM_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         tungsten_nugget = new ItemBase(IndustrialMetallurgyItems.TUNGSTEN_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.TUNGSTEN_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
+        tungsten_steel_nugget = new ItemBase(IndustrialMetallurgyItems.TUNGSTEN_STEEL_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.TUNGSTEN_STEEL_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         zinc_nugget = new ItemBase(IndustrialMetallurgyItems.ZINC_NUGGET.getUnlocalizedName(), IndustrialMetallurgyItems.ZINC_NUGGET.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
 
         alloy7201_pickaxe = new ItemPickaxeBase(IndustrialMetallurgyItems.ALLOY7201_PICKAXE.getUnlocalizedName(), IndustrialMetallurgyItems.ALLOY7201_PICKAXE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, ALLOY7201) {
@@ -350,11 +374,20 @@ public class ModItems
         tungsten_hoe = new ItemHoeBase(IndustrialMetallurgyItems.TUNGSTEN_HOE.getUnlocalizedName(), IndustrialMetallurgyItems.TUNGSTEN_HOE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, TUNGSTEN);
         zinc_hoe = new ItemHoeBase(IndustrialMetallurgyItems.ZINC_HOE.getUnlocalizedName(), IndustrialMetallurgyItems.ZINC_HOE.getRegistryName(), IndustrialMetallurgy.TOOLS_TAB, ZINC);
 
-        refractory_composite = new ItemBase(IndustrialMetallurgyItems.REFRACTORY_COMPOSITE.getUnlocalizedName(), IndustrialMetallurgyItems.REFRACTORY_COMPOSITE.getRegistryName(), IndustrialMetallurgy.SMELTING_TAB);
-        refractory_brick = new ItemBase(IndustrialMetallurgyItems.REFRACTORY_BRICK.getUnlocalizedName(), IndustrialMetallurgyItems.REFRACTORY_BRICK.getRegistryName(), IndustrialMetallurgy.SMELTING_TAB);
-        coal_coke = new ItemBase(IndustrialMetallurgyItems.COAL_COKE.getUnlocalizedName(), IndustrialMetallurgyItems.COAL_COKE.getRegistryName(), IndustrialMetallurgy.SMELTING_TAB);
+        refractory_composite = new ItemBase(IndustrialMetallurgyItems.REFRACTORY_COMPOSITE.getUnlocalizedName(), IndustrialMetallurgyItems.REFRACTORY_COMPOSITE.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
+        refractory_brick = new ItemBase(IndustrialMetallurgyItems.REFRACTORY_BRICK.getUnlocalizedName(), IndustrialMetallurgyItems.REFRACTORY_BRICK.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
+        coal_coke = new ItemBase(IndustrialMetallurgyItems.COAL_COKE.getUnlocalizedName(), IndustrialMetallurgyItems.COAL_COKE.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
         crushed_coal = new ItemBase(IndustrialMetallurgyItems.CRUSHED_COAL.getUnlocalizedName(), IndustrialMetallurgyItems.CRUSHED_COAL.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         crushed_diamond = new ItemBase(IndustrialMetallurgyItems.CRUSHED_DIAMOND.getUnlocalizedName(), IndustrialMetallurgyItems.CRUSHED_DIAMOND.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
+        tungsten_carbide_dust = new ItemBase(IndustrialMetallurgyItems.TUNGSTEN_CARBIDE_DUST.getUnlocalizedName(), IndustrialMetallurgyItems.TUNGSTEN_CARBIDE_DUST.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
+        memory_wire = new ItemBase(IndustrialMetallurgyItems.MEMORY_WIRE.getUnlocalizedName(), IndustrialMetallurgyItems.MEMORY_WIRE.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
+        resistance_wire = new ItemBase(IndustrialMetallurgyItems.RESISTANCE_WIRE.getUnlocalizedName(), IndustrialMetallurgyItems.RESISTANCE_WIRE.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
+        magnet_wire = new ItemBase(IndustrialMetallurgyItems.MAGNET_WIRE.getUnlocalizedName(), IndustrialMetallurgyItems.MAGNET_WIRE.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
+        stator = new ItemBase(IndustrialMetallurgyItems.STATOR.getUnlocalizedName(), IndustrialMetallurgyItems.STATOR.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
+        rotor = new ItemBase(IndustrialMetallurgyItems.ROTOR.getUnlocalizedName(), IndustrialMetallurgyItems.ROTOR.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
+        electric_motor = new ItemBase(IndustrialMetallurgyItems.ELECTRIC_MOTOR.getUnlocalizedName(), IndustrialMetallurgyItems.ELECTRIC_MOTOR.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
+        conducting_element = new ItemBase(IndustrialMetallurgyItems.CONDUCTING_ELEMENT.getUnlocalizedName(), IndustrialMetallurgyItems.CONDUCTING_ELEMENT.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
+        heating_element = new ItemBase(IndustrialMetallurgyItems.HEATING_ELEMENT.getUnlocalizedName(), IndustrialMetallurgyItems.HEATING_ELEMENT.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
     }
 
     public static void register() {
@@ -376,8 +409,10 @@ public class ModItems
         GameRegistry.register(bronze_ingot);
         GameRegistry.register(chromium_ingot);
         GameRegistry.register(cobalt_ingot);
+        GameRegistry.register(cobalt_steel_ingot);
         GameRegistry.register(copper_ingot);
         GameRegistry.register(invar_ingot);
+        GameRegistry.register(kanthal_ingot);
         GameRegistry.register(nichrome_ingot);
         GameRegistry.register(nickel_ingot);
         GameRegistry.register(nitinol_ingot);
@@ -385,6 +420,7 @@ public class ModItems
         GameRegistry.register(tin_ingot);
         GameRegistry.register(titanium_ingot);
         GameRegistry.register(tungsten_ingot);
+        GameRegistry.register(tungsten_steel_ingot);
         GameRegistry.register(zinc_ingot);
 
         GameRegistry.register(alloy7201_nugget);
@@ -393,9 +429,11 @@ public class ModItems
         GameRegistry.register(bronze_nugget);
         GameRegistry.register(chromium_nugget);
         GameRegistry.register(cobalt_nugget);
+        GameRegistry.register(cobalt_steel_nugget);
         GameRegistry.register(copper_nugget);
         GameRegistry.register(invar_nugget);
         GameRegistry.register(iron_nugget);
+        GameRegistry.register(kanthal_nugget);
         GameRegistry.register(nichrome_nugget);
         GameRegistry.register(nickel_nugget);
         GameRegistry.register(nitinol_nugget);
@@ -403,6 +441,7 @@ public class ModItems
         GameRegistry.register(tin_nugget);
         GameRegistry.register(titanium_nugget);
         GameRegistry.register(tungsten_nugget);
+        GameRegistry.register(tungsten_steel_nugget);
         GameRegistry.register(zinc_nugget);
         //pick
         GameRegistry.register(alloy7201_pickaxe);
@@ -495,6 +534,15 @@ public class ModItems
         GameRegistry.register(coal_coke);
         GameRegistry.register(crushed_coal);
         GameRegistry.register(crushed_diamond);
+        GameRegistry.register(tungsten_carbide_dust);
+        GameRegistry.register(memory_wire);
+        GameRegistry.register(resistance_wire);
+        GameRegistry.register(magnet_wire);
+        GameRegistry.register(stator);
+        GameRegistry.register(rotor);
+        GameRegistry.register(electric_motor);
+        GameRegistry.register(conducting_element);
+        GameRegistry.register(heating_element);
     }
 
     public static void registerRenders() {
@@ -516,8 +564,10 @@ public class ModItems
         registerRender(bronze_ingot);
         registerRender(chromium_ingot);
         registerRender(cobalt_ingot);
+        registerRender(cobalt_steel_ingot);
         registerRender(copper_ingot);
         registerRender(invar_ingot);
+        registerRender(kanthal_ingot);
         registerRender(nichrome_ingot);
         registerRender(nickel_ingot);
         registerRender(nitinol_ingot);
@@ -525,6 +575,7 @@ public class ModItems
         registerRender(tin_ingot);
         registerRender(titanium_ingot);
         registerRender(tungsten_ingot);
+        registerRender(tungsten_steel_ingot);
         registerRender(zinc_ingot);
 
         registerRender(alloy7201_nugget);
@@ -533,9 +584,11 @@ public class ModItems
         registerRender(bronze_nugget);
         registerRender(chromium_nugget);
         registerRender(cobalt_nugget);
+        registerRender(cobalt_steel_nugget);
         registerRender(copper_nugget);
         registerRender(invar_nugget);
         registerRender(iron_nugget);
+        registerRender(kanthal_nugget);
         registerRender(nichrome_nugget);
         registerRender(nickel_nugget);
         registerRender(nitinol_nugget);
@@ -543,6 +596,7 @@ public class ModItems
         registerRender(tin_nugget);
         registerRender(titanium_nugget);
         registerRender(tungsten_nugget);
+        registerRender(tungsten_steel_nugget);
         registerRender(zinc_nugget);
         //pick
         registerRender(alloy7201_pickaxe);
@@ -635,6 +689,15 @@ public class ModItems
         registerRender(coal_coke);
         registerRender(crushed_coal);
         registerRender(crushed_diamond);
+        registerRender(tungsten_carbide_dust);
+        registerRender(memory_wire);
+        registerRender(resistance_wire);
+        registerRender(magnet_wire);
+        registerRender(stator);
+        registerRender(rotor);
+        registerRender(electric_motor);
+        registerRender(conducting_element);
+        registerRender(heating_element);
     }
 
     private static void registerRender(Item item) {

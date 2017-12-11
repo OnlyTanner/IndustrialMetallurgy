@@ -6,10 +6,7 @@ import com.onlytanner.industrialmetallurgy.init.ModItems;
 import com.onlytanner.industrialmetallurgy.proxy.CommonProxy;
 import com.onlytanner.industrialmetallurgy.world.ModWorldGen;
 
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemBlock;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -30,7 +27,7 @@ public class IndustrialMetallurgy {
 
     public static final CreativeTabs RESOURCES_TAB = new IndustrialMetallurgyResourcesTab();
     public static final CreativeTabs TOOLS_TAB = new IndustrialMetallurgyToolsTab();
-    public static final CreativeTabs SMELTING_TAB = new IndustrialMetallurgySmeltingTab();
+    public static final CreativeTabs MACHINES_TAB = new IndustrialMetallurgyMachinesTab();
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {

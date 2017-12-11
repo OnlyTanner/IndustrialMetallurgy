@@ -50,7 +50,7 @@ public class GuiForgeTier1 extends GuiContainer {
     final int POINTER_HEIGHT = 7;
     
     final int BUTTON_XPOS = 7;
-    final int BUTTON_YPOS = 73;
+    final int BUTTON_YPOS = 71;
     final int ALLOY_ICON_XPOS = 176;
     final int ALLOY_ICON_YPOS = 38;
     final int SMELT_ICON_XPOS = 184;
@@ -76,7 +76,7 @@ public class GuiForgeTier1 extends GuiContainer {
         changeMode.yPosition = guiTop + BUTTON_YPOS;
         
         changeMode.width = BUTTON_SIZE;
-        changeMode.height = BUTTON_SIZE;
+        changeMode.height = 7;
         
         buttonList.add(changeMode);
         
@@ -177,9 +177,9 @@ public class GuiForgeTier1 extends GuiContainer {
     public void updateChangeModeButton()
     {
         if (tileEntityForgeTier1.getMode() == Mode.ALLOY)
-            changeMode.drawTexturedModalRect(guiLeft + BUTTON_XPOS, guiTop + BUTTON_YPOS, ALLOY_ICON_XPOS, ALLOY_ICON_YPOS, BUTTON_SIZE, BUTTON_SIZE);
+            changeMode.drawTexturedModalRect(guiLeft + BUTTON_XPOS, guiTop + BUTTON_YPOS, ALLOY_ICON_XPOS, ALLOY_ICON_YPOS, BUTTON_SIZE, 7);
         else
-            changeMode.drawTexturedModalRect(guiLeft + BUTTON_XPOS, guiTop + BUTTON_YPOS, SMELT_ICON_XPOS, SMELT_ICON_YPOS, BUTTON_SIZE, BUTTON_SIZE);
+            changeMode.drawTexturedModalRect(guiLeft + BUTTON_XPOS, guiTop + BUTTON_YPOS, SMELT_ICON_XPOS, SMELT_ICON_YPOS, BUTTON_SIZE, 7);
     }
     
     // Returns true if the given x,y coordinates are within the given rectangle

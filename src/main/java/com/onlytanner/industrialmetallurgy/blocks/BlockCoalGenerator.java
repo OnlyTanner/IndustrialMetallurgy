@@ -47,7 +47,7 @@ public class BlockCoalGenerator extends BlockContainer {
         setRegistryName(registryName);
         IS_BURNING = isBurning;
         setHardness(3.0F);
-        setCreativeTab(IndustrialMetallurgy.SMELTING_TAB);
+        setCreativeTab(IndustrialMetallurgy.MACHINES_TAB);
     }
 
     @Override

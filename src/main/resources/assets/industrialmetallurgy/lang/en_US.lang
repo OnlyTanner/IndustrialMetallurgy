@@ -1,4 +1,4 @@
-item.alloy7201_ingot.name=Alloy7201 Ingot
+item.alloy7201_ingot.name=Unobtanium Ingot
 item.aluminum_ingot.name=Aluminum Ingot
 item.brass_ingot.name=Brass Ingot
 item.bronze_ingot.name=Bronze Ingot
@@ -15,7 +15,7 @@ item.titanium_ingot.name=Titanium Ingot
 item.tungsten_ingot.name=Tungsten Ingot
 item.zinc_ingot.name=Zinc Ingot
 
-item.alloy7201_nugget.name=Alloy7201 Nugget
+item.alloy7201_nugget.name=Unobtanium Nugget
 item.aluminum_nugget.name=Aluminum Nugget
 item.brass_nugget.name=Brass Nugget
 item.bronze_nugget.name=Bronze Nugget
@@ -33,11 +33,11 @@ item.titanium_nugget.name=Titanium Nugget
 item.tungsten_nugget.name=Tungsten Nugget
 item.zinc_nugget.name=Zinc Nugget
 
-item.alloy7201_sword.name=Alloy7201 Sword
-item.alloy7201_pickaxe.name=Alloy7201 Pickaxe
-item.alloy7201_shovel.name=Alloy7201 Shovel
-item.alloy7201_axe.name=Alloy7201 Axe
-item.alloy7201_hoe.name=Alloy7201 Hoe
+item.alloy7201_sword.name=Unobtanium Sword
+item.alloy7201_pickaxe.name=Unobtanium Pickaxe
+item.alloy7201_shovel.name=Unobtanium Shovel
+item.alloy7201_axe.name=Unobtanium Axe
+item.alloy7201_hoe.name=Unobtanium Hoe
 
 item.aluminum_sword.name=Aluminum Sword
 item.aluminum_pickaxe.name=Aluminum Pickaxe

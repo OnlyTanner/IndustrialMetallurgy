@@ -3,23 +3,37 @@ package com.onlytanner.industrialmetallurgy.tileentities;
 import com.onlytanner.industrialmetallurgy.blocks.BlockForgeTier1;
 import com.onlytanner.industrialmetallurgy.container.ContainerForgeTier1;
 import com.onlytanner.industrialmetallurgy.items.crafting.ForgeRecipes;
+import java.util.Arrays;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagIntArray;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.ITickable;
 import net.minecraft.world.EnumSkyBlock;
 
-public class TileEntityForgeTier1 extends TileEntityBase
+public class TileEntityForgeTier1 extends TileEntityBase implements ITickable
 {
-    public enum Mode {ALLOY, SMELT};
+    public enum Mode {
+        ALLOY((byte)0), SMELT((byte)1);
+        
+        byte value;
+        Mode(byte value)
+        {
+            this.value = value;
+        }
+    };
     private int cachedNumberOfBurningSlots = -1;
-    public Mode mode;
+    private Mode mode;
 
     public TileEntityForgeTier1()
     {
         super(2, 2, 1);
+        mode = Mode.ALLOY;
     }
 
     @Override
@@ -28,7 +42,7 @@ public class TileEntityForgeTier1 extends TileEntityBase
         // If there is nothing to smelt or there is no room in the output, reset cookTime and return
         boolean flag = this.isBurning();
         boolean flag1 = false;
-        
+        System.out.println(mode);
         if (smeltItem(false)) {
             int numberOfFuelBurning = burnFuel();
             // If fuel is available, keep cooking the item, otherwise start "uncooking" it at double speed
@@ -271,6 +285,77 @@ public class TileEntityForgeTier1 extends TileEntityBase
             case 3:
                 this.totalCookTime = (short) value;
         }
+    }
+    
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound parentNBTTagCompound)
+    {
+        super.writeToNBT(parentNBTTagCompound); // The super call is required to save and load the tiles location
+
+        // Save the stored item stacks
+        // to use an analogy with Java, this code generates an array of hashmaps
+        // The itemStack in each slot is converted to an NBTTagCompound, which is effectively a hashmap of key->value pairs such
+        //   as slot=1, id=2353, count=1, etc
+        // Each of these NBTTagCompound are then inserted into NBTTagList, which is similar to an array.
+        NBTTagList dataForAllSlots = new NBTTagList();
+        for (int i = 0; i < this.itemStacks.length; ++i)
+        {
+            if (this.itemStacks[i] != null)
+            {
+                NBTTagCompound dataForThisSlot = new NBTTagCompound();
+                dataForThisSlot.setByte("Slot", (byte) i);
+                this.itemStacks[i].writeToNBT(dataForThisSlot);
+                dataForAllSlots.appendTag(dataForThisSlot);
+            }
+        }
+        // the array of hashmaps is then inserted into the parent hashmap for the container
+        parentNBTTagCompound.setTag("Items", dataForAllSlots);
+        parentNBTTagCompound.setByte("Mode", mode.value);
+
+        // Save everything else
+        parentNBTTagCompound.setShort("CookTime", cookTime);
+        parentNBTTagCompound.setTag("burnTimeRemaining", new NBTTagIntArray(burnTimeRemaining));
+        parentNBTTagCompound.setTag("burnTimeInitial", new NBTTagIntArray(burnTimeInitialValue));
+        return parentNBTTagCompound;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound nbtTagCompound)
+    {
+        super.readFromNBT(nbtTagCompound); // The super call is required to save and load the tiles location
+        final byte NBT_TYPE_COMPOUND = 10;       // See NBTBase.createNewByType() for a listing
+        NBTTagList dataForAllSlots = nbtTagCompound.getTagList("Items", NBT_TYPE_COMPOUND);
+
+        Arrays.fill(itemStacks, null);           // set all slots to empty
+        for (int i = 0; i < dataForAllSlots.tagCount(); ++i)
+        {
+            NBTTagCompound dataForOneSlot = dataForAllSlots.getCompoundTagAt(i);
+            byte slotNumber = dataForOneSlot.getByte("Slot");
+            if (slotNumber >= 0 && slotNumber < this.itemStacks.length)
+            {
+                this.itemStacks[slotNumber] = ItemStack.loadItemStackFromNBT(dataForOneSlot);
+            }
+        }
+        
+        mode.value = nbtTagCompound.getByte("Mode");
+
+        // Load everything else.  Trim the arrays (or pad with 0) to make sure they have the correct number of elements
+        cookTime = nbtTagCompound.getShort("CookTime");
+        burnTimeRemaining = Arrays.copyOf(nbtTagCompound.getIntArray("burnTimeRemaining"), FUEL_SLOTS_COUNT);
+        burnTimeInitialValue = Arrays.copyOf(nbtTagCompound.getIntArray("burnTimeInitial"), FUEL_SLOTS_COUNT);
+    }
+    
+    public Mode getMode()
+    {
+        return mode;
+    }
+    
+    public void setMode(Mode mode)
+    {
+        if (mode == null)
+            mode = Mode.ALLOY;
+        if (this.mode != mode)
+            this.mode = mode;
     }
 
     @Override

@@ -59,7 +59,7 @@ public class Reference {
         TITANIUM_NUGGET("titanium_nugget", "ItemTitaniumNugget"),
         TUNGSTEN_NUGGET("tungsten_nugget", "ItemTungstenNugget"),
         ZINC_NUGGET("zinc_nugget", "ItemZincNugget"),
-        ALLOY7201_PICKAXE("alloy_7201_pickaxe", "ItemAlloy7201Pickaxe"),
+        ALLOY7201_PICKAXE("alloy7201_pickaxe", "ItemAlloy7201Pickaxe"),
         ALUMINUM_PICKAXE("aluminum_pickaxe", "ItemAluminumPickaxe"),
         BRASS_PICKAXE("brass_pickaxe", "ItemBrassPickaxe"),
         BRONZE_PICKAXE("bronze_pickaxe", "ItemBronzePickaxe"),

@@ -88,10 +88,10 @@ public class GuiForgeTier1 extends GuiContainer {
     {
         if (button.id == CHANGE_MODE_BUTTON_ID)
         {
-            if (tileEntityForgeTier1.mode == Mode.ALLOY)
-                tileEntityForgeTier1.mode = Mode.SMELT;
+            if (tileEntityForgeTier1.getMode() == Mode.ALLOY)
+                tileEntityForgeTier1.setMode(Mode.SMELT);
             else
-                tileEntityForgeTier1.mode = Mode.ALLOY;
+                tileEntityForgeTier1.setMode(Mode.ALLOY);
         }
         else
             super.actionPerformed(button);
@@ -159,7 +159,7 @@ public class GuiForgeTier1 extends GuiContainer {
         }
         
         if (isInRect(guiLeft + BUTTON_XPOS, guiTop + BUTTON_YPOS, BUTTON_SIZE, BUTTON_SIZE, mouseX, mouseY))
-            if(tileEntityForgeTier1.mode == Mode.ALLOY)
+            if(tileEntityForgeTier1.getMode() == Mode.ALLOY)
                 hoveringText.add("Alloy Mode");
             else
                 hoveringText.add("Smelting Mode");
@@ -176,7 +176,7 @@ public class GuiForgeTier1 extends GuiContainer {
 
     public void updateChangeModeButton()
     {
-        if (tileEntityForgeTier1.mode == Mode.ALLOY)
+        if (tileEntityForgeTier1.getMode() == Mode.ALLOY)
             changeMode.drawTexturedModalRect(guiLeft + BUTTON_XPOS, guiTop + BUTTON_YPOS, ALLOY_ICON_XPOS, ALLOY_ICON_YPOS, BUTTON_SIZE, BUTTON_SIZE);
         else
             changeMode.drawTexturedModalRect(guiLeft + BUTTON_XPOS, guiTop + BUTTON_YPOS, SMELT_ICON_XPOS, SMELT_ICON_YPOS, BUTTON_SIZE, BUTTON_SIZE);

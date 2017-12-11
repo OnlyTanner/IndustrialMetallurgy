@@ -3,11 +3,11 @@ package com.onlytanner.industrialmetallurgy.tileentities;
 import com.onlytanner.industrialmetallurgy.blocks.BlockCokeOven;
 import com.onlytanner.industrialmetallurgy.container.ContainerCokeOven;
 import com.onlytanner.industrialmetallurgy.init.ModItems;
-import com.onlytanner.industrialmetallurgy.items.crafting.CokeOvenRecipes;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.EnumSkyBlock;
@@ -28,8 +28,8 @@ public class TileEntityCokeOven extends TileEntityBase
         boolean flag = this.isBurning();
         boolean flag1 = false;
 
-        if (canSmelt()) {
-            burnFuel();
+        burnFuel();
+        if (burnTimeRemaining[0]> 0) { 
             if (burnTimeRemaining[0] == 1) {
                 if (itemStacks[FIRST_OUTPUT_SLOT] == null) {
                     itemStacks[FIRST_OUTPUT_SLOT] = new ItemStack(ModItems.coal_coke, 1);
@@ -38,9 +38,10 @@ public class TileEntityCokeOven extends TileEntityBase
                 }
             }
         }
+        
         if (flag != this.isBurning()) {
             flag1 = true;
-            BlockCokeOven.setState(flag, this.worldObj, this.pos);
+            BlockCokeOven.setState(!flag, this.worldObj, this.pos);
         }
 
         // when the number of burning slots changes, we need to force the block to re-render, otherwise the change in
@@ -105,27 +106,30 @@ public class TileEntityCokeOven extends TileEntityBase
     /**
      * Returns true if the furnace can smelt an item, i.e. has a source item,
      * destination stack isn't full, etc.
-     */
+     *//*
     private boolean canSmelt()
     {
         if (this.itemStacks[FIRST_FUEL_SLOT] == null) {
             return false;
         } else {
-            ItemStack itemstack = CokeOvenRecipes.instance().getSmeltingResult(this.itemStacks[FIRST_FUEL_SLOT]);
-            if (itemstack == null) {
+            ItemStack itemStack = null;
+            if (this.itemStacks[FIRST_FUEL_SLOT].getItem().equals(Items.COAL) || this.itemStacks[FIRST_FUEL_SLOT].getItem().equals(new ItemStack(Items.COAL, 1, 1).getItem()))
+                itemStack = new ItemStack(ModItems.coal_coke, 1);
+            
+            if (itemStack == null) {
                 return false;
             }
             if (this.itemStacks[FIRST_OUTPUT_SLOT] == null) {
                 return true;
             }
-            if (!this.itemStacks[FIRST_OUTPUT_SLOT].isItemEqual(itemstack)) {
+            if (!this.itemStacks[FIRST_OUTPUT_SLOT].isItemEqual(itemStack)) {
                 return false;
             }
 
-            int result = itemStacks[FIRST_OUTPUT_SLOT].stackSize + itemstack.stackSize;
+            int result = itemStacks[FIRST_OUTPUT_SLOT].stackSize + itemStack.stackSize;
             return result <= getInventoryStackLimit() && result <= this.itemStacks[FIRST_OUTPUT_SLOT].getMaxStackSize(); //Forge BugFix: Make it respect stack sizes properly.
         }
-    }
+    }*/
 
     @Override
     public String getName()

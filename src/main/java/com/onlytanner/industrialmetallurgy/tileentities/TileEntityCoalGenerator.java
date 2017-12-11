@@ -34,15 +34,13 @@ public class TileEntityCoalGenerator extends TileEntityBase implements IEnergyPr
         boolean flag = this.isBurning();
         boolean flag1 = false;
 
-        if (getItemBurnTime(itemStacks[0]) > 0) {
-            burnFuel();
-        }
+        burnFuel();
         if (flag != this.isBurning()) {
             flag1 = true;
-            BlockCoalGenerator.setState(flag, this.worldObj, this.pos);
+            BlockCoalGenerator.setState(!flag, this.worldObj, this.pos);
         }
 
-        if (isBurning()) {
+        if (isBurning() && storage.getEnergyStored() <= MAX_CAPACITY) {
             storage.receiveEnergyInternal(80, false);
         }
 

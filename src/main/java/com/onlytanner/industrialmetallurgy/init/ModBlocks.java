@@ -9,14 +9,20 @@ import com.onlytanner.industrialmetallurgy.blocks.BlockCoalGenerator;
 import com.onlytanner.industrialmetallurgy.blocks.BlockCokeOven;
 import com.onlytanner.industrialmetallurgy.blocks.BlockCrusher;
 import com.onlytanner.industrialmetallurgy.blocks.BlockForgeTier1;
+import com.onlytanner.industrialmetallurgy.blocks.BlockForgeTier2;
+import com.onlytanner.industrialmetallurgy.blocks.BlockForgeTier3;
 import com.onlytanner.industrialmetallurgy.handler.GuiHandlerCoalGenerator;
 import com.onlytanner.industrialmetallurgy.handler.GuiHandlerCokeOven;
 import com.onlytanner.industrialmetallurgy.handler.GuiHandlerCrusher;
 import com.onlytanner.industrialmetallurgy.handler.GuiHandlerForgeTier1;
+import com.onlytanner.industrialmetallurgy.handler.GuiHandlerForgeTier2;
+import com.onlytanner.industrialmetallurgy.handler.GuiHandlerForgeTier3;
 import com.onlytanner.industrialmetallurgy.tileentities.TileEntityCoalGenerator;
 import com.onlytanner.industrialmetallurgy.tileentities.TileEntityCokeOven;
 import com.onlytanner.industrialmetallurgy.tileentities.TileEntityCrusher;
 import com.onlytanner.industrialmetallurgy.tileentities.TileEntityForgeTier1;
+import com.onlytanner.industrialmetallurgy.tileentities.TileEntityForgeTier2;
+import com.onlytanner.industrialmetallurgy.tileentities.TileEntityForgeTier3;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -32,6 +38,8 @@ public class ModBlocks
 {
     public static Block refractory_bricks;
     public static Block iron_forge_core;
+    public static Block cobalt_forge_core;
+    public static Block tungsten_forge_core;
 
     public static Block cuprite_ore;
     public static Block cassiterite_ore;
@@ -59,6 +67,10 @@ public class ModBlocks
 
     public static BlockContainer forge_tier1;
     public static BlockContainer lit_forge_tier1;
+    public static BlockContainer forge_tier2;
+    public static BlockContainer lit_forge_tier2;
+    public static BlockContainer forge_tier3;
+    public static BlockContainer lit_forge_tier3;
     //public static Block bellow;
     public static BlockContainer crusher;
     public static BlockContainer coke_oven;
@@ -101,12 +113,18 @@ public class ModBlocks
         titanium_block = new BlockBase(IndustrialMetallurgyBlocks.TITANIUM_BLOCK.getUnlocalizedName(), IndustrialMetallurgyBlocks.TITANIUM_BLOCK.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB, Material.IRON, 3.0F);
         zinc_block = new BlockBase(IndustrialMetallurgyBlocks.ZINC_BLOCK.getUnlocalizedName(), IndustrialMetallurgyBlocks.ZINC_BLOCK.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB, Material.IRON, 3.0F);
 
-        refractory_bricks = new BlockBase(IndustrialMetallurgyBlocks.REFRACTORY_BRICKS.getUnlocalizedName(), IndustrialMetallurgyBlocks.REFRACTORY_BRICKS.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB, Material.ROCK, 3.0F);
-        iron_forge_core = new BlockBase(IndustrialMetallurgyBlocks.IRON_FORGE_CORE.getUnlocalizedName(), IndustrialMetallurgyBlocks.IRON_FORGE_CORE.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB, Material.IRON, 3.0F);
+        refractory_bricks = new BlockBase(IndustrialMetallurgyBlocks.REFRACTORY_BRICKS.getUnlocalizedName(), IndustrialMetallurgyBlocks.REFRACTORY_BRICKS.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB, Material.ROCK, 3.0F);
+        iron_forge_core = new BlockBase(IndustrialMetallurgyBlocks.IRON_FORGE_CORE.getUnlocalizedName(), IndustrialMetallurgyBlocks.IRON_FORGE_CORE.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB, Material.IRON, 3.0F);
+        cobalt_forge_core = new BlockBase(IndustrialMetallurgyBlocks.COBALT_FORGE_CORE.getUnlocalizedName(), IndustrialMetallurgyBlocks.COBALT_FORGE_CORE.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB, Material.IRON, 3.0F);
+        tungsten_forge_core = new BlockBase(IndustrialMetallurgyBlocks.TUNGSTEN_FORGE_CORE.getUnlocalizedName(), IndustrialMetallurgyBlocks.TUNGSTEN_FORGE_CORE.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB, Material.IRON, 3.0F);
         
         forge_tier1 = new BlockForgeTier1(false, Reference.IndustrialMetallurgyBlocks.FORGE_TIER1.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.FORGE_TIER1.getRegistryName());
-        crusher = new BlockCrusher(false, Reference.IndustrialMetallurgyBlocks.CRUSHER.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.CRUSHER.getRegistryName());
+        forge_tier2 = new BlockForgeTier2(false, Reference.IndustrialMetallurgyBlocks.FORGE_TIER2.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.FORGE_TIER2.getRegistryName());
+        forge_tier3 = new BlockForgeTier3(false, Reference.IndustrialMetallurgyBlocks.FORGE_TIER3.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.FORGE_TIER3.getRegistryName());
         lit_forge_tier1 = new BlockForgeTier1(true, Reference.IndustrialMetallurgyBlocks.LIT_FORGE_TIER1.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.LIT_FORGE_TIER1.getRegistryName());
+        lit_forge_tier2 = new BlockForgeTier2(true, Reference.IndustrialMetallurgyBlocks.LIT_FORGE_TIER2.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.LIT_FORGE_TIER2.getRegistryName());
+        lit_forge_tier3 = new BlockForgeTier3(true, Reference.IndustrialMetallurgyBlocks.LIT_FORGE_TIER3.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.LIT_FORGE_TIER3.getRegistryName());
+        crusher = new BlockCrusher(false, Reference.IndustrialMetallurgyBlocks.CRUSHER.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.CRUSHER.getRegistryName());
         //bellow = new BlockBellow();
         coke_oven = new BlockCokeOven(false, Reference.IndustrialMetallurgyBlocks.COKE_OVEN.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.COKE_OVEN.getRegistryName());
         lit_coke_oven = new BlockCokeOven(true, Reference.IndustrialMetallurgyBlocks.LIT_COKE_OVEN.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.LIT_COKE_OVEN.getRegistryName());
@@ -142,22 +160,30 @@ public class ModBlocks
         registerBlock(refractory_bricks);
         registerBlock(iron_forge_core);
         registerBlock(forge_tier1);
+        registerBlock(forge_tier2);
+        registerBlock(forge_tier3);
         //registerBlock(bellow);
         registerBlock(crusher);
         registerBlock(coke_oven);
         registerBlock(coal_generator);
 
         GameRegistry.register(lit_forge_tier1);
+        GameRegistry.register(lit_forge_tier2);
+        GameRegistry.register(lit_forge_tier3);
         GameRegistry.register(lit_coke_oven);
         GameRegistry.register(lit_coal_generator);
 
         GameRegistry.registerTileEntity(TileEntityForgeTier1.class, "forge_tier1");
+        GameRegistry.registerTileEntity(TileEntityForgeTier2.class, "forge_tier2");
+        GameRegistry.registerTileEntity(TileEntityForgeTier3.class, "forge_tier3");
         GameRegistry.registerTileEntity(TileEntityCrusher.class, "crusher");
         GameRegistry.registerTileEntity(TileEntityCokeOven.class, "coke_oven");
         GameRegistry.registerTileEntity(TileEntityCoalGenerator.class, "coal_generator");
         
         NetworkRegistry.INSTANCE.registerGuiHandler(IndustrialMetallurgy.instance, GuiHandlerRegistry.getInstance());
         GuiHandlerRegistry.getInstance().registerGuiHandler(new GuiHandlerForgeTier1(), GuiHandlerForgeTier1.getGuiID());
+        GuiHandlerRegistry.getInstance().registerGuiHandler(new GuiHandlerForgeTier2(), GuiHandlerForgeTier2.getGuiID());
+        GuiHandlerRegistry.getInstance().registerGuiHandler(new GuiHandlerForgeTier3(), GuiHandlerForgeTier3.getGuiID());
         GuiHandlerRegistry.getInstance().registerGuiHandler(new GuiHandlerCrusher(), GuiHandlerCrusher.getGuiID());
         GuiHandlerRegistry.getInstance().registerGuiHandler(new GuiHandlerCokeOven(), GuiHandlerCokeOven.getGuiID());
         GuiHandlerRegistry.getInstance().registerGuiHandler(new GuiHandlerCoalGenerator(), GuiHandlerCoalGenerator.getGuiID());
@@ -198,7 +224,11 @@ public class ModBlocks
         registerRender(refractory_bricks);
         registerRender(iron_forge_core);
         registerRender(forge_tier1);
+        registerRender(forge_tier2);
+        registerRender(forge_tier3);
         registerRender(lit_forge_tier1);
+        registerRender(lit_forge_tier2);
+        registerRender(lit_forge_tier3);
         //registerRender(bellow);
         registerRender(crusher);
         registerRender(coke_oven);

@@ -31,6 +31,7 @@ public class ModItems
     public static Item magnet_wire;
     public static Item stator;
     public static Item rotor;
+    public static Item field_coil;
     public static Item electric_motor;
     public static Item conducting_element;
     public static Item heating_element;
@@ -385,6 +386,7 @@ public class ModItems
         magnet_wire = new ItemBase(IndustrialMetallurgyItems.MAGNET_WIRE.getUnlocalizedName(), IndustrialMetallurgyItems.MAGNET_WIRE.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
         stator = new ItemBase(IndustrialMetallurgyItems.STATOR.getUnlocalizedName(), IndustrialMetallurgyItems.STATOR.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
         rotor = new ItemBase(IndustrialMetallurgyItems.ROTOR.getUnlocalizedName(), IndustrialMetallurgyItems.ROTOR.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
+        field_coil = new ItemBase(IndustrialMetallurgyItems.FIELD_COIL.getUnlocalizedName(), IndustrialMetallurgyItems.FIELD_COIL.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
         electric_motor = new ItemBase(IndustrialMetallurgyItems.ELECTRIC_MOTOR.getUnlocalizedName(), IndustrialMetallurgyItems.ELECTRIC_MOTOR.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
         conducting_element = new ItemBase(IndustrialMetallurgyItems.CONDUCTING_ELEMENT.getUnlocalizedName(), IndustrialMetallurgyItems.CONDUCTING_ELEMENT.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
         heating_element = new ItemBase(IndustrialMetallurgyItems.HEATING_ELEMENT.getUnlocalizedName(), IndustrialMetallurgyItems.HEATING_ELEMENT.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
@@ -540,6 +542,7 @@ public class ModItems
         GameRegistry.register(magnet_wire);
         GameRegistry.register(stator);
         GameRegistry.register(rotor);
+        GameRegistry.register(field_coil);
         GameRegistry.register(electric_motor);
         GameRegistry.register(conducting_element);
         GameRegistry.register(heating_element);
@@ -695,6 +698,7 @@ public class ModItems
         registerRender(magnet_wire);
         registerRender(stator);
         registerRender(rotor);
+        registerRender(field_coil);
         registerRender(electric_motor);
         registerRender(conducting_element);
         registerRender(heating_element);

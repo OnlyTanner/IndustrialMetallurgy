@@ -21,6 +21,7 @@ public class Reference {
         MAGNET_WIRE("magnet_wire", "ItemMagnetWire"),
         STATOR("stator", "ItemStator"),
         ROTOR("rotor", "ItemRotor"),
+        FIELD_COIL("field_coil", "ItemFieldCoil"),
         ELECTRIC_MOTOR("electric_motor", "ItemElectricMotor"),
         CONDUCTING_ELEMENT("conducting_element", "ItemConductingElement"),
         HEATING_ELEMENT("heating_element", "ItemHeatingElement"),

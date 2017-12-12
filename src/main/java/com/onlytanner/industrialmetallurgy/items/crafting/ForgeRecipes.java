@@ -26,6 +26,7 @@ public class ForgeRecipes {
         this.addAlloyRecipe(new ItemStack(ModItems.nickel_ingot, 4), new ItemStack(ModItems.chromium_ingot), new ItemStack(ModItems.nichrome_ingot, 5), 1.75F, 2600);
         this.addAlloyRecipe(new ItemStack(ModItems.nickel_ingot), new ItemStack(ModItems.titanium_ingot), new ItemStack(ModItems.nitinol_ingot, 2), 0.7F, 2400);
         this.addAlloyRecipe(new ItemStack(Items.IRON_INGOT), new ItemStack(ModItems.crushed_coal, 4), new ItemStack(ModItems.steel_ingot), 0.35F, 2700);
+        this.addAlloyRecipe(new ItemStack(ModItems.cobalt_steel_ingot, 4), new ItemStack(ModItems.steel_ingot, 3), new ItemStack(ModItems.cobalt_ingot), 0.35F, 4700);
     }
 
     public static ForgeRecipes getInstance() {

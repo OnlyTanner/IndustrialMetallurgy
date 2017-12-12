@@ -13,4 +13,5 @@ public interface IEnergyProvider
     boolean doesShareEnergy();
     EnumFacing[] getEnergyShareSides();
     boolean canShareTo(TileEntity entity);
+    ModEnergyStorage getStorage();
 }

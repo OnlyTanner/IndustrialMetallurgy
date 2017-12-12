@@ -88,7 +88,7 @@ public class GuiCoalGenerator extends GuiContainer {
         if (isInRect(guiLeft + ENERGY_BAR_XPOS, guiTop + ENERGY_BAR_YPOS, ENERGY_BAR_WIDTH, ENERGY_BAR_HEIGHT, mouseX, mouseY))
         {
             hoveringText.add("Energy Stored:");
-            hoveringText.add(tileEntityCoalGenerator.getEnergyToSplitShare() + "");
+            hoveringText.add(tileEntityCoalGenerator.getEnergyToSplitShare() + "/" + tileEntityCoalGenerator.MAX_CAPACITY);
         }
         
         // If hoveringText is not empty draw the hovering text

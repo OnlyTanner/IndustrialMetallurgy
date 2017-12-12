@@ -201,6 +201,7 @@ item.field_coil.name=Field Coil
 item.electric_motor.name=Electric Motor
 item.conducting_element.name=Conducting Element
 item.heating_element.name=Heating Element
+item.induction_core.name=Induction Core
 
 itemGroup.tabIndustrialMetallurgyResources=Industrial Metallurgy: Resources
 itemGroup.tabIndustrialMetallurgyTools=Industrial Metallurgy: Tools

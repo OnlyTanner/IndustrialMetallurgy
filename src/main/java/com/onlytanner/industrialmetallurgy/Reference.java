@@ -25,6 +25,7 @@ public class Reference {
         ELECTRIC_MOTOR("electric_motor", "ItemElectricMotor"),
         CONDUCTING_ELEMENT("conducting_element", "ItemConductingElement"),
         HEATING_ELEMENT("heating_element", "ItemHeatingElement"),
+        INDUCTION_CORE("induction_core", "ItemInductionCore"),
         CRUSHED_BAUXITE_ORE("crushed_bauxite_ore", "ItemCrushedBauxiteOre"),
         CRUSHED_CASSITERITE_ORE("crushed_cassiterite_ore", "ItemCrushedCassiteriteOre"),
         CRUSHED_CHROMITE_ORE("crushed_chromite_ore", "ItemCrushedChromiteOre"),

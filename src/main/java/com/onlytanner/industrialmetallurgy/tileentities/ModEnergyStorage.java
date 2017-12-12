@@ -1,6 +1,15 @@
 package com.onlytanner.industrialmetallurgy.tileentities;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map.Entry;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.energy.EnergyStorage;
 
 /**
@@ -60,6 +69,42 @@ public class ModEnergyStorage extends EnergyStorage
             this.setEnergyStored(energy-energyExtracted);
         }
         return energyExtracted;
+    }
+    
+    public static long giveEnergyAllFaces(World world, BlockPos pos, long energy, boolean simulate) {
+        List<TileEntity> tiles = new LinkedList<TileEntity>();
+        for (EnumFacing side : EnumFacing.VALUES) {
+            TileEntity te = world.getTileEntity(pos.offset(side));
+            if (te != null && te instanceof IEnergyReceiver)
+                tiles.add(te);
+        }
+        if (tiles.size() <= 0)
+            return 0;
+        
+        long energyPerSide = energy / tiles.size();
+        long energyGiven = 0;
+        for (TileEntity tile : tiles)
+            energyGiven += ((IEnergyReceiver) tile).getStorage().extractEnergy((int) energyPerSide, false);
+            
+        return energyGiven;
+    }
+    
+    public static long takeEnergyAllFaces(World world, BlockPos pos, long energy, boolean simulate) {
+        List<TileEntity> tiles = new LinkedList<TileEntity>();
+        for (EnumFacing side : EnumFacing.VALUES) {
+            TileEntity te = world.getTileEntity(pos.offset(side));
+            if (te != null && te instanceof IEnergyProvider)
+                tiles.add(te);
+        }
+        if (tiles.size() <= 0)
+            return 0;
+        
+        long energyPerSide = energy / tiles.size();
+        long energyGiven = 0;
+        for (TileEntity tile : tiles)
+            energyGiven += ((IEnergyProvider) tile).getStorage().receiveEnergy((int) energyPerSide, false);
+            
+        return energyGiven;
     }
 
     public void readFromNBT(NBTTagCompound compound){

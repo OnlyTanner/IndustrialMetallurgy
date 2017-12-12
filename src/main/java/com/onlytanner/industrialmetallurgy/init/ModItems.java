@@ -15,8 +15,8 @@ import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.common.IFuelHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ModItems 
@@ -36,7 +36,8 @@ public class ModItems
     public static Item electric_motor;
     public static Item conducting_element;
     public static Item heating_element;
-
+    public static Item induction_core;
+    
     public static Item crushed_bauxite_ore;
     public static Item crushed_cassiterite_ore;
     public static Item crushed_chromite_ore;
@@ -378,7 +379,7 @@ public class ModItems
 
         refractory_composite = new ItemBase(IndustrialMetallurgyItems.REFRACTORY_COMPOSITE.getUnlocalizedName(), IndustrialMetallurgyItems.REFRACTORY_COMPOSITE.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
         refractory_brick = new ItemBase(IndustrialMetallurgyItems.REFRACTORY_BRICK.getUnlocalizedName(), IndustrialMetallurgyItems.REFRACTORY_BRICK.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
-        coal_coke = new ItemBase(IndustrialMetallurgyItems.COAL_COKE.getUnlocalizedName(), IndustrialMetallurgyItems.COAL_COKE.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
+        coal_coke = new ItemCoalCokeFuel();
         crushed_coal = new ItemBase(IndustrialMetallurgyItems.CRUSHED_COAL.getUnlocalizedName(), IndustrialMetallurgyItems.CRUSHED_COAL.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         crushed_diamond = new ItemBase(IndustrialMetallurgyItems.CRUSHED_DIAMOND.getUnlocalizedName(), IndustrialMetallurgyItems.CRUSHED_DIAMOND.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         tungsten_carbide_dust = new ItemBase(IndustrialMetallurgyItems.TUNGSTEN_CARBIDE_DUST.getUnlocalizedName(), IndustrialMetallurgyItems.TUNGSTEN_CARBIDE_DUST.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
@@ -391,6 +392,7 @@ public class ModItems
         electric_motor = new ItemBase(IndustrialMetallurgyItems.ELECTRIC_MOTOR.getUnlocalizedName(), IndustrialMetallurgyItems.ELECTRIC_MOTOR.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
         conducting_element = new ItemBase(IndustrialMetallurgyItems.CONDUCTING_ELEMENT.getUnlocalizedName(), IndustrialMetallurgyItems.CONDUCTING_ELEMENT.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
         heating_element = new ItemBase(IndustrialMetallurgyItems.HEATING_ELEMENT.getUnlocalizedName(), IndustrialMetallurgyItems.HEATING_ELEMENT.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
+        induction_core = new ItemBase(IndustrialMetallurgyItems.INDUCTION_CORE.getUnlocalizedName(), IndustrialMetallurgyItems.INDUCTION_CORE.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
     }
 
     public static void register() {
@@ -547,6 +549,9 @@ public class ModItems
         GameRegistry.register(electric_motor);
         GameRegistry.register(conducting_element);
         GameRegistry.register(heating_element);
+        GameRegistry.register(induction_core);
+        
+        GameRegistry.registerFuelHandler((IFuelHandler) coal_coke);
     }
 
     public static void registerRenders() {
@@ -703,6 +708,7 @@ public class ModItems
         registerRender(electric_motor);
         registerRender(conducting_element);
         registerRender(heating_element);
+        registerRender(induction_core);
     }
 
     private static void registerRender(Item item) {

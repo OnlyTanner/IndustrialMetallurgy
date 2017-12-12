@@ -18,8 +18,8 @@ import net.minecraft.util.EnumFacing;
 
 public class TileEntityCoalGenerator extends TileEntityBase implements IEnergyProvider
 {
-    private final int MAX_CAPACITY = 500000;
-    private ModEnergyStorage storage = new ModEnergyStorage(MAX_CAPACITY, 0, 80);
+    public final int MAX_CAPACITY = 500000;
+    public ModEnergyStorage storage = new ModEnergyStorage(MAX_CAPACITY, 0, 80);
 
     public TileEntityCoalGenerator()
     {
@@ -43,15 +43,7 @@ public class TileEntityCoalGenerator extends TileEntityBase implements IEnergyPr
             storage.receiveEnergyInternal(80, false);
         }
 
-        if ((storage.getEnergyStored() > 0)) {
-            EnumFacing[] sides = this.getEnergyShareSides();
-            for (int i = 0; i < 6; i++){
-                TileEntity tile = worldObj.getTileEntity(this.getPos().offset(sides[i]));
-                if (tile != null && tile instanceof IEnergyReceiver) {
-                    storage.extractEnergy(((IEnergyReceiver)tile).getStorage().receiveEnergy(storage.extractEnergy(1000, true), false), false);
-                }
-            }
-        }
+        this.storage.extractEnergyInternal((int) ModEnergyStorage.giveEnergyAllFaces(worldObj, pos, 1000, false), false);
         
         if (flag1) {
             this.markDirty();
@@ -255,5 +247,11 @@ public class TileEntityCoalGenerator extends TileEntityBase implements IEnergyPr
     public boolean canShareTo(TileEntity entity)
     {
         return true;
+    }
+
+    @Override
+    public ModEnergyStorage getStorage()
+    {
+        return storage;
     }
 }

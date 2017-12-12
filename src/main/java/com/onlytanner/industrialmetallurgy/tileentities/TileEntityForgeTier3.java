@@ -33,8 +33,8 @@ public class TileEntityForgeTier3 extends TileEntityBase implements ITickable, I
     private int cachedNumberOfBurningSlots = -1;
     private static Mode mode;
     private ArrayList<ItemStack> inputs;
-    private final int MAX_CAPACITY = 100000;
-    private ModEnergyStorage storage = new ModEnergyStorage(MAX_CAPACITY, 0, 80);
+    public final int MAX_CAPACITY = 100000;
+    public ModEnergyStorage storage = new ModEnergyStorage(MAX_CAPACITY, 0, 80);
     public static final short COOK_TIME_FOR_COMPLETION = 25;  // The number of ticks required to cook an item
 
     public TileEntityForgeTier3()
@@ -79,7 +79,9 @@ public class TileEntityForgeTier3 extends TileEntityBase implements ITickable, I
         } else {
             cookTime = 0;
         }
-
+        
+        this.storage.receiveEnergyInternal((int) ModEnergyStorage.takeEnergyAllFaces(worldObj, pos, 1000, false), false);
+        
         if (flag != this.isBurning()) {
             flag1 = true;
             BlockForgeTier3.setState(this.isBurning(), this.worldObj, this.pos);

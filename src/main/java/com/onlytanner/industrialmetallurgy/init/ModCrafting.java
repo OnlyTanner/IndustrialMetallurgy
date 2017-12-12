@@ -16,11 +16,14 @@ public class ModCrafting {
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.magnet_wire, 8), "   ", "CCC", "   ", 'C', ModItems.copper_ingot);
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.resistance_wire, 8), "   ", "KNK", "   ", 'N', ModItems.nichrome_ingot, 'K', ModItems.kanthal_ingot);
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.conducting_element), "MCM", "RGR", "MCM", 'M', ModItems.memory_wire, 'C', ModItems.copper_ingot, 'R', Items.REDSTONE, 'G', Items.GOLD_INGOT);
+        GameRegistry.addShapedRecipe(new ItemStack(ModItems.conducting_element), "MCM", "RGR", "MCM", 'M', ModItems.memory_wire, 'C', Items.REDSTONE, 'R', ModItems.copper_ingot, 'G', Items.GOLD_INGOT);
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.heating_element), "RRR", "RCR", "RRR", 'R', ModItems.resistance_wire, 'C', ModItems.conducting_element);
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.field_coil), "MMM", "MSM", "MMM", 'M', ModItems.magnet_wire, 'S', ModItems.steel_ingot);
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.stator), "FIF", "I I", "FIF", 'F', ModItems.invar_ingot, 'I', ModItems.field_coil);
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.rotor), "AFA", "FSF", "AFA", 'S', ModItems.steel_ingot, 'F', ModItems.field_coil, 'A', ModItems.aluminum_ingot);
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.electric_motor), " R ", "VSV", " C ", 'S', ModItems.stator, 'R', ModItems.rotor, 'C', ModItems.conducting_element, 'V', Items.REDSTONE);
+        GameRegistry.addShapedRecipe(new ItemStack(ModItems.electric_motor), "V R", " S ", "C V", 'S', ModItems.stator, 'R', ModItems.rotor, 'C', ModItems.conducting_element, 'V', Items.REDSTONE);
+        GameRegistry.addShapedRecipe(new ItemStack(ModItems.induction_core), "RHR", "CHC", "RHR", 'R', ModItems.copper_ingot, 'H', ModItems.heating_element, 'C', ModItems.conducting_element);
         GameRegistry.addSmelting(ModItems.refractory_composite, new ItemStack(ModItems.refractory_brick), 0.35F);
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.refractory_bricks), "BB ", "BB ", "   ", 'B', ModItems.refractory_brick);
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.refractory_bricks), " BB", " BB", "   ", 'B', ModItems.refractory_brick);
@@ -28,10 +31,10 @@ public class ModCrafting {
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.refractory_bricks), "   ", " BB", " BB", 'B', ModItems.refractory_brick);
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.iron_forge_core), "IBI", "B B", "IBI", 'I', Blocks.IRON_BLOCK, 'B', ModBlocks.refractory_bricks);
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.cobalt_forge_core), "IBI", "B B", "IBI", 'I', ModBlocks.cobalt_steel_block, 'B', ModBlocks.refractory_bricks);
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.tungsten_forge_core), "IBI", "B B", "IBI", 'I', ModBlocks.tungsten_steel_block, 'B', ModItems.heating_element);
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.tungsten_forge_core), "IBI", "BCB", "IBI", 'I', ModBlocks.tungsten_steel_block, 'B', ModBlocks.refractory_bricks, 'C', ModItems.induction_core);
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.forge_tier1), "IFI", "ICI", "IFI", 'I', Items.IRON_INGOT, 'F', Blocks.FURNACE, 'C', ModBlocks.iron_forge_core);
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.forge_tier2), "IFI", "ICI", "IFI", 'I', ModItems.cobalt_ingot, 'F', ModBlocks.forge_tier1, 'C', ModBlocks.cobalt_forge_core);
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.forge_tier3), "IFI", "ICI", "IFI", 'I', ModItems.tungsten_ingot, 'F', ModBlocks.forge_tier2, 'C', ModBlocks.tungsten_forge_core);
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.forge_tier2), "IFI", "ICI", "IFI", 'I', ModItems.cobalt_steel_ingot, 'F', ModBlocks.forge_tier1, 'C', ModBlocks.cobalt_forge_core);
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.forge_tier3), "IFI", "ICI", "IFI", 'I', ModItems.tungsten_steel_ingot, 'F', ModBlocks.forge_tier2, 'C', ModBlocks.tungsten_forge_core);
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.crusher), "IBI", "OPO", "OOO", 'I', Blocks.IRON_BLOCK, 'B', Blocks.IRON_BARS, 'O', Blocks.OBSIDIAN, 'P', Items.DIAMOND_PICKAXE);
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.coke_oven), "BBB", "B B", "BBB", 'B', ModBlocks.refractory_bricks);
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.coal_generator), "BRB", "RER", "BRB", 'B', ModBlocks.bronze_block, 'R', ModBlocks.refractory_bricks, 'E', ModItems.electric_motor);

@@ -144,7 +144,7 @@ public class GuiForgeTier3 extends GuiContainer {
         if (isInRect(guiLeft + ENERGY_BAR_XPOS, guiTop + ENERGY_BAR_YPOS, ENERGY_BAR_WIDTH, ENERGY_BAR_HEIGHT, mouseX, mouseY))
         {
             hoveringText.add("Energy Stored:");
-            hoveringText.add(tileEntityForgeTier3.getEnergyStored() + "");
+            hoveringText.add(tileEntityForgeTier3.getEnergyStored() + "/" + tileEntityForgeTier3.MAX_CAPACITY);
         }
 
         if (isInRect(guiLeft + POINTER_XPOS, guiTop + getPointerLocationFromTemp(tileEntityForgeTier3),

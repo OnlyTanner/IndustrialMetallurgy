@@ -48,7 +48,7 @@ public class TileEntityForgeTier1 extends TileEntityBase implements ITickable
         // If there is nothing to smelt or there is no room in the output, reset cookTime and return
         boolean flag = this.isBurning();
         boolean flag1 = false;
-        System.out.println(mode);
+        
         if (smeltItem(false)) {
             int numberOfFuelBurning = burnFuel();
             // If fuel is available, keep cooking the item, otherwise start "uncooking" it at double speed

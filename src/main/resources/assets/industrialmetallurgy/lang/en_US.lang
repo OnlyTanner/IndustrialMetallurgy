@@ -1,3 +1,42 @@
+tile.cuprite_ore.name=Cuprite Ore
+tile.cassiterite_ore.name=Cassiterite Ore
+tile.chromite_ore.name=Chromite Ore
+tile.cobaltite_ore.name=Cobaltite Ore
+tile.sphalerite_ore.name=Sphalerite Ore
+tile.bauxite_ore.name=Bauxite Ore
+tile.garnierite_ore.name=Garnierite Ore
+tile.rutile_ore.name=Rutile Ore
+tile.wolframite_ore.name=Wolframite Ore
+
+tile.aluminum_block.name=Block of Aluminum
+tile.brass_block.name=Block of Brass
+tile.bronze_block.name=Block of Bronze
+tile.chromium_block.name=Block of Chromium
+tile.cobalt_block.name=Block of Cobalt
+tile.cobalt_steel_block.name=Block of Cobalt-Hardened Steel
+tile.copper_block.name=Block of Copper
+tile.invar_block.name=Block of Invar
+tile.nichrome_block.name=Block of Nichrome
+tile.nickel_block.name=Block of Nickel
+tile.nitinol_block.name=Block of Nitinol
+tile.steel_block.name=Block of Steel
+tile.tin_block.name=Block of Tin
+tile.titanium_block.name=Block of Titanium
+tile.tungsten_block.name=Block of Tungsten
+tile.tungsten_steel_block.name=Block of Tungsten-Enriched Steel
+tile.zinc_block.name=Block of Zinc
+
+tile.refractory_bricks.name=Refractory Bricks
+tile.iron_forge_core.name=Iron Forge Core
+tile.cobalt_forge_core.name=Cobalt Forge Core
+tile.tungsten_forge_core.name=Tungsten Forge Core
+tile.forge_tier1.name=Iron Forge (Tier 1)
+tile.forge_tier2.name=Cobalt Forge (Tier 2)
+tile.forge_tier3.name=Tungsten Forge (Tier 3)
+tile.crusher.name=Crusher
+tile.coke_oven.name=Coke Oven
+tile.coal_generator.name=Coal Generator
+
 item.aluminum_ingot.name=Aluminum Ingot
 item.brass_ingot.name=Brass Ingot
 item.bronze_ingot.name=Bronze Ingot
@@ -135,16 +174,6 @@ item.zinc_shovel.name=Zinc Shovel
 item.zinc_axe.name=Zinc Axe
 item.zinc_hoe.name=Zinc Hoe
 
-tile.cuprite_ore.name=Cuprite Ore
-tile.cassiterite_ore.name=Cassiterite Ore
-tile.chromite_ore.name=Chromite Ore
-tile.cobaltite_ore.name=Cobaltite Ore
-tile.sphalerite_ore.name=Sphalerite Ore
-tile.bauxite_ore.name=Bauxite Ore
-tile.garnierite_ore.name=Garnierite Ore
-tile.rutile_ore.name=Rutile Ore
-tile.wolframite_ore.name=Wolframite Ore
-
 item.crushed_bauxite_ore.name=Crushed Bauxite Ore
 item.crushed_cassiterite_ore.name=Crushed Cassiterite Ore
 item.crushed_chromite_ore.name=Crushed Chromite Ore
@@ -156,20 +185,6 @@ item.crushed_iron_ore.name=Crushed Iron Ore
 item.crushed_rutile_ore.name=Crushed Rutile Ore
 item.crushed_sphalerite_ore.name=Crushed Sphalerite Ore
 item.crushed_wolframite_ore.name=Crushed Wolframite Ore
-
-tile.aluminum_block.name=Block of Aluminum
-tile.brass_block.name=Block of Brass
-tile.bronze_block.name=Block of Bronze
-tile.chromium_block.name=Block of Chromium
-tile.copper_block.name=Block of Copper
-tile.invar_block.name=Block of Invar
-tile.nichrome_block.name=Block of Nichrome
-tile.nickel_block.name=Block of Nickel
-tile.nitinol_block.name=Block of Nitinol
-tile.steel_block.name=Block of Steel
-tile.tin_block.name=Block of Tin
-tile.titanium_block.name=Block of Titanium
-tile.zinc_block.name=Block of Zinc
 
 item.refractory_composite.name=Refractory Composite
 item.refractory_brick.name=Refractory Brick
@@ -186,15 +201,6 @@ item.field_coil.name=Field Coil
 item.electric_motor.name=Electric Motor
 item.conducting_element.name=Conducting Element
 item.heating_element.name=Heating Element
-
-tile.refractory_bricks.name=Refractory Bricks
-tile.iron_forge_core.name=Iron Forge Core
-tile.forge_tier1.name=Iron Forge (Tier 1)
-tile.forge_tier2.name=Cobalt Forge (Tier 2)
-tile.forge_tier3.name=Tungsten Forge (Tier 3)
-tile.crusher.name=Crusher
-tile.coke_oven.name=Coke Oven
-tile.coal_generator.name=Coal Generator
 
 itemGroup.tabIndustrialMetallurgyResources=Industrial Metallurgy: Resources
 itemGroup.tabIndustrialMetallurgyTools=Industrial Metallurgy: Tools

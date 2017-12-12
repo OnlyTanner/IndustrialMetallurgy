@@ -9,7 +9,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagIntArray;
 import net.minecraft.nbt.NBTTagList;
@@ -44,6 +43,16 @@ public class TileEntityCoalGenerator extends TileEntityBase implements IEnergyPr
             storage.receiveEnergyInternal(80, false);
         }
 
+        if ((storage.getEnergyStored() > 0)) {
+            EnumFacing[] sides = this.getEnergyShareSides();
+            for (int i = 0; i < 6; i++){
+                TileEntity tile = worldObj.getTileEntity(this.getPos().offset(sides[i]));
+                if (tile != null && tile instanceof IEnergyReceiver) {
+                    storage.extractEnergy(((IEnergyReceiver)tile).getStorage().receiveEnergy(storage.extractEnergy(1000, true), false), false);
+                }
+            }
+        }
+        
         if (flag1) {
             this.markDirty();
         }

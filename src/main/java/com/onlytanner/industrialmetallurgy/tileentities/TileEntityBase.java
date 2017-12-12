@@ -3,8 +3,9 @@ package com.onlytanner.industrialmetallurgy.tileentities;
 import java.util.Arrays;
 import javax.annotation.Nullable;
 
-import com.onlytanner.industrialmetallurgy.container.ContainerForgeTier1;
 import com.onlytanner.industrialmetallurgy.items.crafting.ForgeRecipes;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -155,11 +156,11 @@ public abstract class TileEntityBase extends TileEntityLockable implements IInve
         }
     }
 
-    public static ItemStack getAlloyResultForItem(ItemStack stack1, ItemStack stack2)
+    public static ItemStack getAlloyResultForItem(ArrayList<ItemStack> inputs)
     {
         try
         {
-            return ForgeRecipes.getInstance().getAlloyResult(stack1, stack2);
+            return ForgeRecipes.getInstance().getAlloyResult(inputs);
         } 
         catch (NullPointerException e)
         {

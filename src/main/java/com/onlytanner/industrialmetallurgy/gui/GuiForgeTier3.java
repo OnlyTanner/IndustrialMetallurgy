@@ -113,14 +113,12 @@ public class GuiForgeTier3 extends GuiContainer {
                               (int)(cookProgress * COOK_BAR_WIDTH), 
                               COOK_BAR_HEIGHT);
 
-        /*
-        double energy = tileEntityCoalGenerator.getFractionOfEnergyRemaining();
-        yOffset = (int) ((1.0 - energy) * ENERGY_BAR_HEIGHT);
+        double energy = tileEntityForgeTier3.getFractionOfEnergyRemaining();
+        int yOffset = (int) ((1.0 - energy) * ENERGY_BAR_HEIGHT);
         drawTexturedModalRect(guiLeft + ENERGY_BAR_XPOS, 
                               guiTop + ENERGY_BAR_YPOS + yOffset, ENERGY_BAR_ICON_U, 
                               ENERGY_BAR_ICON_V + yOffset, ENERGY_BAR_WIDTH, 
                               ENERGY_BAR_HEIGHT - yOffset);
-        */
         
         drawTexturedModalRect(guiLeft + POINTER_XPOS, guiTop + getPointerLocationFromTemp(tileEntityForgeTier3),
                 POINTER_ICON_U, POINTER_ICON_V, POINTER_WIDTH, POINTER_HEIGHT);
@@ -146,7 +144,7 @@ public class GuiForgeTier3 extends GuiContainer {
         if (isInRect(guiLeft + ENERGY_BAR_XPOS, guiTop + ENERGY_BAR_YPOS, ENERGY_BAR_WIDTH, ENERGY_BAR_HEIGHT, mouseX, mouseY))
         {
             hoveringText.add("Energy Stored:");
-            //hoveringText.add(tileEntityCoalGenerator.getEnergyToSplitShare() + "");
+            hoveringText.add(tileEntityForgeTier3.getEnergyStored() + "");
         }
 
         if (isInRect(guiLeft + POINTER_XPOS, guiTop + getPointerLocationFromTemp(tileEntityForgeTier3),

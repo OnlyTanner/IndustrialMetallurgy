@@ -31,6 +31,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -56,6 +57,8 @@ public class ModBlocks
     public static Block bronze_block;
     public static Block chromium_block;
     public static Block copper_block;
+    public static Block cobalt_block;
+    public static Block cobalt_steel_block;
     public static Block invar_block;
     public static Block nichrome_block;
     public static Block nickel_block;
@@ -63,6 +66,8 @@ public class ModBlocks
     public static Block steel_block;
     public static Block tin_block;
     public static Block titanium_block;
+    public static Block tungsten_block;
+    public static Block tungsten_steel_block;
     public static Block zinc_block;
 
     public static BlockContainer forge_tier1;
@@ -103,6 +108,8 @@ public class ModBlocks
         brass_block = new BlockBase(IndustrialMetallurgyBlocks.BRASS_BLOCK.getUnlocalizedName(), IndustrialMetallurgyBlocks.BRASS_BLOCK.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB, Material.IRON, 3.0F);
         bronze_block = new BlockBase(IndustrialMetallurgyBlocks.BRONZE_BLOCK.getUnlocalizedName(), IndustrialMetallurgyBlocks.BRONZE_BLOCK.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB, Material.IRON, 3.0F);
         chromium_block = new BlockBase(IndustrialMetallurgyBlocks.CHROMIUM_BLOCK.getUnlocalizedName(), IndustrialMetallurgyBlocks.CHROMIUM_BLOCK.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB, Material.IRON, 3.0F);
+        cobalt_block = new BlockBase(IndustrialMetallurgyBlocks.COBALT_BLOCK.getUnlocalizedName(), IndustrialMetallurgyBlocks.COBALT_BLOCK.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB, Material.IRON, 3.0F);
+        cobalt_steel_block = new BlockBase(IndustrialMetallurgyBlocks.COBALT_STEEL_BLOCK.getUnlocalizedName(), IndustrialMetallurgyBlocks.COBALT_STEEL_BLOCK.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB, Material.IRON, 3.0F);
         copper_block = new BlockBase(IndustrialMetallurgyBlocks.COPPER_BLOCK.getUnlocalizedName(), IndustrialMetallurgyBlocks.COPPER_BLOCK.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB, Material.IRON, 3.0F);
         invar_block = new BlockBase(IndustrialMetallurgyBlocks.INVAR_BLOCK.getUnlocalizedName(), IndustrialMetallurgyBlocks.INVAR_BLOCK.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB, Material.IRON, 3.0F);
         nichrome_block = new BlockBase(IndustrialMetallurgyBlocks.NICHROME_BLOCK.getUnlocalizedName(), IndustrialMetallurgyBlocks.NICHROME_BLOCK.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB, Material.IRON, 3.0F);
@@ -111,6 +118,8 @@ public class ModBlocks
         steel_block = new BlockBase(IndustrialMetallurgyBlocks.STEEL_BLOCK.getUnlocalizedName(), IndustrialMetallurgyBlocks.STEEL_BLOCK.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB, Material.IRON, 3.0F);
         tin_block = new BlockBase(IndustrialMetallurgyBlocks.TIN_BLOCK.getUnlocalizedName(), IndustrialMetallurgyBlocks.TIN_BLOCK.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB, Material.IRON, 3.0F);
         titanium_block = new BlockBase(IndustrialMetallurgyBlocks.TITANIUM_BLOCK.getUnlocalizedName(), IndustrialMetallurgyBlocks.TITANIUM_BLOCK.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB, Material.IRON, 3.0F);
+        tungsten_block = new BlockBase(IndustrialMetallurgyBlocks.TUNGSTEN_BLOCK.getUnlocalizedName(), IndustrialMetallurgyBlocks.TUNGSTEN_BLOCK.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB, Material.IRON, 3.0F);
+        tungsten_steel_block = new BlockBase(IndustrialMetallurgyBlocks.TUNGSTEN_STEEL_BLOCK.getUnlocalizedName(), IndustrialMetallurgyBlocks.TUNGSTEN_STEEL_BLOCK.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB, Material.IRON, 3.0F);
         zinc_block = new BlockBase(IndustrialMetallurgyBlocks.ZINC_BLOCK.getUnlocalizedName(), IndustrialMetallurgyBlocks.ZINC_BLOCK.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB, Material.IRON, 3.0F);
 
         refractory_bricks = new BlockBase(IndustrialMetallurgyBlocks.REFRACTORY_BRICKS.getUnlocalizedName(), IndustrialMetallurgyBlocks.REFRACTORY_BRICKS.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB, Material.ROCK, 3.0F);
@@ -147,6 +156,8 @@ public class ModBlocks
         registerBlock(brass_block);
         registerBlock(bronze_block);
         registerBlock(chromium_block);
+        registerBlock(cobalt_block);
+        registerBlock(cobalt_steel_block);
         registerBlock(copper_block);
         registerBlock(invar_block);
         registerBlock(nichrome_block);
@@ -155,10 +166,14 @@ public class ModBlocks
         registerBlock(steel_block);
         registerBlock(tin_block);
         registerBlock(titanium_block);
+        registerBlock(tungsten_block);
+        registerBlock(tungsten_steel_block);
         registerBlock(zinc_block);
 
         registerBlock(refractory_bricks);
         registerBlock(iron_forge_core);
+        registerBlock(cobalt_forge_core);
+        registerBlock(tungsten_forge_core);
         registerBlock(forge_tier1);
         registerBlock(forge_tier2);
         registerBlock(forge_tier3);
@@ -211,6 +226,8 @@ public class ModBlocks
         registerRender(brass_block);
         registerRender(bronze_block);
         registerRender(chromium_block);
+        registerRender(cobalt_block);
+        registerRender(cobalt_steel_block);
         registerRender(copper_block);
         registerRender(invar_block);
         registerRender(nichrome_block);
@@ -219,10 +236,14 @@ public class ModBlocks
         registerRender(steel_block);
         registerRender(tin_block);
         registerRender(titanium_block);
+        registerRender(tungsten_block);
+        registerRender(tungsten_steel_block);
         registerRender(zinc_block);
 
         registerRender(refractory_bricks);
         registerRender(iron_forge_core);
+        registerRender(cobalt_forge_core);
+        registerRender(tungsten_forge_core);
         registerRender(forge_tier1);
         registerRender(forge_tier2);
         registerRender(forge_tier3);
@@ -238,6 +259,7 @@ public class ModBlocks
     }
 
     private static void registerRender(Block block) {
+        //ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "inventory"));
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "inventory"));
     }
 }

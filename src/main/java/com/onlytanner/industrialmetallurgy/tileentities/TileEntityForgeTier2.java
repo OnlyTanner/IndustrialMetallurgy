@@ -3,6 +3,7 @@ package com.onlytanner.industrialmetallurgy.tileentities;
 import com.onlytanner.industrialmetallurgy.blocks.BlockForgeTier2;
 import com.onlytanner.industrialmetallurgy.container.ContainerForgeTier2;
 import com.onlytanner.industrialmetallurgy.items.crafting.ForgeRecipes;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import net.minecraft.block.state.IBlockState;
@@ -28,12 +29,18 @@ public class TileEntityForgeTier2 extends TileEntityBase implements ITickable
         }
     };
     private int cachedNumberOfBurningSlots = -1;
-    private Mode mode;
+    private static Mode mode;
+    private ArrayList<ItemStack> inputs;
+    public static final short COOK_TIME_FOR_COMPLETION = 50;  // The number of ticks required to cook an item
 
     public TileEntityForgeTier2()
     {
-        super(2, 2, 1);
+        super(3, 1, 1);
         mode = Mode.ALLOY;
+        inputs = new ArrayList<ItemStack>();
+        inputs.add(itemStacks[FIRST_INPUT_SLOT]);
+        inputs.add(itemStacks[FIRST_INPUT_SLOT + 1]);
+        inputs.add(itemStacks[FIRST_INPUT_SLOT + 2]);
     }
 
     @Override
@@ -42,7 +49,7 @@ public class TileEntityForgeTier2 extends TileEntityBase implements ITickable
         // If there is nothing to smelt or there is no room in the output, reset cookTime and return
         boolean flag = this.isBurning();
         boolean flag1 = false;
-        System.out.println(mode);
+        
         if (smeltItem(false)) {
             int numberOfFuelBurning = burnFuel();
             // If fuel is available, keep cooking the item, otherwise start "uncooking" it at double speed
@@ -94,19 +101,18 @@ public class TileEntityForgeTier2 extends TileEntityBase implements ITickable
     
     public boolean smeltItem(boolean performSmelt)
     {
+        inputs.set(0, itemStacks[FIRST_INPUT_SLOT]);
+        inputs.set(1, itemStacks[FIRST_INPUT_SLOT + 1]);
+        inputs.set(2, itemStacks[FIRST_INPUT_SLOT + 2]);
         if (mode == Mode.ALLOY)
         {
             //check for valid recipe based on inputs
-            ItemStack result = null;
-            if ((itemStacks[FIRST_INPUT_SLOT] == null || itemStacks[FIRST_INPUT_SLOT + 1] == null)) 
-                return false;
-            else
-                result = ForgeRecipes.getAlloyResult(itemStacks[FIRST_INPUT_SLOT], itemStacks[FIRST_INPUT_SLOT + 1]);
+            ItemStack result = ForgeRecipes.getAlloyResult(inputs);
             
             //if recipe was valid, alter inputs and outputs appropriately
             if (result != null)
             {
-                ItemStack[] stacks = ForgeRecipes.getReducedStacks(itemStacks[FIRST_INPUT_SLOT], itemStacks[FIRST_INPUT_SLOT + 1]);
+                ItemStack[] stacks = ForgeRecipes.getReducedStacks(itemStacks[FIRST_INPUT_SLOT], itemStacks[FIRST_INPUT_SLOT + 1], itemStacks[FIRST_INPUT_SLOT + 2]);
                 if (itemStacks[FIRST_OUTPUT_SLOT] != null && 
                     itemStacks[FIRST_OUTPUT_SLOT].stackSize + result.stackSize <= this.getInventoryStackLimit() && 
                     itemStacks[FIRST_OUTPUT_SLOT].getItem().equals(result.getItem()))
@@ -117,10 +123,13 @@ public class TileEntityForgeTier2 extends TileEntityBase implements ITickable
                         itemStacks[FIRST_OUTPUT_SLOT].stackSize += result.stackSize;
                         itemStacks[FIRST_INPUT_SLOT].stackSize = stacks[0].stackSize;
                         itemStacks[FIRST_INPUT_SLOT + 1].stackSize = stacks[1].stackSize;
+                        itemStacks[FIRST_INPUT_SLOT + 2].stackSize = stacks[2].stackSize;
                         if (itemStacks[FIRST_INPUT_SLOT].stackSize <= 0)
                             itemStacks[FIRST_INPUT_SLOT] = null;
                         if (itemStacks[FIRST_INPUT_SLOT + 1].stackSize <= 0)
                             itemStacks[FIRST_INPUT_SLOT + 1] = null;
+                        if (itemStacks[FIRST_INPUT_SLOT + 2].stackSize <= 0)
+                            itemStacks[FIRST_INPUT_SLOT + 2] = null;
                     }
                 else if (itemStacks[FIRST_OUTPUT_SLOT] == null)
                     if (!performSmelt)
@@ -130,10 +139,13 @@ public class TileEntityForgeTier2 extends TileEntityBase implements ITickable
                         itemStacks[FIRST_OUTPUT_SLOT] = result.copy();
                         itemStacks[FIRST_INPUT_SLOT].stackSize = stacks[0].stackSize;
                         itemStacks[FIRST_INPUT_SLOT + 1].stackSize = stacks[1].stackSize;
+                        itemStacks[FIRST_INPUT_SLOT + 2].stackSize = stacks[2].stackSize;
                         if (itemStacks[FIRST_INPUT_SLOT].stackSize <= 0)
                             itemStacks[FIRST_INPUT_SLOT] = null;
                         if (itemStacks[FIRST_INPUT_SLOT + 1].stackSize <= 0)
                             itemStacks[FIRST_INPUT_SLOT + 1] = null;
+                        if (itemStacks[FIRST_INPUT_SLOT + 2].stackSize <= 0)
+                            itemStacks[FIRST_INPUT_SLOT + 2] = null;
                     }
                 else
                     return false;
@@ -145,17 +157,12 @@ public class TileEntityForgeTier2 extends TileEntityBase implements ITickable
         {
             //check for valid recipe based on inputs
             ItemStack result = null;
-            if ((itemStacks[FIRST_INPUT_SLOT] == null && itemStacks[FIRST_INPUT_SLOT + 1] == null)) 
-                return false;
-            else if (itemStacks[FIRST_INPUT_SLOT] != null && itemStacks[FIRST_INPUT_SLOT + 1] == null)
-                result = getSmeltingResultForItem(itemStacks[FIRST_INPUT_SLOT], 1);
-            else if (itemStacks[FIRST_INPUT_SLOT] == null && itemStacks[FIRST_INPUT_SLOT + 1] != null)
-                result = getSmeltingResultForItem(itemStacks[FIRST_INPUT_SLOT + 1], 1);
-            else
-                if (itemStacks[FIRST_INPUT_SLOT].getItem().equals(itemStacks[FIRST_INPUT_SLOT + 1].getItem()))
-                    result = getSmeltingResultForItem(itemStacks[FIRST_INPUT_SLOT], 2);
-                else
-                    return false;
+            if (inputs.get(0) != null)
+                result = getSmeltingResultForItem(inputs.get(0), 1);
+            else if (inputs.get(1) != null)
+                result = getSmeltingResultForItem(inputs.get(1), 1);
+            else if (inputs.get(2) != null)
+                result = getSmeltingResultForItem(inputs.get(2), 1);
             
             //if recipe was valid, alter inputs and outputs appropriately
             if (result != null)
@@ -167,10 +174,12 @@ public class TileEntityForgeTier2 extends TileEntityBase implements ITickable
                     else
                     {
                         itemStacks[FIRST_OUTPUT_SLOT].stackSize += result.stackSize;
-                        if (itemStacks[FIRST_INPUT_SLOT] != null && --itemStacks[FIRST_INPUT_SLOT].stackSize <= 0)
-                            itemStacks[FIRST_INPUT_SLOT] = null;
-                        if (itemStacks[FIRST_INPUT_SLOT + 1] != null && --itemStacks[FIRST_INPUT_SLOT + 1].stackSize <= 0)
-                            itemStacks[FIRST_INPUT_SLOT + 1] = null;
+                        if (itemStacks[FIRST_INPUT_SLOT] != null)
+                            itemStacks[FIRST_INPUT_SLOT].stackSize--;
+                        else if (itemStacks[FIRST_INPUT_SLOT + 1] != null)
+                            itemStacks[FIRST_INPUT_SLOT + 1].stackSize--;
+                        else if (itemStacks[FIRST_INPUT_SLOT + 2] != null)
+                            itemStacks[FIRST_INPUT_SLOT + 2].stackSize--;
                     }
                 else if (itemStacks[FIRST_OUTPUT_SLOT] == null)
                     if (!performSmelt)
@@ -178,10 +187,12 @@ public class TileEntityForgeTier2 extends TileEntityBase implements ITickable
                     else
                     {
                         itemStacks[FIRST_OUTPUT_SLOT] = result.copy();
-                        if (itemStacks[FIRST_INPUT_SLOT] != null && --itemStacks[FIRST_INPUT_SLOT].stackSize <= 0)
-                            itemStacks[FIRST_INPUT_SLOT] = null;
-                        if (itemStacks[FIRST_INPUT_SLOT + 1] != null && --itemStacks[FIRST_INPUT_SLOT + 1].stackSize <= 0)
-                            itemStacks[FIRST_INPUT_SLOT + 1] = null;
+                        if (itemStacks[FIRST_INPUT_SLOT] != null)
+                            itemStacks[FIRST_INPUT_SLOT].stackSize--;
+                        else if (itemStacks[FIRST_INPUT_SLOT + 1] != null)
+                            itemStacks[FIRST_INPUT_SLOT + 1].stackSize--;
+                        else if (itemStacks[FIRST_INPUT_SLOT + 2] != null)
+                            itemStacks[FIRST_INPUT_SLOT + 2].stackSize--;
                     }
                 else
                     return false;
@@ -237,7 +248,10 @@ public class TileEntityForgeTier2 extends TileEntityBase implements ITickable
     {
         if (itemStacks[FIRST_INPUT_SLOT] != null && itemStacks[FIRST_INPUT_SLOT + 1] != null) {
             try {
-                return ForgeRecipes.getTemperature(ForgeRecipes.getAlloyResult(itemStacks[FIRST_INPUT_SLOT], itemStacks[FIRST_INPUT_SLOT + 1]).getItem());
+                inputs.set(0, itemStacks[FIRST_INPUT_SLOT]);
+                inputs.set(1, itemStacks[FIRST_INPUT_SLOT + 1]);
+                inputs.set(2, itemStacks[FIRST_INPUT_SLOT + 2]);
+                return ForgeRecipes.getTemperature(ForgeRecipes.getAlloyResult(inputs).getItem());
             } catch (NullPointerException e) {
                 return 500;
             }
@@ -249,7 +263,7 @@ public class TileEntityForgeTier2 extends TileEntityBase implements ITickable
     @Override
     public String getName()
     {
-        return "            Forge (Tier 1)";
+        return "            Forge (Tier 2)";
     }
 
     @Override
@@ -389,7 +403,7 @@ public class TileEntityForgeTier2 extends TileEntityBase implements ITickable
     @Override
     public String getGuiID()
     {
-        return "industrialmetallurgy:forge_tier1";
+        return "industrialmetallurgy:forge_tier2";
     }
 
     @Override

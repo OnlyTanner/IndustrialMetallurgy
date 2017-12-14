@@ -5,9 +5,10 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ModCrafting {
-
-    public static void register() {
+public class ModCrafting
+{
+    public static void register()
+    {
         GameRegistry.addShapedRecipe(new ItemStack(Items.IRON_INGOT), "XXX", "XXX", "XXX", 'X', ModItems.iron_nugget);
         GameRegistry.addShapelessRecipe(new ItemStack(ModItems.iron_nugget, 9), Items.IRON_INGOT);
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.refractory_composite), "SCS", "CBC", "SCS", 'S', Blocks.SAND, 'C', Items.CLAY_BALL, 'B', new ItemStack(Items.DYE, 1, 15));
@@ -21,6 +22,9 @@ public class ModCrafting {
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.field_coil), "MMM", "MSM", "MMM", 'M', ModItems.magnet_wire, 'S', ModItems.steel_ingot);
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.stator), "FIF", "I I", "FIF", 'F', ModItems.invar_ingot, 'I', ModItems.field_coil);
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.rotor), "AFA", "FSF", "AFA", 'S', ModItems.steel_ingot, 'F', ModItems.field_coil, 'A', ModItems.aluminum_ingot);
+        //GameRegistry.addShapedRecipe(new ItemStack(ModItems.battery_cell), "PSP", "SLS", "PSP", 'P', ModItems.hdpe_sheet, 'S', ModItems.sulfuric_acid_bottle, 'L', ModBlocks.);
+        GameRegistry.addShapedRecipe(new ItemStack(ModItems.battery_bank), "CBM", "BBB", "MBC", 'C', ModItems.conducting_element, 'B', ModItems.battery_cell, 'M', ModItems.magnet_wire);
+        GameRegistry.addShapedRecipe(new ItemStack(ModItems.battery_bank), "MBC", "BBB", "CBM", 'C', ModItems.conducting_element, 'B', ModItems.battery_cell, 'M', ModItems.magnet_wire);
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.electric_motor), " R ", "VSV", " C ", 'S', ModItems.stator, 'R', ModItems.rotor, 'C', ModItems.conducting_element, 'V', Items.REDSTONE);
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.electric_motor), "V R", " S ", "C V", 'S', ModItems.stator, 'R', ModItems.rotor, 'C', ModItems.conducting_element, 'V', Items.REDSTONE);
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.induction_core), "RHR", "CHC", "RHR", 'R', ModItems.copper_ingot, 'H', ModItems.heating_element, 'C', ModItems.conducting_element);
@@ -58,7 +62,7 @@ public class ModCrafting {
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.alloy7201_hoe), "CC ", "S  ", "S  ", 'C', ModItems.alloy7201_ingot, 'S', Items.STICK);
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.alloy7201_hoe), "CC ", " S ", " S ", 'C', ModItems.alloy7201_ingot, 'S', Items.STICK);
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.alloy7201_hoe), " CC", "  S", "  S", 'C', ModItems.alloy7201_ingot, 'S', Items.STICK);
-        
+
         GameRegistry.addShapelessRecipe(new ItemStack(ModItems.aluminum_ingot, 9), ModBlocks.aluminum_block);
         GameRegistry.addShapelessRecipe(new ItemStack(ModItems.aluminum_nugget, 9), ModItems.aluminum_ingot);
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.aluminum_block), "XXX", "XXX", "XXX", 'X', ModItems.aluminum_ingot);
@@ -138,7 +142,7 @@ public class ModCrafting {
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.chromium_hoe), "CC ", "S  ", "S  ", 'C', ModItems.chromium_ingot, 'S', Items.STICK);
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.chromium_hoe), "CC ", " S ", " S ", 'C', ModItems.chromium_ingot, 'S', Items.STICK);
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.chromium_hoe), " CC", "  S", "  S", 'C', ModItems.chromium_ingot, 'S', Items.STICK);
-        
+
         GameRegistry.addShapelessRecipe(new ItemStack(ModItems.cobalt_ingot, 9), ModBlocks.cobalt_block);
         GameRegistry.addShapelessRecipe(new ItemStack(ModItems.cobalt_nugget, 9), ModItems.cobalt_ingot);
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.cobalt_block), "XXX", "XXX", "XXX", 'X', ModItems.cobalt_ingot);
@@ -163,7 +167,7 @@ public class ModCrafting {
         GameRegistry.addShapelessRecipe(new ItemStack(ModItems.cobalt_steel_nugget, 9), ModItems.cobalt_steel_ingot);
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.cobalt_steel_block), "XXX", "XXX", "XXX", 'X', ModItems.cobalt_steel_ingot);
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.cobalt_steel_ingot), "XXX", "XXX", "XXX", 'X', ModItems.cobalt_steel_nugget);
-        
+
         GameRegistry.addShapelessRecipe(new ItemStack(ModItems.copper_ingot, 9), ModBlocks.copper_block);
         GameRegistry.addShapelessRecipe(new ItemStack(ModItems.copper_nugget, 9), ModItems.copper_ingot);
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.copper_block), "XXX", "XXX", "XXX", 'X', ModItems.copper_ingot);
@@ -323,7 +327,7 @@ public class ModCrafting {
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.titanium_hoe), "CC ", "S  ", "S  ", 'C', ModItems.titanium_ingot, 'S', Items.STICK);
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.titanium_hoe), "CC ", " S ", " S ", 'C', ModItems.titanium_ingot, 'S', Items.STICK);
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.titanium_hoe), " CC", "  S", "  S", 'C', ModItems.titanium_ingot, 'S', Items.STICK);
-        
+
         GameRegistry.addShapelessRecipe(new ItemStack(ModItems.tungsten_ingot, 9), ModBlocks.tungsten_block);
         GameRegistry.addShapelessRecipe(new ItemStack(ModItems.tungsten_nugget, 9), ModItems.tungsten_ingot);
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.tungsten_block), "XXX", "XXX", "XXX", 'X', ModItems.tungsten_ingot);
@@ -348,7 +352,7 @@ public class ModCrafting {
         GameRegistry.addShapelessRecipe(new ItemStack(ModItems.tungsten_steel_nugget, 9), ModItems.tungsten_steel_ingot);
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.tungsten_steel_block), "XXX", "XXX", "XXX", 'X', ModItems.tungsten_steel_ingot);
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.tungsten_steel_ingot), "XXX", "XXX", "XXX", 'X', ModItems.tungsten_steel_nugget);
-        
+
         GameRegistry.addShapelessRecipe(new ItemStack(ModItems.zinc_ingot, 9), ModBlocks.zinc_block);
         GameRegistry.addShapelessRecipe(new ItemStack(ModItems.zinc_nugget, 9), ModItems.zinc_ingot);
         GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.zinc_block), "XXX", "XXX", "XXX", 'X', ModItems.zinc_ingot);

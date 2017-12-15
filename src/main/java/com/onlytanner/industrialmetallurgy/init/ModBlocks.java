@@ -5,21 +5,30 @@ import com.onlytanner.industrialmetallurgy.Reference;
 import com.onlytanner.industrialmetallurgy.IndustrialMetallurgy;
 import com.onlytanner.industrialmetallurgy.Reference.IndustrialMetallurgyBlocks;
 import com.onlytanner.industrialmetallurgy.blocks.BlockBase;
+import com.onlytanner.industrialmetallurgy.blocks.BlockChemicalReactor;
+import com.onlytanner.industrialmetallurgy.blocks.BlockChemicalSeparator;
 import com.onlytanner.industrialmetallurgy.blocks.BlockCoalGenerator;
 import com.onlytanner.industrialmetallurgy.blocks.BlockCokeOven;
 import com.onlytanner.industrialmetallurgy.blocks.BlockCrusher;
+import com.onlytanner.industrialmetallurgy.blocks.BlockElectricCrusher;
 import com.onlytanner.industrialmetallurgy.blocks.BlockForgeTier1;
 import com.onlytanner.industrialmetallurgy.blocks.BlockForgeTier2;
 import com.onlytanner.industrialmetallurgy.blocks.BlockForgeTier3;
+import com.onlytanner.industrialmetallurgy.handler.GuiHandlerChemicalReactor;
+import com.onlytanner.industrialmetallurgy.handler.GuiHandlerChemicalSeparator;
 import com.onlytanner.industrialmetallurgy.handler.GuiHandlerCoalGenerator;
 import com.onlytanner.industrialmetallurgy.handler.GuiHandlerCokeOven;
 import com.onlytanner.industrialmetallurgy.handler.GuiHandlerCrusher;
+import com.onlytanner.industrialmetallurgy.handler.GuiHandlerElectricCrusher;
 import com.onlytanner.industrialmetallurgy.handler.GuiHandlerForgeTier1;
 import com.onlytanner.industrialmetallurgy.handler.GuiHandlerForgeTier2;
 import com.onlytanner.industrialmetallurgy.handler.GuiHandlerForgeTier3;
+import com.onlytanner.industrialmetallurgy.tileentities.TileEntityChemicalReactor;
+import com.onlytanner.industrialmetallurgy.tileentities.TileEntityChemicalSeparator;
 import com.onlytanner.industrialmetallurgy.tileentities.TileEntityCoalGenerator;
 import com.onlytanner.industrialmetallurgy.tileentities.TileEntityCokeOven;
 import com.onlytanner.industrialmetallurgy.tileentities.TileEntityCrusher;
+import com.onlytanner.industrialmetallurgy.tileentities.TileEntityElectricCrusher;
 import com.onlytanner.industrialmetallurgy.tileentities.TileEntityForgeTier1;
 import com.onlytanner.industrialmetallurgy.tileentities.TileEntityForgeTier2;
 import com.onlytanner.industrialmetallurgy.tileentities.TileEntityForgeTier3;
@@ -31,7 +40,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -78,6 +86,9 @@ public class ModBlocks
     public static BlockContainer lit_forge_tier3;
     //public static Block bellow;
     public static BlockContainer crusher;
+    public static BlockContainer electric_crusher;
+    public static BlockContainer chemical_separator;
+    public static BlockContainer chemical_reactor;
     public static BlockContainer coke_oven;
     public static BlockContainer lit_coke_oven;
     public static BlockContainer coal_generator;
@@ -134,6 +145,9 @@ public class ModBlocks
         lit_forge_tier2 = new BlockForgeTier2(true, Reference.IndustrialMetallurgyBlocks.LIT_FORGE_TIER2.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.LIT_FORGE_TIER2.getRegistryName());
         lit_forge_tier3 = new BlockForgeTier3(true, Reference.IndustrialMetallurgyBlocks.LIT_FORGE_TIER3.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.LIT_FORGE_TIER3.getRegistryName());
         crusher = new BlockCrusher(false, Reference.IndustrialMetallurgyBlocks.CRUSHER.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.CRUSHER.getRegistryName());
+        electric_crusher = new BlockElectricCrusher(false, Reference.IndustrialMetallurgyBlocks.ELECTRIC_CRUSHER.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.ELECTRIC_CRUSHER.getRegistryName());
+        chemical_reactor = new BlockChemicalReactor(false, Reference.IndustrialMetallurgyBlocks.CHEMICAL_REACTOR.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.CHEMICAL_REACTOR.getRegistryName());
+        chemical_separator = new BlockChemicalSeparator(false, Reference.IndustrialMetallurgyBlocks.CHEMICAL_SEPARATOR.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.CHEMICAL_SEPARATOR.getRegistryName());
         //bellow = new BlockBellow();
         coke_oven = new BlockCokeOven(false, Reference.IndustrialMetallurgyBlocks.COKE_OVEN.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.COKE_OVEN.getRegistryName());
         lit_coke_oven = new BlockCokeOven(true, Reference.IndustrialMetallurgyBlocks.LIT_COKE_OVEN.getUnlocalizedName(), Reference.IndustrialMetallurgyBlocks.LIT_COKE_OVEN.getRegistryName());
@@ -179,6 +193,9 @@ public class ModBlocks
         registerBlock(forge_tier3);
         //registerBlock(bellow);
         registerBlock(crusher);
+        registerBlock(electric_crusher);
+        registerBlock(chemical_reactor);
+        registerBlock(chemical_separator);
         registerBlock(coke_oven);
         registerBlock(coal_generator);
 
@@ -192,6 +209,9 @@ public class ModBlocks
         GameRegistry.registerTileEntity(TileEntityForgeTier2.class, "forge_tier2");
         GameRegistry.registerTileEntity(TileEntityForgeTier3.class, "forge_tier3");
         GameRegistry.registerTileEntity(TileEntityCrusher.class, "crusher");
+        GameRegistry.registerTileEntity(TileEntityElectricCrusher.class, "electric_crusher");
+        GameRegistry.registerTileEntity(TileEntityChemicalReactor.class, "chemical_reactor");
+        GameRegistry.registerTileEntity(TileEntityChemicalSeparator.class, "chemical_separator");
         GameRegistry.registerTileEntity(TileEntityCokeOven.class, "coke_oven");
         GameRegistry.registerTileEntity(TileEntityCoalGenerator.class, "coal_generator");
         
@@ -200,6 +220,9 @@ public class ModBlocks
         GuiHandlerRegistry.getInstance().registerGuiHandler(new GuiHandlerForgeTier2(), GuiHandlerForgeTier2.getGuiID());
         GuiHandlerRegistry.getInstance().registerGuiHandler(new GuiHandlerForgeTier3(), GuiHandlerForgeTier3.getGuiID());
         GuiHandlerRegistry.getInstance().registerGuiHandler(new GuiHandlerCrusher(), GuiHandlerCrusher.getGuiID());
+        GuiHandlerRegistry.getInstance().registerGuiHandler(new GuiHandlerElectricCrusher(), GuiHandlerElectricCrusher.getGuiID());
+        GuiHandlerRegistry.getInstance().registerGuiHandler(new GuiHandlerChemicalReactor(), GuiHandlerChemicalReactor.getGuiID());
+        GuiHandlerRegistry.getInstance().registerGuiHandler(new GuiHandlerChemicalSeparator(), GuiHandlerChemicalSeparator.getGuiID());
         GuiHandlerRegistry.getInstance().registerGuiHandler(new GuiHandlerCokeOven(), GuiHandlerCokeOven.getGuiID());
         GuiHandlerRegistry.getInstance().registerGuiHandler(new GuiHandlerCoalGenerator(), GuiHandlerCoalGenerator.getGuiID());
     }
@@ -252,6 +275,9 @@ public class ModBlocks
         registerRender(lit_forge_tier3);
         //registerRender(bellow);
         registerRender(crusher);
+        registerRender(electric_crusher);
+        registerRender(chemical_reactor);
+        registerRender(chemical_separator);
         registerRender(coke_oven);
         registerRender(lit_coke_oven);
         registerRender(coal_generator);

@@ -29,6 +29,7 @@ public class ModItems
     public static Item peat;
     public static Item sulfur;
     public static Item potassium_nitrate;
+    public static Item lead_sulfate;
     public static Item crushed_coal;
     public static Item crushed_diamond;
     public static Item tungsten_carbide_dust;
@@ -40,6 +41,7 @@ public class ModItems
     public static Item resistance_wire;
     public static Item magnet_wire;
     public static Item hdpe_sheet;
+    public static Item lead_sulfate_plate;
     public static Item stator;
     public static Item rotor;
     public static Item field_coil;
@@ -397,6 +399,7 @@ public class ModItems
         peat = new ItemBase(IndustrialMetallurgyItems.PEAT.getUnlocalizedName(), IndustrialMetallurgyItems.PEAT.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         sulfur = new ItemBase(IndustrialMetallurgyItems.SULFUR.getUnlocalizedName(), IndustrialMetallurgyItems.SULFUR.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         potassium_nitrate = new ItemBase(IndustrialMetallurgyItems.POTASSIUM_NITRATE.getUnlocalizedName(), IndustrialMetallurgyItems.POTASSIUM_NITRATE.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
+        lead_sulfate = new ItemBase(IndustrialMetallurgyItems.LEAD_SULFATE.getUnlocalizedName(), IndustrialMetallurgyItems.LEAD_SULFATE.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         crushed_coal = new ItemBase(IndustrialMetallurgyItems.CRUSHED_COAL.getUnlocalizedName(), IndustrialMetallurgyItems.CRUSHED_COAL.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         crushed_diamond = new ItemBase(IndustrialMetallurgyItems.CRUSHED_DIAMOND.getUnlocalizedName(), IndustrialMetallurgyItems.CRUSHED_DIAMOND.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
         tungsten_carbide_dust = new ItemBase(IndustrialMetallurgyItems.TUNGSTEN_CARBIDE_DUST.getUnlocalizedName(), IndustrialMetallurgyItems.TUNGSTEN_CARBIDE_DUST.getRegistryName(), IndustrialMetallurgy.RESOURCES_TAB);
@@ -408,6 +411,7 @@ public class ModItems
         resistance_wire = new ItemBase(IndustrialMetallurgyItems.RESISTANCE_WIRE.getUnlocalizedName(), IndustrialMetallurgyItems.RESISTANCE_WIRE.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
         magnet_wire = new ItemBase(IndustrialMetallurgyItems.MAGNET_WIRE.getUnlocalizedName(), IndustrialMetallurgyItems.MAGNET_WIRE.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
         hdpe_sheet = new ItemBase(IndustrialMetallurgyItems.HDPE_SHEET.getUnlocalizedName(), IndustrialMetallurgyItems.HDPE_SHEET.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
+        lead_sulfate_plate = new ItemBase(IndustrialMetallurgyItems.LEAD_SULFATE_PLATE.getUnlocalizedName(), IndustrialMetallurgyItems.LEAD_SULFATE_PLATE.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
         stator = new ItemBase(IndustrialMetallurgyItems.STATOR.getUnlocalizedName(), IndustrialMetallurgyItems.STATOR.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
         rotor = new ItemBase(IndustrialMetallurgyItems.ROTOR.getUnlocalizedName(), IndustrialMetallurgyItems.ROTOR.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
         field_coil = new ItemBase(IndustrialMetallurgyItems.FIELD_COIL.getUnlocalizedName(), IndustrialMetallurgyItems.FIELD_COIL.getRegistryName(), IndustrialMetallurgy.MACHINES_TAB);
@@ -566,6 +570,7 @@ public class ModItems
         GameRegistry.register(peat);
         GameRegistry.register(sulfur);
         GameRegistry.register(potassium_nitrate);
+        GameRegistry.register(lead_sulfate);
         GameRegistry.register(crushed_coal);
         GameRegistry.register(crushed_diamond);
         GameRegistry.register(tungsten_carbide_dust);
@@ -577,6 +582,7 @@ public class ModItems
         GameRegistry.register(resistance_wire);
         GameRegistry.register(magnet_wire);
         GameRegistry.register(hdpe_sheet);
+        GameRegistry.register(lead_sulfate_plate);
         GameRegistry.register(stator);
         GameRegistry.register(rotor);
         GameRegistry.register(field_coil);
@@ -737,6 +743,7 @@ public class ModItems
         registerRender(peat);
         registerRender(sulfur);
         registerRender(potassium_nitrate);
+        registerRender(lead_sulfate);
         registerRender(crushed_coal);
         registerRender(crushed_diamond);
         registerRender(tungsten_carbide_dust);
@@ -748,6 +755,7 @@ public class ModItems
         registerRender(resistance_wire);
         registerRender(magnet_wire);
         registerRender(hdpe_sheet);
+        registerRender(lead_sulfate_plate);
         registerRender(stator);
         registerRender(rotor);
         registerRender(field_coil);

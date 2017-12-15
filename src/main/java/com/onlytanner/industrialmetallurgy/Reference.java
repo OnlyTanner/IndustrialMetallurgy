@@ -18,6 +18,7 @@ public class Reference {
         PEAT("peat", "ItemPeat"),
         SULFUR("sulfur", "ItemSulfur"),
         POTASSIUM_NITRATE("potassium_nitrate", "ItemPotassiumNitrate"),
+        LEAD_SULFATE("lead_sulfate", "ItemLeadSulfate"),
         CRUSHED_COAL("crushed_coal", "ItemCrushedCoal"),
         CRUSHED_DIAMOND("crushed_diamond", "ItemCrushedDiamond"),
         TUNGSTEN_CARBIDE_DUST("tungsten_carbide_dust", "ItemTungstenCarbideDust"),
@@ -29,6 +30,7 @@ public class Reference {
         RESISTANCE_WIRE("resistance_wire", "ItemResistanceWire"),
         MAGNET_WIRE("magnet_wire", "ItemMagnetWire"),
         HDPE_SHEET("hdpe_sheet", "ItemHDPESheet"),
+        LEAD_SULFATE_PLATE("lead_sulfate_plate", "ItemLeadSulfatePlate"),
         STATOR("stator", "ItemStator"),
         ROTOR("rotor", "ItemRotor"),
         FIELD_COIL("field_coil", "ItemFieldCoil"),
@@ -227,6 +229,9 @@ public class Reference {
         LIT_COKE_OVEN("lit_coke_oven", "BlockLitCokeOven"),
         //BELLOW("bellow", "BlockBellow"),
         CRUSHER("crusher", "BlockCrusher"),
+        ELECTRIC_CRUSHER("electric_crusher", "BlockElectricCrusher"),
+        CHEMICAL_REACTOR("chemical_reactor", "BlockChemicalReactor"),
+        CHEMICAL_SEPARATOR("chemical_separator", "BlockChemicalSeparator"),
         COAL_GENERATOR("coal_generator", "BlockCoalGenerator"),
         LIT_COAL_GENERATOR("lit_coal_generator", "BlockLitCoalGenerator");
 

@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": {"model": "industrialmetallurgy:chemical_separator"},
+        "facing=east":  {"model": "industrialmetallurgy:chemical_separator", "y": 90 },
+        "facing=south": {"model": "industrialmetallurgy:chemical_separator", "y": 180 },
+        "facing=west":  {"model": "industrialmetallurgy:chemical_separator", "y": 270 }
+    }
+}

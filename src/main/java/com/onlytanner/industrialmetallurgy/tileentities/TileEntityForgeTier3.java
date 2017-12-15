@@ -35,11 +35,10 @@ public class TileEntityForgeTier3 extends TileEntityBase implements ITickable, I
     private ArrayList<ItemStack> inputs;
     public final int MAX_CAPACITY = 100000;
     public ModEnergyStorage storage = new ModEnergyStorage(MAX_CAPACITY, 0, 80);
-    public static final short COOK_TIME_FOR_COMPLETION = 25;  // The number of ticks required to cook an item
 
     public TileEntityForgeTier3()
     {
-        super(4, 1, 0);
+        super(4, 1, 0, 25);
         mode = Mode.ALLOY;
         inputs = new ArrayList<ItemStack>();
         inputs.add(itemStacks[FIRST_INPUT_SLOT]);
@@ -117,7 +116,7 @@ public class TileEntityForgeTier3 extends TileEntityBase implements ITickable, I
         {
             //check for valid recipe based on inputs
             ItemStack result = null;
-            if ((itemStacks[FIRST_INPUT_SLOT] == null || itemStacks[FIRST_INPUT_SLOT + 1] == null)) 
+            if (itemStacks[FIRST_INPUT_SLOT] == null || itemStacks[FIRST_INPUT_SLOT + 1] == null && itemStacks[FIRST_INPUT_SLOT + 2] == null || itemStacks[FIRST_INPUT_SLOT + 3] == null) 
                 return false;
             else
                 result = ForgeRecipes.getAlloyResult(inputs);
@@ -152,11 +151,11 @@ public class TileEntityForgeTier3 extends TileEntityBase implements ITickable, I
                         return true;
                     else
                     {
-                        itemStacks[FIRST_OUTPUT_SLOT].stackSize += result.stackSize;
-                        itemStacks[FIRST_INPUT_SLOT].stackSize = stacks[0].stackSize;
-                        itemStacks[FIRST_INPUT_SLOT + 1].stackSize = stacks[1].stackSize;
-                        itemStacks[FIRST_INPUT_SLOT + 2].stackSize = stacks[2].stackSize;
-                        itemStacks[FIRST_INPUT_SLOT + 3].stackSize = stacks[3].stackSize;
+                        itemStacks[FIRST_OUTPUT_SLOT] = result.copy();
+                        itemStacks[FIRST_INPUT_SLOT].stackSize -= stacks[0].stackSize;
+                        itemStacks[FIRST_INPUT_SLOT + 1].stackSize -= stacks[1].stackSize;
+                        itemStacks[FIRST_INPUT_SLOT + 2].stackSize -= stacks[2].stackSize;
+                        itemStacks[FIRST_INPUT_SLOT + 3].stackSize -= stacks[3].stackSize;
                         if (itemStacks[FIRST_INPUT_SLOT].stackSize <= 0)
                             itemStacks[FIRST_INPUT_SLOT] = null;
                         if (itemStacks[FIRST_INPUT_SLOT + 1].stackSize <= 0)

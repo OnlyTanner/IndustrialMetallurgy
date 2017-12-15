@@ -42,9 +42,9 @@ public abstract class TileEntityBase extends TileEntityLockable implements IInve
     protected int[] burnTimeInitialValue; //The initial fuel value of the currently burning fuel (in ticks of burn duration)
     protected short cookTime; //The number of ticks the current item has been cooking
     protected short totalCookTime;
-    public static final short COOK_TIME_FOR_COMPLETION = 200;  // The number of ticks required to cook an item
+    public int COOK_TIME_FOR_COMPLETION;  // The number of ticks required to cook an item
 
-    public TileEntityBase(int numInputSlots, int numOutputSlots, int numFuelSlots)
+    public TileEntityBase(int numInputSlots, int numOutputSlots, int numFuelSlots, int cookTimeCompletion)
     {
         INPUT_SLOTS_COUNT = numInputSlots;
         OUTPUT_SLOTS_COUNT = numOutputSlots;
@@ -58,6 +58,7 @@ public abstract class TileEntityBase extends TileEntityLockable implements IInve
         itemStacks = new ItemStack[TOTAL_SLOTS_COUNT];
         burnTimeRemaining = new int[FUEL_SLOTS_COUNT];
         burnTimeInitialValue = new int[FUEL_SLOTS_COUNT];
+        COOK_TIME_FOR_COMPLETION = cookTimeCompletion;
     }
 
     /**

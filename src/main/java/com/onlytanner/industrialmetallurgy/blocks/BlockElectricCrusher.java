@@ -3,9 +3,9 @@ package com.onlytanner.industrialmetallurgy.blocks;
 import java.util.Random;
 
 import com.onlytanner.industrialmetallurgy.IndustrialMetallurgy;
-import com.onlytanner.industrialmetallurgy.handler.GuiHandlerForgeTier3;
+import com.onlytanner.industrialmetallurgy.handler.GuiHandlerElectricCrusher;
 import com.onlytanner.industrialmetallurgy.init.ModBlocks;
-import com.onlytanner.industrialmetallurgy.tileentities.TileEntityForgeTier3;
+import com.onlytanner.industrialmetallurgy.tileentities.TileEntityElectricCrusher;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockHorizontal;
@@ -34,13 +34,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockForgeTier3 extends BlockContainer {
+public class BlockElectricCrusher extends BlockContainer {
 
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     private final boolean IS_BURNING;
     private static boolean keepInventory;
 
-    public BlockForgeTier3(boolean isBurning, String unlocalizedName, String registryName) {
+    public BlockElectricCrusher(boolean isBurning, String unlocalizedName, String registryName) {
         super(Material.IRON);
         setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         setUnlocalizedName(unlocalizedName);
@@ -52,7 +52,7 @@ public class BlockForgeTier3 extends BlockContainer {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return Item.getItemFromBlock(ModBlocks.forge_tier3);
+        return Item.getItemFromBlock(ModBlocks.crusher);
     }
 
     @Override
@@ -99,33 +99,20 @@ public class BlockForgeTier3 extends BlockContainer {
 
             switch (enumfacing) {
                 case WEST:
-                    worldIn.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, d0 - 0.52D, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
+                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 - 0.52D, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
                     worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 - 0.52D, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
                     break;
                 case EAST:
-                    worldIn.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, d0 + 0.52D, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
+                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + 0.52D, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
                     worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 + 0.52D, d1, d2 + d4, 0.0D, 0.0D, 0.0D, new int[0]);
                     break;
                 case NORTH:
-                    worldIn.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, d0 + d4, d1, d2 - 0.52D, 0.0D, 0.0D, 0.0D, new int[0]);
+                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 - 0.52D, 0.0D, 0.0D, 0.0D, new int[0]);
                     worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 + d4, d1, d2 - 0.52D, 0.0D, 0.0D, 0.0D, new int[0]);
                     break;
                 case SOUTH:
-                    worldIn.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, d0 + d4, d1, d2 + 0.52D, 0.0D, 0.0D, 0.0D, new int[0]);
+                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 + 0.52D, 0.0D, 0.0D, 0.0D, new int[0]);
                     worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 + d4, d1, d2 + 0.52D, 0.0D, 0.0D, 0.0D, new int[0]);
-            }
-            
-            for (int i = 0; i < 5; i++)
-            {
-                double p0 = (double) pos.getX() + 0.375D + rand.nextDouble() * 11.0D / 16.0D;
-                double p1 = (double) pos.getZ() + 0.375D + rand.nextDouble() * 11.0D / 16.0D;
-                double vX = rand.nextDouble() * 0.05D - 0.025D;
-                double vY = rand.nextDouble() * 0.05D - 0.025D;
-                double vZ = rand.nextDouble() * 0.1D + 0.2D;
-
-                //worldIn.spawnParticle(EnumParticleTypes.PORTAL, p0, pos.getY() + 1, p1, vX, vZ, vY, new int[0]);
-                worldIn.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, pos.getX() + 0.5D, pos.getY() + 1, pos.getZ() + 0.5D, vX, vZ, vY, new int[0]);
-                worldIn.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5D, pos.getY() + 1, pos.getZ() + 0.5D, vX, vZ, vY / 1.5, new int[0]);
             }
         }
     }
@@ -133,7 +120,7 @@ public class BlockForgeTier3 extends BlockContainer {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
-            playerIn.openGui(IndustrialMetallurgy.instance, GuiHandlerForgeTier3.getGuiID(), worldIn, pos.getX(), pos.getY(), pos.getZ());
+            playerIn.openGui(IndustrialMetallurgy.instance, GuiHandlerElectricCrusher.getGuiID(), worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }
@@ -143,13 +130,16 @@ public class BlockForgeTier3 extends BlockContainer {
         TileEntity entity = worldIn.getTileEntity(pos);
         keepInventory = true;
 
-        if (active) {
-            worldIn.setBlockState(pos, ModBlocks.lit_forge_tier3.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
-            worldIn.setBlockState(pos, ModBlocks.lit_forge_tier3.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
-        } else {
-            worldIn.setBlockState(pos, ModBlocks.forge_tier3.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
-            worldIn.setBlockState(pos, ModBlocks.forge_tier3.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
-        }
+//		if (active)
+//        {
+//            worldIn.setBlockState(pos, ModBlocks.lit_forge_tier1.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
+//            worldIn.setBlockState(pos, ModBlocks.lit_forge_tier1.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
+//        }
+//        else
+//        {
+        worldIn.setBlockState(pos, ModBlocks.electric_crusher.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
+        worldIn.setBlockState(pos, ModBlocks.electric_crusher.getDefaultState().withProperty(FACING, blockState.getValue(FACING)), 3);
+//        }
 
         keepInventory = false;
         if (entity != null) {
@@ -158,9 +148,8 @@ public class BlockForgeTier3 extends BlockContainer {
         }
     }
 
-    @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileEntityForgeTier3();
+        return new TileEntityElectricCrusher();
     }
 
     @Override
@@ -182,8 +171,8 @@ public class BlockForgeTier3 extends BlockContainer {
         if (!keepInventory) {
             TileEntity tileentity = worldIn.getTileEntity(pos);
 
-            if (tileentity instanceof TileEntityForgeTier3) {
-                InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntityForgeTier3) tileentity);
+            if (tileentity instanceof TileEntityElectricCrusher) {
+                InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntityElectricCrusher) tileentity);
                 worldIn.updateComparatorOutputLevel(pos, this);
             }
         }
@@ -200,7 +189,7 @@ public class BlockForgeTier3 extends BlockContainer {
     }
 
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-        return new ItemStack(ModBlocks.forge_tier3);
+        return new ItemStack(ModBlocks.electric_crusher);
     }
 
     public EnumBlockRenderType getRenderType(IBlockState state) {

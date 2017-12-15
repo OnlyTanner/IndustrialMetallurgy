@@ -31,11 +31,10 @@ public class TileEntityForgeTier1 extends TileEntityBase implements ITickable
     private int cachedNumberOfBurningSlots = -1;
     private static Mode mode;
     private ArrayList<ItemStack> inputs;
-    public static final short COOK_TIME_FOR_COMPLETION = 100;  // The number of ticks required to cook an item
 
     public TileEntityForgeTier1()
     {
-        super(2, 1, 1);
+        super(2, 1, 1, 100);
         mode = Mode.ALLOY;
         inputs = new ArrayList<ItemStack>();
         inputs.add(itemStacks[FIRST_INPUT_SLOT]);

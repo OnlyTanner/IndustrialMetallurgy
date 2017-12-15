@@ -29,7 +29,7 @@ public class ForgeRecipes
         this.addAlloyRecipe(new ItemStack(Items.IRON_INGOT, 5), new ItemStack(ModItems.chromium_ingot, 2), new ItemStack(ModItems.aluminum_ingot), new ItemStack(ModItems.kanthal_ingot, 8), 0.70F, 2730);
         this.addAlloyRecipe(new ItemStack(ModItems.cobalt_steel_ingot, 3), new ItemStack(ModItems.tungsten_carbide_dust, 2), new ItemStack(ModItems.titanium_ingot), new ItemStack(ModItems.tungsten_steel_ingot, 4), 0.70F, 7000);
         
-        this.addAlloyRecipe(new ItemStack(ModItems.tungsten_steel_ingot, 4), new ItemStack(ModItems.crushed_diamond, 4), new ItemStack(Items.BLAZE_POWDER, 16), new ItemStack(Items.NETHER_STAR), new ItemStack(ModItems.alloy7201_ingot, 4), 0.70F, 7000);
+        this.addAlloyRecipe(new ItemStack(ModItems.tungsten_steel_ingot, 4), new ItemStack(ModItems.crushed_diamond, 4), new ItemStack(Items.BLAZE_POWDER, 16), new ItemStack(Items.NETHER_STAR), new ItemStack(ModItems.alloy7201_ingot, 4), 0.70F, 9999);
     }
 
     public static ForgeRecipes getInstance()
@@ -388,7 +388,7 @@ public class ForgeRecipes
         
         for (ItemStack recipe : instance.getInputs()) {
             for (ItemStack itemStack : inputs)
-                if (itemStack != null && itemStack.getItem() == recipe.getItem())
+                if (itemStack != null && itemStack.getItem() == recipe.getItem() && itemStack.stackSize >= recipe.stackSize)
                     count--;
             if (count == 0)
                 return true;

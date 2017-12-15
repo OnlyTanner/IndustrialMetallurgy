@@ -23,7 +23,7 @@ public class TileEntityCoalGenerator extends TileEntityBase implements IEnergyPr
 
     public TileEntityCoalGenerator()
     {
-        super(0, 0, 1);
+        super(0, 0, 1, 0);
     }
 
     @Override

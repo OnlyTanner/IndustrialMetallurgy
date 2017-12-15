@@ -1,7 +1,7 @@
 package com.onlytanner.industrialmetallurgy.container;
 
 import com.onlytanner.industrialmetallurgy.items.crafting.ForgeRecipes;
-import com.onlytanner.industrialmetallurgy.tileentities.TileEntityForgeTier3;
+import com.onlytanner.industrialmetallurgy.tileentities.TileEntityChemicalReactor;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -13,9 +13,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ContainerForgeTier3 extends Container
-{
+public class ContainerChemicalReactor extends Container {
     // Stores the tile entity instance for later use
+
     private IInventory inventory;
 
     // These store cache values, used by the server to only update the client side tile entity when values have changed
@@ -35,21 +35,20 @@ public class ContainerForgeTier3 extends Container
     private final int PLAYER_INVENTORY_SLOT_COUNT = PLAYER_INVENTORY_COLUMN_COUNT * PLAYER_INVENTORY_ROW_COUNT;
     private final int VANILLA_SLOT_COUNT = HOTBAR_SLOT_COUNT + PLAYER_INVENTORY_SLOT_COUNT;
 
-    public final int INPUT_SLOTS_COUNT = 4;
+    public final int INPUT_SLOTS_COUNT = 3;
     public final int OUTPUT_SLOTS_COUNT = 1;
     public final int FURNACE_SLOTS_COUNT = INPUT_SLOTS_COUNT + OUTPUT_SLOTS_COUNT;
 
-    // slot index is the unique index for all slots in this container i.e. 0 - 35 for invPlayer then 36 - 49 for tileEntityForgeTier3
+    // slot index is the unique index for all slots in this container i.e. 0 - 35 for invPlayer then 36 - 49 for tileEntityForgeTier1
     private final int VANILLA_FIRST_SLOT_INDEX = 0;
-    private final int FIRST_INPUT_SLOT_INDEX = 0;
+    private final int FIRST_INPUT_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
     private final int FIRST_OUTPUT_SLOT_INDEX = FIRST_INPUT_SLOT_INDEX + INPUT_SLOTS_COUNT;
 
     // slot number is the slot number within each component; i.e. invPlayer slots 0 - 35, and tileEntityForgeTier1 slots 0 - 14
     private final int FIRST_INPUT_SLOT_NUMBER = 0;
     private final int FIRST_OUTPUT_SLOT_NUMBER = FIRST_INPUT_SLOT_NUMBER + INPUT_SLOTS_COUNT;
 
-    public ContainerForgeTier3(InventoryPlayer invPlayer, IInventory inventory)
-    {
+    public ContainerChemicalReactor(InventoryPlayer invPlayer, IInventory inventory) {
         this.inventory = inventory;
 
         final int SLOT_X_SPACING = 18;
@@ -74,17 +73,16 @@ public class ContainerForgeTier3 extends Container
             }
         }
 
-        this.addSlotToContainer(new Slot(inventory, FIRST_INPUT_SLOT_NUMBER, 38, 16)); //top input slot 1
-        this.addSlotToContainer(new Slot(inventory, FIRST_INPUT_SLOT_NUMBER + 1, 60, 16)); //top input slot 2
-        this.addSlotToContainer(new Slot(inventory, FIRST_INPUT_SLOT_NUMBER + 2, 38, 54)); //bottom input slot 1
-        this.addSlotToContainer(new Slot(inventory, FIRST_INPUT_SLOT_NUMBER + 3, 60, 54)); //bottom input slot 2
-        this.addSlotToContainer(new SlotOutput(inventory, FIRST_OUTPUT_SLOT_NUMBER, 108, 35)); //output slot 1
+        this.addSlotToContainer(new Slot(inventory, FIRST_INPUT_SLOT_NUMBER, 57, 21)); //top input slot
+        this.addSlotToContainer(new Slot(inventory, FIRST_INPUT_SLOT_NUMBER + 1, 80, 14));//middle input slot
+        this.addSlotToContainer(new Slot(inventory, FIRST_INPUT_SLOT_NUMBER + 2, 103, 21)); //bottom input slot
+        this.addSlotToContainer(new SlotOutput(inventory, FIRST_OUTPUT_SLOT_NUMBER, 80, 55)); //output slot 1
+        this.addSlotToContainer(new SlotOutput(inventory, FIRST_OUTPUT_SLOT_NUMBER + 1, 152, 62)); //output slot 1
     }
 
     // Checks each tick to make sure the player is still able to access the inventory and if not closes the gui
     @Override
-    public boolean canInteractWith(EntityPlayer player)
-    {
+    public boolean canInteractWith(EntityPlayer player) {
         return inventory.isUseableByPlayer(player);
     }
 
@@ -96,8 +94,7 @@ public class ContainerForgeTier3 extends Container
     // returns null if the source slot is empty, or if none of the source slot items could be moved.
     //   otherwise, returns a copy of the source stack
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer player, int sourceSlotIndex)
-    {
+    public ItemStack transferStackInSlot(EntityPlayer player, int sourceSlotIndex) {
         Slot sourceSlot = (Slot) inventorySlots.get(sourceSlotIndex);
         if (sourceSlot == null || !sourceSlot.getHasStack()) {
             return null;
@@ -109,17 +106,11 @@ public class ContainerForgeTier3 extends Container
         if (sourceSlotIndex >= VANILLA_FIRST_SLOT_INDEX && sourceSlotIndex < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
             // This is a vanilla container slot so merge the stack into one of the forge slots
             // If the stack is smeltable try to merge merge the stack into the input slots
-            if (TileEntityForgeTier3.getSmeltingResultForItem(sourceStack, sourceStack.stackSize) != null || ForgeRecipes.isPotentialInput(sourceStack.getItem())) {
+            if (TileEntityChemicalReactor.getSmeltingResultForItem(sourceStack, sourceStack.stackSize) != null || ForgeRecipes.isPotentialInput(sourceStack.getItem())) {
                 if (!mergeItemStack(sourceStack, FIRST_INPUT_SLOT_INDEX, FIRST_INPUT_SLOT_INDEX + INPUT_SLOTS_COUNT, false)) {
                     return null;
                 }
             } else {
-                return null;
-            }
-        } else if (sourceSlotIndex >= FIRST_INPUT_SLOT_INDEX && sourceSlotIndex < FIRST_INPUT_SLOT_INDEX + FURNACE_SLOTS_COUNT) {
-            // This is a forge slot so merge the stack into the players inventory: try the hotbar first and then the main inventory
-            //   because the main inventory slots are immediately after the hotbar slots, we can just merge with a single call
-            if (!mergeItemStack(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false)) {
                 return null;
             }
         } else {
@@ -148,8 +139,7 @@ public class ContainerForgeTier3 extends Container
     //   up into two shorts because the progress bar values are sent independently, and unless you add synchronisation logic at the
     //   receiving side, your int value will be wrong until the second short arrives.  Use a custom packet instead.
     @Override
-    public void detectAndSendChanges()
-    {
+    public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
         boolean allFieldsHaveChanged = false;
@@ -180,23 +170,20 @@ public class ContainerForgeTier3 extends Container
     // values given to sendProgressBarUpdate.  In this case we are using fields so we just pass them to the tileEntity.
     @SideOnly(Side.CLIENT)
     @Override
-    public void updateProgressBar(int id, int data)
-    {
+    public void updateProgressBar(int id, int data) {
         inventory.setField(id, data);
     }
 
     // SlotOutput is a slot that will not accept any items
-    public class SlotOutput extends Slot
-    {
-        public SlotOutput(IInventory inventoryIn, int index, int xPosition, int yPosition)
-        {
+    public class SlotOutput extends Slot {
+
+        public SlotOutput(IInventory inventoryIn, int index, int xPosition, int yPosition) {
             super(inventoryIn, index, xPosition, yPosition);
         }
 
         // if this function returns false, the player won't be able to insert the given item into this slot
         @Override
-        public boolean isItemValid(ItemStack stack)
-        {
+        public boolean isItemValid(ItemStack stack) {
             return false;
         }
     }

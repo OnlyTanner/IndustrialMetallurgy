@@ -17,7 +17,7 @@ public class TileEntityCrusher extends TileEntityBase
     
     public TileEntityCrusher()
     {
-        super(1, 2, 1);
+        super(1, 2, 1, 200);
     }
 
     @Override

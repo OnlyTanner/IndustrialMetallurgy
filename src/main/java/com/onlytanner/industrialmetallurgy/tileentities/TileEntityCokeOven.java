@@ -18,7 +18,7 @@ public class TileEntityCokeOven extends TileEntityBase
 
     public TileEntityCokeOven()
     {
-        super(0, 1, 1);
+        super(0, 1, 1, 0);
     }
 
     @Override

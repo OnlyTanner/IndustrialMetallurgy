@@ -19,4 +19,5 @@ public interface IEnergyReceiver
     EnumFacing[] getEnergyReceiveSides();
     boolean canReceiveFrom(TileEntity entity);
     ModEnergyStorage getStorage();
+    int getMaxCapacity();
 }

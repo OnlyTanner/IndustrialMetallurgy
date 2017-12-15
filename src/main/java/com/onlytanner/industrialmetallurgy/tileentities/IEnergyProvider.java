@@ -14,4 +14,5 @@ public interface IEnergyProvider
     EnumFacing[] getEnergyShareSides();
     boolean canShareTo(TileEntity entity);
     ModEnergyStorage getStorage();
+    int getMaxCapacity();
 }

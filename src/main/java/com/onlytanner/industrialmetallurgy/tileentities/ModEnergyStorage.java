@@ -78,13 +78,15 @@ public class ModEnergyStorage extends EnergyStorage
             if (te != null && te instanceof IEnergyReceiver)
                 tiles.add(te);
         }
+        
         if (tiles.size() <= 0)
             return 0;
         
         long energyPerSide = energy / tiles.size();
         long energyGiven = 0;
         for (TileEntity tile : tiles)
-            energyGiven += ((IEnergyReceiver) tile).getStorage().extractEnergy((int) energyPerSide, false);
+            if ((((IEnergyReceiver) tile).getStorage()).getEnergyStored() < ((IEnergyReceiver) tile).getMaxCapacity())
+                energyGiven += ((IEnergyReceiver) tile).getStorage().receiveEnergy((int) energyPerSide, false);
             
         return energyGiven;
     }
@@ -102,7 +104,7 @@ public class ModEnergyStorage extends EnergyStorage
         long energyPerSide = energy / tiles.size();
         long energyGiven = 0;
         for (TileEntity tile : tiles)
-            energyGiven += ((IEnergyProvider) tile).getStorage().receiveEnergy((int) energyPerSide, false);
+            energyGiven += ((IEnergyProvider) tile).getStorage().extractEnergy((int) energyPerSide, false);
             
         return energyGiven;
     }

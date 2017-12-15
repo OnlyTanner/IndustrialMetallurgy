@@ -254,4 +254,10 @@ public class TileEntityCoalGenerator extends TileEntityBase implements IEnergyPr
     {
         return storage;
     }
+    
+    @Override
+    public int getMaxCapacity()
+    {
+        return MAX_CAPACITY;
+    }
 }

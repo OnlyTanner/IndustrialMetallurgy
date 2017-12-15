@@ -80,7 +80,8 @@ public class TileEntityForgeTier3 extends TileEntityBase implements ITickable, I
             cookTime = 0;
         }
         
-        this.storage.receiveEnergyInternal((int) ModEnergyStorage.takeEnergyAllFaces(worldObj, pos, 1000, false), false);
+        if (this.storage.getEnergyStored() < MAX_CAPACITY)
+            this.storage.receiveEnergyInternal((int) ModEnergyStorage.takeEnergyAllFaces(worldObj, pos, 1000, false), false);
         
         if (flag != this.isBurning()) {
             flag1 = true;
@@ -429,5 +430,11 @@ public class TileEntityForgeTier3 extends TileEntityBase implements ITickable, I
     public ModEnergyStorage getStorage()
     {
         return storage;
+    }
+    
+    @Override
+    public int getMaxCapacity()
+    {
+        return MAX_CAPACITY;
     }
 }

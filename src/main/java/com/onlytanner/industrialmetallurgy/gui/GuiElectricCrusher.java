@@ -22,6 +22,21 @@ public class GuiElectricCrusher extends GuiContainer {
     private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/gui/container/electric_crusher.png");
     private TileEntityElectricCrusher tileEntityElectricCrusher;
 
+    // some [x,y] coordinates of graphical elements
+    final int COOK_BAR_XPOS = 79;
+    final int COOK_BAR_YPOS = 35;
+    final int COOK_BAR_ICON_U = 176;   // texture position of white arrow icon
+    final int COOK_BAR_ICON_V = 0;
+    final int COOK_BAR_WIDTH = 24;
+    final int COOK_BAR_HEIGHT = 17;
+    
+    final int ENERGY_BAR_XPOS = 8;
+    final int ENERGY_BAR_YPOS = 8;
+    final int ENERGY_BAR_ICON_U = 176;
+    final int ENERGY_BAR_ICON_V = 17;
+    final int ENERGY_BAR_WIDTH = 16;
+    final int ENERGY_BAR_HEIGHT = 70;
+    
     public GuiElectricCrusher(InventoryPlayer invPlayer, TileEntityElectricCrusher tile) {
         super(new ContainerElectricCrusher(invPlayer, tile));
         tileEntityElectricCrusher = tile;
@@ -29,22 +44,6 @@ public class GuiElectricCrusher extends GuiContainer {
         xSize = 176;
         ySize = 166;
     }
-
-    // some [x,y] coordinates of graphical elements
-    final int COOK_BAR_XPOS = 79;
-    final int COOK_BAR_YPOS = 35;
-    final int COOK_BAR_ICON_U = 176;   // texture position of white arrow icon
-    final int COOK_BAR_ICON_V = 14;
-    final int COOK_BAR_WIDTH = 24;
-    final int COOK_BAR_HEIGHT = 17;
-
-    final int FLAME_XPOS = 57;
-    final int FLAME_YPOS = 37;
-    final int FLAME_ICON_U = 176;   // texture position of flame icon
-    final int FLAME_ICON_V = 0;
-    final int FLAME_WIDTH = 14;
-    final int FLAME_HEIGHT = 14;
-    final int FLAME_X_SPACING = 18;
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int x, int y) {
@@ -59,6 +58,13 @@ public class GuiElectricCrusher extends GuiContainer {
         // draw the cook progress bar
         drawTexturedModalRect(guiLeft + COOK_BAR_XPOS, guiTop + COOK_BAR_YPOS, COOK_BAR_ICON_U, COOK_BAR_ICON_V,
                 (int) (cookProgress * COOK_BAR_WIDTH), COOK_BAR_HEIGHT);
+        
+        double energy = tileEntityElectricCrusher.getFractionOfEnergyRemaining();
+        int yOffset = (int) ((1.0 - energy) * ENERGY_BAR_HEIGHT);
+        drawTexturedModalRect(guiLeft + ENERGY_BAR_XPOS, 
+                              guiTop + ENERGY_BAR_YPOS + yOffset, ENERGY_BAR_ICON_U, 
+                              ENERGY_BAR_ICON_V + yOffset, ENERGY_BAR_WIDTH, 
+                              ENERGY_BAR_HEIGHT - yOffset);
     }
 
     @Override
@@ -77,15 +83,17 @@ public class GuiElectricCrusher extends GuiContainer {
             int cookPercentage = (int) (tileEntityElectricCrusher.fractionOfCookTimeComplete() * 100);
             hoveringText.add(cookPercentage + "%");
         }
+        
+        if (isInRect(guiLeft + ENERGY_BAR_XPOS, guiTop + ENERGY_BAR_YPOS, ENERGY_BAR_WIDTH, ENERGY_BAR_HEIGHT, mouseX, mouseY))
+        {
+            hoveringText.add("Energy Stored:");
+            hoveringText.add(tileEntityElectricCrusher.getEnergyStored() + "/" + tileEntityElectricCrusher.MAX_CAPACITY);
+        }
 
         // If hoveringText is not empty draw the hovering text
         if (!hoveringText.isEmpty()) {
             drawHoveringText(hoveringText, mouseX - guiLeft, mouseY - guiTop, fontRendererObj);
         }
-//			// You must re bind the texture and reset the colour if you still need to use it after drawing a string
-//			Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
-//			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-
     }
 
     // Returns true if the given x,y coordinates are within the given rectangle

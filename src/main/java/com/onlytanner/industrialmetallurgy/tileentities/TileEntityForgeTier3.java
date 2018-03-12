@@ -5,6 +5,7 @@ import com.onlytanner.industrialmetallurgy.container.ContainerForgeTier3;
 import com.onlytanner.industrialmetallurgy.items.crafting.ForgeRecipes;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +17,7 @@ import net.minecraft.nbt.NBTTagIntArray;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.EnumSkyBlock;
 
@@ -81,6 +83,22 @@ public class TileEntityForgeTier3 extends TileEntityBase implements ITickable, I
         
         if (this.storage.getEnergyStored() < MAX_CAPACITY)
             this.storage.receiveEnergyInternal((int) ModEnergyStorage.takeEnergyAllFaces(worldObj, pos, 1000, false), false);
+        
+        if (isBurning())
+        {
+            storage.extractEnergy(160, false);
+            
+            Random rand = new Random();
+            double p0 = (double) pos.getX() + 0.375D + rand.nextDouble() * 11.0D / 16.0D;
+            double p1 = (double) pos.getZ() + 0.375D + rand.nextDouble() * 11.0D / 16.0D;
+            double vX = rand.nextDouble() * 0.05D - 0.025D;
+            double vY = rand.nextDouble() * 0.05D - 0.025D;
+            double vZ = rand.nextDouble() * 0.1D + 0.2D;
+
+            //worldIn.spawnParticle(EnumParticleTypes.PORTAL, p0, pos.getY() + 1, p1, vX, vZ, vY, new int[0]);
+            worldObj.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, pos.getX() + 0.5D, pos.getY() + 1, pos.getZ() + 0.5D, vX, vZ, vY, new int[0]);
+            worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5D, pos.getY() + 1, pos.getZ() + 0.5D, vX, vZ, vY / 1.5, new int[0]);
+        }
         
         if (flag != this.isBurning()) {
             flag1 = true;
@@ -244,7 +262,7 @@ public class TileEntityForgeTier3 extends TileEntityBase implements ITickable, I
     @Override
     public boolean isBurning()
     {
-        return cookTime > 1;
+        return cookTime > 0;
     }
 
     @Override
@@ -353,7 +371,10 @@ public class TileEntityForgeTier3 extends TileEntityBase implements ITickable, I
         if (mode == null)
             mode = Mode.ALLOY;
         if (this.mode != mode)
+        {
             this.mode = mode;
+            this.markDirty();
+        }
     }
 
     @Override

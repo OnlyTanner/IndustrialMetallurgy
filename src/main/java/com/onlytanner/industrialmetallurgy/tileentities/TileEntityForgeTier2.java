@@ -368,7 +368,10 @@ public class TileEntityForgeTier2 extends TileEntityBase implements ITickable
         if (mode == null)
             mode = Mode.ALLOY;
         if (this.mode != mode)
+        {
             this.mode = mode;
+            this.markDirty();
+        }
     }
 
     @Override

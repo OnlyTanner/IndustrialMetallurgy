@@ -28,8 +28,8 @@ public class GuiHandlerForgeTier1 implements IGuiHandler {
         BlockPos xyz = new BlockPos(x, y, z);
         TileEntity tileEntity = world.getTileEntity(xyz);
         if (tileEntity instanceof TileEntityForgeTier1) {
-            TileEntityForgeTier1 tileInventoryFurnace = (TileEntityForgeTier1) tileEntity;
-            return new ContainerForgeTier1(player.inventory, tileInventoryFurnace);
+            TileEntityForgeTier1 tile = (TileEntityForgeTier1) tileEntity;
+            return new ContainerForgeTier1(player.inventory, tile);
         }
         return null;
     }
@@ -44,8 +44,8 @@ public class GuiHandlerForgeTier1 implements IGuiHandler {
         BlockPos xyz = new BlockPos(x, y, z);
         TileEntity tileEntity = world.getTileEntity(xyz);
         if (tileEntity instanceof TileEntityForgeTier1) {
-            TileEntityForgeTier1 tileInventoryFurnace = (TileEntityForgeTier1) tileEntity;
-            return new GuiForgeTier1(player.inventory, tileInventoryFurnace);
+            TileEntityForgeTier1 tile = (TileEntityForgeTier1) tileEntity;
+            return new GuiForgeTier1(player.inventory, tile);
         }
         return null;
     }

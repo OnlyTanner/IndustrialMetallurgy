@@ -33,14 +33,6 @@ public class GuiChemicalReactor extends GuiContainer {
     final int COOK_BAR_ICON_V = 14;
     final int COOK_BAR_WIDTH = 36;
     final int COOK_BAR_HEIGHT = 17;
-
-    final int FLAME_XPOS = 15;
-    final int FLAME_YPOS = 19;
-    final int FLAME_ICON_U = 176;   // texture position of flame icon
-    final int FLAME_ICON_V = 0;
-    final int FLAME_WIDTH = 14;
-    final int FLAME_HEIGHT = 14;
-    final int FLAME_X_SPACING = 18;
     
     public GuiChemicalReactor(InventoryPlayer invPlayer, TileEntityChemicalReactor tile) {
         super(new ContainerChemicalReactor(invPlayer, tile));
@@ -83,12 +75,6 @@ public class GuiChemicalReactor extends GuiContainer {
             hoveringText.add("Progress:");
             int cookPercentage = (int) (tileEntityChemicalReactor.fractionOfCookTimeComplete() * 100);
             hoveringText.add(cookPercentage + "%");
-        }
-
-        // If the mouse is over one of the burn time indicator add the burn time indicator hovering text
-        if (isInRect(guiLeft + FLAME_XPOS, guiTop + FLAME_YPOS, FLAME_WIDTH, FLAME_HEIGHT, mouseX, mouseY)) {
-            hoveringText.add("Fuel Time:");
-            hoveringText.add(tileEntityChemicalReactor.secondsOfFuelRemaining(0) + "s");
         }
 
         // If hoveringText is not empty draw the hovering text

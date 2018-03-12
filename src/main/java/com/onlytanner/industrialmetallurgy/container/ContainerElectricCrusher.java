@@ -73,9 +73,9 @@ public class ContainerElectricCrusher extends Container {
             }
         }
 
-        this.addSlotToContainer(new Slot(inventory, FIRST_INPUT_SLOT_NUMBER, 56, 17)); //top input slot
+        this.addSlotToContainer(new Slot(inventory, FIRST_INPUT_SLOT_NUMBER, 56, 35)); //input slot
         this.addSlotToContainer(new SlotOutput(inventory, FIRST_OUTPUT_SLOT_NUMBER, 116, 26)); //output slot 1
-        this.addSlotToContainer(new SlotOutput(inventory, FIRST_OUTPUT_SLOT_NUMBER + 1, 116, 43)); //output slot 1
+        this.addSlotToContainer(new SlotOutput(inventory, FIRST_OUTPUT_SLOT_NUMBER + 1, 116, 43)); //output slot 2
     }
 
     // Checks each tick to make sure the player is still able to access the inventory and if not closes the gui

@@ -1,12 +1,9 @@
 package com.onlytanner.industrialmetallurgy.tileentities;
 
-import com.onlytanner.industrialmetallurgy.blocks.BlockChemicalReactor;
 import com.onlytanner.industrialmetallurgy.container.ContainerChemicalReactor;
-import com.onlytanner.industrialmetallurgy.items.crafting.ForgeRecipes;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -14,12 +11,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagIntArray;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.world.EnumSkyBlock;
 
-public class TileEntityChemicalReactor extends TileEntityBase implements ITickable
+public class TileEntityChemicalReactor extends TileEntityBase implements ITickable, IEnergyReceiver
 {
     private ArrayList<ItemStack> inputs;
+    public final int MAX_CAPACITY = 100000;
+    public ModEnergyStorage storage = new ModEnergyStorage(MAX_CAPACITY, 0, 80);
 
     public TileEntityChemicalReactor()
     {
@@ -33,15 +33,27 @@ public class TileEntityChemicalReactor extends TileEntityBase implements ITickab
     @Override
     public void update()
     {
+        if (this.storage.getEnergyStored() < MAX_CAPACITY)
+            this.storage.receiveEnergyInternal((int) ModEnergyStorage.takeEnergyAllFaces(worldObj, pos, 1000, false), false);
         
+        if (isBurning())
+        {
+            storage.extractEnergy(160, false);
+        }
     }
 
     @Override
     public String getName()
     {
-        return "            Chemical Reactor";
+        return "          Chemical Reactor";
     }
 
+    @Override
+    public boolean isBurning()
+    {
+        return cookTime > 0;
+    }
+    
     @Override
     public int getField(int id)
     {
@@ -160,5 +172,46 @@ public class TileEntityChemicalReactor extends TileEntityBase implements ITickab
     public boolean hasCustomName()
     {
         return false;
+    }
+
+    @Override
+    public int getEnergyStored()
+    {
+        return this.storage.getEnergyStored();
+    }
+
+    public double getFractionOfEnergyRemaining()
+    {
+        return (double) getEnergyStored() / (double) this.MAX_CAPACITY;
+    }
+
+    @Override
+    public boolean doesReceiveEnergy()
+    {
+        return true;
+    }
+
+    @Override
+    public EnumFacing[] getEnergyReceiveSides()
+    {
+        return EnumFacing.values();
+    }
+
+    @Override
+    public boolean canReceiveFrom(TileEntity entity)
+    {
+        return true;
+    }
+    
+    @Override
+    public ModEnergyStorage getStorage()
+    {
+        return storage;
+    }
+    
+    @Override
+    public int getMaxCapacity()
+    {
+        return MAX_CAPACITY;
     }
 }

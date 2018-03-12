@@ -47,7 +47,7 @@ public class TileEntityForgeTier1 extends TileEntityBase implements ITickable
         // If there is nothing to smelt or there is no room in the output, reset cookTime and return
         boolean flag = this.isBurning();
         boolean flag1 = false;
-        
+        System.out.println(mode);
         if (smeltItem(false)) {
             int numberOfFuelBurning = burnFuel();
             // If fuel is available, keep cooking the item, otherwise start "uncooking" it at double speed
@@ -77,6 +77,7 @@ public class TileEntityForgeTier1 extends TileEntityBase implements ITickable
 
         if (flag != this.isBurning()) {
             flag1 = true;
+            this.updateEntity();
             BlockForgeTier1.setState(this.isBurning(), this.worldObj, this.pos);
         }
 
@@ -364,7 +365,10 @@ public class TileEntityForgeTier1 extends TileEntityBase implements ITickable
         if (mode == null)
             mode = Mode.ALLOY;
         if (this.mode != mode)
+        {
             this.mode = mode;
+            this.markDirty();
+        }
     }
 
     @Override

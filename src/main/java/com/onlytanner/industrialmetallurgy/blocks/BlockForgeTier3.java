@@ -114,19 +114,6 @@ public class BlockForgeTier3 extends BlockContainer {
                     worldIn.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, d0 + d4, d1, d2 + 0.52D, 0.0D, 0.0D, 0.0D, new int[0]);
                     worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 + d4, d1, d2 + 0.52D, 0.0D, 0.0D, 0.0D, new int[0]);
             }
-            
-            for (int i = 0; i < 5; i++)
-            {
-                double p0 = (double) pos.getX() + 0.375D + rand.nextDouble() * 11.0D / 16.0D;
-                double p1 = (double) pos.getZ() + 0.375D + rand.nextDouble() * 11.0D / 16.0D;
-                double vX = rand.nextDouble() * 0.05D - 0.025D;
-                double vY = rand.nextDouble() * 0.05D - 0.025D;
-                double vZ = rand.nextDouble() * 0.1D + 0.2D;
-
-                //worldIn.spawnParticle(EnumParticleTypes.PORTAL, p0, pos.getY() + 1, p1, vX, vZ, vY, new int[0]);
-                worldIn.spawnParticle(EnumParticleTypes.FIREWORKS_SPARK, pos.getX() + 0.5D, pos.getY() + 1, pos.getZ() + 0.5D, vX, vZ, vY, new int[0]);
-                worldIn.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5D, pos.getY() + 1, pos.getZ() + 0.5D, vX, vZ, vY / 1.5, new int[0]);
-            }
         }
     }
 

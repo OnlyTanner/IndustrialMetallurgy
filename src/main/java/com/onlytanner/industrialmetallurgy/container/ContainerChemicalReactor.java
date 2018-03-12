@@ -73,10 +73,10 @@ public class ContainerChemicalReactor extends Container {
             }
         }
 
-        this.addSlotToContainer(new Slot(inventory, FIRST_INPUT_SLOT_NUMBER, 57, 21)); //top input slot
-        this.addSlotToContainer(new Slot(inventory, FIRST_INPUT_SLOT_NUMBER + 1, 80, 14));//middle input slot
-        this.addSlotToContainer(new Slot(inventory, FIRST_INPUT_SLOT_NUMBER + 2, 103, 21)); //bottom input slot
-        this.addSlotToContainer(new SlotOutput(inventory, FIRST_OUTPUT_SLOT_NUMBER, 80, 55)); //output slot 1
+        this.addSlotToContainer(new Slot(inventory, FIRST_INPUT_SLOT_NUMBER, 57, 24)); //top input slot
+        this.addSlotToContainer(new Slot(inventory, FIRST_INPUT_SLOT_NUMBER + 1, 80, 17));//middle input slot
+        this.addSlotToContainer(new Slot(inventory, FIRST_INPUT_SLOT_NUMBER + 2, 103, 24)); //bottom input slot
+        this.addSlotToContainer(new SlotOutput(inventory, FIRST_OUTPUT_SLOT_NUMBER, 80, 58)); //output slot 1
         this.addSlotToContainer(new SlotOutput(inventory, FIRST_OUTPUT_SLOT_NUMBER + 1, 152, 62)); //output slot 1
     }
 

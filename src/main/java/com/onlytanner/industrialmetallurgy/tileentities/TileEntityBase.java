@@ -43,6 +43,7 @@ public abstract class TileEntityBase extends TileEntityLockable implements IInve
     protected short cookTime; //The number of ticks the current item has been cooking
     protected short totalCookTime;
     public int COOK_TIME_FOR_COMPLETION;  // The number of ticks required to cook an item
+    protected boolean requiresUpdate;
 
     public TileEntityBase(int numInputSlots, int numOutputSlots, int numFuelSlots, int cookTimeCompletion)
     {
@@ -59,6 +60,7 @@ public abstract class TileEntityBase extends TileEntityLockable implements IInve
         burnTimeRemaining = new int[FUEL_SLOTS_COUNT];
         burnTimeInitialValue = new int[FUEL_SLOTS_COUNT];
         COOK_TIME_FOR_COMPLETION = cookTimeCompletion;
+        requiresUpdate = false;
     }
 
     /**
@@ -423,6 +425,13 @@ public abstract class TileEntityBase extends TileEntityLockable implements IInve
     @Override
     public abstract boolean isItemValidForSlot(int slotIndex, ItemStack itemstack);
 
+    public void updateEntity()
+    {
+        if (requiresUpdate) {
+            worldObj.notifyBlockUpdate(pos, this.worldObj.getBlockState(pos), this.worldObj.getBlockState(pos), 3);
+        }
+    }
+    
     /**
      * This method removes the entire contents of the given slot and returns it.
      * Used by containers such as crafting tables which return any items in

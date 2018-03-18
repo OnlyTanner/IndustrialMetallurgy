@@ -129,15 +129,24 @@ public class TileEntityElectricCrusher extends TileEntityBase implements ITickab
     {
         if (this.canCrush()) {
             ItemStack itemstack = CrusherRecipes.instance().getCrushingResult(this.itemStacks[FIRST_INPUT_SLOT]);
-
-            if (this.itemStacks[FIRST_OUTPUT_SLOT] == null) {
+            
+            if (this.itemStacks[FIRST_OUTPUT_SLOT] == null)
                 this.itemStacks[FIRST_OUTPUT_SLOT] = itemstack.copy();
-            } else if (this.itemStacks[FIRST_OUTPUT_SLOT].getItem() == itemstack.getItem()) {
+            else if (this.itemStacks[FIRST_OUTPUT_SLOT].getItem() == itemstack.getItem() && this.itemStacks[FIRST_OUTPUT_SLOT].stackSize + itemstack.stackSize <= 64)
                 this.itemStacks[FIRST_OUTPUT_SLOT].stackSize += itemstack.stackSize;
-            } else if (this.itemStacks[FIRST_OUTPUT_SLOT + 1].getItem() == itemstack.getItem()) {
-                this.itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize += itemstack.stackSize;
+            else if (this.itemStacks[FIRST_OUTPUT_SLOT].getItem() == itemstack.getItem() && this.itemStacks[FIRST_OUTPUT_SLOT].stackSize < 64 && this.itemStacks[FIRST_OUTPUT_SLOT].stackSize + itemstack.stackSize > 64 && this.itemStacks[FIRST_OUTPUT_SLOT + 1] == null) {
+                this.itemStacks[FIRST_OUTPUT_SLOT + 1] = new ItemStack(itemstack.getItem(), itemstack.stackSize - (64 - this.itemStacks[FIRST_OUTPUT_SLOT].stackSize));
+                this.itemStacks[FIRST_OUTPUT_SLOT].stackSize = 64;
             }
-
+            else if (this.itemStacks[FIRST_OUTPUT_SLOT].getItem() == itemstack.getItem() && this.itemStacks[FIRST_OUTPUT_SLOT].stackSize < 64 && this.itemStacks[FIRST_OUTPUT_SLOT].stackSize + itemstack.stackSize > 64 && this.itemStacks[FIRST_OUTPUT_SLOT + 1].getItem() == itemstack.getItem() && this.itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize + (itemstack.stackSize - (64 - this.itemStacks[FIRST_OUTPUT_SLOT].stackSize)) <= 64) {
+                this.itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize += itemstack.stackSize - (64 - this.itemStacks[FIRST_OUTPUT_SLOT].stackSize);
+                this.itemStacks[FIRST_OUTPUT_SLOT].stackSize = 64;
+            }
+            else if (this.itemStacks[FIRST_OUTPUT_SLOT].getItem() != itemstack.getItem() && this.itemStacks[FIRST_OUTPUT_SLOT + 1] == null)
+                this.itemStacks[FIRST_OUTPUT_SLOT + 1] = new ItemStack(itemstack.getItem(), itemstack.stackSize);
+            else if (this.itemStacks[FIRST_OUTPUT_SLOT].getItem() != itemstack.getItem() && this.itemStacks[FIRST_OUTPUT_SLOT + 1] != null && this.itemStacks[FIRST_OUTPUT_SLOT + 1].getItem() == itemstack.getItem() && this.itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize + itemstack.stackSize <= 64)
+                this.itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize += itemstack.stackSize;
+*/
             --this.itemStacks[FIRST_INPUT_SLOT].stackSize;
 
             if (this.itemStacks[FIRST_INPUT_SLOT].stackSize <= 0) {

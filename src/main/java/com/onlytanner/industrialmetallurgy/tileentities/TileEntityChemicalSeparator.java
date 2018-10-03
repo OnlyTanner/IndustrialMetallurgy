@@ -1,8 +1,11 @@
 package com.onlytanner.industrialmetallurgy.tileentities;
 
+import com.onlytanner.industrialmetallurgy.blocks.BlockElectricCrusher;
 import com.onlytanner.industrialmetallurgy.container.ContainerChemicalSeparator;
+import com.onlytanner.industrialmetallurgy.items.crafting.SeparatorRecipes;
 import java.util.ArrayList;
 import java.util.Arrays;
+import net.minecraft.block.state.IBlockState;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -14,13 +17,15 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.world.EnumSkyBlock;
 
 public class TileEntityChemicalSeparator extends TileEntityBase implements ITickable, IEnergyReceiver
 {
     private ArrayList<ItemStack> inputs;
     public final int MAX_CAPACITY = 100000;
     public ModEnergyStorage storage = new ModEnergyStorage(MAX_CAPACITY, 0, 80);
-
+    private int cachedNumberOfBurningSlots = -1;
+    
     public TileEntityChemicalSeparator()
     {
         super(1, 3, 0, 200);
@@ -38,6 +43,122 @@ public class TileEntityChemicalSeparator extends TileEntityBase implements ITick
         if (isBurning())
         {
             storage.extractEnergy(160, false);
+        }
+        
+        // If there is nothing to smelt or there is no room in the output, reset cookTime and return
+        boolean flag = this.isBurning();
+        boolean flag1 = false;
+
+        if (canSeparate()) {
+            // If fuel is available, keep cooking the item, otherwise start "uncooking" it at double speed
+            if (storage.getEnergyStored() > 0) {
+                cookTime += 1;
+            } else {
+                cookTime -= 2;
+            }
+
+            if (cookTime < 0) {
+                cookTime = 0;
+            }
+
+            // If cookTime has reached maxCookTime smelt the item and reset cookTime
+            if (cookTime >= COOK_TIME_FOR_COMPLETION) {
+                separateItem();
+                cookTime = 0;
+            }
+        } else {
+            cookTime = 0;
+        }
+
+        if (flag != this.isBurning()) {
+            flag1 = true;
+            BlockElectricCrusher.setState(this.isBurning(), this.worldObj, this.pos);
+        }
+
+        // when the number of burning slots changes, we need to force the block to re-render, otherwise the change in
+        //   state will not be visible.  Likewise, we need to force a lighting recalculation.
+        // The block update (for renderer) is only required on client side, but the lighting is required on both, since
+        //    the client needs it for rendering and the server needs it for crop growth etc
+        int numberBurning = numberOfBurningFuelSlots();
+        if (cachedNumberOfBurningSlots != numberBurning) {
+            cachedNumberOfBurningSlots = numberBurning;
+            if (worldObj.isRemote) {
+                IBlockState iblockstate = this.worldObj.getBlockState(pos);
+                final int FLAGS = 3;  // I'm not sure what these flags do, exactly.
+                worldObj.notifyBlockUpdate(pos, iblockstate, iblockstate, FLAGS);
+            }
+            worldObj.checkLightFor(EnumSkyBlock.BLOCK, pos);
+        }
+        if (flag1) {
+            this.markDirty();
+        }
+    }
+    
+    /**
+     * Returns true if the furnace can smelt an item, i.e. has a source item,
+     * destination stack isn't full, etc.
+     */
+    private boolean canSeparate() 
+    {
+        if (this.itemStacks[FIRST_INPUT_SLOT] == null) {
+            return false;
+        } else {
+            ArrayList<ItemStack> result = SeparatorRecipes.getInstance().getSeparatorResult(this.itemStacks[FIRST_INPUT_SLOT], this.itemStacks[FIRST_INPUT_SLOT + 1]);
+            if (result == null) {
+                return false;
+            }
+            if (this.itemStacks[FIRST_OUTPUT_SLOT] == null && this.itemStacks[FIRST_OUTPUT_SLOT + 1] == null && this.itemStacks[FIRST_OUTPUT_SLOT + 2] == null) {
+                return true;
+            }
+            if (!result.contains(this.itemStacks[FIRST_OUTPUT_SLOT]) || !result.contains(this.itemStacks[FIRST_OUTPUT_SLOT + 1]) || !result.contains(this.itemStacks[FIRST_OUTPUT_SLOT + 2]))
+                return false;
+            
+            int num;
+            if (itemStacks[FIRST_OUTPUT_SLOT].stackSize != this.getInventoryStackLimit()) {
+                num = itemStacks[FIRST_OUTPUT_SLOT].stackSize + result.get(0).stackSize;
+            } else if (itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize != this.getInventoryStackLimit()) {
+                num = itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize + result.get(1).stackSize;
+            } else {
+                num = itemStacks[FIRST_OUTPUT_SLOT + 2].stackSize + result.get(2).stackSize;
+            }
+            return num <= getInventoryStackLimit() && num <= this.itemStacks[FIRST_OUTPUT_SLOT].getMaxStackSize(); //Forge BugFix: Make it respect stack sizes properly.
+        }
+    }
+    
+    public void separateItem() 
+    {
+        if (this.canSeparate()) {
+            ArrayList<ItemStack> itemstack = SeparatorRecipes.getInstance().getSeparatorResult(this.itemStacks[FIRST_INPUT_SLOT], this.itemStacks[FIRST_INPUT_SLOT + 1]);
+            
+            if (this.itemStacks[FIRST_OUTPUT_SLOT] == null) {
+                itemStacks[FIRST_OUTPUT_SLOT] = itemstack.get(MAX_CAPACITY).copy();
+            }
+            else if (this.itemStacks[FIRST_OUTPUT_SLOT].getItem() == itemstack.get(0).getItem() && this.itemStacks[FIRST_OUTPUT_SLOT].stackSize + itemstack.get(0).stackSize <= this.MAX_CAPACITY) {
+                this.itemStacks[FIRST_OUTPUT_SLOT].stackSize += itemstack.get(0).stackSize;
+            }
+            
+            if (this.itemStacks[FIRST_OUTPUT_SLOT + 1] == null) {
+                itemStacks[FIRST_OUTPUT_SLOT + 1] = itemstack.get(MAX_CAPACITY).copy();
+            }
+            else if (this.itemStacks[FIRST_OUTPUT_SLOT + 1].getItem() == itemstack.get(1).getItem() && this.itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize + itemstack.get(1).stackSize <= this.MAX_CAPACITY) {
+                this.itemStacks[FIRST_OUTPUT_SLOT + 1].stackSize += itemstack.get(1).stackSize;
+            }
+            
+            if (this.itemStacks[FIRST_OUTPUT_SLOT + 2] == null) {
+                itemStacks[FIRST_OUTPUT_SLOT + 2] = itemstack.get(MAX_CAPACITY).copy();
+            }
+            else if (this.itemStacks[FIRST_OUTPUT_SLOT + 2].getItem() == itemstack.get(2).getItem() && this.itemStacks[FIRST_OUTPUT_SLOT + 2].stackSize + itemstack.get(2).stackSize <= this.MAX_CAPACITY) {
+                this.itemStacks[FIRST_OUTPUT_SLOT + 2].stackSize += itemstack.get(2).stackSize;
+            }
+
+            itemStacks[FIRST_INPUT_SLOT].stackSize--;
+            itemStacks[FIRST_INPUT_SLOT + SeparatorRecipes.getInstance().getNumBottles(itemStacks[FIRST_INPUT_SLOT])].stackSize--;
+            
+            if (this.itemStacks[FIRST_INPUT_SLOT].stackSize <= 0) {
+                this.itemStacks[FIRST_INPUT_SLOT] = null;
+            } else if (this.itemStacks[FIRST_INPUT_SLOT + 1].stackSize <= 0) {
+                this.itemStacks[FIRST_INPUT_SLOT + 1] = null;
+            }
         }
     }
     

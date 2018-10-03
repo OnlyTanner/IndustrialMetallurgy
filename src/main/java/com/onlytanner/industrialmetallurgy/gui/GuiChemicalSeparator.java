@@ -32,13 +32,12 @@ public class GuiChemicalSeparator extends GuiContainer {
     final int COOK_BAR_WIDTH = 24;
     final int COOK_BAR_HEIGHT = 17;
 
-    final int FLAME_XPOS = 15;
-    final int FLAME_YPOS = 19;
-    final int FLAME_ICON_U = 176;   // texture position of flame icon
-    final int FLAME_ICON_V = 0;
-    final int FLAME_WIDTH = 14;
-    final int FLAME_HEIGHT = 14;
-    final int FLAME_X_SPACING = 18;
+    final int ENERGY_BAR_XPOS = 8;
+    final int ENERGY_BAR_YPOS = 8;
+    final int ENERGY_BAR_ICON_U = 176;
+    final int ENERGY_BAR_ICON_V = 28;
+    final int ENERGY_BAR_WIDTH = 16;
+    final int ENERGY_BAR_HEIGHT = 70;
     
     public GuiChemicalSeparator(InventoryPlayer invPlayer, TileEntityChemicalSeparator tile) {
         super(new ContainerChemicalSeparator(invPlayer, tile));
@@ -64,17 +63,13 @@ public class GuiChemicalSeparator extends GuiContainer {
                               COOK_BAR_ICON_U, COOK_BAR_ICON_V, 
                               (int)(cookProgress * COOK_BAR_WIDTH), 
                               COOK_BAR_HEIGHT);
-
-        // draw the fuel remaining bar for each fuel slot flame
-        for (int i = 0; i < tileEntityChemicalSeparator.FUEL_SLOTS_COUNT; ++i) 
-        {
-            double burnRemaining = tileEntityChemicalSeparator.fractionOfFuelRemaining(i);
-            int yOffset = (int) ((1.0 - burnRemaining) * FLAME_HEIGHT);
-            drawTexturedModalRect(guiLeft + FLAME_XPOS + FLAME_X_SPACING * i, 
-                                  guiTop + FLAME_YPOS + yOffset, FLAME_ICON_U, 
-                                  FLAME_ICON_V + yOffset, FLAME_WIDTH, 
-                                  FLAME_HEIGHT - yOffset);
-        }
+        
+        double energy = tileEntityChemicalSeparator.getFractionOfEnergyRemaining();
+        int yOffset = (int) ((1.0 - energy) * ENERGY_BAR_HEIGHT);
+        drawTexturedModalRect(guiLeft + ENERGY_BAR_XPOS, 
+                              guiTop + ENERGY_BAR_YPOS + yOffset, ENERGY_BAR_ICON_U, 
+                              ENERGY_BAR_ICON_V + yOffset, ENERGY_BAR_WIDTH, 
+                              ENERGY_BAR_HEIGHT - yOffset);
     }
 
     @Override
@@ -93,21 +88,17 @@ public class GuiChemicalSeparator extends GuiContainer {
             int cookPercentage = (int) (tileEntityChemicalSeparator.fractionOfCookTimeComplete() * 100);
             hoveringText.add(cookPercentage + "%");
         }
-
-        // If the mouse is over one of the burn time indicator add the burn time indicator hovering text
-        if (isInRect(guiLeft + FLAME_XPOS, guiTop + FLAME_YPOS, FLAME_WIDTH, FLAME_HEIGHT, mouseX, mouseY)) {
-            hoveringText.add("Fuel Time:");
-            hoveringText.add(tileEntityChemicalSeparator.secondsOfFuelRemaining(0) + "s");
-        }
         
+        if (isInRect(guiLeft + ENERGY_BAR_XPOS, guiTop + ENERGY_BAR_YPOS, ENERGY_BAR_WIDTH, ENERGY_BAR_HEIGHT, mouseX, mouseY))
+        {
+            hoveringText.add("Energy Stored:");
+            hoveringText.add(tileEntityChemicalSeparator.getEnergyStored() + "/" + tileEntityChemicalSeparator.MAX_CAPACITY);
+        }
+
         // If hoveringText is not empty draw the hovering text
         if (!hoveringText.isEmpty()) {
             drawHoveringText(hoveringText, mouseX - guiLeft, mouseY - guiTop, fontRendererObj);
         }
-//			// You must re bind the texture and reset the colour if you still need to use it after drawing a string
-//			Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
-//			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-
     }
     
     // Returns true if the given x,y coordinates are within the given rectangle

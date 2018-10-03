@@ -7,6 +7,7 @@ import java.util.List;
 import com.onlytanner.industrialmetallurgy.Reference;
 import com.onlytanner.industrialmetallurgy.container.ContainerForgeTier1;
 import com.onlytanner.industrialmetallurgy.container.ContainerChemicalReactor;
+import static com.onlytanner.industrialmetallurgy.gui.GuiChemicalSeparator.isInRect;
 import com.onlytanner.industrialmetallurgy.tileentities.TileEntityForgeTier1;
 import com.onlytanner.industrialmetallurgy.tileentities.TileEntityChemicalReactor;
 import java.io.IOException;
@@ -34,6 +35,13 @@ public class GuiChemicalReactor extends GuiContainer {
     final int COOK_BAR_WIDTH = 36;
     final int COOK_BAR_HEIGHT = 17;
     
+    final int ENERGY_BAR_XPOS = 8;
+    final int ENERGY_BAR_YPOS = 8;
+    final int ENERGY_BAR_ICON_U = 176;
+    final int ENERGY_BAR_ICON_V = 28;
+    final int ENERGY_BAR_WIDTH = 16;
+    final int ENERGY_BAR_HEIGHT = 70;
+    
     public GuiChemicalReactor(InventoryPlayer invPlayer, TileEntityChemicalReactor tile) {
         super(new ContainerChemicalReactor(invPlayer, tile));
         tileEntityChemicalReactor = tile;
@@ -58,6 +66,13 @@ public class GuiChemicalReactor extends GuiContainer {
                               COOK_BAR_ICON_U, COOK_BAR_ICON_V, 
                               (int)(cookProgress * COOK_BAR_WIDTH), 
                               COOK_BAR_HEIGHT);
+        
+        double energy = tileEntityChemicalReactor.getFractionOfEnergyRemaining();
+        int yOffset = (int) ((1.0 - energy) * ENERGY_BAR_HEIGHT);
+        drawTexturedModalRect(guiLeft + ENERGY_BAR_XPOS, 
+                              guiTop + ENERGY_BAR_YPOS + yOffset, ENERGY_BAR_ICON_U, 
+                              ENERGY_BAR_ICON_V + yOffset, ENERGY_BAR_WIDTH, 
+                              ENERGY_BAR_HEIGHT - yOffset);
     }
 
     @Override
@@ -76,15 +91,17 @@ public class GuiChemicalReactor extends GuiContainer {
             int cookPercentage = (int) (tileEntityChemicalReactor.fractionOfCookTimeComplete() * 100);
             hoveringText.add(cookPercentage + "%");
         }
+        
+        if (isInRect(guiLeft + ENERGY_BAR_XPOS, guiTop + ENERGY_BAR_YPOS, ENERGY_BAR_WIDTH, ENERGY_BAR_HEIGHT, mouseX, mouseY))
+        {
+            hoveringText.add("Energy Stored:");
+            hoveringText.add(tileEntityChemicalReactor.getEnergyStored() + "/" + tileEntityChemicalReactor.MAX_CAPACITY);
+        }
 
         // If hoveringText is not empty draw the hovering text
         if (!hoveringText.isEmpty()) {
             drawHoveringText(hoveringText, mouseX - guiLeft, mouseY - guiTop, fontRendererObj);
         }
-//			// You must re bind the texture and reset the colour if you still need to use it after drawing a string
-//			Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
-//			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-
     }
     
     // Returns true if the given x,y coordinates are within the given rectangle

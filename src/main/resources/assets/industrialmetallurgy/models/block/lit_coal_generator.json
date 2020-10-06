@@ -1,0 +1,9 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "industrialmetallurgy:blocks/bronze_block",
+		"bottom": "industrialmetallurgy:blocks/bronze_block",
+        "side": "industrialmetallurgy:blocks/coal_generator_side_on",
+		"front": "industrialmetallurgy:blocks/coal_generator_front_on"
+    }
+}

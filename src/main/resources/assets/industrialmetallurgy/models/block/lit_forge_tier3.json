@@ -1,0 +1,11 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "industrialmetallurgy:blocks/tungsten_forge_top_on",
+		"bottom": "industrialmetallurgy:blocks/tungsten_steel_block",
+        "north": "industrialmetallurgy:blocks/tungsten_forge_front_on",
+        "east": "industrialmetallurgy:blocks/tungsten_forge_side",
+		"west": "industrialmetallurgy:blocks/tungsten_forge_side",
+		"south": "industrialmetallurgy:blocks/tungsten_steel_block"
+    }
+}

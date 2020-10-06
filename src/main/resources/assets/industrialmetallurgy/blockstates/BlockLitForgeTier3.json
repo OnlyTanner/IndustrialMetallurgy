@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": {"model": "industrialmetallurgy:lit_forge_tier3"},
+        "facing=east":  {"model": "industrialmetallurgy:lit_forge_tier3", "y": 90 },
+        "facing=south": {"model": "industrialmetallurgy:lit_forge_tier3", "y": 180 },
+        "facing=west":  {"model": "industrialmetallurgy:lit_forge_tier3", "y": 270 }
+    }
+}

@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=north": {"model": "industrialmetallurgy:lit_coal_generator"},
-        "facing=east":  {"model": "industrialmetallurgy:lit_coal_generator", "y": 90 },
-        "facing=south": {"model": "industrialmetallurgy:lit_coal_generator", "y": 180 },
-        "facing=west":  {"model": "industrialmetallurgy:lit_coal_generator", "y": 270 }
-    }
-}

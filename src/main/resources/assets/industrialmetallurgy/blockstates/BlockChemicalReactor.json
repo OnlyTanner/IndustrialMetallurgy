@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=north": {"model": "industrialmetallurgy:chemical_reactor"},
-        "facing=east":  {"model": "industrialmetallurgy:chemical_reactor", "y": 90 },
-        "facing=south": {"model": "industrialmetallurgy:chemical_reactor", "y": 180 },
-        "facing=west":  {"model": "industrialmetallurgy:chemical_reactor", "y": 270 }
-    }
-}

@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=north": { "model": "industrialmetallurgy:bellow" }, 
-        "facing=east":  { "model": "industrialmetallurgy:bellow", "y": 90  }, 
-        "facing=south": { "model": "industrialmetallurgy:bellow", "y": 180 }, 
-        "facing=west":  { "model": "industrialmetallurgy:bellow", "y": 270 } 
-    }
-}

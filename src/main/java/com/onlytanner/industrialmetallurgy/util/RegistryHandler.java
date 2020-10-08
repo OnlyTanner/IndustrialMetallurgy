@@ -1,11 +1,9 @@
 package com.onlytanner.industrialmetallurgy.util;
 
 import com.onlytanner.industrialmetallurgy.IndustrialMetallurgy;
-import com.onlytanner.industrialmetallurgy.blocks.AluminumBlock;
-import com.onlytanner.industrialmetallurgy.blocks.BlockItemBase;
+import com.onlytanner.industrialmetallurgy.blocks.*;
 import com.onlytanner.industrialmetallurgy.items.ItemBase;
 import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -33,6 +31,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> INVAR_INGOT = ITEMS.register("invar_ingot", ItemBase::new);
     public static final RegistryObject<Item> KANTHAL_INGOT = ITEMS.register("kanthal_ingot", ItemBase::new);
     public static final RegistryObject<Item> NEQUITUM_INGOT = ITEMS.register("nequitum_ingot", ItemBase::new);
+    public static final RegistryObject<Item> NICKEL_INGOT = ITEMS.register("nickel_ingot", ItemBase::new);
     public static final RegistryObject<Item> NICHROME_INGOT = ITEMS.register("nichrome_ingot", ItemBase::new);
     public static final RegistryObject<Item> NITINOL_INGOT = ITEMS.register("nitinol_ingot", ItemBase::new);
     public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot", ItemBase::new);
@@ -52,6 +51,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> KANTHAL_NUGGET = ITEMS.register("kanthal_nugget", ItemBase::new);
     public static final RegistryObject<Item> NEQUITUM_NUGGET = ITEMS.register("nequitum_nugget", ItemBase::new);
     public static final RegistryObject<Item> NICHROME_NUGGET = ITEMS.register("nichrome_nugget", ItemBase::new);
+    public static final RegistryObject<Item> NICKEL_NUGGET = ITEMS.register("nickel_nugget", ItemBase::new);
     public static final RegistryObject<Item> NITINOL_NUGGET = ITEMS.register("nitinol_nugget", ItemBase::new);
     public static final RegistryObject<Item> STEEL_NUGGET = ITEMS.register("steel_nugget", ItemBase::new);
     public static final RegistryObject<Item> TIN_NUGGET = ITEMS.register("tin_nugget", ItemBase::new);
@@ -100,9 +100,62 @@ public class RegistryHandler {
     public static final RegistryObject<Item> RESISTANCE_WIRE = ITEMS.register("resistance_wire", ItemBase::new);
 
     // Blocks
-    public static final RegistryObject<Block> ALUMINUM_BLOCK = BLOCKS.register("aluminum_block", AluminumBlock::new);
+    public static final RegistryObject<Block> ALUMINUM_BLOCK = BLOCKS.register("aluminum_block", MetalBlock::new);
+    public static final RegistryObject<Block> BRASS_BLOCK = BLOCKS.register("brass_block", MetalBlock::new);
+    public static final RegistryObject<Block> BRONZE_BLOCK = BLOCKS.register("bronze_block", MetalBlock::new);
+    public static final RegistryObject<Block> CHROMIUM_BLOCK = BLOCKS.register("chromium_block", MetalBlock::new);
+    public static final RegistryObject<Block> COBALT_BLOCK = BLOCKS.register("cobalt_block", MetalBlock::new);
+    public static final RegistryObject<Block> COBALT_STEEL_BLOCK = BLOCKS.register("cobalt_steel_block", MetalBlock::new);
+    public static final RegistryObject<Block> COPPER_BLOCK = BLOCKS.register("copper_block", MetalBlock::new);
+    public static final RegistryObject<Block> INVAR_BLOCK = BLOCKS.register("invar_block", MetalBlock::new);
+    public static final RegistryObject<Block> KANTHAL_BLOCK = BLOCKS.register("kanthal_block", MetalBlock::new);
+    public static final RegistryObject<Block> NEQUITUM_BLOCK = BLOCKS.register("nequitum_block", MetalBlock::new);
+    public static final RegistryObject<Block> NICHROME_BLOCK = BLOCKS.register("nichrome_block", MetalBlock::new);
+    public static final RegistryObject<Block> NICKEL_BLOCK = BLOCKS.register("nickel_block", MetalBlock::new);
+    public static final RegistryObject<Block> NITINOL_BLOCK = BLOCKS.register("nitinol_block", MetalBlock::new);
+    public static final RegistryObject<Block> TIN_BLOCK = BLOCKS.register("tin_block", MetalBlock::new);
+    public static final RegistryObject<Block> TITANIUM_BLOCK = BLOCKS.register("titanium_block", MetalBlock::new);
+    public static final RegistryObject<Block> TUNGSTEN_BLOCK = BLOCKS.register("tungsten_block", MetalBlock::new);
+    public static final RegistryObject<Block> TUNGSTEN_STEEL_BLOCK = BLOCKS.register("tungsten_steel_block", MetalBlock::new);
+    public static final RegistryObject<Block> ZINC_BLOCK = BLOCKS.register("zinc_block", MetalBlock::new);
+    public static final RegistryObject<Block> BAUXITE_ORE = BLOCKS.register("bauxite_ore", Tier1OreBlock::new);
+    public static final RegistryObject<Block> CASSITERITE_ORE = BLOCKS.register("cassiterite_ore", Tier1OreBlock::new);
+    public static final RegistryObject<Block> CHROMITE_ORE = BLOCKS.register("chromite_ore", Tier2OreBlock::new);
+    public static final RegistryObject<Block> COBALTITE_ORE = BLOCKS.register("cobaltite_ore", Tier3OreBlock::new);
+    public static final RegistryObject<Block> CUPRITE_ORE = BLOCKS.register("cuprite_ore", Tier1OreBlock::new);
+    public static final RegistryObject<Block> GARNIERITE_ORE = BLOCKS.register("garnierite_ore", Tier1OreBlock::new);
+    public static final RegistryObject<Block> RUTILE_ORE = BLOCKS.register("rutile_ore", Tier2OreBlock::new);
+    public static final RegistryObject<Block> SPHALERITE_ORE = BLOCKS.register("sphalerite_ore", Tier1OreBlock::new);
+    public static final RegistryObject<Block> WOLFRAMITE_ORE = BLOCKS.register("wolframite_ore", Tier4OreBlock::new);
+
 
     // Block Items
     public static final RegistryObject<Item> ALUMINUM_BLOCK_ITEM = ITEMS.register("aluminum_block", () -> new BlockItemBase(ALUMINUM_BLOCK.get()));
+    public static final RegistryObject<Item> BRASS_BLOCK_ITEM = ITEMS.register("brass_block", () -> new BlockItemBase(BRASS_BLOCK.get()));
+    public static final RegistryObject<Item> BRONZE_BLOCK_ITEM = ITEMS.register("bronze_block", () -> new BlockItemBase(BRONZE_BLOCK.get()));
+    public static final RegistryObject<Item> CHROMIUM_BLOCK_ITEM = ITEMS.register("chromium_block", () -> new BlockItemBase(CHROMIUM_BLOCK.get()));
+    public static final RegistryObject<Item> COBALT_BLOCK_ITEM = ITEMS.register("cobalt_block", () -> new BlockItemBase(COBALT_BLOCK.get()));
+    public static final RegistryObject<Item> COBALT_STEEL_BLOCK_ITEM = ITEMS.register("cobalt_steel_block", () -> new BlockItemBase(COBALT_STEEL_BLOCK.get()));
+    public static final RegistryObject<Item> COPPER_BLOCK_ITEM = ITEMS.register("copper_block", () -> new BlockItemBase(COPPER_BLOCK.get()));
+    public static final RegistryObject<Item> INVAR_BLOCK_ITEM = ITEMS.register("invar_block", () -> new BlockItemBase(INVAR_BLOCK.get()));
+    public static final RegistryObject<Item> KANTHAL_BLOCK_ITEM = ITEMS.register("kanthal_block", () -> new BlockItemBase(KANTHAL_BLOCK.get()));
+    public static final RegistryObject<Item> NEQUITUM_BLOCK_ITEM = ITEMS.register("nequitum_block", () -> new BlockItemBase(NEQUITUM_BLOCK.get()));
+    public static final RegistryObject<Item> NICHROME_BLOCK_ITEM = ITEMS.register("nichrome_block", () -> new BlockItemBase(NICHROME_BLOCK.get()));
+    public static final RegistryObject<Item> NICKEL_BLOCK_ITEM = ITEMS.register("nickel_block", () -> new BlockItemBase(NICKEL_BLOCK.get()));
+    public static final RegistryObject<Item> NITINOL_BLOCK_ITEM = ITEMS.register("nitinol_block", () -> new BlockItemBase(NITINOL_BLOCK.get()));
+    public static final RegistryObject<Item> TIN_BLOCK_ITEM = ITEMS.register("tin_block", () -> new BlockItemBase(TIN_BLOCK.get()));
+    public static final RegistryObject<Item> TITANIUM_BLOCK_ITEM = ITEMS.register("titanium_block", () -> new BlockItemBase(TITANIUM_BLOCK.get()));
+    public static final RegistryObject<Item> TUNGSTEN_BLOCK_ITEM = ITEMS.register("tungsten_block", () -> new BlockItemBase(TUNGSTEN_BLOCK.get()));
+    public static final RegistryObject<Item> TUNGSTEN_STEEL_BLOCK_ITEM = ITEMS.register("tungsten_steel_block", () -> new BlockItemBase(TUNGSTEN_STEEL_BLOCK.get()));
+    public static final RegistryObject<Item> ZINC_BLOCK_ITEM = ITEMS.register("zinc_block", () -> new BlockItemBase(ZINC_BLOCK.get()));
+    public static final RegistryObject<Item> BAUXITE_ORE_ITEM = ITEMS.register("bauxite_ore", () -> new BlockItemBase(BAUXITE_ORE.get()));
+    public static final RegistryObject<Item> CASSITERITE_ORE_ITEM = ITEMS.register("cassiterite_ore", () -> new BlockItemBase(CASSITERITE_ORE.get()));
+    public static final RegistryObject<Item> CHROMITE_ORE_ITEM = ITEMS.register("chromite_ore", () -> new BlockItemBase(CHROMITE_ORE.get()));
+    public static final RegistryObject<Item> COBALTITE_ORE_ITEM = ITEMS.register("cobaltite_ore", () -> new BlockItemBase(COBALTITE_ORE.get()));
+    public static final RegistryObject<Item> CUPRITE_ORE_ITEM = ITEMS.register("cuprite_ore", () -> new BlockItemBase(CUPRITE_ORE.get()));
+    public static final RegistryObject<Item> GARNIERITE_ORE_ITEM = ITEMS.register("garnierite_ore", () -> new BlockItemBase(GARNIERITE_ORE.get()));
+    public static final RegistryObject<Item> RUTILE_ORE_ITEM = ITEMS.register("rutile_ore", () -> new BlockItemBase(RUTILE_ORE.get()));
+    public static final RegistryObject<Item> SPHALERITE_ORE_ITEM = ITEMS.register("sphalerite_ore", () -> new BlockItemBase(SPHALERITE_ORE.get()));
+    public static final RegistryObject<Item> WOLFRAMITE_ORE_ITEM = ITEMS.register("wolframite_ore", () -> new BlockItemBase(WOLFRAMITE_ORE.get()));
 
 }

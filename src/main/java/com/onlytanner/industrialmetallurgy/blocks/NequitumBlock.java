@@ -5,14 +5,14 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.ToolType;
 
-public class Tier2OreBlock extends Block {
+public class NequitumBlock extends Block {
 
-    public Tier2OreBlock() {
-        super(Properties.create(Material.ROCK)
+    public NequitumBlock() {
+        super(Block.Properties.create(Material.IRON)
                 .hardnessAndResistance(5.0f, 6.0f)
-                .sound(SoundType.STONE)
+                .sound(SoundType.METAL)
                 .harvestLevel(2)
-                .func_235861_h_()  // set requires tool
+                .func_235861_h_() // set requires tool
                 .harvestTool(ToolType.PICKAXE));
     }
 

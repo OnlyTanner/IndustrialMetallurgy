@@ -9,9 +9,10 @@ public class Tier3OreBlock extends Block {
 
     public Tier3OreBlock() {
         super(Block.Properties.create(Material.ROCK)
-                .hardnessAndResistance(4.0f, 5.0f)
+                .hardnessAndResistance(7.0f, 8.0f)
                 .sound(SoundType.STONE)
                 .harvestLevel(3)
+                .func_235861_h_()  // set requires tool
                 .harvestTool(ToolType.PICKAXE));
     }
 

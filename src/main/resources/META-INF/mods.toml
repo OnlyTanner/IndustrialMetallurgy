@@ -19,7 +19,7 @@
       logoFile="mod_logo.png"
       authors="OnlyTanner"
       description='''
-      A technical approach to material processing and exploring the domain of metallurgy.
+      An industrial approach to material processing and exploring the domain of metallurgy.
       '''
 
       [[dependencies.industrialmetallurgy]]

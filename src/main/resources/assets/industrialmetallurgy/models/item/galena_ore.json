@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "industrialmetallurgy:blocks/galena_ore"
+    }
+}

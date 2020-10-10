@@ -42,7 +42,7 @@ public class IndustrialMetallurgy
     public static final ItemGroup TAB = new ItemGroup("industrialMetallurgy") {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(RegistryHandler.ALUMINUM_INGOT.get());
+            return new ItemStack(RegistryHandler.TUNGSTEN_INGOT.get());
         }
     };
 

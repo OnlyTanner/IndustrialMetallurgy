@@ -1,6 +1,7 @@
 package com.onlytanner.industrialmetallurgy;
 
 import com.onlytanner.industrialmetallurgy.util.RegistryHandler;
+import net.minecraft.block.SandBlock;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;

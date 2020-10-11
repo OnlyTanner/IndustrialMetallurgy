@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
@@ -27,10 +28,9 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ForgeTier1TileEntity extends LockableLootTileEntity implements ITickableTileEntity {
+public class ForgeTier1TileEntity extends ModTileEntityBase implements ITickableTileEntity, ISidedInventory {
 
     private final int INVENTORY_SIZE = 6;
     public int x, y, z, tick;
@@ -59,7 +59,7 @@ public class ForgeTier1TileEntity extends LockableLootTileEntity implements ITic
     }
 
     @Override
-    protected NonNullList<ItemStack> getItems() {
+    public NonNullList<ItemStack> getItems() {
         return this.invContents;
     }
 
@@ -195,5 +195,20 @@ public class ForgeTier1TileEntity extends LockableLootTileEntity implements ITic
     @Override
     public int getSizeInventory() {
         return INVENTORY_SIZE;
+    }
+
+    @Override
+    public int[] getSlotsForFace(Direction side) {
+        return new int[0];
+    }
+
+    @Override
+    public boolean canInsertItem(int index, ItemStack itemStackIn, @Nullable Direction direction) {
+        return false;
+    }
+
+    @Override
+    public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
+        return false;
     }
 }

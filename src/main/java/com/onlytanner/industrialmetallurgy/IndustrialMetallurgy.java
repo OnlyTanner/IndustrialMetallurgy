@@ -1,5 +1,6 @@
 package com.onlytanner.industrialmetallurgy;
 
+import com.onlytanner.industrialmetallurgy.init.ModContainerTypes;
 import com.onlytanner.industrialmetallurgy.init.ModTileEntityTypes;
 import com.onlytanner.industrialmetallurgy.tileentities.ForgeTier1TileEntity;
 import com.onlytanner.industrialmetallurgy.util.RegistryHandler;
@@ -31,6 +32,8 @@ public class IndustrialMetallurgy
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
         RegistryHandler.init();
+        ModTileEntityTypes.init();
+        ModContainerTypes.init();
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

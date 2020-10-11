@@ -12,12 +12,13 @@ import java.util.Vector;
 public class ForgeTier1Container extends ModContainerBase {
 
     public ForgeTier1Container(final int id, final PlayerInventory player, final ForgeTier1TileEntity forgeTier1TileEntity) {
-        super(id, player, forgeTier1TileEntity, ModContainerTypes.FORGE_TIER1.get().getRegistryType().cast(forgeTier1TileEntity));
+        super(id, player, forgeTier1TileEntity, ModContainerTypes.FORGE_TIER1.get());
         initContainerElements();
     }
 
     public ForgeTier1Container(final int id, final PlayerInventory player, final PacketBuffer data) {
-        super(id, player, super.getTileEntity(player, data), getTileEntity(player, data).getContainer().getType());
+        super(id, player, getTileEntity(player, data), getTileEntity(player, data).getContainer().getType());
+        initContainerElements();
     }
 
     @Override

@@ -28,7 +28,7 @@ public class OreGenHandler {
     @SubscribeEvent
     public static void generateOres(FMLLoadCompleteEvent event) {
         registerOres();
-        for (Map.Entry<RegistryKey<Biome>, Biome> biome : WorldGenRegistries.field_243657_i.func_239659_c_() /* Collection of Biome Entries */) {
+        for (Map.Entry<RegistryKey<Biome>, Biome> biome : WorldGenRegistries.field_243657_i.getEntries() /* Collection of Biome Entries */) {
             if (biome.getValue().getCategory().equals(Biome.Category.NETHER)) {
                 addFeatureToBiome(
                         biome.getValue(),

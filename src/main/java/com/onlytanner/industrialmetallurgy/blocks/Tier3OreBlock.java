@@ -12,7 +12,7 @@ public class Tier3OreBlock extends Block {
                 .hardnessAndResistance(7.0f, 8.0f)
                 .sound(SoundType.STONE)
                 .harvestLevel(3)
-                .func_235861_h_()  // set requires tool
+                .setRequiresTool()  // set requires tool
                 .harvestTool(ToolType.PICKAXE));
     }
 

@@ -26,7 +26,7 @@ public class ForgeTier1Block extends Block {
                 .hardnessAndResistance(5.0f, 8.0f)
                 .sound(SoundType.METAL)
                 .harvestLevel(0)
-                .func_235861_h_()  // set requires tool
+                .setRequiresTool()  // set requires tool
                 .harvestTool(ToolType.PICKAXE));
     }
 

@@ -78,7 +78,7 @@ public class ForgeTier1TileEntity extends ModTileEntityBase implements ITickable
     }
 
     @Override
-    public void func_230337_a_(BlockState state, CompoundNBT compound)  {
+    public void read(BlockState state, CompoundNBT compound)  {
         super.checkLootAndRead(compound);
         this.invContents = NonNullList.withSize(this.INVENTORY_SIZE, ItemStack.EMPTY);
         if (!this.checkLootAndRead(compound)) {

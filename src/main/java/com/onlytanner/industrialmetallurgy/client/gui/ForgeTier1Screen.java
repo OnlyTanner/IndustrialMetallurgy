@@ -1,12 +1,17 @@
 package com.onlytanner.industrialmetallurgy.client.gui;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.onlytanner.industrialmetallurgy.IndustrialMetallurgy;
 import com.onlytanner.industrialmetallurgy.containers.ForgeTier1Container;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class ForgeTier1Screen extends ContainerScreen {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(IndustrialMetallurgy.MOD_ID, "textures/gui/container/forge_main.png");
@@ -19,4 +24,26 @@ public class ForgeTier1Screen extends ContainerScreen {
         this.ySize = 166;
     }
 
+    @Override
+    public void render(MatrixStack matrixStack, final int mouseX, final int mouseY, final float partialTicks) {
+        this.renderBackground(matrixStack);
+        this.render(matrixStack, mouseX, mouseY, partialTicks);
+        this.renderToolTip(matrixStack, null, mouseX, mouseY, this.font);
+    }
+
+    @Override
+    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY) {
+        super.drawGuiContainerForegroundLayer(matrixStack, mouseX, mouseY);
+        this.font.drawString(matrixStack, this.title.getString(), 8.0f, 6.0f, 4210752);
+        this.font.drawString(matrixStack, this.playerInventory.getDisplayName().getString(), 8.0f, 6.0f, 4210752);
+    }
+
+    @Override
+    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
+        RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
+        this.minecraft.getTextureManager().bindTexture(TEXTURE);
+        int backgroundX = (this.width - this.xSize) / 2;
+        int backgroundY = (this.height - this.ySize) / 2;
+        this.blit(matrixStack, backgroundX, backgroundY, 0, 0, this.xSize, this.ySize);
+    }
 }

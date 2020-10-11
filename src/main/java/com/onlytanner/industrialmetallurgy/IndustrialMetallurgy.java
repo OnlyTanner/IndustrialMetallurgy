@@ -1,10 +1,14 @@
 package com.onlytanner.industrialmetallurgy;
 
+import com.onlytanner.industrialmetallurgy.init.ModTileEntityTypes;
+import com.onlytanner.industrialmetallurgy.tileentities.ForgeTier1TileEntity;
 import com.onlytanner.industrialmetallurgy.util.RegistryHandler;
 import net.minecraft.block.SandBlock;
+import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -43,7 +47,7 @@ public class IndustrialMetallurgy
     public static final ItemGroup TAB = new ItemGroup("industrialMetallurgy") {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(RegistryHandler.ALNICO_INGOT.get());
+            return new ItemStack(RegistryHandler.TUNGSTEN_INGOT.get());
         }
     };
 

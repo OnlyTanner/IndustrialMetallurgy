@@ -2,6 +2,8 @@ package com.onlytanner.industrialmetallurgy.util;
 
 import com.onlytanner.industrialmetallurgy.IndustrialMetallurgy;
 import com.onlytanner.industrialmetallurgy.blocks.*;
+import com.onlytanner.industrialmetallurgy.init.ModContainerTypes;
+import com.onlytanner.industrialmetallurgy.init.ModTileEntityTypes;
 import com.onlytanner.industrialmetallurgy.items.ItemBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.SandBlock;
@@ -26,6 +28,8 @@ public class RegistryHandler {
     public static void init() {
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModTileEntityTypes.TILE_ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModContainerTypes.CONTAINER_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     // Items
@@ -172,6 +176,8 @@ public class RegistryHandler {
     public static final RegistryObject<Block> SCHEELITE_ORE = BLOCKS.register("scheelite_ore", Tier4OreBlock::new);
     // Other Resources
     public static final RegistryObject<Block> OIL_SAND = BLOCKS.register("oil_sand", OilSandBlock::new);
+    // Machines
+    public static final RegistryObject<Block> FORGE_TIER1 = BLOCKS.register("forge_tier1", ForgeTier1Block::new);
 
 
     // Block Items
@@ -220,5 +226,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> SCHEELITE_ORE_ITEM = ITEMS.register("scheelite_ore", () -> new BlockItemBase(SCHEELITE_ORE.get()));
     // Other Resources
     public static final RegistryObject<Item> OIL_SAND_ITEM = ITEMS.register("oil_sand", () -> new BlockItemBase(OIL_SAND.get()));
+    // Machines
+    public static final RegistryObject<Item> FORGE_TIER1_ITEM = ITEMS.register("forge_tier1", () -> new BlockItemBase(FORGE_TIER1.get()));
 
 }

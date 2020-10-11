@@ -19,9 +19,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
-import net.minecraftforge.registries.ForgeRegistries;
-
-import java.lang.reflect.Field;
 import java.util.*;
 import java.util.function.Supplier;
 
@@ -56,7 +53,7 @@ public class OreGenHandler {
                         WorldGenRegistries.field_243653_e.getOrDefault(RegistryHandler.LEPIDOLITE_ORE.getId())
                 );
             }
-            else if (biome.getValue().getCategory().equals(Biome.Category.PLAINS)){
+            else if (biome.getValue().getCategory().equals(Biome.Category.PLAINS) || biome.getValue().getCategory().equals(Biome.Category.ICY)){
                 addFeatureToBiome(
                         biome.getValue(),
                         GenerationStage.Decoration.UNDERGROUND_ORES,
@@ -68,7 +65,7 @@ public class OreGenHandler {
                         WorldGenRegistries.field_243653_e.getOrDefault(RegistryHandler.SPHALERITE_ORE.getId())
                 );
             }
-            else if (biome.getValue().getCategory().equals(Biome.Category.JUNGLE)){
+            else if (biome.getValue().getCategory().equals(Biome.Category.JUNGLE) || biome.getValue().getCategory().equals(Biome.Category.EXTREME_HILLS)){
                 addFeatureToBiome(
                         biome.getValue(),
                         GenerationStage.Decoration.UNDERGROUND_ORES,
@@ -80,7 +77,7 @@ public class OreGenHandler {
                         WorldGenRegistries.field_243653_e.getOrDefault(RegistryHandler.CASSITERITE_ORE.getId())
                 );
             }
-            else if (biome.getValue().getCategory().equals(Biome.Category.DESERT)){
+            else if (biome.getValue().getCategory().equals(Biome.Category.DESERT) || biome.getValue().getCategory().equals(Biome.Category.MESA)){
                 addFeatureToBiome(
                         biome.getValue(),
                         GenerationStage.Decoration.UNDERGROUND_ORES,
@@ -92,7 +89,7 @@ public class OreGenHandler {
                         WorldGenRegistries.field_243653_e.getOrDefault(RegistryHandler.RUTILE_ORE.getId())
                 );
             }
-            else if (biome.getValue().getCategory().equals(Biome.Category.FOREST)){
+            else if (biome.getValue().getCategory().equals(Biome.Category.FOREST) || biome.getValue().getCategory().equals(Biome.Category.MUSHROOM) || biome.getValue().getCategory().equals(Biome.Category.TAIGA)){
                 addFeatureToBiome(
                         biome.getValue(),
                         GenerationStage.Decoration.UNDERGROUND_ORES,
@@ -104,7 +101,7 @@ public class OreGenHandler {
                         WorldGenRegistries.field_243653_e.getOrDefault(RegistryHandler.GALENA_ORE.getId())
                 );
             }
-            else if (biome.getValue().getCategory().equals(Biome.Category.SWAMP)){
+            else if (biome.getValue().getCategory().equals(Biome.Category.SWAMP) || biome.getValue().getCategory().equals(Biome.Category.MESA)){
                 addFeatureToBiome(
                         biome.getValue(),
                         GenerationStage.Decoration.UNDERGROUND_ORES,

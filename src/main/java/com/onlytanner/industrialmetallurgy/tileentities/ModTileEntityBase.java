@@ -1,6 +1,5 @@
 package com.onlytanner.industrialmetallurgy.tileentities;
 
-import com.onlytanner.industrialmetallurgy.containers.ModContainerBase;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.container.Container;
@@ -14,70 +13,52 @@ import net.minecraft.util.text.ITextComponent;
 
 import javax.annotation.Nullable;
 
-public class ModTileEntityBase extends LockableLootTileEntity implements ITickableTileEntity, ISidedInventory {
+public abstract class ModTileEntityBase extends LockableLootTileEntity implements ITickableTileEntity, ISidedInventory {
 
-    private ModContainerBase container;
+    private Container container;
 
     public ModTileEntityBase(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
         container = null;
     }
 
-    public ModTileEntityBase(TileEntityType<?> tileEntityTypeIn, ModContainerBase container) {
+    public ModTileEntityBase(TileEntityType<?> tileEntityTypeIn, Container container) {
         super(tileEntityTypeIn);
         this.container = container;
     }
 
-    public ModContainerBase getContainer() {
+    public Container getContainer() {
         return this.container;
     }
 
-    public void setContainer(ModContainerBase container) {
+    public void setContainer(Container container) {
         this.container = container;
     }
 
     @Override
-    protected ITextComponent getDefaultName() {
-        return null;
-    }
+    protected abstract ITextComponent getDefaultName();
 
     @Override
-    protected Container createMenu(int id, PlayerInventory player) {
-        return null;
-    }
+    protected abstract Container createMenu(int id, PlayerInventory player);
 
     @Override
-    protected NonNullList<ItemStack> getItems() {
-        return null;
-    }
+    protected abstract NonNullList<ItemStack> getItems();
 
     @Override
-    protected void setItems(NonNullList<ItemStack> itemsIn) {
-
-    }
+    protected abstract void setItems(NonNullList<ItemStack> itemsIn);
 
     @Override
-    public int getSizeInventory() {
-        return 0;
-    }
+    public abstract int getSizeInventory();
 
     @Override
-    public void tick() {
-
-    }
+    public abstract void tick();
 
     @Override
-    public int[] getSlotsForFace(Direction side) {
-        return new int[0];
-    }
+    public abstract int[] getSlotsForFace(Direction side);
 
     @Override
-    public boolean canInsertItem(int index, ItemStack itemStackIn, @Nullable Direction direction) {
-        return false;
-    }
+    public abstract boolean canInsertItem(int index, ItemStack itemStackIn, @Nullable Direction direction);
 
     @Override
-    public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
-        return false;
-    }
+    public abstract boolean canExtractItem(int index, ItemStack stack, Direction direction);
 }

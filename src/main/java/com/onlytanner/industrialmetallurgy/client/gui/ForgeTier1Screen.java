@@ -11,8 +11,10 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.awt.*;
+
 @OnlyIn(Dist.CLIENT)
-public class ForgeTier1Screen extends ContainerScreen {
+public class ForgeTier1Screen extends ContainerScreen<ForgeTier1Container> {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(IndustrialMetallurgy.MOD_ID, "textures/gui/container/forge_main.png");
 
@@ -27,15 +29,15 @@ public class ForgeTier1Screen extends ContainerScreen {
     @Override
     public void render(MatrixStack matrixStack, final int mouseX, final int mouseY, final float partialTicks) {
         this.renderBackground(matrixStack);
-        this.render(matrixStack, mouseX, mouseY, partialTicks);
+        super.render(matrixStack, mouseX, mouseY, partialTicks);
         this.renderToolTip(matrixStack, null, mouseX, mouseY, this.font);
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY) {
         super.drawGuiContainerForegroundLayer(matrixStack, mouseX, mouseY);
-        this.font.drawString(matrixStack, this.title.getString(), 8.0f, 6.0f, 4210752);
-        this.font.drawString(matrixStack, this.playerInventory.getDisplayName().getString(), 8.0f, 6.0f, 4210752);
+        this.font.drawString(matrixStack, this.title.getUnformattedComponentText(), 8.0f, 6.0f, Color.darkGray.getRGB());
+        this.font.drawString(matrixStack, this.playerInventory.getDisplayName().getString(), 8.0f, 6.0f, Color.darkGray.getRGB());
     }
 
     @Override

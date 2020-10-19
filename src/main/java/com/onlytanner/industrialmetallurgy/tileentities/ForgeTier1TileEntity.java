@@ -1,6 +1,7 @@
 package com.onlytanner.industrialmetallurgy.tileentities;
 
 import com.onlytanner.industrialmetallurgy.blocks.ForgeTier1Block;
+import com.onlytanner.industrialmetallurgy.client.gui.ForgeTier1Screen;
 import com.onlytanner.industrialmetallurgy.containers.ForgeTier1Container;
 import com.onlytanner.industrialmetallurgy.init.ModTileEntityTypes;
 import net.minecraft.block.Block;
@@ -8,12 +9,13 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
@@ -22,6 +24,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -32,7 +35,7 @@ import javax.annotation.Nullable;
 
 public class ForgeTier1TileEntity extends ModTileEntityBase implements ITickableTileEntity, ISidedInventory {
 
-    private final int INVENTORY_SIZE = 6;
+    private static final int INVENTORY_SIZE = 9 + 27 + 8;
     public int x, y, z, tick;
     private boolean initialized = false;
     private NonNullList<ItemStack> invContents = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
@@ -190,6 +193,10 @@ public class ForgeTier1TileEntity extends ModTileEntityBase implements ITickable
         y = this.pos.getY() - 1;
         z = this.pos.getZ() - 1;
         tick = 0;
+    }
+
+    public void dropAllContents(World worldIn, BlockPos pos) {
+        InventoryHelper.dropInventoryItems(worldIn, pos, this);
     }
 
     @Override

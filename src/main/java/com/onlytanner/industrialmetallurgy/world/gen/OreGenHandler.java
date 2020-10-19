@@ -3,7 +3,6 @@ package com.onlytanner.industrialmetallurgy.world.gen;
 import com.google.common.collect.Lists;
 import com.onlytanner.industrialmetallurgy.IndustrialMetallurgy;
 import com.onlytanner.industrialmetallurgy.util.RegistryHandler;
-import net.minecraft.block.BlockState;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
@@ -19,7 +18,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = IndustrialMetallurgy.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)

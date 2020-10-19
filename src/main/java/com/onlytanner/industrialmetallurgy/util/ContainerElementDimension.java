@@ -1,10 +1,5 @@
 package com.onlytanner.industrialmetallurgy.util;
 
-import com.onlytanner.industrialmetallurgy.containers.ModContainerBase;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.tileentity.TileEntity;
-
 public class ContainerElementDimension {
 
     public final int x;

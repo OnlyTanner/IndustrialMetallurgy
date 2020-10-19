@@ -1,7 +1,6 @@
-package com.onlytanner.industrialmetallurgy.tileentities;
+package com.onlytanner.industrialmetallurgy.tileentity;
 
 import com.onlytanner.industrialmetallurgy.blocks.ForgeTier1Block;
-import com.onlytanner.industrialmetallurgy.client.gui.ForgeTier1Screen;
 import com.onlytanner.industrialmetallurgy.containers.ForgeTier1Container;
 import com.onlytanner.industrialmetallurgy.init.ModTileEntityTypes;
 import net.minecraft.block.Block;
@@ -14,7 +13,6 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;

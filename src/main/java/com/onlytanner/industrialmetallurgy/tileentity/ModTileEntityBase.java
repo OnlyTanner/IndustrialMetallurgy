@@ -1,4 +1,4 @@
-package com.onlytanner.industrialmetallurgy.tileentities;
+package com.onlytanner.industrialmetallurgy.tileentity;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ISidedInventory;

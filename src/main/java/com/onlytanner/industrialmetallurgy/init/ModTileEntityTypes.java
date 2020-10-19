@@ -1,7 +1,7 @@
 package com.onlytanner.industrialmetallurgy.init;
 
 import com.onlytanner.industrialmetallurgy.IndustrialMetallurgy;
-import com.onlytanner.industrialmetallurgy.tileentities.ForgeTier1TileEntity;
+import com.onlytanner.industrialmetallurgy.tileentity.ForgeTier1TileEntity;
 import com.onlytanner.industrialmetallurgy.util.RegistryHandler;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;

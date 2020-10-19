@@ -1,7 +1,7 @@
 package com.onlytanner.industrialmetallurgy.containers;
 
 import com.onlytanner.industrialmetallurgy.init.ModContainerTypes;
-import com.onlytanner.industrialmetallurgy.tileentities.ForgeTier1TileEntity;
+import com.onlytanner.industrialmetallurgy.tileentity.ForgeTier1TileEntity;
 import com.onlytanner.industrialmetallurgy.util.ContainerElementDimension;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
-import net.minecraftforge.items.SlotItemHandler;
 
 import java.util.HashMap;
 import java.util.Map;

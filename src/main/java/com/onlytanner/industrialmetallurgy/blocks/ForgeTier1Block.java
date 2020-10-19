@@ -1,7 +1,7 @@
 package com.onlytanner.industrialmetallurgy.blocks;
 
 import com.onlytanner.industrialmetallurgy.init.ModTileEntityTypes;
-import com.onlytanner.industrialmetallurgy.tileentities.ForgeTier1TileEntity;
+import com.onlytanner.industrialmetallurgy.tileentity.ForgeTier1TileEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ContainerBlock;
 import net.minecraft.block.SoundType;

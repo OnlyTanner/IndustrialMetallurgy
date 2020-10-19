@@ -46,7 +46,9 @@ public class ForgeTier1Block extends ContainerBlock {
             if (!(player instanceof ServerPlayerEntity)) return ActionResultType.FAIL;
 
             ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) player;
-            NetworkHooks.openGui(serverPlayerEntity, namedContainerProvider, (packetBuffer) -> {});
+            NetworkHooks.openGui(serverPlayerEntity, namedContainerProvider, (packetBuffer) -> {
+                packetBuffer.writeBlockPos(pos);
+            });
         }
         return ActionResultType.SUCCESS;
     }

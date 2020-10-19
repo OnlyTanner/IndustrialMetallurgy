@@ -30,14 +30,13 @@ public class ForgeTier1Screen extends ContainerScreen<ForgeTier1Container> {
     public void render(MatrixStack matrixStack, final int mouseX, final int mouseY, final float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
-        this.renderToolTip(matrixStack, null, mouseX, mouseY, this.font);
+        //this.renderToolTip(matrixStack, null, mouseX, mouseY, this.font);
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY) {
         super.drawGuiContainerForegroundLayer(matrixStack, mouseX, mouseY);
-        this.font.drawString(matrixStack, this.title.getUnformattedComponentText(), 8.0f, 6.0f, Color.darkGray.getRGB());
-        this.font.drawString(matrixStack, this.playerInventory.getDisplayName().getString(), 8.0f, 6.0f, Color.darkGray.getRGB());
+        this.font.drawString(matrixStack, "Forge (Tier 1)", 8.0f, 6.0f, Color.darkGray.getRGB());
     }
 
     @Override

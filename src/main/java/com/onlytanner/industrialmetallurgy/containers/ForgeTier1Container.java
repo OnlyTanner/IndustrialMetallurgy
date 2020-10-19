@@ -17,17 +17,21 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Vector;
 
+import static com.onlytanner.industrialmetallurgy.util.ContainerElementDimension.ElementType.PLAYER_INVENTORY;
+
 public class ForgeTier1Container extends Container {
 
     protected final ForgeTier1TileEntity te;
     private final IWorldPosCallable canInteractWithCallable;
     protected Map<ContainerElementDimension.ElementType, Vector<ContainerElementDimension>> containerSlots;
+    private PlayerInventory inventory;
 
     public ForgeTier1Container(final int id, final PlayerInventory player, final ForgeTier1TileEntity tileEntity) {
         super(ModContainerTypes.FORGE_TIER1.get(), id);
         this.te = tileEntity;
         this.canInteractWithCallable = IWorldPosCallable.of(te.getWorld(), te.getPos());
         this.containerSlots = new HashMap<>();
+        this.inventory = player;
         initContainerElements();
     }
 
@@ -36,6 +40,7 @@ public class ForgeTier1Container extends Container {
         this.te = getTileEntity(player, data);
         this.canInteractWithCallable = IWorldPosCallable.of(te.getWorld(), te.getPos());
         this.containerSlots = new HashMap<>();
+        this.inventory = player;
         initContainerElements();
     }
 
@@ -58,7 +63,12 @@ public class ForgeTier1Container extends Container {
             if (containerSlots.containsKey(type)) {
                 for (ContainerElementDimension elem : containerSlots.get(type)) {
                     if (elem.isSlot) {
-                        this.addSlot(new Slot(te, elem.index, elem.x, elem.y));
+                        if (elem.type == PLAYER_INVENTORY) {
+                            this.addSlot(new Slot(inventory, elem.index, elem.x, elem.y));
+                        }
+                        else {
+                            this.addSlot(new Slot(te, elem.index, elem.x, elem.y));
+                        }
                     }
                 }
             }
@@ -94,20 +104,20 @@ public class ForgeTier1Container extends Container {
         containerSlots.put(ContainerElementDimension.ElementType.FUEL, new Vector<>());
         containerSlots.put(ContainerElementDimension.ElementType.OUTPUT, new Vector<>());
         containerSlots.put(ContainerElementDimension.ElementType.INPUT, new Vector<>());
-        containerSlots.put(ContainerElementDimension.ElementType.PLAYER_INVENTORY, new Vector<>());
+        containerSlots.put(PLAYER_INVENTORY, new Vector<>());
         // Player Hotbar
         for (int i = 0; i < 9; i++) {
-            containerSlots.get(ContainerElementDimension.ElementType.PLAYER_INVENTORY).add(new ContainerElementDimension(8, 142 + (18*i), 16, 16, index++, ContainerElementDimension.ElementType.PLAYER_INVENTORY, true));
+            containerSlots.get(PLAYER_INVENTORY).add(new ContainerElementDimension(8, 142 + (18*i), 16, 16, index++, PLAYER_INVENTORY, true));
         }
         // Player Inventory
         int invX = 8, invY = 84, hotbarX = 8, hotbarY = 142;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
-                containerSlots.get(ContainerElementDimension.ElementType.PLAYER_INVENTORY).add(new ContainerElementDimension(8 + (18*j), 84 + (18*i), 16, 16, index++, ContainerElementDimension.ElementType.PLAYER_INVENTORY, true));
+                containerSlots.get(PLAYER_INVENTORY).add(new ContainerElementDimension(8 + (18*j), 84 + (18*i), 16, 16, index++, PLAYER_INVENTORY, true));
             }
         }
         // Forge Slots
-        containerSlots.get(ContainerElementDimension.ElementType.FUEL).add(new ContainerElementDimension(17, 32, 16, 16, index++, ContainerElementDimension.ElementType.FUEL, true));
+        containerSlots.get(ContainerElementDimension.ElementType.FUEL).add(new ContainerElementDimension(17, 35, 16, 16, index++, ContainerElementDimension.ElementType.FUEL, true));
         containerSlots.get(ContainerElementDimension.ElementType.OUTPUT).add(new ContainerElementDimension(127, 35, 16, 16, index++, ContainerElementDimension.ElementType.OUTPUT, true));
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 2; j++) {

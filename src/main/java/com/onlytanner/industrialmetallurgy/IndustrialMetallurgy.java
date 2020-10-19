@@ -35,10 +35,7 @@ public class IndustrialMetallurgy
     public IndustrialMetallurgy() {
         // Register the doClientStuff method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
-            FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClient);
-        });
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClient);
 
         // Registers and Loads Config File
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigHandler.COMMON_CONFIG);

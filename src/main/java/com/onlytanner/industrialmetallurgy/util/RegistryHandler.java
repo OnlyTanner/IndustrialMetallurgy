@@ -31,6 +31,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> COBALT_STEEL_INGOT = ITEMS.register("cobalt_steel_ingot", ItemBase::new);
     public static final RegistryObject<Item> CONSTANTAN_INGOT = ITEMS.register("constantan_ingot", ItemBase::new);
     public static final RegistryObject<Item> COPPER_INGOT = ITEMS.register("copper_ingot", ItemBase::new);
+    public static final RegistryObject<Item> COPPER_TUNGSTEN_INGOT = ITEMS.register("copper_tungsten_ingot", ItemBase::new);
     public static final RegistryObject<Item> ELECTRUM_INGOT = ITEMS.register("electrum_ingot", ItemBase::new);
     public static final RegistryObject<Item> INVAR_INGOT = ITEMS.register("invar_ingot", ItemBase::new);
     public static final RegistryObject<Item> KANTHAL_INGOT = ITEMS.register("kanthal_ingot", ItemBase::new);
@@ -51,20 +52,30 @@ public class RegistryHandler {
     public static final RegistryObject<Item> TUNGSTEN_STEEL_INGOT = ITEMS.register("tungsten_steel_ingot", ItemBase::new);
     public static final RegistryObject<Item> ZINC_INGOT = ITEMS.register("zinc_ingot", ItemBase::new);
     // Metal Nuggets
+    public static final RegistryObject<Item> ALNICO_NUGGET = ITEMS.register("alnico_nugget", ItemBase::new);
     public static final RegistryObject<Item> ALUMINUM_NUGGET = ITEMS.register("aluminum_nugget", ItemBase::new);
     public static final RegistryObject<Item> BRASS_NUGGET = ITEMS.register("brass_nugget", ItemBase::new);
     public static final RegistryObject<Item> BRONZE_NUGGET = ITEMS.register("bronze_nugget", ItemBase::new);
     public static final RegistryObject<Item> CHROMIUM_NUGGET = ITEMS.register("chromium_nugget", ItemBase::new);
     public static final RegistryObject<Item> COBALT_NUGGET = ITEMS.register("cobalt_nugget", ItemBase::new);
     public static final RegistryObject<Item> COBALT_STEEL_NUGGET = ITEMS.register("cobalt_steel_nugget", ItemBase::new);
+    public static final RegistryObject<Item> CONSTANTAN_NUGGET = ITEMS.register("constantan_nugget", ItemBase::new);
     public static final RegistryObject<Item> COPPER_NUGGET = ITEMS.register("copper_nugget", ItemBase::new);
+    public static final RegistryObject<Item> COPPER_TUNGSTEN_NUGGET = ITEMS.register("copper_tungsten_nugget", ItemBase::new);
+    public static final RegistryObject<Item> ELECTRUM_NUGGET = ITEMS.register("electrum_nugget", ItemBase::new);
     public static final RegistryObject<Item> INVAR_NUGGET = ITEMS.register("invar_nugget", ItemBase::new);
     public static final RegistryObject<Item> KANTHAL_NUGGET = ITEMS.register("kanthal_nugget", ItemBase::new);
+    public static final RegistryObject<Item> LEAD_NUGGET = ITEMS.register("lead_nugget", ItemBase::new);
+    public static final RegistryObject<Item> MANGANESE_NUGGET = ITEMS.register("manganese_nugget", ItemBase::new);
     public static final RegistryObject<Item> NEQUITUM_NUGGET = ITEMS.register("nequitum_nugget", ItemBase::new);
     public static final RegistryObject<Item> NICHROME_NUGGET = ITEMS.register("nichrome_nugget", ItemBase::new);
     public static final RegistryObject<Item> NICKEL_NUGGET = ITEMS.register("nickel_nugget", ItemBase::new);
+    public static final RegistryObject<Item> NIKROTHAL_NUGGET = ITEMS.register("nikrothal_nugget", ItemBase::new);
     public static final RegistryObject<Item> NITINOL_NUGGET = ITEMS.register("nitinol_nugget", ItemBase::new);
+    public static final RegistryObject<Item> SILVER_NUGGET = ITEMS.register("silver_nugget", ItemBase::new);
+    public static final RegistryObject<Item> SOLDER_NUGGET = ITEMS.register("solder_nugget", ItemBase::new);
     public static final RegistryObject<Item> STEEL_NUGGET = ITEMS.register("steel_nugget", ItemBase::new);
+    public static final RegistryObject<Item> STELLITE_NUGGET = ITEMS.register("stellite_nugget", ItemBase::new);
     public static final RegistryObject<Item> TIN_NUGGET = ITEMS.register("tin_nugget", ItemBase::new);
     public static final RegistryObject<Item> TITANIUM_NUGGET = ITEMS.register("titanium_nugget", ItemBase::new);
     public static final RegistryObject<Item> TUNGSTEN_NUGGET = ITEMS.register("tungsten_nugget", ItemBase::new);
@@ -129,6 +140,7 @@ public class RegistryHandler {
     public static final RegistryObject<Block> COBALT_STEEL_BLOCK = BLOCKS.register("cobalt_steel_block", MetalBlock::new);
     public static final RegistryObject<Block> CONSTANTAN_BLOCK = BLOCKS.register("constantan_block", MetalBlock::new);
     public static final RegistryObject<Block> COPPER_BLOCK = BLOCKS.register("copper_block", MetalBlock::new);
+    public static final RegistryObject<Block> COPPER_TUNSTEN_BLOCK = BLOCKS.register("copper_tungsten_block", MetalBlock::new);
     public static final RegistryObject<Block> ELECTRUM_BLOCK = BLOCKS.register("electrum_block", MetalBlock::new);
     public static final RegistryObject<Block> INVAR_BLOCK = BLOCKS.register("invar_block", MetalBlock::new);
     public static final RegistryObject<Block> KANTHAL_BLOCK = BLOCKS.register("kanthal_block", MetalBlock::new);
@@ -179,6 +191,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> COBALT_STEEL_BLOCK_ITEM = ITEMS.register("cobalt_steel_block", () -> new BlockItemBase(COBALT_STEEL_BLOCK.get()));
     public static final RegistryObject<Item> CONSTANTAN_BLOCK_ITEM = ITEMS.register("constantan_block", () -> new BlockItemBase(CONSTANTAN_BLOCK.get()));
     public static final RegistryObject<Item> COPPER_BLOCK_ITEM = ITEMS.register("copper_block", () -> new BlockItemBase(COPPER_BLOCK.get()));
+    public static final RegistryObject<Item> COPPER_TUNGSTEN_BLOCK_ITEM = ITEMS.register("copper_tungsten_block", () -> new BlockItemBase(COPPER_TUNSTEN_BLOCK.get()));
     public static final RegistryObject<Item> ELECTRUM_BLOCK_ITEM = ITEMS.register("electrum_block", () -> new BlockItemBase(ELECTRUM_BLOCK.get()));
     public static final RegistryObject<Item> INVAR_BLOCK_ITEM = ITEMS.register("invar_block", () -> new BlockItemBase(INVAR_BLOCK.get()));
     public static final RegistryObject<Item> KANTHAL_BLOCK_ITEM = ITEMS.register("kanthal_block", () -> new BlockItemBase(KANTHAL_BLOCK.get()));

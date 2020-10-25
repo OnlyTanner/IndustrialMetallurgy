@@ -9,8 +9,6 @@ import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
-import net.minecraft.world.gen.placement.Placement;
-import net.minecraft.world.gen.placement.TopSolidRangeConfig;
 
 public class OreFeatureHandler {
 
@@ -107,19 +105,19 @@ public class OreFeatureHandler {
 
 
     public static void initModFeatures () {
-        Registry.register(WorldGenRegistries.field_243653_e, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_argentite"), ORE_ARGENTITE);
-        Registry.register(WorldGenRegistries.field_243653_e, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_bauxite"), ORE_BAUXITE);
-        Registry.register(WorldGenRegistries.field_243653_e, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_cassiterite"), ORE_CASSITERITE);
-        Registry.register(WorldGenRegistries.field_243653_e, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_chromite"), ORE_CHROMITE);
-        Registry.register(WorldGenRegistries.field_243653_e, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_cobaltite"), ORE_COBALTITE);
-        Registry.register(WorldGenRegistries.field_243653_e, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_cuprite"), ORE_CUPRITE);
-        Registry.register(WorldGenRegistries.field_243653_e, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_galena"), ORE_GALENA);
-        Registry.register(WorldGenRegistries.field_243653_e, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_garnierite"), ORE_GARNIERITE);
-        Registry.register(WorldGenRegistries.field_243653_e, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_lepidolite"), ORE_LEPIDOLITE);
-        Registry.register(WorldGenRegistries.field_243653_e, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_pyrolusite"), ORE_PYROLUSITE);
-        Registry.register(WorldGenRegistries.field_243653_e, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_rutile"), ORE_RUTILE);
-        Registry.register(WorldGenRegistries.field_243653_e, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_scheelite"), ORE_SCHEELITE);
-        Registry.register(WorldGenRegistries.field_243653_e, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_sphalerite"), ORE_SPHALERITE);
+        Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_argentite"), ORE_ARGENTITE);
+        Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_bauxite"), ORE_BAUXITE);
+        Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_cassiterite"), ORE_CASSITERITE);
+        Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_chromite"), ORE_CHROMITE);
+        Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_cobaltite"), ORE_COBALTITE);
+        Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_cuprite"), ORE_CUPRITE);
+        Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_galena"), ORE_GALENA);
+        Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_garnierite"), ORE_GARNIERITE);
+        Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_lepidolite"), ORE_LEPIDOLITE);
+        Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_pyrolusite"), ORE_PYROLUSITE);
+        Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_rutile"), ORE_RUTILE);
+        Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_scheelite"), ORE_SCHEELITE);
+        Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(IndustrialMetallurgy.MOD_ID, "ore_sphalerite"), ORE_SPHALERITE);
     }
 
 }

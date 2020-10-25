@@ -3,8 +3,11 @@ package com.onlytanner.industrialmetallurgy.containers;
 import com.onlytanner.industrialmetallurgy.init.ModContainerTypes;
 import com.onlytanner.industrialmetallurgy.tileentity.ForgeTier1TileEntity;
 import com.onlytanner.industrialmetallurgy.util.ContainerElementDimension;
+import com.onlytanner.industrialmetallurgy.util.ContainerElementDimension.ElementType;
+import com.onlytanner.industrialmetallurgy.util.RegistryHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
@@ -17,14 +20,14 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Vector;
 
-import static com.onlytanner.industrialmetallurgy.util.ContainerElementDimension.ElementType.PLAYER_INVENTORY;
-
 public class ForgeTier1Container extends Container {
 
     protected final ForgeTier1TileEntity te;
     private final IWorldPosCallable canInteractWithCallable;
     protected Map<ContainerElementDimension.ElementType, Vector<ContainerElementDimension>> containerSlots;
     private PlayerInventory inventory;
+    private Slot fuelSlot, outputSlot;
+    private Slot[] inputSlots;
 
     public ForgeTier1Container(final int id, final PlayerInventory player, final ForgeTier1TileEntity tileEntity) {
         super(ModContainerTypes.FORGE_TIER1.get(), id);
@@ -32,16 +35,12 @@ public class ForgeTier1Container extends Container {
         this.canInteractWithCallable = IWorldPosCallable.of(te.getWorld(), te.getPos());
         this.containerSlots = new HashMap<>();
         this.inventory = player;
+        this.inputSlots = new ForgeInputSlot[6];
         initContainerElements();
     }
 
     public ForgeTier1Container(final int id, final PlayerInventory player, final PacketBuffer data) {
-        super(ModContainerTypes.FORGE_TIER1.get(), id);
-        this.te = getTileEntity(player, data);
-        this.canInteractWithCallable = IWorldPosCallable.of(te.getWorld(), te.getPos());
-        this.containerSlots = new HashMap<>();
-        this.inventory = player;
-        initContainerElements();
+        this(id, player, getTileEntity(player, data));
     }
 
     private static ForgeTier1TileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {
@@ -59,15 +58,25 @@ public class ForgeTier1Container extends Container {
     }
 
     protected void attachSlotsToContainer() {
+        int inputSlotIndex = 0;
         for (ContainerElementDimension.ElementType type : ContainerElementDimension.ElementType.values()) {
             if (containerSlots.containsKey(type)) {
                 for (ContainerElementDimension elem : containerSlots.get(type)) {
                     if (elem.isSlot) {
-                        if (elem.type == PLAYER_INVENTORY) {
+                        if (elem.type == ElementType.PLAYER_INVENTORY) {
                             this.addSlot(new Slot(inventory, elem.index, elem.x, elem.y));
                         }
-                        else {
-                            this.addSlot(new Slot(te, elem.index, elem.x, elem.y));
+                        else if (elem.type == ElementType.FUEL) {
+                            this.fuelSlot = new ForgeFuelSlot(inventory, elem.index, elem.x, elem.y);
+                            this.addSlot(fuelSlot);
+                        }
+                        else if (elem.type == ElementType.OUTPUT) {
+                            this.outputSlot = new ForgeOutputSlot(inventory, elem.index, elem.x, elem.y);
+                            this.addSlot(outputSlot);
+                        }
+                        else if (elem.type == ElementType.INPUT) {
+                            this.inputSlots[inputSlotIndex] = new ForgeInputSlot(inventory, elem.index, elem.x, elem.y);
+                            this.addSlot(inputSlots[inputSlotIndex]);
                         }
                     }
                 }
@@ -101,23 +110,23 @@ public class ForgeTier1Container extends Container {
 
     protected final void initContainerElements() {
         int index = 0;
-        containerSlots.put(ContainerElementDimension.ElementType.FUEL, new Vector<>());
-        containerSlots.put(ContainerElementDimension.ElementType.OUTPUT, new Vector<>());
-        containerSlots.put(ContainerElementDimension.ElementType.INPUT, new Vector<>());
-        containerSlots.put(PLAYER_INVENTORY, new Vector<>());
+        containerSlots.put(ElementType.FUEL, new Vector<>());
+        containerSlots.put(ElementType.OUTPUT, new Vector<>());
+        containerSlots.put(ElementType.INPUT, new Vector<>());
+        containerSlots.put(ElementType.PLAYER_INVENTORY, new Vector<>());
         // Player Hotbar
         for (int i = 0; i < 9; i++) {
-            containerSlots.get(PLAYER_INVENTORY).add(new ContainerElementDimension(8, 142 + (18*i), 16, 16, index++, PLAYER_INVENTORY, true));
+            containerSlots.get(ElementType.PLAYER_INVENTORY).add(new ContainerElementDimension(8, 142 + (18*i), 16, 16, index++, ElementType.PLAYER_INVENTORY, true));
         }
         // Player Inventory
         int invX = 8, invY = 84, hotbarX = 8, hotbarY = 142;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
-                containerSlots.get(PLAYER_INVENTORY).add(new ContainerElementDimension(8 + (18*j), 84 + (18*i), 16, 16, index++, PLAYER_INVENTORY, true));
+                containerSlots.get(ElementType.PLAYER_INVENTORY).add(new ContainerElementDimension(8 + (18*j), 84 + (18*i), 16, 16, index++, ElementType.PLAYER_INVENTORY, true));
             }
         }
         // Forge Slots
-        containerSlots.get(ContainerElementDimension.ElementType.FUEL).add(new ContainerElementDimension(17, 35, 16, 16, index++, ContainerElementDimension.ElementType.FUEL, true));
+        containerSlots.get(ElementType.FUEL).add(new ContainerElementDimension(17, 35, 16, 16, index++, ElementType.FUEL, true));
         containerSlots.get(ContainerElementDimension.ElementType.OUTPUT).add(new ContainerElementDimension(127, 35, 16, 16, index++, ContainerElementDimension.ElementType.OUTPUT, true));
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 2; j++) {
@@ -126,6 +135,45 @@ public class ForgeTier1Container extends Container {
         }
         // Attach all slot elements to the parent Container object
         attachSlotsToContainer();
+    }
+
+    public class ForgeFuelSlot extends Slot {
+
+        public ForgeFuelSlot(IInventory inventory, int index, int xPos, int yPos) {
+            super(inventory, index, xPos, yPos);
+        }
+
+        @Override
+        public boolean isItemValid(ItemStack stack) {
+            return (stack.getItem().equals(RegistryHandler.COAL_COKE));
+        }
+
+    }
+
+    public class ForgeOutputSlot extends Slot {
+
+        public ForgeOutputSlot(IInventory inventory, int index, int xPos, int yPos) {
+            super(inventory, index, xPos, yPos);
+        }
+
+        @Override
+        public boolean isItemValid(ItemStack stack) {
+            return false;
+        }
+
+    }
+
+    public class ForgeInputSlot extends Slot {
+
+        public ForgeInputSlot(IInventory inventory, int index, int xPos, int yPos) {
+            super(inventory, index, xPos, yPos);
+        }
+
+        @Override
+        public boolean isItemValid(ItemStack stack) {
+            return true;
+        }
+
     }
 
 }

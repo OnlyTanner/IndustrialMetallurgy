@@ -26,7 +26,6 @@ public class ContainerElementDimension {
         OUTPUT,
         CONTAINER_INVENTORY,
         PLAYER_INVENTORY,
-        BUTTON,
         LAYER_ELEMENT
     }
 

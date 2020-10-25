@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 public class OreGenHandler {
 
     public static void generateOres() {
-        for (Map.Entry<RegistryKey<Biome>, Biome> biome : WorldGenRegistries.field_243657_i.getEntries() /* Collection of Biome Entries */) {
+        for (Map.Entry<RegistryKey<Biome>, Biome> biome : WorldGenRegistries.BIOME.getEntries() /* Collection of Biome Entries */) {
             if (biome.getValue().getCategory() == Biome.Category.NETHER) {
                 if (OreGenConfig.cobaltiteGeneration.get())
                     addFeatureToBiome(biome.getValue(), GenerationStage.Decoration.UNDERGROUND_ORES, OreFeatureHandler.ORE_COBALTITE);
@@ -65,7 +65,7 @@ public class OreGenHandler {
 
     public static void addFeatureToBiome(Biome biome, GenerationStage.Decoration decoration, ConfiguredFeature<?, ?> configuredFeature) {
         List<List<Supplier<ConfiguredFeature<?, ?>>>> biomeFeatures = new ArrayList<>(
-                biome.func_242440_e().func_242498_c() /* List of Configured Features */
+                biome.getGenerationSettings().getFeatures() /* List of Configured Features */
         );
         while (biomeFeatures.size() <= decoration.ordinal()) {
             biomeFeatures.add(Lists.newArrayList());
@@ -74,7 +74,7 @@ public class OreGenHandler {
         features.add(() -> configuredFeature);
         biomeFeatures.set(decoration.ordinal(), features);
         /* Change field_242484_f that contains the Configured Features of the Biome*/
-        ObfuscationReflectionHelper.setPrivateValue(BiomeGenerationSettings.class, biome.func_242440_e(), biomeFeatures, "field_242484_f");
+        ObfuscationReflectionHelper.setPrivateValue(BiomeGenerationSettings.class, biome.getGenerationSettings(), biomeFeatures, "features");
     }
 
 }

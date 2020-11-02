@@ -3,105 +3,112 @@ package com.onlytanner.industrialmetallurgy.world.gen.feature;
 import com.onlytanner.industrialmetallurgy.IndustrialMetallurgy;
 import com.onlytanner.industrialmetallurgy.config.OreGenConfig;
 import com.onlytanner.industrialmetallurgy.util.RegistryHandler;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.world.gen.feature.template.BlockMatchRuleTest;
+import net.minecraft.world.gen.feature.template.RuleTest;
 
 public class OreFeatureHandler {
 
+    public static final class FillerBlockType {
+        public static final RuleTest END_STONE = new BlockMatchRuleTest(Blocks.END_STONE);
+    }
+
     public static ConfiguredFeature<?, ?> ORE_ARGENTITE = Feature.ORE
             .withConfiguration(new OreFeatureConfig(
-                    OreFeatureConfig.FillerBlockType.field_241882_a, RegistryHandler.ARGENTITE_ORE.get().getDefaultState(),
+                    OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, RegistryHandler.ARGENTITE_ORE.get().getDefaultState(),
                     OreGenConfig.argentiteVeinSize.get()))
-            .func_242733_d(OreGenConfig.argentiteMaxHeight.get())
-            .func_242728_a().func_242731_b(OreGenConfig.argentitePerChunk.get());
+            .range(OreGenConfig.argentiteMaxHeight.get())
+            .square().func_242731_b(OreGenConfig.argentitePerChunk.get());
 
     public static ConfiguredFeature<?, ?> ORE_BAUXITE = Feature.ORE
             .withConfiguration(new OreFeatureConfig(
-                    OreFeatureConfig.FillerBlockType.field_241882_a, RegistryHandler.BAUXITE_ORE.get().getDefaultState(),
+                    OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, RegistryHandler.BAUXITE_ORE.get().getDefaultState(),
                     OreGenConfig.bauxiteVeinSize.get()))
-            .func_242733_d(OreGenConfig.bauxiteMaxHeight.get())
-            .func_242728_a().func_242731_b(OreGenConfig.bauxitePerChunk.get());
+            .range(OreGenConfig.bauxiteMaxHeight.get())
+            .square().func_242731_b(OreGenConfig.bauxitePerChunk.get());
 
     public static ConfiguredFeature<?, ?> ORE_CASSITERITE = Feature.ORE
             .withConfiguration(new OreFeatureConfig(
-                    OreFeatureConfig.FillerBlockType.field_241882_a, RegistryHandler.CASSITERITE_ORE.get().getDefaultState(),
+                    OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, RegistryHandler.CASSITERITE_ORE.get().getDefaultState(),
                     OreGenConfig.cassiteriteVeinSize.get()))
-            .func_242733_d(OreGenConfig.cassiteriteMaxHeight.get())
-            .func_242728_a().func_242731_b(OreGenConfig.cassiteritePerChunk.get());
+            .range(OreGenConfig.cassiteriteMaxHeight.get())
+            .square().func_242731_b(OreGenConfig.cassiteritePerChunk.get());
 
     public static ConfiguredFeature<?, ?> ORE_CHROMITE = Feature.ORE
             .withConfiguration(new OreFeatureConfig(
-                    OreFeatureConfig.FillerBlockType.field_241883_b, RegistryHandler.CHROMITE_ORE.get().getDefaultState(),
+                    OreFeatureConfig.FillerBlockType.NETHERRACK, RegistryHandler.CHROMITE_ORE.get().getDefaultState(),
                     OreGenConfig.chromiteVeinSize.get()))
-            .func_242733_d(OreGenConfig.chromiteMaxHeight.get())
-            .func_242728_a().func_242731_b(OreGenConfig.chromitePerChunk.get());
+            .range(OreGenConfig.chromiteMaxHeight.get())
+            .square().func_242731_b(OreGenConfig.chromitePerChunk.get());
 
     public static ConfiguredFeature<?, ?> ORE_COBALTITE = Feature.ORE
             .withConfiguration(new OreFeatureConfig(
-                    OreFeatureConfig.FillerBlockType.field_241883_b, RegistryHandler.COBALTITE_ORE.get().getDefaultState(),
+                    OreFeatureConfig.FillerBlockType.NETHERRACK, RegistryHandler.COBALTITE_ORE.get().getDefaultState(),
                     OreGenConfig.cobaltiteVeinSize.get()))
-            .func_242733_d(OreGenConfig.cobaltiteMaxHeight.get())
-            .func_242728_a().func_242731_b(OreGenConfig.cobaltitePerChunk.get());
+            .range(OreGenConfig.cobaltiteMaxHeight.get())
+            .square().func_242731_b(OreGenConfig.cobaltitePerChunk.get());
 
     public static ConfiguredFeature<?, ?> ORE_CUPRITE = Feature.ORE
             .withConfiguration(new OreFeatureConfig(
-                    OreFeatureConfig.FillerBlockType.field_241882_a, RegistryHandler.CUPRITE_ORE.get().getDefaultState(),
+                    OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, RegistryHandler.CUPRITE_ORE.get().getDefaultState(),
                     OreGenConfig.cupriteVeinSize.get()))
-            .func_242733_d(OreGenConfig.cupriteMaxHeight.get())
-            .func_242728_a().func_242731_b(OreGenConfig.cupritePerChunk.get());
+            .range(OreGenConfig.cupriteMaxHeight.get())
+            .square().func_242731_b(OreGenConfig.cupritePerChunk.get());
 
     public static ConfiguredFeature<?, ?> ORE_GALENA = Feature.ORE
             .withConfiguration(new OreFeatureConfig(
-                    OreFeatureConfig.FillerBlockType.field_241882_a, RegistryHandler.GALENA_ORE.get().getDefaultState(),
+                    OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, RegistryHandler.GALENA_ORE.get().getDefaultState(),
                     OreGenConfig.galenaVeinSize.get()))
-            .func_242733_d(OreGenConfig.galenaMaxHeight.get())
-            .func_242728_a().func_242731_b(OreGenConfig.galenaPerChunk.get());
+            .range(OreGenConfig.galenaMaxHeight.get())
+            .square().func_242731_b(OreGenConfig.galenaPerChunk.get());
 
     public static ConfiguredFeature<?, ?> ORE_GARNIERITE = Feature.ORE
             .withConfiguration(new OreFeatureConfig(
-                    OreFeatureConfig.FillerBlockType.field_241882_a, RegistryHandler.GARNIERITE_ORE.get().getDefaultState(),
+                    OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, RegistryHandler.GARNIERITE_ORE.get().getDefaultState(),
                     OreGenConfig.garnieriteVeinSize.get()))
-            .func_242733_d(OreGenConfig.garnieriteMaxHeight.get())
-            .func_242728_a().func_242731_b(OreGenConfig.garnieritePerChunk.get());
+            .range(OreGenConfig.garnieriteMaxHeight.get())
+            .square().func_242731_b(OreGenConfig.garnieritePerChunk.get());
 
     public static ConfiguredFeature<?, ?> ORE_LEPIDOLITE = Feature.ORE
             .withConfiguration(new OreFeatureConfig(
-                    OreFeatureConfig.FillerBlockType.field_241884_c, RegistryHandler.LEPIDOLITE_ORE.get().getDefaultState(),
+                    FillerBlockType.END_STONE, RegistryHandler.LEPIDOLITE_ORE.get().getDefaultState(),
                     OreGenConfig.lepidoliteVeinSize.get()))
-            .func_242733_d(OreGenConfig.lepidoliteMaxHeight.get())
-            .func_242728_a().func_242731_b(OreGenConfig.lepidolitePerChunk.get());
+            .range(OreGenConfig.lepidoliteMaxHeight.get())
+            .square().func_242731_b(OreGenConfig.lepidolitePerChunk.get());
 
     public static ConfiguredFeature<?, ?> ORE_PYROLUSITE = Feature.ORE
             .withConfiguration(new OreFeatureConfig(
-                    OreFeatureConfig.FillerBlockType.field_241882_a, RegistryHandler.PYROLUSITE_ORE.get().getDefaultState(),
+                    OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, RegistryHandler.PYROLUSITE_ORE.get().getDefaultState(),
                     OreGenConfig.pyrolusiteVeinSize.get()))
-            .func_242733_d(OreGenConfig.pyrolusiteMaxHeight.get())
-            .func_242728_a().func_242731_b(OreGenConfig.pyrolusitePerChunk.get());
+            .range(OreGenConfig.pyrolusiteMaxHeight.get())
+            .square().func_242731_b(OreGenConfig.pyrolusitePerChunk.get());
 
     public static ConfiguredFeature<?, ?> ORE_RUTILE = Feature.ORE
             .withConfiguration(new OreFeatureConfig(
-                    OreFeatureConfig.FillerBlockType.field_241882_a, RegistryHandler.RUTILE_ORE.get().getDefaultState(),
+                    OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, RegistryHandler.RUTILE_ORE.get().getDefaultState(),
                     OreGenConfig.rutileVeinSize.get()))
-            .func_242733_d(OreGenConfig.rutileMaxHeight.get())
-            .func_242728_a().func_242731_b(OreGenConfig.rutilePerChunk.get());
+            .range(OreGenConfig.rutileMaxHeight.get())
+            .square().func_242731_b(OreGenConfig.rutilePerChunk.get());
 
     public static ConfiguredFeature<?, ?> ORE_SCHEELITE = Feature.ORE
             .withConfiguration(new OreFeatureConfig(
-                    OreFeatureConfig.FillerBlockType.field_241884_c, RegistryHandler.SCHEELITE_ORE.get().getDefaultState(),
+                    FillerBlockType.END_STONE, RegistryHandler.SCHEELITE_ORE.get().getDefaultState(),
                     OreGenConfig.scheeliteVeinSize.get()))
-            .func_242733_d(OreGenConfig.scheeliteMaxHeight.get())
-            .func_242728_a().func_242731_b(OreGenConfig.scheelitePerChunk.get());
+            .range(OreGenConfig.scheeliteMaxHeight.get())
+            .square().func_242731_b(OreGenConfig.scheelitePerChunk.get());
 
     public static ConfiguredFeature<?, ?> ORE_SPHALERITE = Feature.ORE
             .withConfiguration(new OreFeatureConfig(
-                    OreFeatureConfig.FillerBlockType.field_241882_a, RegistryHandler.SPHALERITE_ORE.get().getDefaultState(),
+                    OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, RegistryHandler.SPHALERITE_ORE.get().getDefaultState(),
                     OreGenConfig.sphaleriteVeinSize.get()))
-            .func_242733_d(OreGenConfig.sphaleriteMaxHeight.get())
-            .func_242728_a().func_242731_b(OreGenConfig.sphaleritePerChunk.get());
+            .range(OreGenConfig.sphaleriteMaxHeight.get())
+            .square().func_242731_b(OreGenConfig.sphaleritePerChunk.get());
 
 
     public static void initModFeatures () {

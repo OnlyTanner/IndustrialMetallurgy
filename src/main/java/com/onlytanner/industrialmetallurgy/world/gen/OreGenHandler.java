@@ -32,7 +32,7 @@ public class OreGenHandler {
                 if (OreGenConfig.lepidoliteGeneration.get())
                     addFeatureToBiome(biome.getValue(), GenerationStage.Decoration.UNDERGROUND_ORES, OreFeatureHandler.ORE_LEPIDOLITE);
             }
-            else if ((biome.getValue().getCategory() == Biome.Category.PLAINS) || (biome.getValue().getCategory() == Biome.Category.ICY)){
+            else if ((biome.getValue().getCategory() == Biome.Category.PLAINS) || (biome.getValue().getCategory() == Biome.Category.ICY) || biome.getValue().getCategory() == Biome.Category.SAVANNA){
                 if (OreGenConfig.argentiteGeneration.get())
                     addFeatureToBiome(biome.getValue(), GenerationStage.Decoration.UNDERGROUND_ORES, OreFeatureHandler.ORE_ARGENTITE);
                 if (OreGenConfig.sphaleriteGeneration.get())

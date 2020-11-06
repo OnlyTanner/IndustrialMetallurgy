@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ipi",
+    "p p",
+    "ipi"
+  ],
+  "key": {
+    "i": {
+      "item": "industrialmetallurgy:invar_ingot"
+    },
+    "p": {
+      "item": "industrialmetallurgy:steel_ingot"
+    }
+  },
+  "result":
+  {
+    "item": "industrialmetallurgy:stator",
+    "count": 1
+  }
+}

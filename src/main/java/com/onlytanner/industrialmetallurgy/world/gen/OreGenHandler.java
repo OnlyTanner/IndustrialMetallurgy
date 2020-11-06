@@ -38,13 +38,13 @@ public class OreGenHandler {
                 if (OreGenConfig.sphaleriteGeneration.get())
                     addFeatureToBiome(biome.getValue(), GenerationStage.Decoration.UNDERGROUND_ORES, OreFeatureHandler.ORE_SPHALERITE);
             }
-            else if ((biome.getValue().getCategory() == Biome.Category.JUNGLE) || (biome.getValue().getCategory() == Biome.Category.EXTREME_HILLS)){
+            else if ((biome.getValue().getCategory() == Biome.Category.JUNGLE) || (biome.getValue().getCategory() == Biome.Category.EXTREME_HILLS) || (biome.getValue().getCategory() == Biome.Category.OCEAN)){
                 if (OreGenConfig.bauxiteGeneration.get())
                     addFeatureToBiome(biome.getValue(), GenerationStage.Decoration.UNDERGROUND_ORES, OreFeatureHandler.ORE_BAUXITE);
                 if (OreGenConfig.cassiteriteGeneration.get())
                     addFeatureToBiome(biome.getValue(), GenerationStage.Decoration.UNDERGROUND_ORES, OreFeatureHandler.ORE_CASSITERITE);
             }
-            else if ((biome.getValue().getCategory() == Biome.Category.DESERT) || (biome.getValue().getCategory() == Biome.Category.MESA)){
+            else if ((biome.getValue().getCategory() == Biome.Category.DESERT) || (biome.getValue().getCategory() == Biome.Category.MESA) || (biome.getValue().getCategory() == Biome.Category.BEACH)){
                 if (OreGenConfig.cupriteGeneration.get())
                     addFeatureToBiome(biome.getValue(), GenerationStage.Decoration.UNDERGROUND_ORES, OreFeatureHandler.ORE_CUPRITE);
                 if (OreGenConfig.rutileGeneration.get())

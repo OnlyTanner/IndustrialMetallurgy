@@ -128,6 +128,11 @@ public class RegistryHandler {
     public static final RegistryObject<Item> MEMORY_WIRE = ITEMS.register("memory_wire", ItemBase::new);
     public static final RegistryObject<Item> RESISTANCE_WIRE = ITEMS.register("resistance_wire", ItemBase::new);
     public static final RegistryObject<Item> SOLDER_WIRE = ITEMS.register("solder_wire", ItemBase::new);
+    public static final RegistryObject<Item> BRASS_BURR_SET = ITEMS.register("brass_burr_set", ItemBase::new);
+    public static final RegistryObject<Item> STEEL_BURR_SET = ITEMS.register("steel_burr_set", ItemBase::new);
+    public static final RegistryObject<Item> CHROMIUM_BURR_SET = ITEMS.register("chromium_burr_set", ItemBase::new);
+    public static final RegistryObject<Item> TUNGSTEN_CARBIDE_BURR_SET = ITEMS.register("tungsten_carbide_burr_set", ItemBase::new);
+    public static final RegistryObject<Item> NEQUITUM_BURR_SET = ITEMS.register("nequitum_burr_set", ItemBase::new);
 
     // Blocks
     // Metal Blocks

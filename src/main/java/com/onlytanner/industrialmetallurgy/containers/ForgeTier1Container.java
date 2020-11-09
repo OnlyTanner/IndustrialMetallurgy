@@ -98,8 +98,8 @@ public class ForgeTier1Container extends Container {
 
     @OnlyIn(Dist.CLIENT)
     public int getSmeltProgressionScaled() {
-        return this.currentSmeltTime.get() != 0 && this.te.maxSmeltTime != 0
-                ? this.currentSmeltTime.get() * 24 / this.te.maxSmeltTime
+        return this.currentSmeltTime.get() != 0 && this.te.MAX_SMELT_TIME != 0
+                ? this.currentSmeltTime.get() * 24 / this.te.MAX_SMELT_TIME
                 : 0;
     }
 

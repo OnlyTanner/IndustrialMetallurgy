@@ -52,9 +52,13 @@ import java.util.stream.Collectors;
 public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
     public static final int NUM_INPUT_SLOTS = 6;
+    public static final int OUTPUT_ID = 7;
+    public static final int FUEL_ID = 6;
     private ITextComponent customName;
     public int currentSmeltTime;
-    public final int maxSmeltTime = 100;
+    public int burnTimeRemaining;
+    public final int MAX_BURN_TIME = 800;
+    public final int MAX_SMELT_TIME = 100;
     private ForgeItemHandler inventory;
 
     public ForgeTier1TileEntity() {
@@ -65,6 +69,7 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
         super(tileEntityTypeIn);
         customName = new TranslationTextComponent("Iron Forge (Tier 1)");
         inventory = new ForgeItemHandler(8);
+        burnTimeRemaining = 0;
     }
 
     @Override
@@ -76,21 +81,34 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
     public void tick() {
         boolean dirty = false;
         if (this.world != null && !this.world.isRemote) {
-            if (this.getRecipe() != null) {
-                if (this.currentSmeltTime != this.maxSmeltTime) {
-                    this.world.setBlockState(this.getPos(),
-                            this.getBlockState().with(ForgeTier1Block.LIT, true));
+            if (this.getRecipe() != null && canProcess() && (hasFuel() || burnTimeRemaining > 0)) {
+                this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier1Block.LIT, true));
+                if (this.currentSmeltTime != this.MAX_SMELT_TIME) {
                     this.currentSmeltTime++;
+                    this.burnTimeRemaining--;
                     dirty = true;
                 } else {
-                    this.world.setBlockState(this.getPos(),
-                            this.getBlockState().with(ForgeTier1Block.LIT, false));
                     this.currentSmeltTime = 0;
-                    ItemStack output = this.getRecipe().getRecipeOutput();
-                    this.inventory.insertItem(1, output.copy(), false);
-                    this.inventory.decrStackSize(0, 1);
+                    this.burnTimeRemaining--;
+                    if (canProcess())
+                        processRecipe();
                     dirty = true;
                 }
+            }
+            else if (this.burnTimeRemaining == 0 && hasFuel() && canProcess()) {
+                this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier1Block.LIT, true));
+                consumeFuel();
+                dirty = true;
+            }
+            else {
+                if (burnTimeRemaining > 0) {
+                    this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier1Block.LIT, true));
+                    this.burnTimeRemaining--;
+                }
+                else {
+                    this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier1Block.LIT, false));
+                }
+                currentSmeltTime = 0;
             }
         }
 
@@ -99,6 +117,38 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
             this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(),
                     Constants.BlockFlags.BLOCK_UPDATE);
         }
+    }
+
+    public void processRecipe() {
+        ItemStack output = this.getRecipe().getRecipeOutput();
+        this.inventory.insertItem(OUTPUT_ID, output.copy(), false);
+        for (int i = 0; i < NUM_INPUT_SLOTS; i++) {
+            if (this.inventory.getStackInSlot(i) != ItemStack.EMPTY) {
+                ItemStack[] list = this.getRecipe().getInput().getMatchingStacks();
+                for (int j = 0; j < list.length; j++) {
+                    if (list[j].getItem().equals(this.getInventory().getStackInSlot(i).getItem())) {
+                        this.inventory.decrStackSize(i, list[j].getCount());
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean canProcess() {
+        if (getRecipe().matches(new RecipeWrapper(this.inventory), world))
+            return true;
+        return false;
+    }
+
+    public boolean hasFuel() {
+        if (this.inventory.getStackInSlot(FUEL_ID) != ItemStack.EMPTY)
+            return true;
+        return false;
+    }
+
+    public void consumeFuel() {
+        this.inventory.getStackInSlot(FUEL_ID).setCount(this.getInventory().getStackInSlot(FUEL_ID).getCount() - 1);
+        burnTimeRemaining = MAX_BURN_TIME;
     }
 
     public void setCustomName(ITextComponent name) {

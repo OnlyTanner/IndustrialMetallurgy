@@ -37,11 +37,13 @@ public class ForgeRecipe implements IRecipeBase {
         for (int i = 0; i < ForgeTier1TileEntity.NUM_INPUT_SLOTS; i++) {
             if (inv.getStackInSlot(i) != ItemStack.EMPTY) {
                 invInput.add(inv.getStackInSlot(i));
-                System.out.println(inv.getStackInSlot(i));
             }
         }
-        for (ItemStack stack : invInput) if (!input.test(stack))
+        if (invInput.size() != input.getMatchingStacks().length)
             return false;
+        for (ItemStack stack : invInput)
+            if (!input.test(stack))
+                return false;
         return true;
     }
 

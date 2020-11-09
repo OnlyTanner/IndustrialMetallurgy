@@ -53,8 +53,8 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
     private ITextComponent customName;
     public int currentSmeltTime;
     public int burnTimeRemaining;
-    public final int MAX_BURN_TIME = 800;
-    public final int MAX_SMELT_TIME = 100;
+    public final int MAX_BURN_TIME = 1600;
+    public final int MAX_SMELT_TIME = 200;
     private ForgeItemHandler inventory;
 
     public ForgeTier1TileEntity() {
@@ -107,7 +107,6 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
                 currentSmeltTime = 0;
             }
         }
-
         if (dirty) {
             this.markDirty();
             this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(),

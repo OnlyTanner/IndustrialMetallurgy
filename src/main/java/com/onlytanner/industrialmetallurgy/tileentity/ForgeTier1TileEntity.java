@@ -7,14 +7,11 @@ import com.onlytanner.industrialmetallurgy.init.ModTileEntityTypes;
 import com.onlytanner.industrialmetallurgy.recipes.ForgeRecipe;
 import com.onlytanner.industrialmetallurgy.recipes.RecipeSerializerInit;
 import com.onlytanner.industrialmetallurgy.util.ForgeItemHandler;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
@@ -30,10 +27,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -42,11 +37,12 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.wrapper.InvWrapper;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
@@ -81,7 +77,7 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
     public void tick() {
         boolean dirty = false;
         if (this.world != null && !this.world.isRemote) {
-            if (this.getRecipe() != null && canProcess() && (hasFuel() || burnTimeRemaining > 0)) {
+            if (this.getRecipe() != null && canProcess() && burnTimeRemaining > 0) {
                 this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier1Block.LIT, true));
                 if (this.currentSmeltTime != this.MAX_SMELT_TIME) {
                     this.currentSmeltTime++;
@@ -135,13 +131,16 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
     }
 
     public boolean canProcess() {
-        if (getRecipe().matches(new RecipeWrapper(this.inventory), world))
+        if (getRecipe() != null && getRecipe().matches(new RecipeWrapper(this.inventory), world) &&
+            (this.inventory.getStackInSlot(OUTPUT_ID).getCount() < 64) &&
+            ((this.inventory.getStackInSlot(OUTPUT_ID) == ItemStack.EMPTY) ||
+            (this.inventory.getStackInSlot(OUTPUT_ID).getItem().equals(getRecipe().getRecipeOutput().getItem()))))
             return true;
         return false;
     }
 
     public boolean hasFuel() {
-        if (this.inventory.getStackInSlot(FUEL_ID) != ItemStack.EMPTY)
+        if (this.inventory.getStackInSlot(FUEL_ID) != ItemStack.EMPTY && this.inventory.getStackInSlot(FUEL_ID).getCount() > 0)
             return true;
         return false;
     }

@@ -8,7 +8,6 @@ import com.onlytanner.industrialmetallurgy.util.FunctionalIntReferenceHolder;
 import com.onlytanner.industrialmetallurgy.util.RegistryHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
@@ -18,17 +17,20 @@ import net.minecraft.util.IWorldPosCallable;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Vector;
 
 public class ForgeTier1Container extends Container {
 
     protected final ForgeTier1TileEntity te;
     private final IWorldPosCallable canInteractWithCallable;
     public FunctionalIntReferenceHolder currentSmeltTime;
+    public FunctionalIntReferenceHolder burnTimeRemaining;
     protected Map<ContainerElementDimension.ElementType, Vector<ContainerElementDimension>> containerSlots;
     private PlayerInventory inventory;
     public Slot fuelSlot, outputSlot;
@@ -45,6 +47,7 @@ public class ForgeTier1Container extends Container {
         this.inputSlots = new ForgeInputSlot[6];
         initContainerElements();
         this.trackInt(currentSmeltTime = new FunctionalIntReferenceHolder(() -> this.te.currentSmeltTime, value -> this.te.currentSmeltTime = value));
+        this.trackInt(burnTimeRemaining = new FunctionalIntReferenceHolder(() -> this.te.burnTimeRemaining, value -> this.te.burnTimeRemaining = value));
     }
 
     public ForgeTier1Container(final int id, final PlayerInventory player, final PacketBuffer data) {
@@ -100,6 +103,13 @@ public class ForgeTier1Container extends Container {
     public int getSmeltProgressionScaled() {
         return this.currentSmeltTime.get() != 0 && this.te.MAX_SMELT_TIME != 0
                 ? this.currentSmeltTime.get() * 24 / this.te.MAX_SMELT_TIME
+                : 0;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public int getBurnTimeScaled() {
+        return this.burnTimeRemaining.get() != 0 && this.te.MAX_BURN_TIME != 0
+                ? this.burnTimeRemaining.get() * 14 / this.te.MAX_BURN_TIME
                 : 0;
     }
 

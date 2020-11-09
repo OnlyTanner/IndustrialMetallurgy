@@ -43,7 +43,6 @@ public class ForgeTier1Screen extends ContainerScreen<ForgeTier1Container> {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
-        //RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
         this.minecraft.getTextureManager().bindTexture(TEXTURE);
         int backgroundX = (this.width - this.xSize) / 2;
         int backgroundY = (this.height - this.ySize) / 2;
@@ -55,6 +54,8 @@ public class ForgeTier1Screen extends ContainerScreen<ForgeTier1Container> {
             ((ImageButton)button).setPosition(backgroundX + SMELT_BUTTON_X, backgroundY + SMELT_BUTTON_Y);
         }));
         this.blit(matrixStack, this.guiLeft + 94, this.guiTop + 35, 176, 14, this.container.getSmeltProgressionScaled(), 16);
+        int yOffset = 14 - this.container.getBurnTimeScaled();
+        this.blit(matrixStack, this.guiLeft + 18, this.guiTop + 17 + yOffset, 176, yOffset, 14, this.container.getBurnTimeScaled());
     }
 
     @Override

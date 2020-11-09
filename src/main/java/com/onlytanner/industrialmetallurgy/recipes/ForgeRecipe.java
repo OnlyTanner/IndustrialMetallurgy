@@ -1,14 +1,12 @@
 package com.onlytanner.industrialmetallurgy.recipes;
 
 import com.onlytanner.industrialmetallurgy.tileentity.ForgeTier1TileEntity;
-import net.minecraft.item.AirItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 
 import java.util.ArrayList;

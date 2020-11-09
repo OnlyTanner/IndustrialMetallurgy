@@ -1,0 +1,20 @@
+{
+  "type": "industrialmetallurgy:forge",
+  "output": {
+    "item": "industrialmetallurgy:brass_ingot"
+  },
+  "input": [
+    {
+      "item": "industrialmetallurgy:copper_ingot",
+      "count": 1
+    },
+    {
+      "item": "industrialmetallurgy:zinc_nugget",
+      "count": 4
+    },
+    {
+      "item": "industrialmetallurgy:lead_nugget",
+      "count": 1
+    }
+  ]
+}

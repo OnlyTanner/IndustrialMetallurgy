@@ -3,6 +3,7 @@ package com.onlytanner.industrialmetallurgy;
 import com.onlytanner.industrialmetallurgy.client.gui.ForgeTier1Screen;
 import com.onlytanner.industrialmetallurgy.init.ModContainerTypes;
 import com.onlytanner.industrialmetallurgy.init.ModTileEntityTypes;
+import com.onlytanner.industrialmetallurgy.recipes.RecipeSerializerInit;
 import com.onlytanner.industrialmetallurgy.util.ConfigHandler;
 import com.onlytanner.industrialmetallurgy.util.RegistryHandler;
 import com.onlytanner.industrialmetallurgy.world.gen.OreGenHandler;
@@ -41,6 +42,7 @@ public class IndustrialMetallurgy
         ConfigHandler.loadConfig(ConfigHandler.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve("industrialmetallurgy-common.toml"));
 
         RegistryHandler.init();
+        RecipeSerializerInit.init();
         ModTileEntityTypes.init();
         ModContainerTypes.init();
 

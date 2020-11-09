@@ -15,24 +15,12 @@ import javax.annotation.Nullable;
 
 public abstract class ModTileEntityBase extends LockableLootTileEntity implements ITickableTileEntity, ISidedInventory {
 
-    private Container container;
-
     public ModTileEntityBase(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
-        container = null;
     }
 
     public ModTileEntityBase(TileEntityType<?> tileEntityTypeIn, Container container) {
         super(tileEntityTypeIn);
-        this.container = container;
-    }
-
-    public Container getContainer() {
-        return this.container;
-    }
-
-    public void setContainer(Container container) {
-        this.container = container;
     }
 
     @Override

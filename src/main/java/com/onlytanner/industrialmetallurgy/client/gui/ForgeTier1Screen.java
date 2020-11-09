@@ -54,7 +54,7 @@ public class ForgeTier1Screen extends ContainerScreen<ForgeTier1Container> {
         this.addButton(new ImageButton(backgroundX + SMELT_BUTTON_X, backgroundY + SMELT_BUTTON_Y, BUTTON_SIZE, BUTTON_SIZE, 0, 0, BUTTON_SIZE, this.SMELT_BUTTON, (button) -> {
             ((ImageButton)button).setPosition(backgroundX + SMELT_BUTTON_X, backgroundY + SMELT_BUTTON_Y);
         }));
+        this.blit(matrixStack, this.guiLeft + 94, this.guiTop + 35, 176, 14, this.container.getSmeltProgressionScaled(), 16);
     }
-
 
 }

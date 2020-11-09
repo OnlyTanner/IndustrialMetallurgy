@@ -17,6 +17,6 @@ public class ModContainerTypes {
         CONTAINER_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
-    public static final RegistryObject<ContainerType<ForgeTier1Container>> FORGE_TIER1 = CONTAINER_TYPES.register("forge_tier1_container", () -> IForgeContainerType.create(ForgeTier1Container::new));
+    public static final RegistryObject<ContainerType<ForgeTier1Container>> FORGE_TIER1 = CONTAINER_TYPES.register("forge_tier1", () -> IForgeContainerType.create(ForgeTier1Container::new));
 
 }

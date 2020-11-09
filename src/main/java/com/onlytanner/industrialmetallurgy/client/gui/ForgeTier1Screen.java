@@ -57,4 +57,10 @@ public class ForgeTier1Screen extends ContainerScreen<ForgeTier1Container> {
         this.blit(matrixStack, this.guiLeft + 94, this.guiTop + 35, 176, 14, this.container.getSmeltProgressionScaled(), 16);
     }
 
+    @Override
+    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
+        super.drawGuiContainerForegroundLayer(matrixStack, x, y);
+        this.font.drawString(matrixStack, this.title.getUnformattedComponentText(), 8.0f, 8.0f, 0x404040);
+        this.font.drawString(matrixStack, this.playerInventory.getDisplayName().getUnformattedComponentText(), 8.0f, 69.0f, 0x404040);
+    }
 }

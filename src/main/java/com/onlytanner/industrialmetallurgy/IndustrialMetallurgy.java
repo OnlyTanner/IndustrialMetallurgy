@@ -43,8 +43,8 @@ public class IndustrialMetallurgy
 
         RegistryHandler.init();
         RecipeSerializerInit.init();
-        ModTileEntityTypes.init();
         ModContainerTypes.init();
+        ModTileEntityTypes.init();
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

@@ -4,6 +4,7 @@ import com.onlytanner.industrialmetallurgy.init.ModContainerTypes;
 import com.onlytanner.industrialmetallurgy.tileentity.ForgeTier1TileEntity;
 import com.onlytanner.industrialmetallurgy.util.ContainerElementDimension;
 import com.onlytanner.industrialmetallurgy.util.ContainerElementDimension.ElementType;
+import com.onlytanner.industrialmetallurgy.util.FunctionalIntReferenceHolder;
 import com.onlytanner.industrialmetallurgy.util.RegistryHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -27,6 +28,7 @@ public class ForgeTier1Container extends Container {
 
     protected final ForgeTier1TileEntity te;
     private final IWorldPosCallable canInteractWithCallable;
+    public FunctionalIntReferenceHolder currentSmeltTime;
     protected Map<ContainerElementDimension.ElementType, Vector<ContainerElementDimension>> containerSlots;
     private PlayerInventory inventory;
     public Slot fuelSlot, outputSlot;
@@ -42,24 +44,63 @@ public class ForgeTier1Container extends Container {
         this.inventory = player;
         this.inputSlots = new ForgeInputSlot[6];
         initContainerElements();
+        this.trackInt(currentSmeltTime = new FunctionalIntReferenceHolder(() -> this.te.currentSmeltTime, value -> this.te.currentSmeltTime = value));
     }
 
     public ForgeTier1Container(final int id, final PlayerInventory player, final PacketBuffer data) {
         this(id, player, getTileEntity(player, data));
     }
 
-    private static ForgeTier1TileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {
-        Objects.requireNonNull(playerInventory, "playerInventory cannot be null!");
-        Objects.requireNonNull(data, "data cannot be null!");
-        TileEntity tileAtPos = playerInventory.player.world.getTileEntity(data.readBlockPos());
-        if (tileAtPos instanceof ForgeTier1TileEntity)
+    private static ForgeTier1TileEntity getTileEntity(final PlayerInventory playerInv, final PacketBuffer data) {
+        Objects.requireNonNull(playerInv, "playerInv cannot be null");
+        Objects.requireNonNull(data, "data cannot be null");
+        final TileEntity tileAtPos = playerInv.player.world.getTileEntity(data.readBlockPos());
+        if (tileAtPos instanceof ForgeTier1TileEntity) {
             return (ForgeTier1TileEntity) tileAtPos;
-        throw new IllegalStateException("Tile entity is not correct! " + tileAtPos);
+        }
+        throw new IllegalStateException("TileEntity is not correct " + tileAtPos);
     }
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
-        return true;
+        return isWithinUsableDistance(canInteractWithCallable, playerIn, RegistryHandler.FORGE_TIER1.get());
+    }
+
+    @Nonnull
+    @Override
+    public ItemStack transferStackInSlot(final PlayerEntity player, final int index) {
+        ItemStack returnStack = ItemStack.EMPTY;
+        final Slot slot = this.inventorySlots.get(index);
+        if (slot != null && slot.getHasStack()) {
+            final ItemStack slotStack = slot.getStack();
+            returnStack = slotStack.copy();
+
+            final int containerSlots = this.inventorySlots.size() - player.inventory.mainInventory.size();
+            if (index < containerSlots) {
+                if (!mergeItemStack(slotStack, containerSlots, this.inventorySlots.size(), true)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (!mergeItemStack(slotStack, 0, containerSlots, false)) {
+                return ItemStack.EMPTY;
+            }
+            if (slotStack.getCount() == 0) {
+                slot.putStack(ItemStack.EMPTY);
+            } else {
+                slot.onSlotChanged();
+            }
+            if (slotStack.getCount() == returnStack.getCount()) {
+                return ItemStack.EMPTY;
+            }
+            slot.onTake(player, slotStack);
+        }
+        return returnStack;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public int getSmeltProgressionScaled() {
+        return this.currentSmeltTime.get() != 0 && this.te.maxSmeltTime != 0
+                ? this.currentSmeltTime.get() * 24 / this.te.maxSmeltTime
+                : 0;
     }
 
     protected final void initContainerElements() {
@@ -103,19 +144,16 @@ public class ForgeTier1Container extends Container {
                         }
                         else if (elem.type == ElementType.FUEL) {
                             ForgeFuelSlot f = new ForgeFuelSlot(this.te.getInventory(), elem.index, elem.x, elem.y);
-                            f.putStack(te.teContents[FUEL_ID]);
                             this.fuelSlot = f;
                             this.addSlot(fuelSlot);
                         }
                         else if (elem.type == ElementType.OUTPUT) {
                             ForgeOutputSlot o = new ForgeOutputSlot(this.te.getInventory(), elem.index, elem.x, elem.y);
-                            o.putStack(te.teContents[OUTPUT_ID]);
                             this.outputSlot = o;
                             this.addSlot(outputSlot);
                         }
                         else if (elem.type == ElementType.INPUT) {
                             ForgeInputSlot i = new ForgeInputSlot(this.te.getInventory(), elem.index, elem.x, elem.y);
-                            i.putStack(te.teContents[inputSlotIndex]);
                             this.inputSlots[inputSlotIndex] = i;
                             this.addSlot(inputSlots[inputSlotIndex++]);
                         }
@@ -123,58 +161,6 @@ public class ForgeTier1Container extends Container {
                 }
             }
         }
-    }
-
-    private ItemStack[] getContainerItemStacks() {
-        ItemStack[] slots = new ItemStack[8];
-        for (int i = 0; i < 6; i++)
-            slots[i] = inputSlots[i].getStack();
-        slots[FUEL_ID] = fuelSlot.getStack();
-        slots[OUTPUT_ID] = outputSlot.getStack();
-        return slots;
-    }
-
-    @Nonnull
-    @Override
-    public ItemStack transferStackInSlot(PlayerEntity player, int index) {
-        ItemStack returnStack = ItemStack.EMPTY;
-        final Slot slot = this.inventorySlots.get(index);
-        if (slot != null && slot.getHasStack()) {
-            final ItemStack slotStack = slot.getStack();
-            returnStack = slotStack.copy();
-
-            final int containerSlots = this.inventorySlots.size() - player.inventory.mainInventory.size();
-            if (index < containerSlots) {
-                if (!mergeItemStack(slotStack, containerSlots, this.inventorySlots.size(), true)) {
-                    return ItemStack.EMPTY;
-                }
-            } else if (!mergeItemStack(slotStack, 0, containerSlots, false)) {
-                return ItemStack.EMPTY;
-            }
-            if (slotStack.getCount() == 0) {
-                slot.putStack(ItemStack.EMPTY);
-            } else {
-                slot.onSlotChanged();
-            }
-            if (slotStack.getCount() == returnStack.getCount()) {
-                return ItemStack.EMPTY;
-            }
-            slot.onTake(player, slotStack);
-        }
-        updateSlotContents();
-        return returnStack;
-    }
-
-    private void updateSlotContents() {
-        ItemStack[] stacks = getContainerItemStacks();
-        for (int i = 0; i < stacks.length; i++) {
-            te.teContents[i] = stacks[i];
-        }
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public int getSmeltProgressionScaled() {
-        return this.te.currentSmeltTime != 0 && this.te.maxSmeltTime != 0 ? this.te.currentSmeltTime * 24 / this.te.maxSmeltTime : 0;
     }
 
     public class ForgeFuelSlot extends SlotItemHandler {

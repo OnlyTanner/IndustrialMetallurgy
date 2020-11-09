@@ -4,6 +4,7 @@ import com.onlytanner.industrialmetallurgy.IndustrialMetallurgy;
 import com.onlytanner.industrialmetallurgy.blocks.*;
 import com.onlytanner.industrialmetallurgy.items.ItemBase;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -182,7 +183,7 @@ public class RegistryHandler {
     // Other Resources
     public static final RegistryObject<Block> OIL_SAND = BLOCKS.register("oil_sand", OilSandBlock::new);
     // Machines
-    public static final RegistryObject<Block> FORGE_TIER1 = BLOCKS.register("forge_tier1", ForgeTier1Block::new);
+    public static final RegistryObject<Block> FORGE_TIER1 = BLOCKS.register("forge_tier1", () -> new ForgeTier1Block(Block.Properties.from(Blocks.FURNACE)));
 
 
     // Block Items

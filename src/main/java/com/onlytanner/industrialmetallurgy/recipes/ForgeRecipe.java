@@ -1,12 +1,14 @@
 package com.onlytanner.industrialmetallurgy.recipes;
 
 import com.onlytanner.industrialmetallurgy.tileentity.ForgeTier1TileEntity;
+import net.minecraft.item.AirItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 
 import java.util.ArrayList;
@@ -33,8 +35,10 @@ public class ForgeRecipe implements IRecipeBase {
     public boolean matches(RecipeWrapper inv, World worldIn) {
         List<ItemStack> invInput = new ArrayList<>();
         for (int i = 0; i < ForgeTier1TileEntity.NUM_INPUT_SLOTS; i++) {
-            invInput.add(inv.getStackInSlot(i));
-            System.out.println(inv.getStackInSlot(i).getItem().toString());
+            if (inv.getStackInSlot(i) != ItemStack.EMPTY) {
+                invInput.add(inv.getStackInSlot(i));
+                System.out.println(inv.getStackInSlot(i));
+            }
         }
         for (ItemStack stack : invInput) if (!input.test(stack))
             return false;

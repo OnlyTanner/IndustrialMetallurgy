@@ -18,6 +18,7 @@ public class ForgeRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializer<
     public ForgeRecipe read(ResourceLocation recipeId, JsonObject json) {
         ItemStack output = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "output"), true);
         Ingredient input = Ingredient.deserialize(JSONUtils.getJsonArray(json, "input"));
+        System.out.println(output.getItem().toString() + " <-- " + input.getMatchingStacks().toString());
         return new ForgeRecipe(recipeId, input, output);
     }
 

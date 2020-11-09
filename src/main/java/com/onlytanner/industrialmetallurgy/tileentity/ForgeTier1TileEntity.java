@@ -51,9 +51,7 @@ import java.util.stream.Collectors;
 
 public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
-    public static final int INVENTORY_SIZE = 9 + 27 + 8;
     public static final int NUM_INPUT_SLOTS = 6;
-    public int x, y, z, tick;
     private ITextComponent customName;
     public int currentSmeltTime;
     public final int maxSmeltTime = 100;
@@ -77,24 +75,21 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
     @Override
     public void tick() {
         boolean dirty = false;
-
         if (this.world != null && !this.world.isRemote) {
-            if (this.world.isBlockPowered(this.getPos())) {
-                if (this.getRecipe(this.inventory.getStackInSlot(0)) != null) {
-                    if (this.currentSmeltTime != this.maxSmeltTime) {
-                        this.world.setBlockState(this.getPos(),
-                                this.getBlockState().with(ForgeTier1Block.LIT, true));
-                        this.currentSmeltTime++;
-                        dirty = true;
-                    } else {
-                        this.world.setBlockState(this.getPos(),
-                                this.getBlockState().with(ForgeTier1Block.LIT, false));
-                        this.currentSmeltTime = 0;
-                        ItemStack output = this.getRecipe(this.inventory.getStackInSlot(0)).getRecipeOutput();
-                        this.inventory.insertItem(1, output.copy(), false);
-                        this.inventory.decrStackSize(0, 1);
-                        dirty = true;
-                    }
+            if (this.getRecipe() != null) {
+                if (this.currentSmeltTime != this.maxSmeltTime) {
+                    this.world.setBlockState(this.getPos(),
+                            this.getBlockState().with(ForgeTier1Block.LIT, true));
+                    this.currentSmeltTime++;
+                    dirty = true;
+                } else {
+                    this.world.setBlockState(this.getPos(),
+                            this.getBlockState().with(ForgeTier1Block.LIT, false));
+                    this.currentSmeltTime = 0;
+                    ItemStack output = this.getRecipe().getRecipeOutput();
+                    this.inventory.insertItem(1, output.copy(), false);
+                    this.inventory.decrStackSize(0, 1);
+                    dirty = true;
                 }
             }
         }
@@ -154,11 +149,9 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
     }
 
     @Nullable
-    private ForgeRecipe getRecipe(ItemStack stack) {
-        if (stack == null) {
+    private ForgeRecipe getRecipe() {
+        if (this.inventory == null)
             return null;
-        }
-
         Set<IRecipe<?>> recipes = findRecipesByType(RecipeSerializerInit.FORGE_RECIPE_TYPE, this.world);
         for (IRecipe<?> iRecipe : recipes) {
             ForgeRecipe recipe = (ForgeRecipe) iRecipe;
@@ -166,7 +159,6 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
                 return recipe;
             }
         }
-
         return null;
     }
 

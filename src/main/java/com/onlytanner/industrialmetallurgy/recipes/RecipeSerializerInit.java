@@ -19,7 +19,7 @@ public class RecipeSerializerInit {
 
     public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, IndustrialMetallurgy.MOD_ID);
 
-    public static final RegistryObject<IRecipeSerializer<?>> FORGE_SERIALIZER = RECIPE_SERIALIZERS.register("recipe", () -> FORGE_RECIPE_SERIALIZER);
+    public static final RegistryObject<IRecipeSerializer<?>> FORGE_SERIALIZER = RECIPE_SERIALIZERS.register("forge", () -> FORGE_RECIPE_SERIALIZER);
 
     public static void init() {
         RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().getModEventBus());

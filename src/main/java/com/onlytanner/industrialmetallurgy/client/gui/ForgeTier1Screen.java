@@ -40,6 +40,7 @@ public class ForgeTier1Screen extends ContainerScreen<ForgeTier1Container> {
         this.blit(matrixStack, this.guiLeft + 94, this.guiTop + 35, 176, 14, this.container.getSmeltProgressionScaled(), 16);
         int yOffset = 14 - this.container.getBurnTimeScaled();
         this.blit(matrixStack, this.guiLeft + 18, this.guiTop + 17 + yOffset, 176, yOffset, 14, this.container.getBurnTimeScaled());
+        this.blit(matrixStack, this.guiLeft + 164, this.guiTop + 76 - this.container.getTemperatureScaled(), 176, 31, 7, 7);
     }
 
     @Override

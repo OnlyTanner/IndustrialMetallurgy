@@ -9,6 +9,7 @@ import com.onlytanner.industrialmetallurgy.recipes.RecipeSerializerInit;
 import com.onlytanner.industrialmetallurgy.util.ForgeItemHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screen.inventory.AbstractFurnaceScreen;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -47,14 +48,16 @@ import java.util.stream.Collectors;
 
 public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
-    public static final int NUM_INPUT_SLOTS = 6;
-    public static final int OUTPUT_ID = 7;
-    public static final int FUEL_ID = 6;
+    public static final int NUM_INPUT_SLOTS = 4;
+    public static final int OUTPUT_ID = 5;
+    public static final int FUEL_ID = 4;
     private ITextComponent customName;
     public int currentSmeltTime;
     public int burnTimeRemaining;
+    public int currentTemperature;
     public final int MAX_BURN_TIME = 1600;
-    public final int MAX_SMELT_TIME = 200;
+    public final int MAX_SMELT_TIME = 50;
+    public final int MAX_TEMPERATURE = 2000;
     private ForgeItemHandler inventory;
 
     public ForgeTier1TileEntity() {
@@ -64,8 +67,9 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
     private ForgeTier1TileEntity(final TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
         customName = new TranslationTextComponent("Iron Forge (Tier 1)");
-        inventory = new ForgeItemHandler(8);
+        inventory = new ForgeItemHandler(6);
         burnTimeRemaining = 0;
+        currentTemperature = 0;
     }
 
     @Override
@@ -77,14 +81,16 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
     public void tick() {
         boolean dirty = false;
         if (this.world != null && !this.world.isRemote) {
-            if (this.getRecipe() != null && canProcess() && burnTimeRemaining > 0) {
+            if (this.getRecipe() != null && canProcess() && burnTimeRemaining > 0 && currentTemperature > 1500) {
                 this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier1Block.LIT, true));
                 if (this.currentSmeltTime != this.MAX_SMELT_TIME) {
                     this.currentSmeltTime++;
+                    this.currentTemperature = (this.currentTemperature < MAX_TEMPERATURE) ? this.currentTemperature + 5 : MAX_TEMPERATURE;
                     this.burnTimeRemaining--;
                     dirty = true;
                 } else {
                     this.currentSmeltTime = 0;
+                    this.currentTemperature = (this.currentTemperature < MAX_TEMPERATURE) ? this.currentTemperature + 5 : MAX_TEMPERATURE;
                     this.burnTimeRemaining--;
                     if (canProcess())
                         processRecipe();
@@ -93,16 +99,19 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
             }
             else if (this.burnTimeRemaining == 0 && hasFuel() && canProcess()) {
                 this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier1Block.LIT, true));
+                this.currentTemperature = (this.currentTemperature < MAX_TEMPERATURE) ? this.currentTemperature + 5 : MAX_TEMPERATURE;
                 consumeFuel();
                 dirty = true;
             }
             else {
                 if (burnTimeRemaining > 0) {
                     this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier1Block.LIT, true));
+                    this.currentTemperature = (this.currentTemperature < MAX_TEMPERATURE) ? this.currentTemperature + 5 : MAX_TEMPERATURE;
                     this.burnTimeRemaining--;
                 }
                 else {
                     this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier1Block.LIT, false));
+                    this.currentTemperature = (this.currentTemperature > 0) ? this.currentTemperature - 5 : 0;
                 }
                 currentSmeltTime = 0;
             }
@@ -181,6 +190,8 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
         ItemStackHelper.loadAllItems(nbt, inv);
         this.inventory.setNonNullList(inv);
         this.currentSmeltTime = nbt.getInt("CurrentSmeltTime");
+        this.currentTemperature = nbt.getInt("CurrentTemperature");
+        this.burnTimeRemaining = nbt.getInt("BurnTimeRemaining");
     }
 
     @Override
@@ -189,10 +200,10 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
         if (this.customName != null) {
             compound.putString("CustomName", ITextComponent.Serializer.toJson(this.customName));
         }
-
         ItemStackHelper.saveAllItems(compound, this.inventory.toNonNullList());
         compound.putInt("CurrentSmeltTime", this.currentSmeltTime);
-
+        compound.putInt("CurrentTemperature", this.currentTemperature);
+        compound.putInt("BurnTimeRemaining", this.burnTimeRemaining);
         return compound;
     }
 

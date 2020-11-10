@@ -31,12 +31,11 @@ public class ForgeTier1Container extends Container {
     private final IWorldPosCallable canInteractWithCallable;
     public FunctionalIntReferenceHolder currentSmeltTime;
     public FunctionalIntReferenceHolder burnTimeRemaining;
+    public FunctionalIntReferenceHolder currentTemperature;
     protected Map<ContainerElementDimension.ElementType, Vector<ContainerElementDimension>> containerSlots;
     private PlayerInventory inventory;
     public Slot fuelSlot, outputSlot;
     public Slot[] inputSlots;
-    public static final int FUEL_ID = 6;
-    public static final int OUTPUT_ID = 7;
 
     public ForgeTier1Container(final int id, final PlayerInventory player, final ForgeTier1TileEntity tileEntity) {
         super(ModContainerTypes.FORGE_TIER1.get(), id);
@@ -44,10 +43,11 @@ public class ForgeTier1Container extends Container {
         this.canInteractWithCallable = IWorldPosCallable.of(te.getWorld(), te.getPos());
         this.containerSlots = new HashMap<>();
         this.inventory = player;
-        this.inputSlots = new ForgeInputSlot[6];
+        this.inputSlots = new ForgeInputSlot[4];
         initContainerElements();
         this.trackInt(currentSmeltTime = new FunctionalIntReferenceHolder(() -> this.te.currentSmeltTime, value -> this.te.currentSmeltTime = value));
         this.trackInt(burnTimeRemaining = new FunctionalIntReferenceHolder(() -> this.te.burnTimeRemaining, value -> this.te.burnTimeRemaining = value));
+        this.trackInt(currentTemperature = new FunctionalIntReferenceHolder(() -> this.te.currentTemperature, value -> this.te.currentTemperature = value));
     }
 
     public ForgeTier1Container(final int id, final PlayerInventory player, final PacketBuffer data) {
@@ -113,6 +113,13 @@ public class ForgeTier1Container extends Container {
                 : 0;
     }
 
+    @OnlyIn(Dist.CLIENT)
+    public int getTemperatureScaled() {
+        return this.currentTemperature.get() != 0 && this.te.MAX_TEMPERATURE != 0
+                ? this.currentTemperature.get() * 73 / this.te.MAX_TEMPERATURE
+                : 0;
+    }
+
     protected final void initContainerElements() {
         int index = 0;
         containerSlots.put(ElementType.FUEL, new Vector<>());
@@ -132,11 +139,10 @@ public class ForgeTier1Container extends Container {
         }
         index = 0;
         // Forge Slots
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 2; j++) {
-                containerSlots.get(ContainerElementDimension.ElementType.INPUT).add(new ContainerElementDimension(55 + (18*j), 17 + (18*i), 16, 16, index++, ContainerElementDimension.ElementType.INPUT, true));
-            }
-        }
+        containerSlots.get(ContainerElementDimension.ElementType.INPUT).add(new ContainerElementDimension(47, 22, 16, 16, index++, ContainerElementDimension.ElementType.INPUT, true));
+        containerSlots.get(ContainerElementDimension.ElementType.INPUT).add(new ContainerElementDimension(73, 22, 16, 16, index++, ContainerElementDimension.ElementType.INPUT, true));
+        containerSlots.get(ContainerElementDimension.ElementType.INPUT).add(new ContainerElementDimension(47, 48, 16, 16, index++, ContainerElementDimension.ElementType.INPUT, true));
+        containerSlots.get(ContainerElementDimension.ElementType.INPUT).add(new ContainerElementDimension(73, 48, 16, 16, index++, ContainerElementDimension.ElementType.INPUT, true));
         containerSlots.get(ElementType.FUEL).add(new ContainerElementDimension(17, 35, 16, 16, index++, ElementType.FUEL, true));
         containerSlots.get(ContainerElementDimension.ElementType.OUTPUT).add(new ContainerElementDimension(127, 35, 16, 16, index++, ContainerElementDimension.ElementType.OUTPUT, true));
         // Attach all slot elements to the parent Container object

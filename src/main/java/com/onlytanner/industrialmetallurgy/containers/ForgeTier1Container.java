@@ -131,7 +131,6 @@ public class ForgeTier1Container extends Container {
             containerSlots.get(ElementType.PLAYER_INVENTORY).add(new ContainerElementDimension(8 + (18*i), 142, 16, 16, index++, ElementType.PLAYER_INVENTORY, true));
         }
         // Player Inventory
-        int invX = 8, invY = 84, hotbarX = 8, hotbarY = 142;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
                 containerSlots.get(ElementType.PLAYER_INVENTORY).add(new ContainerElementDimension(8 + (18*j), 84 + (18*i), 16, 16, index++, ElementType.PLAYER_INVENTORY, true));

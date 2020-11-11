@@ -132,7 +132,7 @@ public class CrusherBlock extends ContainerBlock {
                 return ActionResultType.SUCCESS;
             }
         }
-        return ActionResultType.SUCCESS;
+        return ActionResultType.FAIL;
     }
 
     @Override

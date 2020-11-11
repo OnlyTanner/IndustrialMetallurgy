@@ -35,7 +35,7 @@ public class CrusherContainer extends Container {
     public Slot burrSlot, outputSlot, inputSlot;
 
     public CrusherContainer(final int id, final PlayerInventory player, final CrusherTileEntity tileEntity) {
-        super(ModContainerTypes.FORGE_TIER1.get(), id);
+        super(ModContainerTypes.CRUSHER.get(), id);
         this.te = tileEntity;
         this.canInteractWithCallable = IWorldPosCallable.of(te.getWorld(), te.getPos());
         this.containerSlots = new HashMap<>();
@@ -60,7 +60,7 @@ public class CrusherContainer extends Container {
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(canInteractWithCallable, playerIn, RegistryHandler.FORGE_TIER1.get());
+        return isWithinUsableDistance(canInteractWithCallable, playerIn, RegistryHandler.CRUSHER.get());
     }
 
     @Nonnull
@@ -111,7 +111,6 @@ public class CrusherContainer extends Container {
             containerSlots.get(ElementType.PLAYER_INVENTORY).add(new ContainerElementDimension(8 + (18*i), 142, 16, 16, index++, ElementType.PLAYER_INVENTORY, true));
         }
         // Player Inventory
-        int invX = 8, invY = 84, hotbarX = 8, hotbarY = 142;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
                 containerSlots.get(ElementType.PLAYER_INVENTORY).add(new ContainerElementDimension(8 + (18*j), 84 + (18*i), 16, 16, index++, ElementType.PLAYER_INVENTORY, true));
@@ -127,7 +126,6 @@ public class CrusherContainer extends Container {
     }
 
     protected void attachSlotsToContainer() {
-        int inputSlotIndex = 0;
         for (ContainerElementDimension.ElementType type : ContainerElementDimension.ElementType.values()) {
             if (containerSlots.containsKey(type)) {
                 for (ContainerElementDimension elem : containerSlots.get(type)) {

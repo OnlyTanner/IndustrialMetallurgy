@@ -3,6 +3,7 @@ package com.onlytanner.industrialmetallurgy.client.gui;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.onlytanner.industrialmetallurgy.IndustrialMetallurgy;
 import com.onlytanner.industrialmetallurgy.containers.CrusherContainer;
+import net.minecraft.client.gui.screen.inventory.AbstractFurnaceScreen;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
@@ -21,6 +22,13 @@ public class CrusherScreen extends ContainerScreen<CrusherContainer> {
         this.guiTop = 0;
         this.xSize = 176;
         this.ySize = 166;
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        this.titleX = (this.xSize - this.font.getStringPropertyWidth(this.title)) / 2;
+        this.playerInventoryTitleX += 20;
     }
 
     @Override

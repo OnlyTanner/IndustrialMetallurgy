@@ -132,7 +132,7 @@ public class ForgeTier1Block extends ContainerBlock {
                 return ActionResultType.SUCCESS;
             }
         }
-        return ActionResultType.SUCCESS;
+        return ActionResultType.FAIL;
     }
 
     @Override

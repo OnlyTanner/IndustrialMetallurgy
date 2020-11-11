@@ -47,7 +47,6 @@ import java.util.stream.Collectors;
 
 public class CrusherTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
-    public static final int NUM_INPUT_SLOTS = 4;
     private ITextComponent customName;
     public int currentSmeltTime;
     public final int MAX_SMELT_TIME = 50;
@@ -60,7 +59,7 @@ public class CrusherTileEntity extends TileEntity implements ITickableTileEntity
     private CrusherTileEntity(final TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
         customName = new TranslationTextComponent("Crusher");
-        inventory = new ModItemHandler(6);
+        inventory = new ModItemHandler(3);
     }
 
     @Override

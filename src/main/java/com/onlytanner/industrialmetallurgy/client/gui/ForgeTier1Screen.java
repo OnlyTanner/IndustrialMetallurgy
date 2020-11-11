@@ -24,6 +24,12 @@ public class ForgeTier1Screen extends ContainerScreen<ForgeTier1Container> {
     }
 
     @Override
+    protected void init() {
+        super.init();
+        this.titleX = (this.xSize - this.font.getStringPropertyWidth(this.title)) / 2;
+    }
+
+    @Override
     public void render(MatrixStack matrixStack, final int mouseX, final int mouseY, final float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);

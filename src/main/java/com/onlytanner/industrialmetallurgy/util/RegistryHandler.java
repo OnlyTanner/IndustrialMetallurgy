@@ -186,6 +186,7 @@ public class RegistryHandler {
     // Machines
     public static final RegistryObject<Block> FORGE_TIER1 = BLOCKS.register("forge_tier1", () -> new ForgeTier1Block(Block.Properties.from(Blocks.FURNACE)));
     public static final RegistryObject<Block> CRUSHER = BLOCKS.register("crusher", () -> new CrusherBlock(Block.Properties.from(Blocks.FURNACE)));
+    public static final RegistryObject<Block> COKE_OVEN = BLOCKS.register("coke_oven", () -> new CokeOvenBlock(Block.Properties.from(Blocks.FURNACE)));
 
 
     // Block Items
@@ -238,5 +239,6 @@ public class RegistryHandler {
     // Machines
     public static final RegistryObject<Item> FORGE_TIER1_ITEM = ITEMS.register("forge_tier1", () -> new BlockItemBase(FORGE_TIER1.get()));
     public static final RegistryObject<Item> CRUSHER_ITEM = ITEMS.register("crusher", () -> new BlockItemBase(CRUSHER.get()));
+    public static final RegistryObject<Item> COKE_OVEN_ITEM = ITEMS.register("coke_oven", () -> new BlockItemBase(COKE_OVEN.get()));
 
 }

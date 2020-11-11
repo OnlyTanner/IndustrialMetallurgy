@@ -1,13 +1,13 @@
 package com.onlytanner.industrialmetallurgy.tileentity;
 
 import com.onlytanner.industrialmetallurgy.IndustrialMetallurgy;
+import com.onlytanner.industrialmetallurgy.blocks.CokeOvenBlock;
 import com.onlytanner.industrialmetallurgy.blocks.CrusherBlock;
-import com.onlytanner.industrialmetallurgy.containers.CrusherContainer;
+import com.onlytanner.industrialmetallurgy.containers.CokeOvenContainer;
 import com.onlytanner.industrialmetallurgy.init.ModTileEntityTypes;
-import com.onlytanner.industrialmetallurgy.recipes.CrusherRecipe;
+import com.onlytanner.industrialmetallurgy.recipes.CokeOvenRecipe;
 import com.onlytanner.industrialmetallurgy.recipes.RecipeSerializerInit;
 import com.onlytanner.industrialmetallurgy.util.ModItemHandler;
-import com.onlytanner.industrialmetallurgy.util.RegistryHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
@@ -43,52 +43,61 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class CrusherTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
+public class CokeOvenTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
     public static final int INPUT_ID = 0;
-    public static final int BURR_SET_ID = 1;
-    public static final int OUTPUT_ID = 2;
+    public static final int OUTPUT_ID = 1;
     private ITextComponent customName;
+    public int burnTimeRemaining;
     public int currentSmeltTime;
-    public final int MAX_SMELT_TIME = 50;
+    public final int MAX_BURN_TIME = 800;
     private ModItemHandler inventory;
 
-    public CrusherTileEntity() {
-        this(ModTileEntityTypes.CRUSHER.get());
+    public CokeOvenTileEntity() {
+        this(ModTileEntityTypes.COKE_OVEN.get());
     }
 
-    private CrusherTileEntity(final TileEntityType<?> tileEntityTypeIn) {
+    private CokeOvenTileEntity(final TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
-        customName = new TranslationTextComponent("Crusher");
-        inventory = new ModItemHandler(3);
+        customName = new TranslationTextComponent("Coke Oven");
+        inventory = new ModItemHandler(2);
+        burnTimeRemaining = 0;
+        currentSmeltTime = 0;
     }
 
     @Override
     public Container createMenu(final int windowID, final PlayerInventory playerInv, final PlayerEntity playerIn) {
-        return new CrusherContainer(windowID, playerInv, this);
+        return new CokeOvenContainer(windowID, playerInv, this);
     }
 
     @Override
     public void tick() {
         boolean dirty = false;
         if (this.world != null && !this.world.isRemote) {
-            if (this.getRecipe() != null && canProcess() && this.inventory.getStackInSlot(BURR_SET_ID).getCount() > 0) {
-                this.world.setBlockState(this.getPos(), this.getBlockState().with(CrusherBlock.LIT, true));
-                if (this.currentSmeltTime != this.MAX_SMELT_TIME) {
+            if (this.getRecipe() != null && canProcess()) {
+                this.world.setBlockState(this.getPos(), this.getBlockState().with(CokeOvenBlock.LIT, true));
+                if (this.currentSmeltTime != this.MAX_BURN_TIME) {
                     this.currentSmeltTime++;
+                    this.burnTimeRemaining = MAX_BURN_TIME - currentSmeltTime;
                     dirty = true;
                 } else {
                     this.currentSmeltTime = 0;
+                    this.burnTimeRemaining = 0;
                     processRecipe();
                     dirty = true;
                 }
             }
             else {
-                this.world.setBlockState(this.getPos(), this.getBlockState().with(CrusherBlock.LIT, false));
+                if (burnTimeRemaining > 0) {
+                    this.world.setBlockState(this.getPos(), this.getBlockState().with(CokeOvenBlock.LIT, true));
+                    this.burnTimeRemaining = 0;
+                }
+                else {
+                    this.world.setBlockState(this.getPos(), this.getBlockState().with(CokeOvenBlock.LIT, false));
+                }
                 currentSmeltTime = 0;
             }
         }
@@ -101,9 +110,7 @@ public class CrusherTileEntity extends TileEntity implements ITickableTileEntity
 
     public void processRecipe() {
         ItemStack output = this.getRecipe().getRecipeOutput();
-        ItemStack copy = output.copy();
-        copy.setCount(getOutputForTier() * copy.getCount());
-        this.inventory.insertItem(OUTPUT_ID, copy, false);
+        this.inventory.insertItem(OUTPUT_ID, output.copy(), false);
         if (this.inventory.getStackInSlot(INPUT_ID) != ItemStack.EMPTY) {
             ItemStack[] list = this.getRecipe().getInput().getMatchingStacks();
             for (int j = 0; j < list.length; j++) {
@@ -112,25 +119,6 @@ public class CrusherTileEntity extends TileEntity implements ITickableTileEntity
                 }
             }
         }
-    }
-
-    private int getOutputForTier() {
-        if (this.inventory.getStackInSlot(BURR_SET_ID).getItem().equals(RegistryHandler.BRASS_BURR_SET.get())) {
-            return 1 + (new Random().nextInt(4) + 1) / 4;
-        }
-        else if (this.inventory.getStackInSlot(BURR_SET_ID).getItem().equals(RegistryHandler.STEEL_BURR_SET.get())) {
-            return 1 + (new Random().nextInt(2) + 1) / 2;
-        }
-        else if (this.inventory.getStackInSlot(BURR_SET_ID).getItem().equals(RegistryHandler.CHROMIUM_BURR_SET.get())) {
-            return 2;
-        }
-        else if (this.inventory.getStackInSlot(BURR_SET_ID).getItem().equals(RegistryHandler.TUNGSTEN_CARBIDE_BURR_SET.get())) {
-            return 2 + (new Random().nextInt(2) + 1) / 2;
-        }
-        else if (this.inventory.getStackInSlot(BURR_SET_ID).getItem().equals(RegistryHandler.NEQUITUM_BURR_SET.get())) {
-            return 2 + (new Random().nextInt(2) + 1) / 2;
-        }
-        return 0;
     }
 
     public boolean canProcess() {
@@ -151,7 +139,7 @@ public class CrusherTileEntity extends TileEntity implements ITickableTileEntity
     }
 
     public ITextComponent getDefaultName() {
-        return new TranslationTextComponent("container." + IndustrialMetallurgy.MOD_ID + ".crusher");
+        return new TranslationTextComponent("container." + IndustrialMetallurgy.MOD_ID + ".coke_oven");
     }
 
     @Override
@@ -173,7 +161,7 @@ public class CrusherTileEntity extends TileEntity implements ITickableTileEntity
         NonNullList<ItemStack> inv = NonNullList.<ItemStack>withSize(this.inventory.getSlots(), ItemStack.EMPTY);
         ItemStackHelper.loadAllItems(nbt, inv);
         this.inventory.setNonNullList(inv);
-        this.currentSmeltTime = nbt.getInt("CurrentSmeltTime");
+        this.burnTimeRemaining = nbt.getInt("BurnTimeRemaining");
     }
 
     @Override
@@ -183,17 +171,17 @@ public class CrusherTileEntity extends TileEntity implements ITickableTileEntity
             compound.putString("CustomName", ITextComponent.Serializer.toJson(this.customName));
         }
         ItemStackHelper.saveAllItems(compound, this.inventory.toNonNullList());
-        compound.putInt("CurrentSmeltTime", this.currentSmeltTime);
+        compound.putInt("BurnTimeRemaining", this.burnTimeRemaining);
         return compound;
     }
 
     @Nullable
-    private CrusherRecipe getRecipe() {
+    private CokeOvenRecipe getRecipe() {
         if (this.inventory == null)
             return null;
-        Set<IRecipe<?>> recipes = findRecipesByType(RecipeSerializerInit.CRUSHER_RECIPE_TYPE, this.world);
+        Set<IRecipe<?>> recipes = findRecipesByType(RecipeSerializerInit.COKE_OVEN_RECIPE_TYPE, this.world);
         for (IRecipe<?> iRecipe : recipes) {
-            CrusherRecipe recipe = (CrusherRecipe) iRecipe;
+            CokeOvenRecipe recipe = (CokeOvenRecipe) iRecipe;
             if (recipe.matches(new RecipeWrapper(this.inventory), this.world)) {
                 return recipe;
             }

@@ -1,0 +1,9 @@
+{
+  "type": "industrialmetallurgy:coke_oven",
+  "output": {
+    "item": "industrialmetallurgy:coal_coke"
+  },
+  "input": {
+    "item": "minecraft:coal"
+  }
+}

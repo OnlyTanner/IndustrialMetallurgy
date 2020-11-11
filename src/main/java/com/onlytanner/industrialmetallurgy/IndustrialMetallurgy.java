@@ -1,5 +1,6 @@
 package com.onlytanner.industrialmetallurgy;
 
+import com.onlytanner.industrialmetallurgy.client.gui.CrusherScreen;
 import com.onlytanner.industrialmetallurgy.client.gui.ForgeTier1Screen;
 import com.onlytanner.industrialmetallurgy.init.ModContainerTypes;
 import com.onlytanner.industrialmetallurgy.init.ModTileEntityTypes;
@@ -58,6 +59,7 @@ public class IndustrialMetallurgy
     @OnlyIn(Dist.CLIENT)
     private void setupClient(final FMLClientSetupEvent event) {
         ScreenManager.registerFactory(ModContainerTypes.FORGE_TIER1.get(), ForgeTier1Screen::new);
+        ScreenManager.registerFactory(ModContainerTypes.CRUSHER.get(), CrusherScreen::new);
     }
 
     public static final ItemGroup TAB = new ItemGroup("industrialMetallurgy") {

@@ -1,6 +1,6 @@
 package com.onlytanner.industrialmetallurgy.recipes;
 
-import com.onlytanner.industrialmetallurgy.tileentity.ForgeTier1TileEntity;
+import com.onlytanner.industrialmetallurgy.tileentity.CrusherTileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
@@ -12,13 +12,13 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ForgeRecipe implements ForgeRecipeBase {
+public class CrusherRecipe implements ForgeRecipeBase {
 
     private final ResourceLocation id;
     private Ingredient input;
     private ItemStack output;
 
-    public ForgeRecipe(ResourceLocation id, Ingredient input, ItemStack output) {
+    public CrusherRecipe(ResourceLocation id, Ingredient input, ItemStack output) {
         this.id = id;
         this.input = input;
         this.output = output;
@@ -32,7 +32,7 @@ public class ForgeRecipe implements ForgeRecipeBase {
     @Override
     public boolean matches(RecipeWrapper inv, World worldIn) {
         List<ItemStack> invInput = new ArrayList<>();
-        for (int i = 0; i < ForgeTier1TileEntity.NUM_INPUT_SLOTS; i++) {
+        for (int i = 0; i < CrusherTileEntity.NUM_INPUT_SLOTS; i++) {
             if (inv.getStackInSlot(i) != ItemStack.EMPTY) {
                 invInput.add(inv.getStackInSlot(i));
             }
@@ -62,7 +62,7 @@ public class ForgeRecipe implements ForgeRecipeBase {
 
     @Override
     public IRecipeSerializer<?> getSerializer() {
-        return RecipeSerializerInit.FORGE_SERIALIZER.get();
+        return RecipeSerializerInit.CRUSHER_SERIALIZER.get();
     }
 
     @Override

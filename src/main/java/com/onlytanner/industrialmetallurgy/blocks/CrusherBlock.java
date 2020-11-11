@@ -1,7 +1,7 @@
 package com.onlytanner.industrialmetallurgy.blocks;
 
 import com.onlytanner.industrialmetallurgy.init.ModTileEntityTypes;
-import com.onlytanner.industrialmetallurgy.tileentity.ForgeTier1TileEntity;
+import com.onlytanner.industrialmetallurgy.tileentity.CrusherTileEntity;
 import com.onlytanner.industrialmetallurgy.util.ModItemHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -32,12 +32,12 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class ForgeTier1Block extends ContainerBlock {
+public class CrusherBlock extends ContainerBlock {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty LIT = BooleanProperty.create("lit");
 
-    public ForgeTier1Block(Properties properties) {
+    public CrusherBlock(Properties properties) {
         super(properties);
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(LIT, false));
     }
@@ -49,7 +49,7 @@ public class ForgeTier1Block extends ContainerBlock {
 
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return ModTileEntityTypes.FORGE_TIER1.get().create();
+        return ModTileEntityTypes.CRUSHER.get().create();
     }
 
     @Override
@@ -83,8 +83,8 @@ public class ForgeTier1Block extends ContainerBlock {
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
         if (stack.hasDisplayName()) {
             TileEntity tile = worldIn.getTileEntity(pos);
-            if (tile instanceof ForgeTier1TileEntity) {
-                ((ForgeTier1TileEntity) tile).setCustomName(stack.getDisplayName());
+            if (tile instanceof CrusherTileEntity) {
+                ((CrusherTileEntity) tile).setCustomName(stack.getDisplayName());
             }
         }
     }
@@ -127,7 +127,7 @@ public class ForgeTier1Block extends ContainerBlock {
                                              Hand handIn, BlockRayTraceResult hit) {
         if (worldIn != null && !worldIn.isRemote) {
             TileEntity tile = worldIn.getTileEntity(pos);
-            if (tile instanceof ForgeTier1TileEntity) {
+            if (tile instanceof CrusherTileEntity) {
                 NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tile, pos);
                 return ActionResultType.SUCCESS;
             }
@@ -138,8 +138,8 @@ public class ForgeTier1Block extends ContainerBlock {
     @Override
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         TileEntity tile = worldIn.getTileEntity(pos);
-        if (tile instanceof ForgeTier1TileEntity && state.getBlock() != newState.getBlock()) {
-            ForgeTier1TileEntity furnace = (ForgeTier1TileEntity) tile;
+        if (tile instanceof CrusherTileEntity && state.getBlock() != newState.getBlock()) {
+            CrusherTileEntity furnace = (CrusherTileEntity) tile;
             ((ModItemHandler) furnace.getInventory()).toNonNullList().forEach(item -> {
                 ItemEntity itemEntity = new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), item);
                 worldIn.addEntity(itemEntity);
@@ -154,6 +154,6 @@ public class ForgeTier1Block extends ContainerBlock {
     @Nullable
     @Override
     public TileEntity createNewTileEntity(IBlockReader worldIn) {
-        return ModTileEntityTypes.FORGE_TIER1.get().create();
+        return ModTileEntityTypes.CRUSHER.get().create();
     }
 }

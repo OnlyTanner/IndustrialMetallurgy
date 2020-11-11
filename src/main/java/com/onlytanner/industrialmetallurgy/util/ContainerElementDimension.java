@@ -24,9 +24,9 @@ public class ContainerElementDimension {
         FUEL,
         INPUT,
         OUTPUT,
+        UTILITY,
         CONTAINER_INVENTORY,
         PLAYER_INVENTORY,
-        LAYER_ELEMENT
     }
 
 }

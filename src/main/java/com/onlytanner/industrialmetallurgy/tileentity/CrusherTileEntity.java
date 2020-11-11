@@ -1,10 +1,10 @@
 package com.onlytanner.industrialmetallurgy.tileentity;
 
 import com.onlytanner.industrialmetallurgy.IndustrialMetallurgy;
-import com.onlytanner.industrialmetallurgy.blocks.ForgeTier1Block;
-import com.onlytanner.industrialmetallurgy.containers.ForgeTier1Container;
+import com.onlytanner.industrialmetallurgy.blocks.CrusherBlock;
+import com.onlytanner.industrialmetallurgy.containers.CrusherContainer;
 import com.onlytanner.industrialmetallurgy.init.ModTileEntityTypes;
-import com.onlytanner.industrialmetallurgy.recipes.ForgeRecipe;
+import com.onlytanner.industrialmetallurgy.recipes.CrusherRecipe;
 import com.onlytanner.industrialmetallurgy.recipes.RecipeSerializerInit;
 import com.onlytanner.industrialmetallurgy.util.ModItemHandler;
 import net.minecraft.block.BlockState;
@@ -45,75 +45,33 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
+public class CrusherTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
     public static final int NUM_INPUT_SLOTS = 4;
-    public static final int OUTPUT_ID = 5;
-    public static final int FUEL_ID = 4;
     private ITextComponent customName;
     public int currentSmeltTime;
-    public int burnTimeRemaining;
-    public int currentTemperature;
-    public final int MAX_BURN_TIME = 1600;
     public final int MAX_SMELT_TIME = 50;
-    public final int MAX_TEMPERATURE = 2000;
     private ModItemHandler inventory;
 
-    public ForgeTier1TileEntity() {
-        this(ModTileEntityTypes.FORGE_TIER1.get());
+    public CrusherTileEntity() {
+        this(ModTileEntityTypes.CRUSHER.get());
     }
 
-    private ForgeTier1TileEntity(final TileEntityType<?> tileEntityTypeIn) {
+    private CrusherTileEntity(final TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
-        customName = new TranslationTextComponent("Iron Forge (Tier 1)");
+        customName = new TranslationTextComponent("Crusher");
         inventory = new ModItemHandler(6);
-        burnTimeRemaining = 0;
-        currentTemperature = 0;
     }
 
     @Override
     public Container createMenu(final int windowID, final PlayerInventory playerInv, final PlayerEntity playerIn) {
-        return new ForgeTier1Container(windowID, playerInv, this);
+        return new CrusherContainer(windowID, playerInv, this);
     }
 
     @Override
     public void tick() {
         boolean dirty = false;
         if (this.world != null && !this.world.isRemote) {
-            if (this.getRecipe() != null && canProcess() && burnTimeRemaining > 0 && currentTemperature > 1500) {
-                this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier1Block.LIT, true));
-                if (this.currentSmeltTime != this.MAX_SMELT_TIME) {
-                    this.currentSmeltTime++;
-                    this.currentTemperature = (this.currentTemperature < MAX_TEMPERATURE) ? this.currentTemperature + 5 : MAX_TEMPERATURE;
-                    this.burnTimeRemaining--;
-                    dirty = true;
-                } else {
-                    this.currentSmeltTime = 0;
-                    this.currentTemperature = (this.currentTemperature < MAX_TEMPERATURE) ? this.currentTemperature + 5 : MAX_TEMPERATURE;
-                    this.burnTimeRemaining--;
-                    if (canProcess())
-                        processRecipe();
-                    dirty = true;
-                }
-            }
-            else if (this.burnTimeRemaining == 0 && hasFuel() && canProcess()) {
-                this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier1Block.LIT, true));
-                this.currentTemperature = (this.currentTemperature < MAX_TEMPERATURE) ? this.currentTemperature + 5 : MAX_TEMPERATURE;
-                consumeFuel();
-                dirty = true;
-            }
-            else {
-                if (burnTimeRemaining > 0) {
-                    this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier1Block.LIT, true));
-                    this.currentTemperature = (this.currentTemperature < MAX_TEMPERATURE) ? this.currentTemperature + 5 : MAX_TEMPERATURE;
-                    this.burnTimeRemaining--;
-                }
-                else {
-                    this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier1Block.LIT, false));
-                    this.currentTemperature = (this.currentTemperature > 0) ? this.currentTemperature - 5 : 0;
-                }
-                currentSmeltTime = 0;
-            }
         }
         if (dirty) {
             this.markDirty();
@@ -123,38 +81,11 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
     }
 
     public void processRecipe() {
-        ItemStack output = this.getRecipe().getRecipeOutput();
-        this.inventory.insertItem(OUTPUT_ID, output.copy(), false);
-        for (int i = 0; i < NUM_INPUT_SLOTS; i++) {
-            if (this.inventory.getStackInSlot(i) != ItemStack.EMPTY) {
-                ItemStack[] list = this.getRecipe().getInput().getMatchingStacks();
-                for (int j = 0; j < list.length; j++) {
-                    if (list[j].getItem().equals(this.getInventory().getStackInSlot(i).getItem())) {
-                        this.inventory.decrStackSize(i, list[j].getCount());
-                    }
-                }
-            }
-        }
+
     }
 
     public boolean canProcess() {
-        if (getRecipe() != null && getRecipe().matches(new RecipeWrapper(this.inventory), world) &&
-            (this.inventory.getStackInSlot(OUTPUT_ID).getCount() < 64) &&
-            ((this.inventory.getStackInSlot(OUTPUT_ID) == ItemStack.EMPTY) ||
-            (this.inventory.getStackInSlot(OUTPUT_ID).getItem().equals(getRecipe().getRecipeOutput().getItem()))))
-            return true;
         return false;
-    }
-
-    public boolean hasFuel() {
-        if (this.inventory.getStackInSlot(FUEL_ID) != ItemStack.EMPTY && this.inventory.getStackInSlot(FUEL_ID).getCount() > 0)
-            return true;
-        return false;
-    }
-
-    public void consumeFuel() {
-        this.inventory.getStackInSlot(FUEL_ID).setCount(this.getInventory().getStackInSlot(FUEL_ID).getCount() - 1);
-        burnTimeRemaining = MAX_BURN_TIME;
     }
 
     public void setCustomName(ITextComponent name) {
@@ -166,7 +97,7 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
     }
 
     public ITextComponent getDefaultName() {
-        return new TranslationTextComponent("container." + IndustrialMetallurgy.MOD_ID + ".forge_tier1");
+        return new TranslationTextComponent("container." + IndustrialMetallurgy.MOD_ID + ".crusher");
     }
 
     @Override
@@ -189,8 +120,6 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
         ItemStackHelper.loadAllItems(nbt, inv);
         this.inventory.setNonNullList(inv);
         this.currentSmeltTime = nbt.getInt("CurrentSmeltTime");
-        this.currentTemperature = nbt.getInt("CurrentTemperature");
-        this.burnTimeRemaining = nbt.getInt("BurnTimeRemaining");
     }
 
     @Override
@@ -201,18 +130,16 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
         }
         ItemStackHelper.saveAllItems(compound, this.inventory.toNonNullList());
         compound.putInt("CurrentSmeltTime", this.currentSmeltTime);
-        compound.putInt("CurrentTemperature", this.currentTemperature);
-        compound.putInt("BurnTimeRemaining", this.burnTimeRemaining);
         return compound;
     }
 
     @Nullable
-    private ForgeRecipe getRecipe() {
+    private CrusherRecipe getRecipe() {
         if (this.inventory == null)
             return null;
-        Set<IRecipe<?>> recipes = findRecipesByType(RecipeSerializerInit.FORGE_RECIPE_TYPE, this.world);
+        Set<IRecipe<?>> recipes = findRecipesByType(RecipeSerializerInit.CRUSHER_RECIPE_TYPE, this.world);
         for (IRecipe<?> iRecipe : recipes) {
-            ForgeRecipe recipe = (ForgeRecipe) iRecipe;
+            CrusherRecipe recipe = (CrusherRecipe) iRecipe;
             if (recipe.matches(new RecipeWrapper(this.inventory), this.world)) {
                 return recipe;
             }

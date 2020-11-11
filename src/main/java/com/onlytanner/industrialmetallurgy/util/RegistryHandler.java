@@ -184,6 +184,7 @@ public class RegistryHandler {
     public static final RegistryObject<Block> OIL_SAND = BLOCKS.register("oil_sand", OilSandBlock::new);
     // Machines
     public static final RegistryObject<Block> FORGE_TIER1 = BLOCKS.register("forge_tier1", () -> new ForgeTier1Block(Block.Properties.from(Blocks.FURNACE)));
+    public static final RegistryObject<Block> CRUSHER = BLOCKS.register("crusher", () -> new CrusherBlock(Block.Properties.from(Blocks.FURNACE)));
 
 
     // Block Items
@@ -235,5 +236,6 @@ public class RegistryHandler {
     public static final RegistryObject<Item> OIL_SAND_ITEM = ITEMS.register("oil_sand", () -> new BlockItemBase(OIL_SAND.get()));
     // Machines
     public static final RegistryObject<Item> FORGE_TIER1_ITEM = ITEMS.register("forge_tier1", () -> new BlockItemBase(FORGE_TIER1.get()));
+    public static final RegistryObject<Item> CRUSHER_ITEM = ITEMS.register("crusher", () -> new BlockItemBase(CRUSHER.get()));
 
 }

@@ -5,9 +5,9 @@ import net.minecraft.item.Items;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class ForgeItemHandler extends ItemStackHandler {
+public class ModItemHandler extends ItemStackHandler {
 
-    public ForgeItemHandler(int size, ItemStack... stacks) {
+    public ModItemHandler(int size, ItemStack... stacks) {
         super(size);
 
         for (int index = 0; index < stacks.length; index++) {

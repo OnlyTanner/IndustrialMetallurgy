@@ -10,9 +10,9 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
 
 import javax.annotation.Nonnull;
 
-public interface IRecipeBase extends IRecipe<RecipeWrapper> {
+public interface CrusherRecipeBase extends IRecipe<RecipeWrapper> {
 
-    ResourceLocation RECIPE_TYPE_ID = new ResourceLocation(IndustrialMetallurgy.MOD_ID, "forge");
+    ResourceLocation RECIPE_TYPE_ID = new ResourceLocation(IndustrialMetallurgy.MOD_ID, "crusher");
 
     @Nonnull
     @Override

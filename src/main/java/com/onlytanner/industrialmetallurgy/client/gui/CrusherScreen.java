@@ -2,7 +2,7 @@ package com.onlytanner.industrialmetallurgy.client.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.onlytanner.industrialmetallurgy.IndustrialMetallurgy;
-import com.onlytanner.industrialmetallurgy.containers.ForgeTier1Container;
+import com.onlytanner.industrialmetallurgy.containers.CrusherContainer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
@@ -11,11 +11,11 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ForgeTier1Screen extends ContainerScreen<ForgeTier1Container> {
+public class CrusherScreen extends ContainerScreen<CrusherContainer> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(IndustrialMetallurgy.MOD_ID, "textures/gui/container/forge_main.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(IndustrialMetallurgy.MOD_ID, "textures/gui/container/crusher.png");
 
-    public ForgeTier1Screen(ForgeTier1Container screenContainer, PlayerInventory inv, ITextComponent titleIn) {
+    public CrusherScreen(CrusherContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
         this.guiLeft = 0;
         this.guiTop = 0;
@@ -36,10 +36,7 @@ public class ForgeTier1Screen extends ContainerScreen<ForgeTier1Container> {
         int backgroundX = (this.width - this.xSize) / 2;
         int backgroundY = (this.height - this.ySize) / 2;
         this.blit(matrixStack, backgroundX, backgroundY, 0, 0, this.xSize, this.ySize);
-        this.blit(matrixStack, this.guiLeft + 94, this.guiTop + 35, 176, 14, this.container.getSmeltProgressionScaled(), 16);
-        int yOffset = 14 - this.container.getBurnTimeScaled();
-        this.blit(matrixStack, this.guiLeft + 18, this.guiTop + 17 + yOffset, 176, yOffset, 14, this.container.getBurnTimeScaled());
-        this.blit(matrixStack, this.guiLeft + 164, this.guiTop + 76 - this.container.getTemperatureScaled(), 176, 31, 7, 7);
+        this.blit(matrixStack, this.guiLeft + 79, this.guiTop + 35, 176, 0, this.container.getSmeltProgressionScaled(), 16);
     }
 
     @Override

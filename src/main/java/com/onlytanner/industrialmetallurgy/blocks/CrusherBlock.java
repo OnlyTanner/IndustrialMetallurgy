@@ -32,7 +32,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class CrusherBlock extends ContainerBlock {
+public class CrusherBlock extends Block {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty LIT = BooleanProperty.create("lit");
@@ -151,9 +151,4 @@ public class CrusherBlock extends ContainerBlock {
         }
     }
 
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(IBlockReader worldIn) {
-        return ModTileEntityTypes.CRUSHER.get().create();
-    }
 }

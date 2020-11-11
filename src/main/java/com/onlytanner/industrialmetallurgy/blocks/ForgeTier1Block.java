@@ -32,7 +32,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class ForgeTier1Block extends ContainerBlock {
+public class ForgeTier1Block extends Block {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty LIT = BooleanProperty.create("lit");
@@ -151,9 +151,4 @@ public class ForgeTier1Block extends ContainerBlock {
         }
     }
 
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(IBlockReader worldIn) {
-        return ModTileEntityTypes.FORGE_TIER1.get().create();
-    }
 }

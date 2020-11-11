@@ -32,7 +32,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class CokeOvenBlock extends ContainerBlock {
+public class CokeOvenBlock extends Block {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty LIT = BooleanProperty.create("lit");
@@ -151,9 +151,4 @@ public class CokeOvenBlock extends ContainerBlock {
         }
     }
 
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(IBlockReader worldIn) {
-        return ModTileEntityTypes.COKE_OVEN.get().create();
-    }
 }

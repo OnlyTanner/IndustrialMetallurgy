@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": {"model": "industrialmetallurgy:block/thermoelectric_generator"},
+        "facing=east":  {"model": "industrialmetallurgy:block/thermoelectric_generator", "y": 90 },
+        "facing=south": {"model": "industrialmetallurgy:block/thermoelectric_generator", "y": 180 },
+        "facing=west":  {"model": "industrialmetallurgy:block/thermoelectric_generator", "y": 270 }
+    }
+}

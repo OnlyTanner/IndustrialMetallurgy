@@ -5,7 +5,6 @@ import com.onlytanner.industrialmetallurgy.tileentity.CokeOvenTileEntity;
 import com.onlytanner.industrialmetallurgy.util.ModItemHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.ContainerBlock;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,7 +28,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-import javax.annotation.Nullable;
 import java.util.Random;
 
 public class CokeOvenBlock extends Block {
@@ -104,7 +102,7 @@ public class CokeOvenBlock extends Block {
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
         if (stateIn.get(LIT)) {
             double d0 = (double) pos.getX() + 0.5D;
-            double d1 = (double) pos.getY();
+            double d1 = (double) pos.getY() + 0.5D;
             double d2 = (double) pos.getZ() + 0.5D;
             if (rand.nextDouble() < 0.1D) {
                 worldIn.playSound(d0, d1, d2, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F,

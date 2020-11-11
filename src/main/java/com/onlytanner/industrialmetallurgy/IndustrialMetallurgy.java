@@ -3,6 +3,7 @@ package com.onlytanner.industrialmetallurgy;
 import com.onlytanner.industrialmetallurgy.client.gui.CokeOvenScreen;
 import com.onlytanner.industrialmetallurgy.client.gui.CrusherScreen;
 import com.onlytanner.industrialmetallurgy.client.gui.ForgeTier1Screen;
+import com.onlytanner.industrialmetallurgy.client.gui.ThermoelectricGeneratorScreen;
 import com.onlytanner.industrialmetallurgy.init.ModContainerTypes;
 import com.onlytanner.industrialmetallurgy.init.ModTileEntityTypes;
 import com.onlytanner.industrialmetallurgy.recipes.RecipeSerializerInit;
@@ -62,6 +63,7 @@ public class IndustrialMetallurgy
         ScreenManager.registerFactory(ModContainerTypes.FORGE_TIER1.get(), ForgeTier1Screen::new);
         ScreenManager.registerFactory(ModContainerTypes.CRUSHER.get(), CrusherScreen::new);
         ScreenManager.registerFactory(ModContainerTypes.COKE_OVEN.get(), CokeOvenScreen::new);
+        ScreenManager.registerFactory(ModContainerTypes.THERMOELECTRIC_GENERATOR.get(), ThermoelectricGeneratorScreen::new);
     }
 
     public static final ItemGroup TAB = new ItemGroup("industrialMetallurgy") {

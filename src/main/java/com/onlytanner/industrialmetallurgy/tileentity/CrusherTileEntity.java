@@ -197,6 +197,7 @@ public class CrusherTileEntity extends TileEntity implements ITickableTileEntity
         this.inventory.setNonNullList(inv);
         this.currentSmeltTime = nbt.getInt("CurrentSmeltTime");
         this.energy = nbt.getInt("Energy");
+        this.acidLevel = nbt.getInt("AcidLevel");
     }
 
     @Override
@@ -208,6 +209,7 @@ public class CrusherTileEntity extends TileEntity implements ITickableTileEntity
         ItemStackHelper.saveAllItems(compound, this.inventory.toNonNullList());
         compound.putInt("CurrentSmeltTime", this.currentSmeltTime);
         compound.putInt("Energy", this.energy);
+        compound.putInt("AcidLevel", this.acidLevel);
         return compound;
     }
 

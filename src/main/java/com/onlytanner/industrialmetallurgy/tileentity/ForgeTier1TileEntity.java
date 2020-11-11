@@ -152,7 +152,7 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
     }
 
     public void consumeFuel() {
-        this.inventory.getStackInSlot(FUEL_ID).setCount(this.getInventory().getStackInSlot(FUEL_ID).getCount() - 1);
+        this.inventory.decrStackSize(FUEL_ID, 1);
         burnTimeRemaining = MAX_BURN_TIME;
     }
 

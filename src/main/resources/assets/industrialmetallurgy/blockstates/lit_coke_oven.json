@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=north": {"model": "industrialmetallurgy:block/lit_coke_oven"},
-        "facing=east":  {"model": "industrialmetallurgy:block/lit_coke_oven", "y": 90 },
-        "facing=south": {"model": "industrialmetallurgy:block/lit_coke_oven", "y": 180 },
-        "facing=west":  {"model": "industrialmetallurgy:block/lit_coke_oven", "y": 270 }
-    }
-}

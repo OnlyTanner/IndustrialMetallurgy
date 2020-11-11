@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 
-public class CrusherRecipe implements ForgeRecipeBase {
+public class CrusherRecipe implements CrusherRecipeBase {
 
     private final ResourceLocation id;
     private Ingredient input;

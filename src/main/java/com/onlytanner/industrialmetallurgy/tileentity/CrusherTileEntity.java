@@ -47,6 +47,9 @@ import java.util.stream.Collectors;
 
 public class CrusherTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
+    public static final int INPUT_ID = 0;
+    public static final int BURR_SET_ID = 1;
+    public static final int OUTPUT_ID = 2;
     private ITextComponent customName;
     public int currentSmeltTime;
     public final int MAX_SMELT_TIME = 50;
@@ -71,6 +74,22 @@ public class CrusherTileEntity extends TileEntity implements ITickableTileEntity
     public void tick() {
         boolean dirty = false;
         if (this.world != null && !this.world.isRemote) {
+            if (this.getRecipe() != null && canProcess() && this.inventory.getStackInSlot(BURR_SET_ID).getCount() > 0) {
+                this.world.setBlockState(this.getPos(), this.getBlockState().with(CrusherBlock.LIT, true));
+                if (this.currentSmeltTime != this.MAX_SMELT_TIME) {
+                    this.currentSmeltTime++;
+                    dirty = true;
+                } else {
+                    this.currentSmeltTime = 0;
+                    processRecipe();
+                    this.inventory.getStackInSlot(BURR_SET_ID).damageItem(1, this, );
+                    dirty = true;
+                }
+            }
+            else {
+                this.world.setBlockState(this.getPos(), this.getBlockState().with(CrusherBlock.LIT, false));
+                currentSmeltTime = 0;
+            }
         }
         if (dirty) {
             this.markDirty();
@@ -80,10 +99,24 @@ public class CrusherTileEntity extends TileEntity implements ITickableTileEntity
     }
 
     public void processRecipe() {
-
+        ItemStack output = this.getRecipe().getRecipeOutput();
+        this.inventory.insertItem(OUTPUT_ID, output.copy(), false);
+        if (this.inventory.getStackInSlot(INPUT_ID) != ItemStack.EMPTY) {
+            ItemStack[] list = this.getRecipe().getInput().getMatchingStacks();
+            for (int j = 0; j < list.length; j++) {
+                if (list[j].getItem().equals(this.getInventory().getStackInSlot(INPUT_ID).getItem())) {
+                    this.inventory.decrStackSize(INPUT_ID, list[j].getCount());
+                }
+            }
+        }
     }
 
     public boolean canProcess() {
+        if (getRecipe() != null && getRecipe().matches(new RecipeWrapper(this.inventory), world) &&
+            (this.inventory.getStackInSlot(OUTPUT_ID).getCount() < 64) &&
+            ((this.inventory.getStackInSlot(OUTPUT_ID) == ItemStack.EMPTY) ||
+            (this.inventory.getStackInSlot(OUTPUT_ID).getItem().equals(getRecipe().getRecipeOutput().getItem()))))
+            return true;
         return false;
     }
 

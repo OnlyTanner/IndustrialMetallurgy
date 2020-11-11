@@ -91,8 +91,7 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
                     this.currentSmeltTime = 0;
                     this.currentTemperature = (this.currentTemperature < MAX_TEMPERATURE) ? this.currentTemperature + 5 : MAX_TEMPERATURE;
                     this.burnTimeRemaining--;
-                    if (canProcess())
-                        processRecipe();
+                    processRecipe();
                     dirty = true;
                 }
             }

@@ -2,7 +2,6 @@ package com.onlytanner.industrialmetallurgy.tileentity;
 
 import com.onlytanner.industrialmetallurgy.IndustrialMetallurgy;
 import com.onlytanner.industrialmetallurgy.blocks.CokeOvenBlock;
-import com.onlytanner.industrialmetallurgy.blocks.CrusherBlock;
 import com.onlytanner.industrialmetallurgy.containers.CokeOvenContainer;
 import com.onlytanner.industrialmetallurgy.init.ModTileEntityTypes;
 import com.onlytanner.industrialmetallurgy.recipes.CokeOvenRecipe;

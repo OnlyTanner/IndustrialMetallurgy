@@ -3,7 +3,6 @@ package com.onlytanner.industrialmetallurgy.client.gui;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.onlytanner.industrialmetallurgy.IndustrialMetallurgy;
 import com.onlytanner.industrialmetallurgy.containers.CrusherContainer;
-import net.minecraft.client.gui.screen.inventory.AbstractFurnaceScreen;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
@@ -45,6 +44,10 @@ public class CrusherScreen extends ContainerScreen<CrusherContainer> {
         int backgroundY = (this.height - this.ySize) / 2;
         this.blit(matrixStack, backgroundX, backgroundY, 0, 0, this.xSize, this.ySize);
         this.blit(matrixStack, this.guiLeft + 79, this.guiTop + 35, 176, 0, this.container.getSmeltProgressionScaled(), 16);
+        int yOffset = 70 - this.container.getCurrentEnergyScaled();
+        this.blit(matrixStack, this.guiLeft + 8, this.guiTop + 8 + yOffset, 176, yOffset + 17, 16, this.container.getCurrentEnergyScaled());
+        yOffset = 28 - this.container.getAcidLevelScaled();
+        this.blit(matrixStack, this.guiLeft + 157, this.guiTop + 29 + yOffset, 192, yOffset + 17, 6, this.container.getAcidLevelScaled());
     }
 
     @Override

@@ -109,7 +109,7 @@ public class ForgeTier1TileEntity extends TileEntity implements ITickableTileEnt
                 }
                 else {
                     this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier1Block.LIT, false));
-                    this.currentTemperature = (this.currentTemperature > 0) ? this.currentTemperature - 5 : 0;
+                    this.currentTemperature = (this.currentTemperature > 0) ? this.currentTemperature - 1 : 0;
                 }
                 currentSmeltTime = 0;
             }

@@ -7,6 +7,7 @@ import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -14,6 +15,10 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class CrusherScreen extends ContainerScreen<CrusherContainer> {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(IndustrialMetallurgy.MOD_ID, "textures/gui/container/crusher.png");
+
+    private final int PROGRESS_X = 79, PROGRESS_Y = 34, PROGRESS_WIDTH = 24, PROGRESS_HEIGHT = 17;
+    private final int ENERGY_X = 8, ENERGY_Y = 8, ENERGY_WIDTH = 16, ENERGY_HEIGHT = 70;
+    private final int ACID_X = 157, ACID_Y = 29, ACID_WIDTH = 6, ACID_HEIGHT = 28;
 
     public CrusherScreen(CrusherContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
@@ -35,6 +40,19 @@ public class CrusherScreen extends ContainerScreen<CrusherContainer> {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
+        this.renderTooltips(matrixStack, mouseX, mouseY);
+    }
+
+    protected void renderTooltips(MatrixStack matrixStack, int x, int y) {
+        if (x >= PROGRESS_X + this.guiLeft && x <= PROGRESS_X + PROGRESS_WIDTH + this.guiLeft && y >= PROGRESS_Y + this.guiTop && y <= PROGRESS_Y + PROGRESS_HEIGHT + this.guiTop) {
+            super.renderTooltip(matrixStack, new TranslationTextComponent("Progress: " + ((this.container.currentSmeltTime.get() * 100) / this.container.te.MAX_SMELT_TIME) + "%"), x, y);
+        }
+        if (x >= ENERGY_X + this.guiLeft && x <= ENERGY_X + ENERGY_WIDTH + this.guiLeft && y >= ENERGY_Y + this.guiTop && y <= ENERGY_Y + ENERGY_HEIGHT + this.guiTop) {
+            super.renderTooltip(matrixStack, new TranslationTextComponent("Energy Stored: " + this.container.currentEnergy.get()), x, y);
+        }
+        if (x >= ACID_X + this.guiLeft && x <= ACID_X + ACID_WIDTH + this.guiLeft && y >= ACID_Y + this.guiTop && y <= ACID_Y + ACID_HEIGHT + this.guiTop) {
+            super.renderTooltip(matrixStack, new TranslationTextComponent("Sulfuric Acid: " + (this.container.acidLevel.get() * 100 / this.container.te.MAX_ACID_LEVEL) + "%"), x, y);
+        }
     }
 
     @Override

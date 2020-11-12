@@ -27,7 +27,7 @@ import java.util.Vector;
 
 public class CrusherContainer extends Container {
 
-    protected final CrusherTileEntity te;
+    public final CrusherTileEntity te;
     private final IWorldPosCallable canInteractWithCallable;
     public FunctionalIntReferenceHolder currentSmeltTime;
     public FunctionalIntReferenceHolder currentEnergy;

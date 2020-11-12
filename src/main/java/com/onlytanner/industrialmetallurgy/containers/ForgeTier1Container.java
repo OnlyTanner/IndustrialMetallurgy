@@ -27,7 +27,7 @@ import java.util.Vector;
 
 public class ForgeTier1Container extends Container {
 
-    protected final ForgeTier1TileEntity te;
+    public final ForgeTier1TileEntity te;
     private final IWorldPosCallable canInteractWithCallable;
     public FunctionalIntReferenceHolder currentSmeltTime;
     public FunctionalIntReferenceHolder burnTimeRemaining;

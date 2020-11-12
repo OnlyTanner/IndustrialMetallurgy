@@ -36,6 +36,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -71,7 +72,7 @@ public class CrusherTileEntity extends TileEntity implements ITickableTileEntity
         super(tileEntityTypeIn);
         customName = new TranslationTextComponent("Crusher");
         inventory = new ModItemHandler(4);
-        energy = MAX_ENERGY;
+        energy = 0;
     }
 
     @Override
@@ -285,14 +286,17 @@ public class CrusherTileEntity extends TileEntity implements ITickableTileEntity
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
+        if (cap.getName().equals(CapabilityEnergy.ENERGY.getName())) {
+            return CapabilityEnergy.ENERGY.orEmpty(cap, LazyOptional.of(() -> this));
+        }
         return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.orEmpty(cap, LazyOptional.of(() -> this.inventory));
     }
 
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
-        int result = this.energy + maxReceive;
-        if (!simulate)
-            this.energy = result;
+        int result = (this.energy <= MAX_ENERGY - maxReceive) ? maxReceive : MAX_ENERGY - this.energy;
+        if (!simulate && result > 0)
+            this.energy += result;
         return result;
     }
 
@@ -318,6 +322,6 @@ public class CrusherTileEntity extends TileEntity implements ITickableTileEntity
 
     @Override
     public boolean canReceive() {
-        return true;
+        return (energy < MAX_ENERGY);
     }
 }

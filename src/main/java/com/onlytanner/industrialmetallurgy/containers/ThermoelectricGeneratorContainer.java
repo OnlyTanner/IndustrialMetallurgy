@@ -32,6 +32,7 @@ public class ThermoelectricGeneratorContainer extends Container {
     private final IWorldPosCallable canInteractWithCallable;
     public FunctionalIntReferenceHolder burnTimeRemaining;
     public FunctionalIntReferenceHolder currentEnergy;
+    public FunctionalIntReferenceHolder currentMaxBurnTime;
     protected Map<ContainerElementDimension.ElementType, Vector<ContainerElementDimension>> containerSlots;
     private PlayerInventory inventory;
     public Slot fuelSlot;
@@ -47,6 +48,7 @@ public class ThermoelectricGeneratorContainer extends Container {
         initContainerElements();
         this.trackInt(burnTimeRemaining = new FunctionalIntReferenceHolder(() -> this.te.burnTimeRemaining, value -> this.te.burnTimeRemaining = value));
         this.trackInt(currentEnergy = new FunctionalIntReferenceHolder(() -> this.te.energy, value -> this.te.energy = value));
+        this.trackInt(currentMaxBurnTime = new FunctionalIntReferenceHolder(() -> this.te.currentMaxBurnTime, value -> this.te.currentMaxBurnTime = value));
     }
 
     public ThermoelectricGeneratorContainer(final int id, final PlayerInventory player, final PacketBuffer data) {
@@ -107,8 +109,8 @@ public class ThermoelectricGeneratorContainer extends Container {
 
     @OnlyIn(Dist.CLIENT)
     public int getBurnTimeScaled() {
-        return this.burnTimeRemaining.get() != 0 && this.te.currentMaxBurnTime != 0
-                ? this.burnTimeRemaining.get() * 70 / this.te.currentMaxBurnTime
+        return this.burnTimeRemaining.get() != 0 && this.currentMaxBurnTime.get() != 0
+                ? this.burnTimeRemaining.get() * 14 / this.currentMaxBurnTime.get()
                 : 0;
     }
 

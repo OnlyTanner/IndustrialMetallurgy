@@ -26,9 +26,12 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
@@ -44,7 +47,8 @@ public class ThermoelectricGeneratorTileEntity extends TileEntity implements ITi
     private ModItemHandler inventory;
     public int energy;
     public final int MAX_ENERGY = 500000;
-    public final int ENERGY_GENERATED_PER_TICK = 40;
+    public final int MAX_ENERGY_PROVIDED = 80;
+    public final int ENERGY_GENERATED_PER_TICK = 80;
 
     public ThermoelectricGeneratorTileEntity() {
         this(ModTileEntityTypes.THERMOELECTRIC_GENERATOR.get());
@@ -52,7 +56,7 @@ public class ThermoelectricGeneratorTileEntity extends TileEntity implements ITi
 
     private ThermoelectricGeneratorTileEntity(final TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
-        customName = new TranslationTextComponent("Thermoelectric Generator");
+        customName = new TranslationTextComponent("TE Generator");
         inventory = new ModItemHandler(5);
         energy = 0;
         currentMaxBurnTime = 0;
@@ -81,26 +85,65 @@ public class ThermoelectricGeneratorTileEntity extends TileEntity implements ITi
                     i = NUM_EXTRA_FUEL_SLOTS;
                 }
             }
-            if (hasFuel() && burnTimeRemaining == 0 && energy < (MAX_ENERGY - ENERGY_GENERATED_PER_TICK)) {
+            //System.out.println("HAS FUEL: " + hasFuel() + ", burnTime: " + burnTimeRemaining + ", energy: " + energy);
+            if (hasFuel() && burnTimeRemaining == 0 && this.energy < MAX_ENERGY) {
                 consumeFuel();
                 this.world.setBlockState(this.getPos(), this.getBlockState().with(ThermoelectricGeneratorBlock.LIT, true));
                 dirty = true;
             }
             else if (burnTimeRemaining > 0 && energy < (MAX_ENERGY - ENERGY_GENERATED_PER_TICK)) {
                 this.burnTimeRemaining--;
-                energy += ENERGY_GENERATED_PER_TICK;
-                this.world.setBlockState(this.getPos(), this.getBlockState().with(ThermoelectricGeneratorBlock.LIT, true));
-                dirty = true;
+                this.energy += ENERGY_GENERATED_PER_TICK;
+            }
+            else if (burnTimeRemaining > 0 && energy == MAX_ENERGY) {
+                this.burnTimeRemaining--;
             }
             else {
-                this.burnTimeRemaining--;
                 this.world.setBlockState(this.getPos(), this.getBlockState().with(ThermoelectricGeneratorBlock.LIT, false));
+                dirty = true;
             }
+            if (this.canExtract())
+                providePowerToNeighbors();
         }
         if (dirty) {
             this.markDirty();
             this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(),
                     Constants.BlockFlags.BLOCK_UPDATE);
+        }
+    }
+
+    private void providePowerToNeighbors() {
+        int numNeighbors = 0;
+        IEnergyStorage[] neighbors = new IEnergyStorage[6];
+        if (this.world.getTileEntity(this.pos.up()) instanceof IEnergyStorage && ((IEnergyStorage) this.world.getTileEntity(this.pos.up())).canReceive()) {
+            neighbors[0] = (IEnergyStorage) this.world.getTileEntity(this.pos.up());
+            numNeighbors++;
+        }
+        if (this.world.getTileEntity(this.pos.down()) instanceof IEnergyStorage && ((IEnergyStorage) this.world.getTileEntity(this.pos.down())).canReceive()) {
+            neighbors[1] = (IEnergyStorage) this.world.getTileEntity(this.pos.down());
+            numNeighbors++;
+        }
+        if (this.world.getTileEntity(this.pos.north()) instanceof IEnergyStorage && ((IEnergyStorage) this.world.getTileEntity(this.pos.north())).canReceive()) {
+            neighbors[2] = (IEnergyStorage) this.world.getTileEntity(this.pos.north());
+            numNeighbors++;
+        }
+        if (this.world.getTileEntity(this.pos.south()) instanceof IEnergyStorage && ((IEnergyStorage) this.world.getTileEntity(this.pos.south())).canReceive()) {
+            neighbors[3] = (IEnergyStorage) this.world.getTileEntity(this.pos.south());
+            numNeighbors++;
+        }
+        if (this.world.getTileEntity(this.pos.east()) instanceof IEnergyStorage && ((IEnergyStorage) this.world.getTileEntity(this.pos.east())).canReceive()) {
+            neighbors[4] = (IEnergyStorage) this.world.getTileEntity(this.pos.east());
+            numNeighbors++;
+        }
+        if (this.world.getTileEntity(this.pos.west()) instanceof IEnergyStorage && ((IEnergyStorage) this.world.getTileEntity(this.pos.west())).canReceive()) {
+            neighbors[5] = (IEnergyStorage) this.world.getTileEntity(this.pos.west());
+            numNeighbors++;
+        }
+        for (int i = 0; i < neighbors.length; i++) {
+            if (neighbors[i] != null) {
+                int result = neighbors[i].receiveEnergy(this.extractEnergy(MAX_ENERGY_PROVIDED / numNeighbors, true), false);
+                this.extractEnergy(result, false);
+            }
         }
     }
 
@@ -114,6 +157,7 @@ public class ThermoelectricGeneratorTileEntity extends TileEntity implements ITi
         burnTimeRemaining = ForgeHooks.getBurnTime(this.inventory.getStackInSlot(FUEL_ID));
         this.inventory.decrStackSize(FUEL_ID, 1);
         currentMaxBurnTime = burnTimeRemaining;
+        System.out.println(currentMaxBurnTime);
     }
 
     public void setCustomName(ITextComponent name) {
@@ -194,6 +238,9 @@ public class ThermoelectricGeneratorTileEntity extends TileEntity implements ITi
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
+        if (cap.getName().equals(CapabilityEnergy.ENERGY.getName())) {
+            return CapabilityEnergy.ENERGY.orEmpty(cap, LazyOptional.of(() -> this));
+        }
         return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.orEmpty(cap, LazyOptional.of(() -> this.inventory));
     }
 
@@ -204,9 +251,9 @@ public class ThermoelectricGeneratorTileEntity extends TileEntity implements ITi
 
     @Override
     public int extractEnergy(int maxExtract, boolean simulate) {
-        int result = this.energy - maxExtract;
-        if (!simulate)
-            this.energy = result;
+        int result = (this.energy >= maxExtract) ? maxExtract : this.energy;
+        if (!simulate && result > 0)
+            this.energy -= result;
         return result;
     }
 
@@ -222,7 +269,7 @@ public class ThermoelectricGeneratorTileEntity extends TileEntity implements ITi
 
     @Override
     public boolean canExtract() {
-        return true;
+        return (energy > 0);
     }
 
     @Override

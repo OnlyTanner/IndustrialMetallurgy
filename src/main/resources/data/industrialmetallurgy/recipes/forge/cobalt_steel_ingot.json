@@ -1,0 +1,21 @@
+{
+  "type": "industrialmetallurgy:forge",
+  "output": {
+    "item": "industrialmetallurgy:cobalt_steel_ingot"
+  },
+  "input": [
+    {
+      "item": "industrialmetallurgy:steel_ingot",
+      "count": 1
+    },
+    {
+      "item": "industrialmetallurgy:cobalt_nugget",
+      "count": 1
+    },
+    {
+      "item": "industrialmetallurgy:chromium_nugget",
+      "count": 2
+    }
+  ],
+  "tier": "steel"
+}

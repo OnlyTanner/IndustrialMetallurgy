@@ -1,6 +1,6 @@
 package com.onlytanner.industrialmetallurgy.recipes;
 
-import com.onlytanner.industrialmetallurgy.tileentity.ForgeTier1TileEntity;
+import com.onlytanner.industrialmetallurgy.tileentity.BasicForgeTileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
@@ -17,11 +17,13 @@ public class ForgeRecipe implements ForgeRecipeBase {
     private final ResourceLocation id;
     private Ingredient input;
     private ItemStack output;
+    private String tier;
 
-    public ForgeRecipe(ResourceLocation id, Ingredient input, ItemStack output) {
+    public ForgeRecipe(ResourceLocation id, Ingredient input, ItemStack output, String tier) {
         this.id = id;
         this.input = input;
         this.output = output;
+        this.tier = tier;
     }
 
     @Override
@@ -32,7 +34,7 @@ public class ForgeRecipe implements ForgeRecipeBase {
     @Override
     public boolean matches(RecipeWrapper inv, World worldIn) {
         List<ItemStack> invInput = new ArrayList<>();
-        for (int i = 0; i < ForgeTier1TileEntity.NUM_INPUT_SLOTS; i++) {
+        for (int i = 0; i < BasicForgeTileEntity.NUM_INPUT_SLOTS; i++) {
             if (inv.getStackInSlot(i) != ItemStack.EMPTY) {
                 invInput.add(inv.getStackInSlot(i));
             }
@@ -69,4 +71,9 @@ public class ForgeRecipe implements ForgeRecipeBase {
     public NonNullList<Ingredient> getIngredients() {
         return NonNullList.from(null, input);
     }
+
+    public String getTier() {
+        return tier;
+    }
+
 }

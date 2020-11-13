@@ -2,7 +2,7 @@ package com.onlytanner.industrialmetallurgy.client.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.onlytanner.industrialmetallurgy.IndustrialMetallurgy;
-import com.onlytanner.industrialmetallurgy.containers.ForgeTier1Container;
+import com.onlytanner.industrialmetallurgy.containers.BasicForgeContainer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
@@ -12,7 +12,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ForgeTier1Screen extends ContainerScreen<ForgeTier1Container> {
+public class BasicForgeScreen extends ContainerScreen<BasicForgeContainer> {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(IndustrialMetallurgy.MOD_ID, "textures/gui/container/forge_main.png");
 
@@ -20,7 +20,7 @@ public class ForgeTier1Screen extends ContainerScreen<ForgeTier1Container> {
     private final int FLAME_X = 17, FLAME_Y = 16, FLAME_SIZE = 16;
     private final int TEMP_X = 163, TEMP_Y = 6, TEMP_WIDTH = 5, TEMP_HEIGHT = 74;
 
-    public ForgeTier1Screen(ForgeTier1Container screenContainer, PlayerInventory inv, ITextComponent titleIn) {
+    public BasicForgeScreen(BasicForgeContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
         this.guiLeft = 0;
         this.guiTop = 0;
@@ -44,7 +44,7 @@ public class ForgeTier1Screen extends ContainerScreen<ForgeTier1Container> {
 
     protected void renderTooltips(MatrixStack matrixStack, int x, int y) {
         if (x >= PROGRESS_X + this.guiLeft && x <= PROGRESS_X + PROGRESS_WIDTH + this.guiLeft && y >= PROGRESS_Y + this.guiTop && y <= PROGRESS_Y + PROGRESS_HEIGHT + this.guiTop) {
-            super.renderTooltip(matrixStack, new TranslationTextComponent("Progress: " + ((this.container.currentSmeltTime.get() * 100) / this.container.te.MAX_SMELT_TIME) + "%"), x, y);
+            super.renderTooltip(matrixStack, new TranslationTextComponent("Progress: " + ((this.container.currentSmeltTime.get() * 100) / this.container.te.maxSmeltTime) + "%"), x, y);
         }
         if (x >= FLAME_X + this.guiLeft && x <= FLAME_X + FLAME_SIZE + this.guiLeft && y >= FLAME_Y + this.guiTop && y <= FLAME_Y + FLAME_SIZE + this.guiTop) {
             super.renderTooltip(matrixStack, new TranslationTextComponent("Burn Time Remaining: " + (this.container.burnTimeRemaining.get() / 20) + "s"), x, y);

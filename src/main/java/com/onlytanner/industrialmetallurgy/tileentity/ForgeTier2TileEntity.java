@@ -1,9 +1,9 @@
 package com.onlytanner.industrialmetallurgy.tileentity;
 
 import com.onlytanner.industrialmetallurgy.IndustrialMetallurgy;
-import com.onlytanner.industrialmetallurgy.blocks.ForgeTier1Block;
+import com.onlytanner.industrialmetallurgy.blocks.ForgeTier2Block;
 import com.onlytanner.industrialmetallurgy.containers.BasicForgeContainer;
-import com.onlytanner.industrialmetallurgy.containers.ForgeTier1Container;
+import com.onlytanner.industrialmetallurgy.containers.ForgeTier2Container;
 import com.onlytanner.industrialmetallurgy.init.ModTileEntityTypes;
 import com.onlytanner.industrialmetallurgy.recipes.ForgeRecipe;
 import com.onlytanner.industrialmetallurgy.recipes.RecipeSerializerInit;
@@ -21,18 +21,18 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
 import javax.annotation.Nullable;
 import java.util.Set;
 
-public class ForgeTier1TileEntity extends BasicForgeTileEntity {
+public class ForgeTier2TileEntity extends BasicForgeTileEntity {
 
-    public ForgeTier1TileEntity() {
-        this(ModTileEntityTypes.FORGE_TIER1.get());
-        this.maxSmeltTime = 50;
-        this.maxTemperature = 2000;
-        this.degreesPerTick = 5;
+    public ForgeTier2TileEntity() {
+        this(ModTileEntityTypes.FORGE_TIER2.get());
+        this.maxSmeltTime = 35;
+        this.maxTemperature = 2500;
+        this.degreesPerTick = 8;
     }
 
-    protected ForgeTier1TileEntity(final TileEntityType<?> tileEntityTypeIn) {
+    protected ForgeTier2TileEntity(final TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
-        customName = new TranslationTextComponent("Iron Forge (Tier 1)");
+        customName = new TranslationTextComponent("Steel Forge (Tier 2)");
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ForgeTier1TileEntity extends BasicForgeTileEntity {
         boolean dirty = false;
         if (this.world != null && !this.world.isRemote) {
             if (this.getRecipe() != null && canProcess() && burnTimeRemaining > 0 && currentTemperature > 1500) {
-                this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier1Block.LIT, true));
+                this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier2Block.LIT, true));
                 if (this.currentSmeltTime != this.maxSmeltTime) {
                     this.currentSmeltTime++;
                     this.currentTemperature = (this.currentTemperature < maxTemperature) ? this.currentTemperature + degreesPerTick : maxTemperature;
@@ -55,19 +55,19 @@ public class ForgeTier1TileEntity extends BasicForgeTileEntity {
                 }
             }
             else if (this.burnTimeRemaining == 0 && hasFuel() && canProcess()) {
-                this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier1Block.LIT, true));
+                this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier2Block.LIT, true));
                 this.currentTemperature = (this.currentTemperature < maxTemperature) ? this.currentTemperature + degreesPerTick : maxTemperature;
                 consumeFuel();
                 dirty = true;
             }
             else {
                 if (burnTimeRemaining > 0) {
-                    this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier1Block.LIT, true));
+                    this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier2Block.LIT, true));
                     this.currentTemperature = (this.currentTemperature < maxTemperature) ? this.currentTemperature + degreesPerTick : maxTemperature;
                     this.burnTimeRemaining--;
                 }
                 else {
-                    this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier1Block.LIT, false));
+                    this.world.setBlockState(this.getPos(), this.getBlockState().with(ForgeTier2Block.LIT, false));
                     this.currentTemperature = (this.currentTemperature > 0) ? this.currentTemperature - 1 : 0;
                 }
                 currentSmeltTime = 0;
@@ -78,6 +78,11 @@ public class ForgeTier1TileEntity extends BasicForgeTileEntity {
             this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(),
                     Constants.BlockFlags.BLOCK_UPDATE);
         }
+    }
+
+    @Override
+    public Container createMenu(final int windowID, final PlayerInventory playerInv, final PlayerEntity playerIn) {
+        return new ForgeTier2Container(windowID, playerInv, this);
     }
 
     public void processRecipe() {
@@ -115,11 +120,6 @@ public class ForgeTier1TileEntity extends BasicForgeTileEntity {
         burnTimeRemaining = MAX_BURN_TIME;
     }
 
-    @Override
-    public Container createMenu(final int windowID, final PlayerInventory playerInv, final PlayerEntity playerIn) {
-        return new ForgeTier1Container(windowID, playerInv, this);
-    }
-
     @Nullable
     @Override
     protected ForgeRecipe getRecipe() {
@@ -128,7 +128,7 @@ public class ForgeTier1TileEntity extends BasicForgeTileEntity {
         Set<IRecipe<?>> recipes = findRecipesByType(RecipeSerializerInit.FORGE_RECIPE_TYPE, this.world);
         for (IRecipe<?> iRecipe : recipes) {
             ForgeRecipe recipe = (ForgeRecipe) iRecipe;
-            if (recipe.matches(new RecipeWrapper(this.inventory), this.world) && recipe.getTier().equals("iron")) {
+            if (recipe.matches(new RecipeWrapper(this.inventory), this.world) && (recipe.getTier().equals("iron") || recipe.getTier().equals("steel"))) {
                 return recipe;
             }
         }
@@ -137,7 +137,7 @@ public class ForgeTier1TileEntity extends BasicForgeTileEntity {
 
     @Override
     public ITextComponent getDefaultName() {
-        return new TranslationTextComponent("container." + IndustrialMetallurgy.MOD_ID + ".forge_tier1");
+        return new TranslationTextComponent("container." + IndustrialMetallurgy.MOD_ID + ".forge_tier2");
     }
 
 }

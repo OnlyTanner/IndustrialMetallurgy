@@ -1,11 +1,8 @@
 {
-    "parent": "block/orientable",
-    "textures": {
-        "top": "industrialmetallurgy:blocks/cobalt_forge_top_off",
-		"bottom": "industrialmetallurgy:blocks/cobalt_steel_block",
-        "north": "industrialmetallurgy:blocks/cobalt_forge_front_off",
-        "east": "industrialmetallurgy:blocks/cobalt_forge_side",
-		"west": "industrialmetallurgy:blocks/cobalt_forge_side",
-		"south": "industrialmetallurgy:blocks/cobalt_steel_block"
-    }
+  "parent": "block/orientable",
+  "textures": {
+    "top": "industrialmetallurgy:blocks/steel_forge_top_off",
+    "front": "industrialmetallurgy:blocks/steel_forge_front_off",
+    "side": "industrialmetallurgy:blocks/steel_forge_side"
+  }
 }

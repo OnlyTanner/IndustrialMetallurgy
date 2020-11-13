@@ -2,7 +2,7 @@ package com.onlytanner.industrialmetallurgy.blocks;
 
 import com.onlytanner.industrialmetallurgy.init.ModTileEntityTypes;
 import com.onlytanner.industrialmetallurgy.tileentity.BasicForgeTileEntity;
-import com.onlytanner.industrialmetallurgy.tileentity.ForgeTier1TileEntity;
+import com.onlytanner.industrialmetallurgy.tileentity.ForgeTier2TileEntity;
 import com.onlytanner.industrialmetallurgy.util.ModItemHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -31,12 +31,12 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import java.util.Random;
 
-public class ForgeTier1Block extends Block {
+public class ForgeTier2Block extends Block {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty LIT = BooleanProperty.create("lit");
 
-    public ForgeTier1Block(Properties properties) {
+    public ForgeTier2Block(Properties properties) {
         super(properties);
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(LIT, false));
     }
@@ -48,7 +48,7 @@ public class ForgeTier1Block extends Block {
 
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return ModTileEntityTypes.FORGE_TIER1.get().create();
+        return ModTileEntityTypes.FORGE_TIER2.get().create();
     }
 
     @Override
@@ -82,8 +82,8 @@ public class ForgeTier1Block extends Block {
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
         if (stack.hasDisplayName()) {
             TileEntity tile = worldIn.getTileEntity(pos);
-            if (tile instanceof ForgeTier1TileEntity) {
-                ((ForgeTier1TileEntity) tile).setCustomName(stack.getDisplayName());
+            if (tile instanceof ForgeTier2TileEntity) {
+                ((ForgeTier2TileEntity) tile).setCustomName(stack.getDisplayName());
             }
         }
     }
@@ -126,7 +126,7 @@ public class ForgeTier1Block extends Block {
                                              Hand handIn, BlockRayTraceResult hit) {
         if (worldIn != null && !worldIn.isRemote) {
             TileEntity tile = worldIn.getTileEntity(pos);
-            if (tile instanceof ForgeTier1TileEntity) {
+            if (tile instanceof ForgeTier2TileEntity) {
                 NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tile, pos);
                 return ActionResultType.SUCCESS;
             }
@@ -137,8 +137,8 @@ public class ForgeTier1Block extends Block {
     @Override
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         TileEntity tile = worldIn.getTileEntity(pos);
-        if (tile instanceof ForgeTier1TileEntity && state.getBlock() != newState.getBlock()) {
-            ForgeTier1TileEntity furnace = (ForgeTier1TileEntity) tile;
+        if (tile instanceof ForgeTier2TileEntity && state.getBlock() != newState.getBlock()) {
+            ForgeTier2TileEntity furnace = (ForgeTier2TileEntity) tile;
             ((ModItemHandler) furnace.getInventory()).toNonNullList().forEach(item -> {
                 ItemEntity itemEntity = new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), item);
                 worldIn.addEntity(itemEntity);

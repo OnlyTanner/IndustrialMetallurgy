@@ -16,5 +16,6 @@
       "item": "industrialmetallurgy:crushed_coal",
       "count": 1
     }
-  ]
+  ],
+  "tier": "iron"
 }

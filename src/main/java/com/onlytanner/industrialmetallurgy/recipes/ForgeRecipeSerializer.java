@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
@@ -18,7 +19,8 @@ public class ForgeRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializer<
     public ForgeRecipe read(ResourceLocation recipeId, JsonObject json) {
         ItemStack output = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "output"), true);
         Ingredient input = Ingredient.deserialize(JSONUtils.getJsonArray(json, "input"));
-        return new ForgeRecipe(recipeId, input, output);
+        String tier = json.get("tier").getAsString();
+        return new ForgeRecipe(recipeId, input, output, tier);
     }
 
     @Nullable
@@ -26,7 +28,8 @@ public class ForgeRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializer<
     public ForgeRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
         ItemStack output = buffer.readItemStack();
         Ingredient input = Ingredient.read(buffer);
-        return new ForgeRecipe(recipeId, input, output);
+        String tier = buffer.readCompoundTag().getString("tier");
+        return new ForgeRecipe(recipeId, input, output, tier);
     }
 
     @Override
@@ -34,6 +37,9 @@ public class ForgeRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializer<
         Ingredient input = recipe.getIngredients().get(0);
         input.write(buffer);
         buffer.writeItemStack(recipe.getRecipeOutput(), false);
+        CompoundNBT data = buffer.readCompoundTag();
+        data.putString("tier", recipe.getTier());
+        buffer.writeCompoundTag(data);
     }
 
 }

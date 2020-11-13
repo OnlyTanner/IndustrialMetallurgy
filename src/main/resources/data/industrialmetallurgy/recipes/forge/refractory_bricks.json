@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ss ",
+    "ss ",
+    "   "
+  ],
+  "key": {
+    "s": {
+      "item": "industrialmetallurgy:refractory_brick"
+    }
+  },
+  "result":
+  {
+    "item": "industrialmetallurgy:refractory_bricks",
+    "count": 1
+  }
+}

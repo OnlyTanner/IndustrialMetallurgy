@@ -94,12 +94,12 @@ public class RegistryHandler {
     public static final RegistryObject<Item> CRUSHED_GARNIERITE_ORE = ITEMS.register("crushed_garnierite_ore", ItemBase::new);
     public static final RegistryObject<Item> CRUSHED_GOLD_ORE = ITEMS.register("crushed_gold_ore", ItemBase::new);
     public static final RegistryObject<Item> CRUSHED_IRON_ORE = ITEMS.register("crushed_iron_ore", ItemBase::new);
-    public static final RegistryObject<Item> CRUSHED_LEPIDOLITE_ORE = ITEMS.register("crushed_lepidolite_ore", ItemBase::new);
     public static final RegistryObject<Item> CRUSHED_PYROLUSITE_ORE = ITEMS.register("crushed_pyrolusite_ore", ItemBase::new);
     public static final RegistryObject<Item> CRUSHED_RUTILE_ORE = ITEMS.register("crushed_rutile_ore", ItemBase::new);
     public static final RegistryObject<Item> CRUSHED_SPHALERITE_ORE = ITEMS.register("crushed_sphalerite_ore", ItemBase::new);
     public static final RegistryObject<Item> CRUSHED_SCHEELITE_ORE = ITEMS.register("crushed_scheelite_ore", ItemBase::new);
     // Misc Resources
+    public static final RegistryObject<Item> LEPIDOLITE = ITEMS.register("lepidolite", ItemBase::new);
     public static final RegistryObject<Item> CRUSHED_COAL = ITEMS.register("crushed_coal", ItemBase::new);
     public static final RegistryObject<Item> CRUSHED_DIAMOND = ITEMS.register("crushed_diamond", ItemBase::new);
     public static final RegistryObject<Item> TUNGSTEN_CARBIDE_DUST = ITEMS.register("tungsten_carbide_dust", ItemBase::new);
@@ -211,6 +211,7 @@ public class RegistryHandler {
     public static final RegistryObject<Block> OIL_SAND = BLOCKS.register("oil_sand", OilSandBlock::new);
     // Machines
     public static final RegistryObject<Block> FORGE_TIER1 = BLOCKS.register("forge_tier1", () -> new ForgeTier1Block(Block.Properties.from(Blocks.FURNACE)));
+    public static final RegistryObject<Block> FORGE_TIER2 = BLOCKS.register("forge_tier2", () -> new ForgeTier2Block(Block.Properties.from(Blocks.FURNACE)));
     public static final RegistryObject<Block> CRUSHER = BLOCKS.register("crusher", () -> new CrusherBlock(Block.Properties.from(Blocks.FURNACE)));
     public static final RegistryObject<Block> COKE_OVEN = BLOCKS.register("coke_oven", () -> new CokeOvenBlock(Block.Properties.from(Blocks.FURNACE)));
     public static final RegistryObject<Block> THERMOELECTRIC_GENERATOR = BLOCKS.register("thermoelectric_generator", () -> new ThermoelectricGeneratorBlock(Block.Properties.from(Blocks.FURNACE)));
@@ -265,6 +266,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> OIL_SAND_ITEM = ITEMS.register("oil_sand", () -> new BlockItemBase(OIL_SAND.get()));
     // Machines
     public static final RegistryObject<Item> FORGE_TIER1_ITEM = ITEMS.register("forge_tier1", () -> new BlockItemBase(FORGE_TIER1.get()));
+    public static final RegistryObject<Item> FORGE_TIER2_ITEM = ITEMS.register("forge_tier2", () -> new BlockItemBase(FORGE_TIER2.get()));
     public static final RegistryObject<Item> CRUSHER_ITEM = ITEMS.register("crusher", () -> new BlockItemBase(CRUSHER.get()));
     public static final RegistryObject<Item> COKE_OVEN_ITEM = ITEMS.register("coke_oven", () -> new BlockItemBase(COKE_OVEN.get()));
     public static final RegistryObject<Item> THERMOELECTRIC_GENERATOR_ITEM = ITEMS.register("thermoelectric_generator", () -> new BlockItemBase(THERMOELECTRIC_GENERATOR.get()));

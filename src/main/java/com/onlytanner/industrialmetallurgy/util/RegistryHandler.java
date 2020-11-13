@@ -111,6 +111,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> PETROLEUM_BOTTLE = ITEMS.register("petroleum_bottle", ItemBase::new);
     public static final RegistryObject<Item> SULFURIC_ACID_BOTTLE = ITEMS.register("sulfuric_acid_bottle", ItemBase::new);
     public static final RegistryObject<Item> COAL_COKE = ITEMS.register("coal_coke", ItemBase::new);
+    public static final RegistryObject<Item> SILICON = ITEMS.register("silicon", ItemBase::new);
     public static final RegistryObject<Item> BITUMEN = ITEMS.register("bitumen", ItemBase::new);
     public static final RegistryObject<Item> PEAT = ITEMS.register("peat", ItemBase::new);
     public static final RegistryObject<Item> FERTILIZER = ITEMS.register("fertilizer", ItemBase::new);

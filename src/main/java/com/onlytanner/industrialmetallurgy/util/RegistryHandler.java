@@ -130,6 +130,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> STATOR = ITEMS.register("stator", ItemBase::new);
     public static final RegistryObject<Item> ROTOR = ITEMS.register("rotor", ItemBase::new);
     public static final RegistryObject<Item> FIELD_COIL = ITEMS.register("field_coil", ItemBase::new);
+    public static final RegistryObject<Item> GEAR = ITEMS.register("gear", ItemBase::new);
     public static final RegistryObject<Item> HEATING_ELEMENT = ITEMS.register("heating_element", ItemBase::new);
     public static final RegistryObject<Item> INDUCTION_CORE = ITEMS.register("induction_core", ItemBase::new);
     public static final RegistryObject<Item> MAGNET_WIRE = ITEMS.register("magnet_wire", ItemBase::new);
@@ -141,6 +142,13 @@ public class RegistryHandler {
     public static final RegistryObject<Item> CHROMIUM_BURR_SET = ITEMS.register("chromium_burr_set", BurrSetBase::new);
     public static final RegistryObject<Item> TUNGSTEN_CARBIDE_BURR_SET = ITEMS.register("tungsten_carbide_burr_set", BurrSetBase::new);
     public static final RegistryObject<Item> NEQUITUM_BURR_SET = ITEMS.register("nequitum_burr_set", ItemBase::new);
+    public static final RegistryObject<Item> LEAD_SULFATE_PLATE = ITEMS.register("lead_sulfate_plate", ItemBase::new);
+    public static final RegistryObject<Item> SILICON_PLATE = ITEMS.register("silicon_plate", ItemBase::new);
+    public static final RegistryObject<Item> STEEL_PLATE = ITEMS.register("steel_plate", ItemBase::new);
+    public static final RegistryObject<Item> COPPER_PLATE = ITEMS.register("copper_plate", ItemBase::new);
+    public static final RegistryObject<Item> INVAR_PLATE = ITEMS.register("invar_plate", ItemBase::new);
+    public static final RegistryObject<Item> ALUMINUM_PLATE = ITEMS.register("aluminum_plate", ItemBase::new);
+    public static final RegistryObject<Item> ALUMINUM_FOIL = ITEMS.register("aluminum_foil", ItemBase::new);
     // Tools
     public static final RegistryObject<Item> STEEL_PICAXE = ITEMS.register("steel_pickaxe", () -> new PickaxeItem(ModItemTiers.STEEL, 1, -2.8F, new Item.Properties().group(IndustrialMetallurgy.TAB)));
     public static final RegistryObject<Item> STEEL_SHOVEL = ITEMS.register("steel_shovel", () -> new ShovelItem(ModItemTiers.STEEL, 1, -2.8F, new Item.Properties().group(IndustrialMetallurgy.TAB)));

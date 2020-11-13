@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sps",
+    "gmg",
+    "pbp"
+  ],
+  "key": {
+    "s": {
+      "item": "industrialmetallurgy:conducting_element"
+    },
+    "p": {
+      "item": "industrialmetallurgy:steel_plate"
+    },
+    "m": {
+      "item": "industrialmetallurgy:electric_motor"
+    },
+    "g": {
+      "item": "industrialmetallurgy:gear"
+    },
+    "b": {
+      "item": "industrialmetallurgy:lead_acid_battery"
+    }
+  },
+  "result":
+  {
+    "item": "industrialmetallurgy:crusher",
+    "count": 1
+  }
+}

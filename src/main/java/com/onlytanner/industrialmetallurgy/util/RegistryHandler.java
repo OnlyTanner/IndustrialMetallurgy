@@ -134,7 +134,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> STEEL_BURR_SET = ITEMS.register("steel_burr_set", BurrSetBase::new);
     public static final RegistryObject<Item> CHROMIUM_BURR_SET = ITEMS.register("chromium_burr_set", BurrSetBase::new);
     public static final RegistryObject<Item> TUNGSTEN_CARBIDE_BURR_SET = ITEMS.register("tungsten_carbide_burr_set", BurrSetBase::new);
-    public static final RegistryObject<Item> NEQUITUM_BURR_SET = ITEMS.register("nequitum_burr_set", BurrSetBase::new);
+    public static final RegistryObject<Item> NEQUITUM_BURR_SET = ITEMS.register("nequitum_burr_set", ItemBase::new);
 
     // Blocks
     // Metal Blocks

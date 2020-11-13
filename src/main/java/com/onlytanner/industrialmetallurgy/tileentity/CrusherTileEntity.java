@@ -4,6 +4,7 @@ import com.onlytanner.industrialmetallurgy.IndustrialMetallurgy;
 import com.onlytanner.industrialmetallurgy.blocks.CrusherBlock;
 import com.onlytanner.industrialmetallurgy.containers.CrusherContainer;
 import com.onlytanner.industrialmetallurgy.init.ModTileEntityTypes;
+import com.onlytanner.industrialmetallurgy.items.BurrSetBase;
 import com.onlytanner.industrialmetallurgy.recipes.CrusherRecipe;
 import com.onlytanner.industrialmetallurgy.recipes.RecipeSerializerInit;
 import com.onlytanner.industrialmetallurgy.util.ModItemHandler;
@@ -122,6 +123,8 @@ public class CrusherTileEntity extends TileEntity implements ITickableTileEntity
                 if (list[j].getItem().equals(this.getInventory().getStackInSlot(INPUT_ID).getItem())) {
                     this.inventory.decrStackSize(INPUT_ID, list[j].getCount());
                     acidLevel = (acidLevel >= 8) ? acidLevel - 8 : 0;
+                    if (this.inventory.getStackInSlot(BURR_SET_ID).getItem() instanceof BurrSetBase)
+                        this.inventory.getStackInSlot(BURR_SET_ID).setDamage(this.inventory.getStackInSlot(BURR_SET_ID).getDamage() + 1);
                 }
             }
         }

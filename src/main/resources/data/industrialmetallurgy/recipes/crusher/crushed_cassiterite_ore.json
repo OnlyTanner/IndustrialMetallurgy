@@ -1,0 +1,9 @@
+{
+  "type": "industrialmetallurgy:crusher",
+  "output": {
+    "item": "industrialmetallurgy:crushed_cassiterite_ore"
+  },
+  "input": {
+    "item": "industrialmetallurgy:cassiterite_ore"
+  }
+}

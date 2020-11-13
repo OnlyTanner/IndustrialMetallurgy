@@ -3,7 +3,12 @@
   "output": {
     "item": "industrialmetallurgy:coal_coke"
   },
-  "input": {
-    "item": "minecraft:coal"
-  }
+  "input": [
+    {
+      "item": "minecraft:coal"
+    },
+    {
+      "item": "minecraft:charcoal"
+    }
+  ]
 }

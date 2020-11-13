@@ -17,7 +17,7 @@ public class CokeOvenRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializ
     @Override
     public CokeOvenRecipe read(ResourceLocation recipeId, JsonObject json) {
         ItemStack output = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "output"), true);
-        Ingredient input = Ingredient.deserialize(JSONUtils.getJsonObject(json, "input"));
+        Ingredient input = Ingredient.deserialize(JSONUtils.getJsonArray(json, "input"));
         return new CokeOvenRecipe(recipeId, input, output);
     }
 

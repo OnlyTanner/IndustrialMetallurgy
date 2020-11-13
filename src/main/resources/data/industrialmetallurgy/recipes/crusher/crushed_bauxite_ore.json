@@ -1,0 +1,9 @@
+{
+  "type": "industrialmetallurgy:crusher",
+  "output": {
+    "item": "industrialmetallurgy:crushed_bauxite_ore"
+  },
+  "input": {
+    "item": "industrialmetallurgy:bauxite_ore"
+  }
+}

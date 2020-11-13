@@ -111,6 +111,17 @@
   "item.industrialmetallurgy.tungsten_carbide_burr_set": "Tungsten Carbide Burr Set",
   "item.industrialmetallurgy.nequitum_burr_set": "Nequitum Burr Set",
 
+  "item.industrialmetallurgy.steel_pickaxe": "Steel Pickaxe",
+  "item.industrialmetallurgy.steel_shovel": "Steel Shovel",
+  "item.industrialmetallurgy.steel_sword": "Steel Sword",
+  "item.industrialmetallurgy.steel_axe": "Steel Axe",
+  "item.industrialmetallurgy.steel_hoe": "Steel Hoe",
+  "item.industrialmetallurgy.nequitum_pickaxe": "Nequitum Pickaxe",
+  "item.industrialmetallurgy.nequitum_shovel": "Nequitum Shovel",
+  "item.industrialmetallurgy.nequitum_sword": "Nequitum Sword",
+  "item.industrialmetallurgy.nequitum_axe": "Nequitum Axe",
+  "item.industrialmetallurgy.nequitum_hoe": "Nequitum Hoe",
+
   "block.industrialmetallurgy.alnico_block": "Block of Alnico",
   "block.industrialmetallurgy.aluminum_block": "Block of Aluminum",
   "block.industrialmetallurgy.brass_block": "Block of Brass",

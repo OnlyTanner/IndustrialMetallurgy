@@ -6,7 +6,7 @@ import com.onlytanner.industrialmetallurgy.items.BurrSetBase;
 import com.onlytanner.industrialmetallurgy.items.ItemBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.item.Item;
+import net.minecraft.item.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -135,6 +135,17 @@ public class RegistryHandler {
     public static final RegistryObject<Item> CHROMIUM_BURR_SET = ITEMS.register("chromium_burr_set", BurrSetBase::new);
     public static final RegistryObject<Item> TUNGSTEN_CARBIDE_BURR_SET = ITEMS.register("tungsten_carbide_burr_set", BurrSetBase::new);
     public static final RegistryObject<Item> NEQUITUM_BURR_SET = ITEMS.register("nequitum_burr_set", ItemBase::new);
+    // Tools
+    public static final RegistryObject<Item> STEEL_PICAXE = ITEMS.register("steel_pickaxe", () -> new PickaxeItem(ModItemTiers.STEEL, 1, -2.8F, new Item.Properties().group(IndustrialMetallurgy.TAB)));
+    public static final RegistryObject<Item> STEEL_SHOVEL = ITEMS.register("steel_shovel", () -> new ShovelItem(ModItemTiers.STEEL, 1, -2.8F, new Item.Properties().group(IndustrialMetallurgy.TAB)));
+    public static final RegistryObject<Item> STEEL_SWORD = ITEMS.register("steel_sword", () -> new SwordItem(ModItemTiers.STEEL, 1, -2.8F, new Item.Properties().group(IndustrialMetallurgy.TAB)));
+    public static final RegistryObject<Item> STEEL_AXE = ITEMS.register("steel_axe", () -> new AxeItem(ModItemTiers.STEEL, 1, -2.8F, new Item.Properties().group(IndustrialMetallurgy.TAB)));
+    public static final RegistryObject<Item> STEEL_HOE = ITEMS.register("steel_hoe", () -> new HoeItem(ModItemTiers.STEEL, 1, -2.8F, new Item.Properties().group(IndustrialMetallurgy.TAB)));
+    public static final RegistryObject<Item> NEQUITUM_PICAXE = ITEMS.register("nequitum_pickaxe", () -> new PickaxeItem(ModItemTiers.NEQUITUM, 1, -2.8F, new Item.Properties().group(IndustrialMetallurgy.TAB)));
+    public static final RegistryObject<Item> NEQUITUM_SHOVEL = ITEMS.register("nequitum_shovel", () -> new ShovelItem(ModItemTiers.NEQUITUM, 1, -2.8F, new Item.Properties().group(IndustrialMetallurgy.TAB)));
+    public static final RegistryObject<Item> NEQUITUM_SWORD = ITEMS.register("nequitum_sword", () -> new SwordItem(ModItemTiers.NEQUITUM, 1, -2.8F, new Item.Properties().group(IndustrialMetallurgy.TAB)));
+    public static final RegistryObject<Item> NEQUITUM_AXE = ITEMS.register("nequitum_axe", () -> new AxeItem(ModItemTiers.NEQUITUM, 1, -2.8F, new Item.Properties().group(IndustrialMetallurgy.TAB)));
+    public static final RegistryObject<Item> NEQUITUM_HOE = ITEMS.register("nequitum_hoe", () -> new HoeItem(ModItemTiers.NEQUITUM, 1, -2.8F, new Item.Properties().group(IndustrialMetallurgy.TAB)));
 
     // Blocks
     // Metal Blocks

@@ -72,7 +72,7 @@ public class ChemicalCentrifugeTileEntity extends TileEntity implements ITickabl
     private ChemicalCentrifugeTileEntity(final TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
         customName = new TranslationTextComponent("Chemical Centrifuge");
-        inventory = new ModItemHandler(4);
+        inventory = new ModItemHandler(5);
         energy = 0;
     }
 

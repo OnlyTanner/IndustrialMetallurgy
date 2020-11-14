@@ -72,7 +72,7 @@ public class ExtruderTileEntity extends TileEntity implements ITickableTileEntit
     private ExtruderTileEntity(final TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
         customName = new TranslationTextComponent("Extruder");
-        inventory = new ModItemHandler(4);
+        inventory = new ModItemHandler(2);
         energy = 0;
     }
 

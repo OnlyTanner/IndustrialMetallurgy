@@ -11,6 +11,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
@@ -34,7 +35,7 @@ public class ChemicalCentrifugeContainer extends Container {
     public FunctionalIntReferenceHolder acidLevel;
     protected Map<ElementType, Vector<ContainerElementDimension>> containerSlots;
     private PlayerInventory inventory;
-    public Slot outputSlot, inputSlot, acidSlot;
+    public Slot outputSlot, inputSlot, bottleSlot;
 
     public ChemicalCentrifugeContainer(final int id, final PlayerInventory player, final ChemicalCentrifugeTileEntity tileEntity) {
         super(ModContainerTypes.CHEMICAL_CENTRIFUGE.get(), id);
@@ -100,7 +101,7 @@ public class ChemicalCentrifugeContainer extends Container {
     @OnlyIn(Dist.CLIENT)
     public int getSmeltProgressionScaled() {
         return this.currentSmeltTime.get() != 0 && this.te.MAX_SMELT_TIME != 0
-                ? this.currentSmeltTime.get() * 24 / this.te.MAX_SMELT_TIME
+                ? this.currentSmeltTime.get() * 28 / this.te.MAX_SMELT_TIME
                 : 0;
     }
 
@@ -108,13 +109,6 @@ public class ChemicalCentrifugeContainer extends Container {
     public int getCurrentEnergyScaled() {
         return this.currentEnergy.get() != 0 && this.te.MAX_ENERGY != 0
                 ? this.currentEnergy.get() * 70 / this.te.MAX_ENERGY
-                : 0;
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public int getAcidLevelScaled() {
-        return this.acidLevel.get() != 0 && this.te.MAX_ACID_LEVEL != 0
-                ? this.acidLevel.get() * 28 / this.te.MAX_ACID_LEVEL
                 : 0;
     }
 
@@ -136,9 +130,11 @@ public class ChemicalCentrifugeContainer extends Container {
         }
         index = 0;
         // ChemicalCentrifuge Slots
-        containerSlots.get(ElementType.INPUT).add(new ContainerElementDimension(56, 35, 16, 16, index++, ElementType.INPUT, true));
-        containerSlots.get(ElementType.OUTPUT).add(new ContainerElementDimension(116, 35, 16, 16, index++, ElementType.OUTPUT, true));
-        containerSlots.get(ElementType.UTILITY).add(new ContainerElementDimension(152, 62, 16, 16, index++, ElementType.UTILITY, true));
+        containerSlots.get(ElementType.INPUT).add(new ContainerElementDimension(80, 17, 16, 16, index++, ElementType.INPUT, true));
+        containerSlots.get(ElementType.OUTPUT).add(new ContainerElementDimension(57, 51, 16, 16, index++, ElementType.OUTPUT, true));
+        containerSlots.get(ElementType.OUTPUT).add(new ContainerElementDimension(80, 58, 16, 16, index++, ElementType.OUTPUT, true));
+        containerSlots.get(ElementType.OUTPUT).add(new ContainerElementDimension(103, 51, 16, 16, index++, ElementType.OUTPUT, true));
+        containerSlots.get(ElementType.UTILITY).add(new ContainerElementDimension(152, 8, 16, 16, index++, ElementType.UTILITY, true));
         // Attach all slot elements to the parent Container object
         attachSlotsToContainer();
     }
@@ -152,9 +148,9 @@ public class ChemicalCentrifugeContainer extends Container {
                             this.addSlot(new Slot(inventory, elem.index, elem.x, elem.y));
                         }
                         else if (elem.type == ElementType.UTILITY) {
-                            ChemicalCentrifugeAcidSlot a = new ChemicalCentrifugeAcidSlot(this.te.getInventory(), elem.index, elem.x, elem.y);
-                            this.acidSlot = a;
-                            this.addSlot(acidSlot);
+                            ChemicalCentrifugeBottleSlot a = new ChemicalCentrifugeBottleSlot(this.te.getInventory(), elem.index, elem.x, elem.y);
+                            this.bottleSlot = a;
+                            this.addSlot(bottleSlot);
                         }
                         else if (elem.type == ElementType.OUTPUT) {
                             ChemicalCentrifugeOutputSlot o = new ChemicalCentrifugeOutputSlot(this.te.getInventory(), elem.index, elem.x, elem.y);
@@ -172,15 +168,15 @@ public class ChemicalCentrifugeContainer extends Container {
         }
     }
 
-    public class ChemicalCentrifugeAcidSlot extends SlotItemHandler {
+    public class ChemicalCentrifugeBottleSlot extends SlotItemHandler {
 
-        public ChemicalCentrifugeAcidSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+        public ChemicalCentrifugeBottleSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
             super(itemHandler, index, xPosition, yPosition);
         }
 
         @Override
         public boolean isItemValid(ItemStack stack) {
-            return (stack.getItem().equals(RegistryHandler.SULFURIC_ACID_BOTTLE.get()));
+            return (stack.getItem().equals(Items.GLASS_BOTTLE.getItem()));
         }
 
     }

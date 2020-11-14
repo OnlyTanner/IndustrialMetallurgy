@@ -72,7 +72,7 @@ public class SolderingStationTileEntity extends TileEntity implements ITickableT
     private SolderingStationTileEntity(final TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
         customName = new TranslationTextComponent("Soldering Station");
-        inventory = new ModItemHandler(4);
+        inventory = new ModItemHandler(11);
         energy = 0;
     }
 

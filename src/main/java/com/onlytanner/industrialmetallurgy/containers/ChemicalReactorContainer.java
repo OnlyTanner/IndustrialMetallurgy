@@ -11,6 +11,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
@@ -31,10 +32,9 @@ public class ChemicalReactorContainer extends Container {
     private final IWorldPosCallable canInteractWithCallable;
     public FunctionalIntReferenceHolder currentSmeltTime;
     public FunctionalIntReferenceHolder currentEnergy;
-    public FunctionalIntReferenceHolder acidLevel;
     protected Map<ElementType, Vector<ContainerElementDimension>> containerSlots;
     private PlayerInventory inventory;
-    public Slot burrSlot, outputSlot, inputSlot, acidSlot;
+    public Slot outputSlot, inputSlot, bottleSlot;
 
     public ChemicalReactorContainer(final int id, final PlayerInventory player, final ChemicalReactorTileEntity tileEntity) {
         super(ModContainerTypes.CHEMICAL_REACTOR.get(), id);
@@ -45,7 +45,6 @@ public class ChemicalReactorContainer extends Container {
         initContainerElements();
         this.trackInt(currentSmeltTime = new FunctionalIntReferenceHolder(() -> this.te.currentSmeltTime, value -> this.te.currentSmeltTime = value));
         this.trackInt(currentEnergy = new FunctionalIntReferenceHolder(() -> this.te.energy, value -> this.te.energy = value));
-        this.trackInt(acidLevel = new FunctionalIntReferenceHolder(() -> this.te.acidLevel, value -> this.te.acidLevel = value));
     }
 
     public ChemicalReactorContainer(final int id, final PlayerInventory player, final PacketBuffer data) {
@@ -111,18 +110,10 @@ public class ChemicalReactorContainer extends Container {
                 : 0;
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public int getAcidLevelScaled() {
-        return this.acidLevel.get() != 0 && this.te.MAX_ACID_LEVEL != 0
-                ? this.acidLevel.get() * 28 / this.te.MAX_ACID_LEVEL
-                : 0;
-    }
-
     protected final void initContainerElements() {
         int index = 0;
         containerSlots.put(ElementType.UTILITY, new Vector<>());
         containerSlots.put(ElementType.OUTPUT, new Vector<>());
-        containerSlots.put(ElementType.FUEL, new Vector<>());
         containerSlots.put(ElementType.INPUT, new Vector<>());
         containerSlots.put(ElementType.PLAYER_INVENTORY, new Vector<>());
         // Player Hotbar
@@ -137,9 +128,10 @@ public class ChemicalReactorContainer extends Container {
         }
         index = 0;
         // ChemicalReactor Slots
-        containerSlots.get(ElementType.INPUT).add(new ContainerElementDimension(56, 35, 16, 16, index++, ElementType.INPUT, true));
-        containerSlots.get(ElementType.FUEL).add(new ContainerElementDimension(152, 8, 16, 16, index++, ElementType.FUEL, true));
-        containerSlots.get(ElementType.OUTPUT).add(new ContainerElementDimension(116, 35, 16, 16, index++, ElementType.OUTPUT, true));
+        containerSlots.get(ElementType.INPUT).add(new ContainerElementDimension(57, 24, 16, 16, index++, ElementType.INPUT, true));
+        containerSlots.get(ElementType.INPUT).add(new ContainerElementDimension(80, 17, 16, 16, index++, ElementType.INPUT, true));
+        containerSlots.get(ElementType.INPUT).add(new ContainerElementDimension(103, 24, 16, 16, index++, ElementType.INPUT, true));
+        containerSlots.get(ElementType.OUTPUT).add(new ContainerElementDimension(80, 58, 16, 16, index++, ElementType.OUTPUT, true));
         containerSlots.get(ElementType.UTILITY).add(new ContainerElementDimension(152, 62, 16, 16, index++, ElementType.UTILITY, true));
         // Attach all slot elements to the parent Container object
         attachSlotsToContainer();
@@ -153,15 +145,10 @@ public class ChemicalReactorContainer extends Container {
                         if (elem.type == ElementType.PLAYER_INVENTORY) {
                             this.addSlot(new Slot(inventory, elem.index, elem.x, elem.y));
                         }
-                        else if (elem.type == ElementType.FUEL) {
-                            ChemicalReactorBurrSlot f = new ChemicalReactorBurrSlot(this.te.getInventory(), elem.index, elem.x, elem.y);
-                            this.burrSlot = f;
-                            this.addSlot(burrSlot);
-                        }
                         else if (elem.type == ElementType.UTILITY) {
-                            ChemicalReactorAcidSlot a = new ChemicalReactorAcidSlot(this.te.getInventory(), elem.index, elem.x, elem.y);
-                            this.acidSlot = a;
-                            this.addSlot(acidSlot);
+                            ChemicalReactorBottleSlot a = new ChemicalReactorBottleSlot(this.te.getInventory(), elem.index, elem.x, elem.y);
+                            this.bottleSlot = a;
+                            this.addSlot(bottleSlot);
                         }
                         else if (elem.type == ElementType.OUTPUT) {
                             ChemicalReactorOutputSlot o = new ChemicalReactorOutputSlot(this.te.getInventory(), elem.index, elem.x, elem.y);
@@ -179,32 +166,15 @@ public class ChemicalReactorContainer extends Container {
         }
     }
 
-    public class ChemicalReactorBurrSlot extends SlotItemHandler {
+    public class ChemicalReactorBottleSlot extends SlotItemHandler {
 
-        public ChemicalReactorBurrSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+        public ChemicalReactorBottleSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
             super(itemHandler, index, xPosition, yPosition);
         }
 
         @Override
         public boolean isItemValid(ItemStack stack) {
-            return (stack.getItem().equals(RegistryHandler.BRASS_BURR_SET.get()) ||
-                    stack.getItem().equals(RegistryHandler.STEEL_BURR_SET.get()) ||
-                    stack.getItem().equals(RegistryHandler.CHROMIUM_BURR_SET.get()) ||
-                    stack.getItem().equals(RegistryHandler.TUNGSTEN_CARBIDE_BURR_SET.get()) ||
-                    stack.getItem().equals(RegistryHandler.NEQUITUM_BURR_SET.get()));
-        }
-
-    }
-
-    public class ChemicalReactorAcidSlot extends SlotItemHandler {
-
-        public ChemicalReactorAcidSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
-            super(itemHandler, index, xPosition, yPosition);
-        }
-
-        @Override
-        public boolean isItemValid(ItemStack stack) {
-            return (stack.getItem().equals(RegistryHandler.SULFURIC_ACID_BOTTLE.get()));
+            return (stack.getItem().equals(Items.GLASS_BOTTLE.getItem()));
         }
 
     }

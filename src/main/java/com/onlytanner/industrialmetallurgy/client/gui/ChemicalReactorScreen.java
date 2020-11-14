@@ -17,9 +17,8 @@ public class ChemicalReactorScreen extends ContainerScreen<ChemicalReactorContai
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(IndustrialMetallurgy.MOD_ID, "textures/gui/container/chemical_reactor.png");
 
-    private final int PROGRESS_X = 79, PROGRESS_Y = 34, PROGRESS_WIDTH = 24, PROGRESS_HEIGHT = 17;
+    private final int PROGRESS_X = 98, PROGRESS_Y = 47, PROGRESS_WIDTH = 9, PROGRESS_HEIGHT = 28;
     private final int ENERGY_X = 8, ENERGY_Y = 8, ENERGY_WIDTH = 16, ENERGY_HEIGHT = 70;
-    private final int ACID_X = 157, ACID_Y = 29, ACID_WIDTH = 6, ACID_HEIGHT = 28;
 
     public ChemicalReactorScreen(ChemicalReactorContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
@@ -51,9 +50,6 @@ public class ChemicalReactorScreen extends ContainerScreen<ChemicalReactorContai
         if (x >= ENERGY_X + this.guiLeft && x <= ENERGY_X + ENERGY_WIDTH + this.guiLeft && y >= ENERGY_Y + this.guiTop && y <= ENERGY_Y + ENERGY_HEIGHT + this.guiTop) {
             super.renderTooltip(matrixStack, new TranslationTextComponent("Energy Stored: " + this.container.currentEnergy.get()), x, y);
         }
-        if (x >= ACID_X + this.guiLeft && x <= ACID_X + ACID_WIDTH + this.guiLeft && y >= ACID_Y + this.guiTop && y <= ACID_Y + ACID_HEIGHT + this.guiTop) {
-            super.renderTooltip(matrixStack, new TranslationTextComponent("Sulfuric Acid: " + (this.container.acidLevel.get() * 100 / this.container.te.MAX_ACID_LEVEL) + "%"), x, y);
-        }
     }
 
     @Override
@@ -62,11 +58,9 @@ public class ChemicalReactorScreen extends ContainerScreen<ChemicalReactorContai
         int backgroundX = (this.width - this.xSize) / 2;
         int backgroundY = (this.height - this.ySize) / 2;
         this.blit(matrixStack, backgroundX, backgroundY, 0, 0, this.xSize, this.ySize);
-        this.blit(matrixStack, this.guiLeft + 79, this.guiTop + 35, 176, 0, this.container.getSmeltProgressionScaled(), 16);
+        this.blit(matrixStack, this.guiLeft + PROGRESS_X, this.guiTop + PROGRESS_Y, 176, 0, 9, this.container.getSmeltProgressionScaled());
         int yOffset = 70 - this.container.getCurrentEnergyScaled();
         this.blit(matrixStack, this.guiLeft + 8, this.guiTop + 8 + yOffset, 176, yOffset + 17, 16, this.container.getCurrentEnergyScaled());
-        yOffset = 28 - this.container.getAcidLevelScaled();
-        this.blit(matrixStack, this.guiLeft + 157, this.guiTop + 29 + yOffset, 192, yOffset + 17, 6, this.container.getAcidLevelScaled());
     }
 
     @Override

@@ -31,10 +31,9 @@ public class ExtruderContainer extends Container {
     private final IWorldPosCallable canInteractWithCallable;
     public FunctionalIntReferenceHolder currentSmeltTime;
     public FunctionalIntReferenceHolder currentEnergy;
-    public FunctionalIntReferenceHolder acidLevel;
     protected Map<ElementType, Vector<ContainerElementDimension>> containerSlots;
     private PlayerInventory inventory;
-    public Slot burrSlot, outputSlot, inputSlot, acidSlot;
+    public Slot outputSlot, inputSlot;
 
     public ExtruderContainer(final int id, final PlayerInventory player, final ExtruderTileEntity tileEntity) {
         super(ModContainerTypes.EXTRUDER.get(), id);
@@ -45,7 +44,6 @@ public class ExtruderContainer extends Container {
         initContainerElements();
         this.trackInt(currentSmeltTime = new FunctionalIntReferenceHolder(() -> this.te.currentSmeltTime, value -> this.te.currentSmeltTime = value));
         this.trackInt(currentEnergy = new FunctionalIntReferenceHolder(() -> this.te.energy, value -> this.te.energy = value));
-        this.trackInt(acidLevel = new FunctionalIntReferenceHolder(() -> this.te.acidLevel, value -> this.te.acidLevel = value));
     }
 
     public ExtruderContainer(final int id, final PlayerInventory player, final PacketBuffer data) {
@@ -100,7 +98,7 @@ public class ExtruderContainer extends Container {
     @OnlyIn(Dist.CLIENT)
     public int getSmeltProgressionScaled() {
         return this.currentSmeltTime.get() != 0 && this.te.MAX_SMELT_TIME != 0
-                ? this.currentSmeltTime.get() * 24 / this.te.MAX_SMELT_TIME
+                ? this.currentSmeltTime.get() * 18 / this.te.MAX_SMELT_TIME
                 : 0;
     }
 
@@ -111,18 +109,9 @@ public class ExtruderContainer extends Container {
                 : 0;
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public int getAcidLevelScaled() {
-        return this.acidLevel.get() != 0 && this.te.MAX_ACID_LEVEL != 0
-                ? this.acidLevel.get() * 28 / this.te.MAX_ACID_LEVEL
-                : 0;
-    }
-
     protected final void initContainerElements() {
         int index = 0;
-        containerSlots.put(ElementType.UTILITY, new Vector<>());
         containerSlots.put(ElementType.OUTPUT, new Vector<>());
-        containerSlots.put(ElementType.FUEL, new Vector<>());
         containerSlots.put(ElementType.INPUT, new Vector<>());
         containerSlots.put(ElementType.PLAYER_INVENTORY, new Vector<>());
         // Player Hotbar
@@ -138,9 +127,7 @@ public class ExtruderContainer extends Container {
         index = 0;
         // Crusher Slots
         containerSlots.get(ElementType.INPUT).add(new ContainerElementDimension(56, 35, 16, 16, index++, ElementType.INPUT, true));
-        containerSlots.get(ElementType.FUEL).add(new ContainerElementDimension(152, 8, 16, 16, index++, ElementType.FUEL, true));
         containerSlots.get(ElementType.OUTPUT).add(new ContainerElementDimension(116, 35, 16, 16, index++, ElementType.OUTPUT, true));
-        containerSlots.get(ElementType.UTILITY).add(new ContainerElementDimension(152, 62, 16, 16, index++, ElementType.UTILITY, true));
         // Attach all slot elements to the parent Container object
         attachSlotsToContainer();
     }
@@ -153,23 +140,13 @@ public class ExtruderContainer extends Container {
                         if (elem.type == ElementType.PLAYER_INVENTORY) {
                             this.addSlot(new Slot(inventory, elem.index, elem.x, elem.y));
                         }
-                        else if (elem.type == ElementType.FUEL) {
-                            CrusherBurrSlot f = new CrusherBurrSlot(this.te.getInventory(), elem.index, elem.x, elem.y);
-                            this.burrSlot = f;
-                            this.addSlot(burrSlot);
-                        }
-                        else if (elem.type == ElementType.UTILITY) {
-                            CrusherAcidSlot a = new CrusherAcidSlot(this.te.getInventory(), elem.index, elem.x, elem.y);
-                            this.acidSlot = a;
-                            this.addSlot(acidSlot);
-                        }
                         else if (elem.type == ElementType.OUTPUT) {
-                            CrusherOutputSlot o = new CrusherOutputSlot(this.te.getInventory(), elem.index, elem.x, elem.y);
+                            ExtruderOutputSlot o = new ExtruderOutputSlot(this.te.getInventory(), elem.index, elem.x, elem.y);
                             this.outputSlot = o;
                             this.addSlot(outputSlot);
                         }
                         else if (elem.type == ElementType.INPUT) {
-                            CrusherInputSlot i = new CrusherInputSlot(this.te.getInventory(), elem.index, elem.x, elem.y);
+                            ExtruderInputSlot i = new ExtruderInputSlot(this.te.getInventory(), elem.index, elem.x, elem.y);
                             this.inputSlot = i;
                             this.addSlot(inputSlot);
                         }
@@ -179,39 +156,9 @@ public class ExtruderContainer extends Container {
         }
     }
 
-    public class CrusherBurrSlot extends SlotItemHandler {
+    public class ExtruderOutputSlot extends SlotItemHandler {
 
-        public CrusherBurrSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
-            super(itemHandler, index, xPosition, yPosition);
-        }
-
-        @Override
-        public boolean isItemValid(ItemStack stack) {
-            return (stack.getItem().equals(RegistryHandler.BRASS_BURR_SET.get()) ||
-                    stack.getItem().equals(RegistryHandler.STEEL_BURR_SET.get()) ||
-                    stack.getItem().equals(RegistryHandler.CHROMIUM_BURR_SET.get()) ||
-                    stack.getItem().equals(RegistryHandler.TUNGSTEN_CARBIDE_BURR_SET.get()) ||
-                    stack.getItem().equals(RegistryHandler.NEQUITUM_BURR_SET.get()));
-        }
-
-    }
-
-    public class CrusherAcidSlot extends SlotItemHandler {
-
-        public CrusherAcidSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
-            super(itemHandler, index, xPosition, yPosition);
-        }
-
-        @Override
-        public boolean isItemValid(ItemStack stack) {
-            return (stack.getItem().equals(RegistryHandler.SULFURIC_ACID_BOTTLE.get()));
-        }
-
-    }
-
-    public class CrusherOutputSlot extends SlotItemHandler {
-
-        public CrusherOutputSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+        public ExtruderOutputSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
             super(itemHandler, index, xPosition, yPosition);
         }
 
@@ -222,9 +169,9 @@ public class ExtruderContainer extends Container {
 
     }
 
-    public class CrusherInputSlot extends SlotItemHandler {
+    public class ExtruderInputSlot extends SlotItemHandler {
 
-        public CrusherInputSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+        public ExtruderInputSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
             super(itemHandler, index, xPosition, yPosition);
         }
 

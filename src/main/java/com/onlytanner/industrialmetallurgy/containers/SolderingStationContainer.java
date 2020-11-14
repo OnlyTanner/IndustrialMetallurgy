@@ -34,7 +34,7 @@ public class SolderingStationContainer extends Container {
     public FunctionalIntReferenceHolder acidLevel;
     protected Map<ElementType, Vector<ContainerElementDimension>> containerSlots;
     private PlayerInventory inventory;
-    public Slot burrSlot, outputSlot, inputSlot, acidSlot;
+    public Slot outputSlot, inputSlot, solderSlot;
 
     public SolderingStationContainer(final int id, final PlayerInventory player, final SolderingStationTileEntity tileEntity) {
         super(ModContainerTypes.SOLDERING_STATION.get(), id);
@@ -111,18 +111,10 @@ public class SolderingStationContainer extends Container {
                 : 0;
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public int getAcidLevelScaled() {
-        return this.acidLevel.get() != 0 && this.te.MAX_ACID_LEVEL != 0
-                ? this.acidLevel.get() * 28 / this.te.MAX_ACID_LEVEL
-                : 0;
-    }
-
     protected final void initContainerElements() {
         int index = 0;
         containerSlots.put(ElementType.UTILITY, new Vector<>());
         containerSlots.put(ElementType.OUTPUT, new Vector<>());
-        containerSlots.put(ElementType.FUEL, new Vector<>());
         containerSlots.put(ElementType.INPUT, new Vector<>());
         containerSlots.put(ElementType.PLAYER_INVENTORY, new Vector<>());
         // Player Hotbar
@@ -137,10 +129,13 @@ public class SolderingStationContainer extends Container {
         }
         index = 0;
         // SolderingStation Slots
-        containerSlots.get(ElementType.INPUT).add(new ContainerElementDimension(56, 35, 16, 16, index++, ElementType.INPUT, true));
-        containerSlots.get(ElementType.FUEL).add(new ContainerElementDimension(152, 8, 16, 16, index++, ElementType.FUEL, true));
-        containerSlots.get(ElementType.OUTPUT).add(new ContainerElementDimension(116, 35, 16, 16, index++, ElementType.OUTPUT, true));
-        containerSlots.get(ElementType.UTILITY).add(new ContainerElementDimension(152, 62, 16, 16, index++, ElementType.UTILITY, true));
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                containerSlots.get(ElementType.INPUT).add(new ContainerElementDimension(42 + (i * 18), 17 + (j * 18), 16, 16, index++, ElementType.INPUT, true));
+            }
+        }
+        containerSlots.get(ElementType.OUTPUT).add(new ContainerElementDimension(136, 49, 16, 16, index++, ElementType.OUTPUT, true));
+        containerSlots.get(ElementType.UTILITY).add(new ContainerElementDimension(132, 17, 16, 16, index++, ElementType.UTILITY, true));
         // Attach all slot elements to the parent Container object
         attachSlotsToContainer();
     }
@@ -153,15 +148,10 @@ public class SolderingStationContainer extends Container {
                         if (elem.type == ElementType.PLAYER_INVENTORY) {
                             this.addSlot(new Slot(inventory, elem.index, elem.x, elem.y));
                         }
-                        else if (elem.type == ElementType.FUEL) {
-                            SolderingStationBurrSlot f = new SolderingStationBurrSlot(this.te.getInventory(), elem.index, elem.x, elem.y);
-                            this.burrSlot = f;
-                            this.addSlot(burrSlot);
-                        }
                         else if (elem.type == ElementType.UTILITY) {
-                            SolderingStationAcidSlot a = new SolderingStationAcidSlot(this.te.getInventory(), elem.index, elem.x, elem.y);
-                            this.acidSlot = a;
-                            this.addSlot(acidSlot);
+                            SolderingStationSolderSlot a = new SolderingStationSolderSlot(this.te.getInventory(), elem.index, elem.x, elem.y);
+                            this.solderSlot = a;
+                            this.addSlot(solderSlot);
                         }
                         else if (elem.type == ElementType.OUTPUT) {
                             SolderingStationOutputSlot o = new SolderingStationOutputSlot(this.te.getInventory(), elem.index, elem.x, elem.y);
@@ -179,32 +169,15 @@ public class SolderingStationContainer extends Container {
         }
     }
 
-    public class SolderingStationBurrSlot extends SlotItemHandler {
+    public class SolderingStationSolderSlot extends SlotItemHandler {
 
-        public SolderingStationBurrSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+        public SolderingStationSolderSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
             super(itemHandler, index, xPosition, yPosition);
         }
 
         @Override
         public boolean isItemValid(ItemStack stack) {
-            return (stack.getItem().equals(RegistryHandler.BRASS_BURR_SET.get()) ||
-                    stack.getItem().equals(RegistryHandler.STEEL_BURR_SET.get()) ||
-                    stack.getItem().equals(RegistryHandler.CHROMIUM_BURR_SET.get()) ||
-                    stack.getItem().equals(RegistryHandler.TUNGSTEN_CARBIDE_BURR_SET.get()) ||
-                    stack.getItem().equals(RegistryHandler.NEQUITUM_BURR_SET.get()));
-        }
-
-    }
-
-    public class SolderingStationAcidSlot extends SlotItemHandler {
-
-        public SolderingStationAcidSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
-            super(itemHandler, index, xPosition, yPosition);
-        }
-
-        @Override
-        public boolean isItemValid(ItemStack stack) {
-            return (stack.getItem().equals(RegistryHandler.SULFURIC_ACID_BOTTLE.get()));
+            return (stack.getItem().equals(RegistryHandler.SOLDER_WIRE.get()));
         }
 
     }

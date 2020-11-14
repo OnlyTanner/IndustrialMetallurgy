@@ -72,7 +72,7 @@ public class ChemicalReactorTileEntity extends TileEntity implements ITickableTi
     private ChemicalReactorTileEntity(final TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
         customName = new TranslationTextComponent("Chemical Reactor");
-        inventory = new ModItemHandler(4);
+        inventory = new ModItemHandler(5);
         energy = 0;
     }
 

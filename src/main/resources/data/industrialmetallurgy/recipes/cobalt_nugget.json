@@ -1,18 +1,13 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "   ",
-    " s ",
-    "   "
-  ],
-  "key": {
-    "s": {
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
       "item": "industrialmetallurgy:cobalt_ingot"
     }
-  },
+  ],
   "result":
   {
     "item": "industrialmetallurgy:cobalt_nugget",
-    "count": 1
+    "count": 9
   }
 }

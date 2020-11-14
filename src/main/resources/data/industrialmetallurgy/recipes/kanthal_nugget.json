@@ -2,12 +2,12 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "industrialmetallurgy:silver_ingot"
+      "item": "industrialmetallurgy:kanthal_ingot"
     }
   ],
   "result":
   {
-    "item": "industrialmetallurgy:silver_nugget",
+    "item": "industrialmetallurgy:kanthal_nugget",
     "count": 9
   }
 }

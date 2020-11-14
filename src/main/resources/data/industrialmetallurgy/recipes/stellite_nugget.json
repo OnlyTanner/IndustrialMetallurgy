@@ -2,12 +2,12 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "industrialmetallurgy:silver_ingot"
+      "item": "industrialmetallurgy:stellite_ingot"
     }
   ],
   "result":
   {
-    "item": "industrialmetallurgy:silver_nugget",
+    "item": "industrialmetallurgy:stellite_nugget",
     "count": 9
   }
 }

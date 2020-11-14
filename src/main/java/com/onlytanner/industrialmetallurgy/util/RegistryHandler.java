@@ -214,6 +214,10 @@ public class RegistryHandler {
     public static final RegistryObject<Block> FORGE_TIER2 = BLOCKS.register("forge_tier2", () -> new ForgeTier2Block(Block.Properties.from(Blocks.FURNACE)));
     public static final RegistryObject<Block> CRUSHER = BLOCKS.register("crusher", () -> new CrusherBlock(Block.Properties.from(Blocks.FURNACE)));
     public static final RegistryObject<Block> COKE_OVEN = BLOCKS.register("coke_oven", () -> new CokeOvenBlock(Block.Properties.from(Blocks.FURNACE)));
+    public static final RegistryObject<Block> CHEMICAL_CENTRIFUGE = BLOCKS.register("chemical_centrifuge", () -> new ChemicalCentrifugeBlock(Block.Properties.from(Blocks.FURNACE)));
+    public static final RegistryObject<Block> CHEMICAL_REACTOR = BLOCKS.register("chemical_reactor", () -> new ChemicalReactorBlock(Block.Properties.from(Blocks.FURNACE)));
+    public static final RegistryObject<Block> EXTRUDER = BLOCKS.register("extruder", () -> new ExtruderBlock(Block.Properties.from(Blocks.FURNACE)));
+    public static final RegistryObject<Block> SOLDERING_STATION = BLOCKS.register("soldering_station", () -> new SolderingStationBlock(Block.Properties.from(Blocks.FURNACE)));
     public static final RegistryObject<Block> THERMOELECTRIC_GENERATOR = BLOCKS.register("thermoelectric_generator", () -> new ThermoelectricGeneratorBlock(Block.Properties.from(Blocks.FURNACE)));
 
 
@@ -269,6 +273,10 @@ public class RegistryHandler {
     public static final RegistryObject<Item> FORGE_TIER2_ITEM = ITEMS.register("forge_tier2", () -> new BlockItemBase(FORGE_TIER2.get()));
     public static final RegistryObject<Item> CRUSHER_ITEM = ITEMS.register("crusher", () -> new BlockItemBase(CRUSHER.get()));
     public static final RegistryObject<Item> COKE_OVEN_ITEM = ITEMS.register("coke_oven", () -> new BlockItemBase(COKE_OVEN.get()));
+    public static final RegistryObject<Item> CHEMICAL_CENTRIFUGE_ITEM = ITEMS.register("chemical_centrifuge", () -> new BlockItemBase(CHEMICAL_CENTRIFUGE.get()));
+    public static final RegistryObject<Item> CHEMICAL_REACTOR_ITEM = ITEMS.register("chemical_reactor", () -> new BlockItemBase(CHEMICAL_REACTOR.get()));
+    public static final RegistryObject<Item> EXTRUDER_ITEM = ITEMS.register("extruder", () -> new BlockItemBase(EXTRUDER.get()));
+    public static final RegistryObject<Item> SOLDERING_STATION_ITEM = ITEMS.register("soldering_station", () -> new BlockItemBase(SOLDERING_STATION.get()));
     public static final RegistryObject<Item> THERMOELECTRIC_GENERATOR_ITEM = ITEMS.register("thermoelectric_generator", () -> new BlockItemBase(THERMOELECTRIC_GENERATOR.get()));
 
 }

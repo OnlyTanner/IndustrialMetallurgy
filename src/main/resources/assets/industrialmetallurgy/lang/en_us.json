@@ -187,6 +187,10 @@
   "block.industrialmetallurgy.forge_tier2": "Steel Forge (Tier 2)",
   "block.industrialmetallurgy.crusher": "Crusher",
   "block.industrialmetallurgy.coke_oven": "Coke Oven",
+  "block.industrialmetallurgy.chemical_centrifuge": "Chemical Centrifuge",
+  "block.industrialmetallurgy.chemical_reactor": "Chemical Reactor",
+  "block.industrialmetallurgy.extruder": "Extruder",
+  "block.industrialmetallurgy.soldering_station": "Soldering Station",
   "block.industrialmetallurgy.thermoelectric_generator": "Thermoelectric Generator",
 
   "itemGroup.industrialMetallurgy": "Industrial Metallurgy"

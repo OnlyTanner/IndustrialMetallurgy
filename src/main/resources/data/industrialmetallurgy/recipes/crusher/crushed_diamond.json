@@ -1,0 +1,9 @@
+{
+  "type": "industrialmetallurgy:crusher",
+  "output": {
+    "item": "industrialmetallurgy:crushed_diamond"
+  },
+  "input": {
+    "item": "minecraft:diamond"
+  }
+}

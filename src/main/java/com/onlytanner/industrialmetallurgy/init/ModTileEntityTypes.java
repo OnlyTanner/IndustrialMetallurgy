@@ -1,6 +1,7 @@
 package com.onlytanner.industrialmetallurgy.init;
 
 import com.onlytanner.industrialmetallurgy.IndustrialMetallurgy;
+import com.onlytanner.industrialmetallurgy.blocks.ChemicalCentrifugeBlock;
 import com.onlytanner.industrialmetallurgy.tileentity.*;
 import com.onlytanner.industrialmetallurgy.util.RegistryHandler;
 import net.minecraft.tileentity.TileEntityType;
@@ -21,6 +22,10 @@ public class ModTileEntityTypes {
     public static final RegistryObject<TileEntityType<ForgeTier2TileEntity>> FORGE_TIER2 = TILE_ENTITY_TYPES.register("forge_tier2", () -> TileEntityType.Builder.create(ForgeTier2TileEntity::new, RegistryHandler.FORGE_TIER2.get()).build(null));
     public static final RegistryObject<TileEntityType<CrusherTileEntity>> CRUSHER = TILE_ENTITY_TYPES.register("crusher", () -> TileEntityType.Builder.create(CrusherTileEntity::new, RegistryHandler.CRUSHER.get()).build(null));
     public static final RegistryObject<TileEntityType<CokeOvenTileEntity>> COKE_OVEN = TILE_ENTITY_TYPES.register("coke_oven", () -> TileEntityType.Builder.create(CokeOvenTileEntity::new, RegistryHandler.COKE_OVEN.get()).build(null));
+    public static final RegistryObject<TileEntityType<ChemicalCentrifugeTileEntity>> CHEMICAL_CENTRIFUGE = TILE_ENTITY_TYPES.register("chemical_centrifuge", () -> TileEntityType.Builder.create(ChemicalCentrifugeTileEntity::new, RegistryHandler.COKE_OVEN.get()).build(null));
+    public static final RegistryObject<TileEntityType<ChemicalReactorTileEntity>> CHEMICAL_REACTOR = TILE_ENTITY_TYPES.register("chemical_reactor", () -> TileEntityType.Builder.create(ChemicalReactorTileEntity::new, RegistryHandler.COKE_OVEN.get()).build(null));
+    public static final RegistryObject<TileEntityType<ExtruderTileEntity>> EXTRUDER = TILE_ENTITY_TYPES.register("extruder", () -> TileEntityType.Builder.create(ExtruderTileEntity::new, RegistryHandler.COKE_OVEN.get()).build(null));
+    public static final RegistryObject<TileEntityType<SolderingStationTileEntity>> SOLDERING_STATION = TILE_ENTITY_TYPES.register("soldering_station", () -> TileEntityType.Builder.create(SolderingStationTileEntity::new, RegistryHandler.COKE_OVEN.get()).build(null));
     public static final RegistryObject<TileEntityType<ThermoelectricGeneratorTileEntity>> THERMOELECTRIC_GENERATOR = TILE_ENTITY_TYPES.register("thermoelectric_generator", () -> TileEntityType.Builder.create(ThermoelectricGeneratorTileEntity::new, RegistryHandler.THERMOELECTRIC_GENERATOR.get()).build(null));
 
 }

@@ -21,6 +21,10 @@ public class ModContainerTypes {
     public static final RegistryObject<ContainerType<ForgeTier2Container>> FORGE_TIER2 = CONTAINER_TYPES.register("forge_tier2", () -> IForgeContainerType.create(ForgeTier2Container::new));
     public static final RegistryObject<ContainerType<CrusherContainer>> CRUSHER = CONTAINER_TYPES.register("crusher", () -> IForgeContainerType.create(CrusherContainer::new));
     public static final RegistryObject<ContainerType<CokeOvenContainer>> COKE_OVEN = CONTAINER_TYPES.register("coke_oven", () -> IForgeContainerType.create(CokeOvenContainer::new));
+    public static final RegistryObject<ContainerType<ChemicalCentrifugeContainer>> CHEMICAL_CENTRIFUGE = CONTAINER_TYPES.register("chemical_centrifuge", () -> IForgeContainerType.create(ChemicalCentrifugeContainer::new));
+    public static final RegistryObject<ContainerType<ChemicalReactorContainer>> CHEMICAL_REACTOR = CONTAINER_TYPES.register("chemical_reactor", () -> IForgeContainerType.create(ChemicalReactorContainer::new));
+    public static final RegistryObject<ContainerType<ExtruderContainer>> EXTRUDER = CONTAINER_TYPES.register("extruder", () -> IForgeContainerType.create(ExtruderContainer::new));
+    public static final RegistryObject<ContainerType<SolderingStationContainer>> SOLDERING_STATION = CONTAINER_TYPES.register("soldering_station", () -> IForgeContainerType.create(SolderingStationContainer::new));
     public static final RegistryObject<ContainerType<ThermoelectricGeneratorContainer>> THERMOELECTRIC_GENERATOR = CONTAINER_TYPES.register("thermoelectric_generator", () -> IForgeContainerType.create(ThermoelectricGeneratorContainer::new));
 
 }

@@ -1,8 +1,8 @@
 {
     "variants": {
-        "facing=north": {"model": "industrialmetallurgy:block/chemical_separator"},
-        "facing=east":  {"model": "industrialmetallurgy:block/chemical_separator", "y": 90 },
-        "facing=south": {"model": "industrialmetallurgy:block/chemical_separator", "y": 180 },
-        "facing=west":  {"model": "industrialmetallurgy:block/chemical_separator", "y": 270 }
+        "facing=north":  { "model": "industrialmetallurgy:block/chemical_centrifuge" },
+        "facing=east":   { "model": "industrialmetallurgy:block/chemical_centrifuge", "y": 90 },
+        "facing=south":   { "model": "industrialmetallurgy:block/chemical_centrifuge", "y": 180 },
+        "facing=west":   { "model": "industrialmetallurgy:block/chemical_centrifuge", "y": 270 },
     }
 }

@@ -1,9 +1,6 @@
 package com.onlytanner.industrialmetallurgy;
 
-import com.onlytanner.industrialmetallurgy.client.gui.BasicForgeScreen;
-import com.onlytanner.industrialmetallurgy.client.gui.CokeOvenScreen;
-import com.onlytanner.industrialmetallurgy.client.gui.CrusherScreen;
-import com.onlytanner.industrialmetallurgy.client.gui.ThermoelectricGeneratorScreen;
+import com.onlytanner.industrialmetallurgy.client.gui.*;
 import com.onlytanner.industrialmetallurgy.init.ModContainerTypes;
 import com.onlytanner.industrialmetallurgy.init.ModTileEntityTypes;
 import com.onlytanner.industrialmetallurgy.recipes.RecipeSerializerInit;
@@ -64,6 +61,10 @@ public class IndustrialMetallurgy
         ScreenManager.registerFactory(ModContainerTypes.FORGE_TIER2.get(), BasicForgeScreen::new);
         ScreenManager.registerFactory(ModContainerTypes.CRUSHER.get(), CrusherScreen::new);
         ScreenManager.registerFactory(ModContainerTypes.COKE_OVEN.get(), CokeOvenScreen::new);
+        ScreenManager.registerFactory(ModContainerTypes.CHEMICAL_CENTRIFUGE.get(), ChemicalCentrifugeScreen::new);
+        ScreenManager.registerFactory(ModContainerTypes.CHEMICAL_REACTOR.get(), ChemicalReactorScreen::new);
+        ScreenManager.registerFactory(ModContainerTypes.EXTRUDER.get(), ExtruderScreen::new);
+        ScreenManager.registerFactory(ModContainerTypes.SOLDERING_STATION.get(), SolderingStationScreen::new);
         ScreenManager.registerFactory(ModContainerTypes.THERMOELECTRIC_GENERATOR.get(), ThermoelectricGeneratorScreen::new);
     }
 

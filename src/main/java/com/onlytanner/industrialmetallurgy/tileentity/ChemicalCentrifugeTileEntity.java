@@ -52,18 +52,15 @@ import java.util.stream.Collectors;
 public class ChemicalCentrifugeTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider, IEnergyStorage {
 
     public static final int INPUT_ID = 0;
-    public static final int BURR_SET_ID = 1;
-    public static final int OUTPUT_ID = 2;
-    public static final int ACID_ID = 3;
+    public static final int OUTPUT_ID = 1;
+    public static final int BOTTLE_ID = 4;
     private ITextComponent customName;
     public int currentSmeltTime;
     public final int MAX_SMELT_TIME = 50;
     private ModItemHandler inventory;
     public int energy;
-    public int acidLevel;
     public final int MAX_ENERGY = 100000;
     public final int ENERGY_USAGE_PER_TICK = 40;
-    public final int MAX_ACID_LEVEL = 64;
 
     public ChemicalCentrifugeTileEntity() {
         this(ModTileEntityTypes.CHEMICAL_CENTRIFUGE.get());
@@ -85,25 +82,7 @@ public class ChemicalCentrifugeTileEntity extends TileEntity implements ITickabl
     public void tick() {
         boolean dirty = false;
         if (this.world != null && !this.world.isRemote) {
-            if (this.acidLevel == 0 && this.inventory.getStackInSlot(ACID_ID).getCount() > 0) {
-                this.inventory.decrStackSize(ACID_ID, 1);
-                this.acidLevel = MAX_ACID_LEVEL;
-            }
-            if (this.getRecipe() != null && canProcess() && this.inventory.getStackInSlot(BURR_SET_ID).getCount() > 0 && energy >= ENERGY_USAGE_PER_TICK) {
-                this.world.setBlockState(this.getPos(), this.getBlockState().with(ChemicalCentrifugeBlock.LIT, true));
-                if (this.currentSmeltTime != this.MAX_SMELT_TIME) {
-                    this.currentSmeltTime++;
-                } else {
-                    this.currentSmeltTime = 0;
-                    processRecipe();
-                }
-                this.energy -= this.ENERGY_USAGE_PER_TICK;
-                dirty = true;
-            }
-            else {
-                this.world.setBlockState(this.getPos(), this.getBlockState().with(ChemicalCentrifugeBlock.LIT, false));
-                currentSmeltTime = 0;
-            }
+
         }
         if (dirty) {
             this.markDirty();
@@ -112,59 +91,25 @@ public class ChemicalCentrifugeTileEntity extends TileEntity implements ITickabl
         }
     }
 
-    public void processRecipe() {
+    public void processRecipe() {/*
         ItemStack output = this.getRecipe().getRecipeOutput();
-        ItemStack copy = output.copy();
-        copy.setCount(getOutputForTier() * copy.getCount());
-        this.inventory.insertItem(OUTPUT_ID, copy, false);
+        this.inventory.insertItem(OUTPUT_ID, output.copy(), false);
         if (this.inventory.getStackInSlot(INPUT_ID) != ItemStack.EMPTY) {
             ItemStack[] list = this.getRecipe().getInput().getMatchingStacks();
             for (int j = 0; j < list.length; j++) {
                 if (list[j].getItem().equals(this.getInventory().getStackInSlot(INPUT_ID).getItem())) {
                     this.inventory.decrStackSize(INPUT_ID, list[j].getCount());
-                    acidLevel = (acidLevel >= 8) ? acidLevel - 8 : 0;
-                    if (this.inventory.getStackInSlot(BURR_SET_ID).getItem() instanceof BurrSetBase)
-                        this.inventory.getStackInSlot(BURR_SET_ID).setDamage(this.inventory.getStackInSlot(BURR_SET_ID).getDamage() + 1);
                 }
             }
-        }
+        }*/
     }
 
-    private int getOutputForTier() {
-        if (this.inventory.getStackInSlot(BURR_SET_ID).getItem().equals(RegistryHandler.BRASS_BURR_SET.get())) {
-            if (this.acidLevel > 0)
-                return 1 + ((Math.random() >= 0.66) ? 1 : 0);
-            return 1 + ((Math.random() >= 0.75) ? 1 : 0);
-        }
-        else if (this.inventory.getStackInSlot(BURR_SET_ID).getItem().equals(RegistryHandler.STEEL_BURR_SET.get())) {
-            if (this.acidLevel > 0)
-                return 1 + ((Math.random() >= 0.25) ? 1 : 0);
-            return 1 + ((Math.random() >= 0.5) ? 1 : 0);
-        }
-        else if (this.inventory.getStackInSlot(BURR_SET_ID).getItem().equals(RegistryHandler.CHROMIUM_BURR_SET.get())) {
-            if (this.acidLevel > 0)
-                return 2 + ((Math.random() >= 0.5) ? 1 : 0);
-            return 2;
-        }
-        else if (this.inventory.getStackInSlot(BURR_SET_ID).getItem().equals(RegistryHandler.TUNGSTEN_CARBIDE_BURR_SET.get())) {
-            if (this.acidLevel > 0)
-                return 3;
-            return 2 + ((Math.random() >= 0.5) ? 1 : 0);
-        }
-        else if (this.inventory.getStackInSlot(BURR_SET_ID).getItem().equals(RegistryHandler.NEQUITUM_BURR_SET.get())) {
-            if (this.acidLevel > 0)
-                return 3;
-            return 2 + ((Math.random() >= 0.5) ? 1 : 0);
-        }
-        return 0;
-    }
-
-    public boolean canProcess() {
+    public boolean canProcess() {/*
         if (getRecipe() != null && getRecipe().matches(new RecipeWrapper(this.inventory), world) &&
             (this.inventory.getStackInSlot(OUTPUT_ID).getCount() < 64) &&
             ((this.inventory.getStackInSlot(OUTPUT_ID) == ItemStack.EMPTY) ||
             (this.inventory.getStackInSlot(OUTPUT_ID).getItem().equals(getRecipe().getRecipeOutput().getItem()))))
-            return true;
+            return true;*/
         return false;
     }
 
@@ -201,7 +146,6 @@ public class ChemicalCentrifugeTileEntity extends TileEntity implements ITickabl
         this.inventory.setNonNullList(inv);
         this.currentSmeltTime = nbt.getInt("CurrentSmeltTime");
         this.energy = nbt.getInt("Energy");
-        this.acidLevel = nbt.getInt("AcidLevel");
     }
 
     @Override
@@ -213,7 +157,6 @@ public class ChemicalCentrifugeTileEntity extends TileEntity implements ITickabl
         ItemStackHelper.saveAllItems(compound, this.inventory.toNonNullList());
         compound.putInt("CurrentSmeltTime", this.currentSmeltTime);
         compound.putInt("Energy", this.energy);
-        compound.putInt("AcidLevel", this.acidLevel);
         return compound;
     }
 

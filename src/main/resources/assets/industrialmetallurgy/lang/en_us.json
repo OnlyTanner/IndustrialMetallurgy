@@ -69,12 +69,12 @@
   "item.industrialmetallurgy.crushed_garnierite_ore": "Crushed Garnierite Ore",
   "item.industrialmetallurgy.crushed_gold_ore": "Crushed Gold Ore",
   "item.industrialmetallurgy.crushed_iron_ore": "Crushed Iron Ore",
-  "item.industrialmetallurgy.crushed_lepidolite_ore": "Crushed Lepidolite Ore",
   "item.industrialmetallurgy.crushed_pyrolusite_ore": "Crushed Pyrolusite Ore",
   "item.industrialmetallurgy.crushed_rutile_ore": "Crushed Rutile Ore",
   "item.industrialmetallurgy.crushed_sphalerite_ore": "Crushed Sphalerite Ore",
   "item.industrialmetallurgy.crushed_scheelite_ore": "Crushed Scheelite Ore",
 
+  "item.industrialmetallurgy.lepidolite": "Lepidolite Crystal",
   "item.industrialmetallurgy.crushed_coal": "Carbon Dust",
   "item.industrialmetallurgy.crushed_diamond": "Diamond Dust",
   "item.industrialmetallurgy.tungsten_carbide_dust": "Tungsten Carbide Dust",

@@ -31,7 +31,6 @@ public class SolderingStationContainer extends Container {
     private final IWorldPosCallable canInteractWithCallable;
     public FunctionalIntReferenceHolder currentSmeltTime;
     public FunctionalIntReferenceHolder currentEnergy;
-    public FunctionalIntReferenceHolder acidLevel;
     protected Map<ElementType, Vector<ContainerElementDimension>> containerSlots;
     private PlayerInventory inventory;
     public Slot outputSlot, inputSlot, solderSlot;
@@ -45,7 +44,6 @@ public class SolderingStationContainer extends Container {
         initContainerElements();
         this.trackInt(currentSmeltTime = new FunctionalIntReferenceHolder(() -> this.te.currentSmeltTime, value -> this.te.currentSmeltTime = value));
         this.trackInt(currentEnergy = new FunctionalIntReferenceHolder(() -> this.te.energy, value -> this.te.energy = value));
-        this.trackInt(acidLevel = new FunctionalIntReferenceHolder(() -> this.te.acidLevel, value -> this.te.acidLevel = value));
     }
 
     public SolderingStationContainer(final int id, final PlayerInventory player, final PacketBuffer data) {

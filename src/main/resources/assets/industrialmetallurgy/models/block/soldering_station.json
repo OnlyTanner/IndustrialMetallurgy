@@ -1,7 +1,7 @@
 {
     "parent": "block/orientable",
     "textures": {
-      "top": "industrialmetallurgy:blocks/stellite_block",
+      "top": "industrialmetallurgy:blocks/soldering_station_top",
       "front": "industrialmetallurgy:blocks/soldering_station",
       "side": "industrialmetallurgy:blocks/stellite_block"
     }

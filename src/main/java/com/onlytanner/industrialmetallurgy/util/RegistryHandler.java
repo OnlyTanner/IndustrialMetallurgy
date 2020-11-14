@@ -132,6 +132,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> ROTOR = ITEMS.register("rotor", ItemBase::new);
     public static final RegistryObject<Item> FIELD_COIL = ITEMS.register("field_coil", ItemBase::new);
     public static final RegistryObject<Item> GEAR = ITEMS.register("gear", ItemBase::new);
+    public static final RegistryObject<Item> HEAT_SINK = ITEMS.register("heat_sink", ItemBase::new);
     public static final RegistryObject<Item> HEATING_ELEMENT = ITEMS.register("heating_element", ItemBase::new);
     public static final RegistryObject<Item> INDUCTION_CORE = ITEMS.register("induction_core", ItemBase::new);
     public static final RegistryObject<Item> MAGNET_WIRE = ITEMS.register("magnet_wire", ItemBase::new);

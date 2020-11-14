@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    " s ",
+    "   "
+  ],
+  "key": {
+    "s": {
+      "item": "industrialmetallurgy:lead_ingot"
+    }
+  },
+  "result":
+  {
+    "item": "industrialmetallurgy:lead_nugget",
+    "count": 1
+  }
+}

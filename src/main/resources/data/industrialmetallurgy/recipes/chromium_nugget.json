@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    " s ",
+    "   "
+  ],
+  "key": {
+    "s": {
+      "item": "industrialmetallurgy:chromium_ingot"
+    }
+  },
+  "result":
+  {
+    "item": "industrialmetallurgy:chromium_nugget",
+    "count": 1
+  }
+}

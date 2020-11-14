@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    " s ",
+    "   "
+  ],
+  "key": {
+    "s": {
+      "item": "industrialmetallurgy:titanium_ingot"
+    }
+  },
+  "result":
+  {
+    "item": "industrialmetallurgy:titanium_nugget",
+    "count": 1
+  }
+}

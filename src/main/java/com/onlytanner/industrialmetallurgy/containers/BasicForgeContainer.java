@@ -1,6 +1,5 @@
 package com.onlytanner.industrialmetallurgy.containers;
 
-import com.onlytanner.industrialmetallurgy.init.ModContainerTypes;
 import com.onlytanner.industrialmetallurgy.tileentity.BasicForgeTileEntity;
 import com.onlytanner.industrialmetallurgy.util.ContainerElementDimension;
 import com.onlytanner.industrialmetallurgy.util.ContainerElementDimension.ElementType;

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    " s ",
+    "   "
+  ],
+  "key": {
+    "s": {
+      "item": "industrialmetallurgy:zinc_ingot"
+    }
+  },
+  "result":
+  {
+    "item": "industrialmetallurgy:zinc_nugget",
+    "count": 1
+  }
+}

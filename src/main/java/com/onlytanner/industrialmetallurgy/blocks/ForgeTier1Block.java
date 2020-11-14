@@ -1,7 +1,6 @@
 package com.onlytanner.industrialmetallurgy.blocks;
 
 import com.onlytanner.industrialmetallurgy.init.ModTileEntityTypes;
-import com.onlytanner.industrialmetallurgy.tileentity.BasicForgeTileEntity;
 import com.onlytanner.industrialmetallurgy.tileentity.ForgeTier1TileEntity;
 import com.onlytanner.industrialmetallurgy.util.ModItemHandler;
 import net.minecraft.block.Block;

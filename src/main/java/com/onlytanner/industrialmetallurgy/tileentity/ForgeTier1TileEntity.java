@@ -2,7 +2,6 @@ package com.onlytanner.industrialmetallurgy.tileentity;
 
 import com.onlytanner.industrialmetallurgy.IndustrialMetallurgy;
 import com.onlytanner.industrialmetallurgy.blocks.ForgeTier1Block;
-import com.onlytanner.industrialmetallurgy.containers.BasicForgeContainer;
 import com.onlytanner.industrialmetallurgy.containers.ForgeTier1Container;
 import com.onlytanner.industrialmetallurgy.init.ModTileEntityTypes;
 import com.onlytanner.industrialmetallurgy.recipes.ForgeRecipe;

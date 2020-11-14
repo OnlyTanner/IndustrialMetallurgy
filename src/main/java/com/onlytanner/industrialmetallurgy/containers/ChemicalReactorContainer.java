@@ -131,8 +131,8 @@ public class ChemicalReactorContainer extends Container {
         containerSlots.get(ElementType.INPUT).add(new ContainerElementDimension(57, 24, 16, 16, index++, ElementType.INPUT, true));
         containerSlots.get(ElementType.INPUT).add(new ContainerElementDimension(80, 17, 16, 16, index++, ElementType.INPUT, true));
         containerSlots.get(ElementType.INPUT).add(new ContainerElementDimension(103, 24, 16, 16, index++, ElementType.INPUT, true));
-        containerSlots.get(ElementType.OUTPUT).add(new ContainerElementDimension(80, 58, 16, 16, index++, ElementType.OUTPUT, true));
         containerSlots.get(ElementType.UTILITY).add(new ContainerElementDimension(152, 62, 16, 16, index++, ElementType.UTILITY, true));
+        containerSlots.get(ElementType.OUTPUT).add(new ContainerElementDimension(80, 58, 16, 16, index++, ElementType.OUTPUT, true));
         // Attach all slot elements to the parent Container object
         attachSlotsToContainer();
     }

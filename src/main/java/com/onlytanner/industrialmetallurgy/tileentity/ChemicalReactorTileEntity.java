@@ -46,14 +46,15 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ChemicalReactorTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider, IEnergyStorage {
 
     public static final int INPUT_ID = 0;
-    public static final int OUTPUT_ID = 3;
-    public static final int BOTTLE_ID = 4;
+    public static final int BOTTLE_ID = 3;
+    public static final int OUTPUT_ID = 4;
     private ITextComponent customName;
     public int currentSmeltTime;
     public final int MAX_SMELT_TIME = 50;
@@ -82,6 +83,18 @@ public class ChemicalReactorTileEntity extends TileEntity implements ITickableTi
     public void tick() {
         boolean dirty = false;
         if (this.world != null && !this.world.isRemote) {
+            if (canProcess() && energy > ENERGY_USAGE_PER_TICK && currentSmeltTime < MAX_SMELT_TIME) {
+                energy -= ENERGY_USAGE_PER_TICK;
+                currentSmeltTime ++;
+            }
+            else if (canProcess() && currentSmeltTime == MAX_SMELT_TIME) {
+                processRecipe();
+                currentSmeltTime = 0;
+                dirty = true;
+            }
+            else {
+                currentSmeltTime = 0;
+            }
         }
         if (dirty) {
             this.markDirty();
@@ -90,30 +103,29 @@ public class ChemicalReactorTileEntity extends TileEntity implements ITickableTi
         }
     }
 
-    public void processRecipe() {/*
-        ItemStack output = this.getRecipe().getRecipeOutput();
-        ItemStack copy = output.copy();
-        copy.setCount(getOutputForTier() * copy.getCount());
-        this.inventory.insertItem(OUTPUT_ID, copy, false);
+    public void processRecipe() {
+        List<ItemStack> output = this.getRecipe().getAllOutput();
+        this.inventory.insertItem(OUTPUT_ID, output.get(0).copy(), false);
+        this.inventory.insertItem(BOTTLE_ID, output.get(1).copy(), false);
         if (this.inventory.getStackInSlot(INPUT_ID) != ItemStack.EMPTY) {
             ItemStack[] list = this.getRecipe().getInput().getMatchingStacks();
             for (int j = 0; j < list.length; j++) {
                 if (list[j].getItem().equals(this.getInventory().getStackInSlot(INPUT_ID).getItem())) {
                     this.inventory.decrStackSize(INPUT_ID, list[j].getCount());
-                    acidLevel = (acidLevel >= 8) ? acidLevel - 8 : 0;
-                    if (this.inventory.getStackInSlot(BOTTLE_ID).getItem() instanceof BurrSetBase)
-                        this.inventory.getStackInSlot(BOTTLE_ID).setDamage(this.inventory.getStackInSlot(BOTTLE_ID).getDamage() + 1);
                 }
             }
-        }*/
+        }
     }
 
-    public boolean canProcess() {/*
+    public boolean canProcess() {
         if (getRecipe() != null && getRecipe().matches(new RecipeWrapper(this.inventory), world) &&
             (this.inventory.getStackInSlot(OUTPUT_ID).getCount() < 64) &&
             ((this.inventory.getStackInSlot(OUTPUT_ID) == ItemStack.EMPTY) ||
-            (this.inventory.getStackInSlot(OUTPUT_ID).getItem().equals(getRecipe().getRecipeOutput().getItem()))))
-            return true;*/
+            (this.inventory.getStackInSlot(OUTPUT_ID).getItem().equals(getRecipe().getAllOutput().get(0).getItem()))) &&
+            (this.inventory.getStackInSlot(BOTTLE_ID).getCount() < 64) &&
+            ((this.inventory.getStackInSlot(BOTTLE_ID) == ItemStack.EMPTY) ||
+            (this.inventory.getStackInSlot(BOTTLE_ID).getItem().equals(getRecipe().getAllOutput().get(1).getItem()))))
+            return true;
         return false;
     }
 

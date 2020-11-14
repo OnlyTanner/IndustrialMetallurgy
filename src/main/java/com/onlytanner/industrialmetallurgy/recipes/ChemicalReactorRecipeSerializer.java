@@ -1,5 +1,7 @@
 package com.onlytanner.industrialmetallurgy.recipes;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -11,12 +13,19 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ChemicalReactorRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<ChemicalReactorRecipe> {
 
     @Override
     public ChemicalReactorRecipe read(ResourceLocation recipeId, JsonObject json) {
-        ItemStack output = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "output"), true);
+        List<ItemStack> output = new LinkedList<>();
+        JsonArray arr = JSONUtils.getJsonArray(json, "output");
+        for (JsonElement elem : arr) {
+            output.add(CraftingHelper.getItemStack((JsonObject) elem.getAsJsonObject(), true));
+        }
         Ingredient input = Ingredient.deserialize(JSONUtils.getJsonArray(json, "input"));
         return new ChemicalReactorRecipe(recipeId, input, output);
     }
@@ -24,7 +33,10 @@ public class ChemicalReactorRecipeSerializer extends ForgeRegistryEntry<IRecipeS
     @Nullable
     @Override
     public ChemicalReactorRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-        ItemStack output = buffer.readItemStack();
+        List<ItemStack> output = new LinkedList<>();
+        for (int i = 0; i < 2; i++) {
+            output.add(buffer.readItemStack());
+        }
         Ingredient input = Ingredient.read(buffer);
         return new ChemicalReactorRecipe(recipeId, input, output);
     }
@@ -33,7 +45,9 @@ public class ChemicalReactorRecipeSerializer extends ForgeRegistryEntry<IRecipeS
     public void write(PacketBuffer buffer, ChemicalReactorRecipe recipe) {
         Ingredient input = recipe.getIngredients().get(0);
         input.write(buffer);
-        buffer.writeItemStack(recipe.getRecipeOutput(), false);
+        for (int i = 0; i < 2; i++) {
+            buffer.writeItemStack(recipe.getAllOutput().get(i), false);
+        }
     }
 
 }

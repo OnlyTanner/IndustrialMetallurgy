@@ -3,12 +3,7 @@
   "output": {
     "item": "industrialmetallurgy:carbon_dust"
   },
-  "input": [
-    {
-      "item": "industrialmetallurgy:coal"
-    },
-    {
-      "item": "industrialmetallurgy:charcoal"
-    }
-  ]
+  "input": {
+    "item": "industrialmetallurgy:coal"
+  }
 }

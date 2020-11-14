@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sss",
+    "sss",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "item": "industrialmetallurgy:steel_ingot"
+    }
+  },
+  "result":
+  {
+    "item": "industrialmetallurgy:steel_block",
+    "count": 1
+  }
+}

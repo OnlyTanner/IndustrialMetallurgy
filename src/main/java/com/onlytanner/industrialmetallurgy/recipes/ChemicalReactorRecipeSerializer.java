@@ -24,7 +24,7 @@ public class ChemicalReactorRecipeSerializer extends ForgeRegistryEntry<IRecipeS
         List<ItemStack> output = new LinkedList<>();
         JsonArray arr = JSONUtils.getJsonArray(json, "output");
         for (JsonElement elem : arr) {
-            output.add(CraftingHelper.getItemStack((JsonObject) elem.getAsJsonObject(), true));
+            output.add(CraftingHelper.getItemStack(elem.getAsJsonObject(), true));
         }
         Ingredient input = Ingredient.deserialize(JSONUtils.getJsonArray(json, "input"));
         return new ChemicalReactorRecipe(recipeId, input, output);

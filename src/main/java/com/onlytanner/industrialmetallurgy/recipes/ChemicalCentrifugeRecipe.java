@@ -8,13 +8,16 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ChemicalCentrifugeRecipe implements ChemicalCentrifugeRecipeBase {
 
     private final ResourceLocation id;
     private Ingredient input;
-    private ItemStack output;
+    private List<ItemStack> output;
 
-    public ChemicalCentrifugeRecipe(ResourceLocation id, Ingredient input, ItemStack output) {
+    public ChemicalCentrifugeRecipe(ResourceLocation id, Ingredient input, List<ItemStack> output) {
         this.id = id;
         this.input = input;
         this.output = output;
@@ -27,19 +30,32 @@ public class ChemicalCentrifugeRecipe implements ChemicalCentrifugeRecipeBase {
 
     @Override
     public boolean matches(RecipeWrapper inv, World worldIn) {
-        if (!input.test(inv.getStackInSlot(0)))
+        List<ItemStack> invInput = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            if (inv.getStackInSlot(i) != ItemStack.EMPTY) {
+                invInput.add(inv.getStackInSlot(i));
+            }
+        }
+        if (invInput.size() != input.getMatchingStacks().length)
             return false;
+        for (ItemStack stack : invInput)
+            if (!input.test(stack))
+                return false;
         return true;
+    }
+
+    public List<ItemStack> getAllOutput() {
+        return output;
     }
 
     @Override
     public ItemStack getCraftingResult(RecipeWrapper inv) {
-        return output;
+        return output.get(0);
     }
 
     @Override
     public ItemStack getRecipeOutput() {
-        return output;
+        return output.get(0);
     }
 
     @Override

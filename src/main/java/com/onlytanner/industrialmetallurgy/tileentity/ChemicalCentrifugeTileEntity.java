@@ -46,14 +46,15 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ChemicalCentrifugeTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider, IEnergyStorage {
 
     public static final int INPUT_ID = 0;
-    public static final int OUTPUT_ID = 1;
-    public static final int BOTTLE_ID = 4;
+    public static final int BOTTLE_ID = 1;
+    public static final int OUTPUT_ID = 2;
     private ITextComponent customName;
     public int currentSmeltTime;
     public final int MAX_SMELT_TIME = 50;
@@ -82,7 +83,18 @@ public class ChemicalCentrifugeTileEntity extends TileEntity implements ITickabl
     public void tick() {
         boolean dirty = false;
         if (this.world != null && !this.world.isRemote) {
-
+            if (canProcess() && energy > ENERGY_USAGE_PER_TICK && currentSmeltTime < MAX_SMELT_TIME) {
+                energy -= ENERGY_USAGE_PER_TICK;
+                currentSmeltTime++;
+            }
+            else if (canProcess() && currentSmeltTime == MAX_SMELT_TIME) {
+                processRecipe();
+                currentSmeltTime = 0;
+                dirty = true;
+            }
+            else {
+                currentSmeltTime = 0;
+            }
         }
         if (dirty) {
             this.markDirty();
@@ -91,25 +103,32 @@ public class ChemicalCentrifugeTileEntity extends TileEntity implements ITickabl
         }
     }
 
-    public void processRecipe() {/*
-        ItemStack output = this.getRecipe().getRecipeOutput();
-        this.inventory.insertItem(OUTPUT_ID, output.copy(), false);
-        if (this.inventory.getStackInSlot(INPUT_ID) != ItemStack.EMPTY) {
-            ItemStack[] list = this.getRecipe().getInput().getMatchingStacks();
-            for (int j = 0; j < list.length; j++) {
-                if (list[j].getItem().equals(this.getInventory().getStackInSlot(INPUT_ID).getItem())) {
-                    this.inventory.decrStackSize(INPUT_ID, list[j].getCount());
-                }
+    public void processRecipe() {
+        if (getRecipe() != null) {
+            ChemicalCentrifugeRecipe recipe = this.getRecipe();
+            List<ItemStack> output = recipe.getAllOutput();
+            this.inventory.insertItem(OUTPUT_ID, output.get(0).copy(), false);
+            this.inventory.insertItem(OUTPUT_ID + 1, output.get(1).copy(), false);
+            this.inventory.insertItem(OUTPUT_ID + 2, output.get(2).copy(), false);
+            ItemStack[] list = recipe.getInput().getMatchingStacks();
+            if (list[0].getItem().equals(this.getInventory().getStackInSlot(INPUT_ID).getItem())) {
+                this.inventory.decrStackSize(INPUT_ID, list[0].getCount());
             }
-        }*/
+            if (list.length > 1 && list[1].getItem().equals(this.getInventory().getStackInSlot(BOTTLE_ID).getItem())) {
+                this.inventory.decrStackSize(INPUT_ID, list[1].getCount());
+            }
+        }
     }
 
-    public boolean canProcess() {/*
+    public boolean canProcess() {
         if (getRecipe() != null && getRecipe().matches(new RecipeWrapper(this.inventory), world) &&
-            (this.inventory.getStackInSlot(OUTPUT_ID).getCount() < 64) &&
-            ((this.inventory.getStackInSlot(OUTPUT_ID) == ItemStack.EMPTY) ||
-            (this.inventory.getStackInSlot(OUTPUT_ID).getItem().equals(getRecipe().getRecipeOutput().getItem()))))
-            return true;*/
+            ((this.inventory.getStackInSlot(OUTPUT_ID).getCount() < 64) ||
+            (this.inventory.getStackInSlot(OUTPUT_ID) == ItemStack.EMPTY)) &&
+            ((this.inventory.getStackInSlot(OUTPUT_ID + 1).getCount() < 64) ||
+            (this.inventory.getStackInSlot(OUTPUT_ID + 1) == ItemStack.EMPTY)) &&
+            ((this.inventory.getStackInSlot(OUTPUT_ID + 2).getCount() < 64) ||
+            (this.inventory.getStackInSlot(OUTPUT_ID + 2) == ItemStack.EMPTY)))
+            return true;
         return false;
     }
 

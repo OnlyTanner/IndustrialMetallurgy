@@ -60,7 +60,7 @@ public class ChemicalCentrifugeScreen extends ContainerScreen<ChemicalCentrifuge
         this.blit(matrixStack, backgroundX, backgroundY, 0, 0, this.xSize, this.ySize);
         this.blit(matrixStack, this.guiLeft + PROGRESS_X, this.guiTop + PROGRESS_Y, 176, 0, 9, this.container.getSmeltProgressionScaled());
         int yOffset = 70 - this.container.getCurrentEnergyScaled();
-        this.blit(matrixStack, this.guiLeft + 8, this.guiTop + 8 + yOffset, 176, yOffset + 17, 16, this.container.getCurrentEnergyScaled());
+        this.blit(matrixStack, this.guiLeft + 8, this.guiTop + 8 + yOffset, 176, yOffset + 28, 16, this.container.getCurrentEnergyScaled());
     }
 
     @Override

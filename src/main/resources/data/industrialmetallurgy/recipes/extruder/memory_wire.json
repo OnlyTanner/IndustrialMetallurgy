@@ -1,0 +1,9 @@
+{
+  "type": "industrialmetallurgy:extruder",
+  "output": {
+    "item": "industrialmetallurgy:memory_wire"
+  },
+  "input": {
+    "item": "industrialmetallurgy:nitinol_ingot"
+  }
+}

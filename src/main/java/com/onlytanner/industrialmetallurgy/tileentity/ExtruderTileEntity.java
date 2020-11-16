@@ -52,7 +52,7 @@ import java.util.stream.Collectors;
 public class ExtruderTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider, IEnergyStorage {
 
     public static final int INPUT_ID = 0;
-    public static final int OUTPUT_ID = 2;
+    public static final int OUTPUT_ID = 1;
     private ITextComponent customName;
     public int currentSmeltTime;
     public final int MAX_SMELT_TIME = 50;
@@ -81,7 +81,18 @@ public class ExtruderTileEntity extends TileEntity implements ITickableTileEntit
     public void tick() {
         boolean dirty = false;
         if (this.world != null && !this.world.isRemote) {
-
+            if (canProcess() && energy > ENERGY_USAGE_PER_TICK && currentSmeltTime < MAX_SMELT_TIME) {
+                energy -= ENERGY_USAGE_PER_TICK;
+                currentSmeltTime++;
+            }
+            else if (canProcess() && currentSmeltTime == MAX_SMELT_TIME) {
+                processRecipe();
+                currentSmeltTime = 0;
+                dirty = true;
+            }
+            else {
+                currentSmeltTime = 0;
+            }
         }
         if (dirty) {
             this.markDirty();
@@ -90,26 +101,22 @@ public class ExtruderTileEntity extends TileEntity implements ITickableTileEntit
         }
     }
 
-    public void processRecipe() {/*
-        ItemStack output = this.getRecipe().getRecipeOutput();
-        ItemStack copy = output.copy();
-        copy.setCount(getOutputForTier() * copy.getCount());
-        this.inventory.insertItem(OUTPUT_ID, copy, false);
+    public void processRecipe() {
+        ExtruderRecipe recipe = this.getRecipe();
+        this.inventory.insertItem(OUTPUT_ID, recipe.getRecipeOutput().copy(), false);
         if (this.inventory.getStackInSlot(INPUT_ID) != ItemStack.EMPTY) {
-            ItemStack[] list = this.getRecipe().getInput().getMatchingStacks();
-            for (int j = 0; j < list.length; j++) {
-                if (list[j].getItem().equals(this.getInventory().getStackInSlot(INPUT_ID).getItem())) {
-                }
+            if (recipe.getInput().getMatchingStacks()[0].getItem().equals(this.getInventory().getStackInSlot(INPUT_ID).getItem())) {
+                this.inventory.decrStackSize(INPUT_ID, recipe.getInput().getMatchingStacks()[0].getCount());
             }
-        }*/
+        }
     }
 
-    public boolean canProcess() {/*
+    public boolean canProcess() {
         if (getRecipe() != null && getRecipe().matches(new RecipeWrapper(this.inventory), world) &&
             (this.inventory.getStackInSlot(OUTPUT_ID).getCount() < 64) &&
             ((this.inventory.getStackInSlot(OUTPUT_ID) == ItemStack.EMPTY) ||
             (this.inventory.getStackInSlot(OUTPUT_ID).getItem().equals(getRecipe().getRecipeOutput().getItem()))))
-            return true;*/
+            return true;
         return false;
     }
 

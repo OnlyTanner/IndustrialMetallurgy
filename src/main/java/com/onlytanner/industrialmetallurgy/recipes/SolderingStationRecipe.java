@@ -1,5 +1,6 @@
 package com.onlytanner.industrialmetallurgy.recipes;
 
+import com.onlytanner.industrialmetallurgy.tileentity.SolderingStationTileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
@@ -27,8 +28,11 @@ public class SolderingStationRecipe implements SolderingStationRecipeBase {
 
     @Override
     public boolean matches(RecipeWrapper inv, World worldIn) {
-        if (!input.test(inv.getStackInSlot(0)))
-            return false;
+        ItemStack[] matchingStacks = input.getMatchingStacks();
+        for (int i = 0; i < matchingStacks.length; i++) {
+            if (!inv.getStackInSlot(i).getItem().equals(matchingStacks[i].getItem()))
+                return false;
+        }
         return true;
     }
 

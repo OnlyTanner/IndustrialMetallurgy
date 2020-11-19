@@ -127,6 +127,11 @@ public class RegistryHandler {
     public static final RegistryObject<Item> LITHIUM_BATTERY_CELL = ITEMS.register("lithium_battery_cell", ItemBase::new);
     public static final RegistryObject<Item> LITHIUM_BATTERY_BANK = ITEMS.register("lithium_battery_bank", ItemBase::new);
     public static final RegistryObject<Item> CONDUCTING_ELEMENT = ITEMS.register("conducting_element", ItemBase::new);
+    public static final RegistryObject<Item> PRINTED_CIRCUIT_BOARD = ITEMS.register("printed_circuit_board", ItemBase::new);
+    public static final RegistryObject<Item> INTEGRATED_CIRCUIT = ITEMS.register("integrated_circuit", ItemBase::new);
+    public static final RegistryObject<Item> CONTROLLER_BOARD = ITEMS.register("controller_board", ItemBase::new);
+    public static final RegistryObject<Item> CERAMIC_CAPACITOR = ITEMS.register("ceramic_capacitor", ItemBase::new);
+    public static final RegistryObject<Item> ELECTROLYTIC_CAPACITOR = ITEMS.register("electrolytic_capacitor", ItemBase::new);
     public static final RegistryObject<Item> ELECTRIC_MOTOR = ITEMS.register("electric_motor", ItemBase::new);
     public static final RegistryObject<Item> STATOR = ITEMS.register("stator", ItemBase::new);
     public static final RegistryObject<Item> ROTOR = ITEMS.register("rotor", ItemBase::new);

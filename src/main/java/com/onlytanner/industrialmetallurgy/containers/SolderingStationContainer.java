@@ -129,11 +129,11 @@ public class SolderingStationContainer extends Container {
         // SolderingStation Slots
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                containerSlots.get(ElementType.INPUT).add(new ContainerElementDimension(42 + (i * 18), 17 + (j * 18), 16, 16, index++, ElementType.INPUT, true));
+                containerSlots.get(ElementType.INPUT).add(new ContainerElementDimension(42 + (j * 18), 17 + (i * 18), 16, 16, index++, ElementType.INPUT, true));
             }
         }
-        containerSlots.get(ElementType.OUTPUT).add(new ContainerElementDimension(136, 49, 16, 16, index++, ElementType.OUTPUT, true));
         containerSlots.get(ElementType.UTILITY).add(new ContainerElementDimension(132, 17, 16, 16, index++, ElementType.UTILITY, true));
+        containerSlots.get(ElementType.OUTPUT).add(new ContainerElementDimension(136, 49, 16, 16, index++, ElementType.OUTPUT, true));
         // Attach all slot elements to the parent Container object
         attachSlotsToContainer();
     }

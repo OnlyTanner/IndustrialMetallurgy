@@ -106,7 +106,9 @@ public class RegistryHandler {
     public static final RegistryObject<Item> SULFUR = ITEMS.register("sulfur", ItemBase::new);
     public static final RegistryObject<Item> CALCIUM_OXIDE = ITEMS.register("calcium_oxide", ItemBase::new);
     public static final RegistryObject<Item> POTASSIUM_NITRATE = ITEMS.register("potassium_nitrate", ItemBase::new);
+    public static final RegistryObject<Item> LITHIUM_IRON_PHOSPHATE = ITEMS.register("lithium_iron_phosphate", ItemBase::new);
     public static final RegistryObject<Item> ETHYLENE_BOTTLE = ITEMS.register("ethylene_bottle", ItemBase::new);
+    public static final RegistryObject<Item> ETHYLENE_GLYCOL_BOTTLE = ITEMS.register("ethylene_glycol_bottle", ItemBase::new);
     public static final RegistryObject<Item> METHANE_BOTTLE = ITEMS.register("methane_bottle", ItemBase::new);
     public static final RegistryObject<Item> PETROLEUM_BOTTLE = ITEMS.register("petroleum_bottle", ItemBase::new);
     public static final RegistryObject<Item> SULFURIC_ACID_BOTTLE = ITEMS.register("sulfuric_acid_bottle", ItemBase::new);
@@ -216,6 +218,10 @@ public class RegistryHandler {
     // Other Resources
     public static final RegistryObject<Block> OIL_SAND = BLOCKS.register("oil_sand", OilSandBlock::new);
     // Machines
+    public static final RegistryObject<Block> IRON_FORGE_CORE = BLOCKS.register("iron_forge_core", OilSandBlock::new);
+    public static final RegistryObject<Block> STEEL_FORGE_CORE = BLOCKS.register("steel_forge_core", OilSandBlock::new);
+    public static final RegistryObject<Block> COBALT_FORGE_CORE = BLOCKS.register("cobalt_forge_core", OilSandBlock::new);
+    public static final RegistryObject<Block> TUNGSTEN_FORGE_CORE = BLOCKS.register("tungsten_forge_core", OilSandBlock::new);
     public static final RegistryObject<Block> FORGE_TIER1 = BLOCKS.register("forge_tier1", () -> new ForgeTier1Block(Block.Properties.from(Blocks.FURNACE)));
     public static final RegistryObject<Block> FORGE_TIER2 = BLOCKS.register("forge_tier2", () -> new ForgeTier2Block(Block.Properties.from(Blocks.FURNACE)));
     public static final RegistryObject<Block> CRUSHER = BLOCKS.register("crusher", () -> new CrusherBlock(Block.Properties.from(Blocks.FURNACE)));
@@ -275,6 +281,10 @@ public class RegistryHandler {
     // Other Resources
     public static final RegistryObject<Item> OIL_SAND_ITEM = ITEMS.register("oil_sand", () -> new BlockItemBase(OIL_SAND.get()));
     // Machines
+    public static final RegistryObject<Item> IRON_FORGE_CORE_ITEM = ITEMS.register("iron_forge_core", () -> new BlockItemBase(IRON_FORGE_CORE.get()));
+    public static final RegistryObject<Item> STEEL_FORGE_CORE_ITEM = ITEMS.register("steel_forge_core", () -> new BlockItemBase(STEEL_FORGE_CORE.get()));
+    public static final RegistryObject<Item> COBALT_FORGE_CORE_ITEM = ITEMS.register("cobalt_forge_core", () -> new BlockItemBase(COBALT_FORGE_CORE.get()));
+    public static final RegistryObject<Item> TUNGSTEN_FORGE_CORE_ITEM = ITEMS.register("tungsten_forge_core", () -> new BlockItemBase(TUNGSTEN_FORGE_CORE.get()));
     public static final RegistryObject<Item> FORGE_TIER1_ITEM = ITEMS.register("forge_tier1", () -> new BlockItemBase(FORGE_TIER1.get()));
     public static final RegistryObject<Item> FORGE_TIER2_ITEM = ITEMS.register("forge_tier2", () -> new BlockItemBase(FORGE_TIER2.get()));
     public static final RegistryObject<Item> CRUSHER_ITEM = ITEMS.register("crusher", () -> new BlockItemBase(CRUSHER.get()));

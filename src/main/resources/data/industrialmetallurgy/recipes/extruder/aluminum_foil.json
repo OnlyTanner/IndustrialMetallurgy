@@ -1,11 +1,11 @@
 {
   "type": "industrialmetallurgy:extruder",
   "output": {
-    "item": "industrialmetallurgy:memory_wire",
+    "item": "industrialmetallurgy:aluminum_foil",
     "count": 2
   },
   "input": {
-    "item": "industrialmetallurgy:nitinol_ingot",
+    "item": "industrialmetallurgy:aluminum_plate",
     "count": 1
   }
 }

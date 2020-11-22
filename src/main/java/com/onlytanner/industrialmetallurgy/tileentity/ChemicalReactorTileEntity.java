@@ -106,12 +106,13 @@ public class ChemicalReactorTileEntity extends TileEntity implements ITickableTi
     public void processRecipe() {
         List<ItemStack> output = this.getRecipe().getAllOutput();
         this.inventory.insertItem(OUTPUT_ID, output.get(0).copy(), false);
-        this.inventory.insertItem(BOTTLE_ID, output.get(1).copy(), false);
-        ItemStack[] list = this.getRecipe().getInput().getMatchingStacks();
-        for (int i = 0; i < 3; i++) {
+        if (output.size() > 1)
+            this.inventory.insertItem(BOTTLE_ID, output.get(1).copy(), false);
+        if (this.inventory.getStackInSlot(INPUT_ID) != ItemStack.EMPTY) {
+            ItemStack[] list = this.getRecipe().getInput().getMatchingStacks();
             for (int j = 0; j < list.length; j++) {
-                if (list[j].getItem().equals(this.getInventory().getStackInSlot(INPUT_ID).getItem())) {
-                    this.inventory.decrStackSize(INPUT_ID + i, list[j].getCount());
+                if (list[j].getItem().equals(this.getInventory().getStackInSlot(INPUT_ID + j).getItem())) {
+                    this.inventory.decrStackSize(INPUT_ID + j, list[j].getCount());
                 }
             }
         }

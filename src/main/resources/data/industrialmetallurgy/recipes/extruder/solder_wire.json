@@ -1,11 +1,11 @@
 {
   "type": "industrialmetallurgy:extruder",
   "output": {
-    "item": "industrialmetallurgy:memory_wire",
+    "item": "industrialmetallurgy:solder_wire",
     "count": 2
   },
   "input": {
-    "item": "industrialmetallurgy:nitinol_ingot",
+    "item": "industrialmetallurgy:solder_ingot",
     "count": 1
   }
 }

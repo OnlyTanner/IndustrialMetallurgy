@@ -1,0 +1,11 @@
+{
+  "type": "industrialmetallurgy:extruder",
+  "output": {
+    "item": "industrialmetallurgy:heat_sink",
+    "count": 1
+  },
+  "input": {
+    "item": "industrialmetallurgy:copper_tungsten_ingot",
+    "count": 3
+  }
+}

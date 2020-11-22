@@ -1,0 +1,23 @@
+{
+  "type": "industrialmetallurgy:chemical_reactor",
+  "output": [
+    {
+      "item": "industrialmetallurgy:fertilizer",
+      "count": 1
+    }
+  ],
+  "input": [
+    {
+      "item": "industrialmetallurgy:peat",
+      "count": 1
+    },
+    {
+      "item": "industrialmetallurgy:potassium_nitrate",
+      "count": 1
+    },
+    {
+      "item": "minecraft:bone_meal",
+      "count": 1
+    }
+  ]
+}

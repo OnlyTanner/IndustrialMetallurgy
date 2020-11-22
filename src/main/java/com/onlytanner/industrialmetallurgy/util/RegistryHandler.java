@@ -100,13 +100,18 @@ public class RegistryHandler {
     public static final RegistryObject<Item> CRUSHED_SCHEELITE_ORE = ITEMS.register("crushed_scheelite_ore", ItemBase::new);
     // Misc Resources
     public static final RegistryObject<Item> LEPIDOLITE = ITEMS.register("lepidolite", ItemBase::new);
+    public static final RegistryObject<Item> LITHIUM_DUST = ITEMS.register("lithium_dust", ItemBase::new);
     public static final RegistryObject<Item> CRUSHED_COAL = ITEMS.register("crushed_coal", ItemBase::new);
     public static final RegistryObject<Item> CRUSHED_DIAMOND = ITEMS.register("crushed_diamond", ItemBase::new);
     public static final RegistryObject<Item> TUNGSTEN_CARBIDE_DUST = ITEMS.register("tungsten_carbide_dust", ItemBase::new);
     public static final RegistryObject<Item> SULFUR = ITEMS.register("sulfur", ItemBase::new);
+    public static final RegistryObject<Item> PHOSPHORUS = ITEMS.register("phosphorus", ItemBase::new);
+    public static final RegistryObject<Item> ARSENIC = ITEMS.register("arsenic", ItemBase::new);
+    public static final RegistryObject<Item> LEAD_SULFATE = ITEMS.register("lead_sulfate", ItemBase::new);
     public static final RegistryObject<Item> CALCIUM_OXIDE = ITEMS.register("calcium_oxide", ItemBase::new);
     public static final RegistryObject<Item> POTASSIUM_NITRATE = ITEMS.register("potassium_nitrate", ItemBase::new);
     public static final RegistryObject<Item> LITHIUM_IRON_PHOSPHATE = ITEMS.register("lithium_iron_phosphate", ItemBase::new);
+    public static final RegistryObject<Item> WELDING_FLUX = ITEMS.register("welding_flux", ItemBase::new);
     public static final RegistryObject<Item> ETHYLENE_BOTTLE = ITEMS.register("ethylene_bottle", ItemBase::new);
     public static final RegistryObject<Item> ETHYLENE_GLYCOL_BOTTLE = ITEMS.register("ethylene_glycol_bottle", ItemBase::new);
     public static final RegistryObject<Item> METHANE_BOTTLE = ITEMS.register("methane_bottle", ItemBase::new);
@@ -118,6 +123,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> PEAT = ITEMS.register("peat", ItemBase::new);
     public static final RegistryObject<Item> FERTILIZER = ITEMS.register("fertilizer", ItemBase::new);
     public static final RegistryObject<Item> HDPE_SHEET = ITEMS.register("hdpe_sheet", ItemBase::new);
+    public static final RegistryObject<Item> CERAMIC_FIBER = ITEMS.register("ceramic_fiber", ItemBase::new);
     public static final RegistryObject<Item> GRAPHITE_ROD = ITEMS.register("graphite_rod", ItemBase::new);
     public static final RegistryObject<Item> REFRACTORY_BRICK = ITEMS.register("refractory_brick", ItemBase::new);
     public static final RegistryObject<Item> REFRACTORY_COMPOSITE = ITEMS.register("refractory_composite", ItemBase::new);

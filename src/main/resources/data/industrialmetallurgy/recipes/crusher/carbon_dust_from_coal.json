@@ -1,0 +1,9 @@
+{
+  "type": "industrialmetallurgy:crusher",
+  "output": {
+    "item": "industrialmetallurgy:carbon_dust"
+  },
+  "input": {
+    "item": "minecraft:coal"
+  }
+}

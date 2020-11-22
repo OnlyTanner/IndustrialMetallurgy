@@ -4,6 +4,6 @@
     "item": "industrialmetallurgy:carbon_dust"
   },
   "input": {
-    "item": "industrialmetallurgy:coal"
+    "item": "minecraft:charcoal"
   }
 }

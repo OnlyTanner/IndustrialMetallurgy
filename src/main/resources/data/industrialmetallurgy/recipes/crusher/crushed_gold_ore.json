@@ -1,0 +1,9 @@
+{
+  "type": "industrialmetallurgy:crusher",
+  "output": {
+    "item": "industrialmetallurgy:crushed_gold_ore"
+  },
+  "input": {
+    "item": "minecraft:gold_ore"
+  }
+}

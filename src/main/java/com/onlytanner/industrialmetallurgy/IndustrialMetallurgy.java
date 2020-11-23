@@ -59,6 +59,8 @@ public class IndustrialMetallurgy
     private void setupClient(final FMLClientSetupEvent event) {
         ScreenManager.registerFactory(ModContainerTypes.FORGE_TIER1.get(), BasicForgeScreen::new);
         ScreenManager.registerFactory(ModContainerTypes.FORGE_TIER2.get(), BasicForgeScreen::new);
+        ScreenManager.registerFactory(ModContainerTypes.FORGE_TIER3.get(), AdvancedForgeScreen::new);
+        ScreenManager.registerFactory(ModContainerTypes.FORGE_TIER4.get(), AdvancedForgeScreen::new);
         ScreenManager.registerFactory(ModContainerTypes.CRUSHER.get(), CrusherScreen::new);
         ScreenManager.registerFactory(ModContainerTypes.COKE_OVEN.get(), CokeOvenScreen::new);
         ScreenManager.registerFactory(ModContainerTypes.CHEMICAL_CENTRIFUGE.get(), ChemicalCentrifugeScreen::new);

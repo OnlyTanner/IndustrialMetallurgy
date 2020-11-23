@@ -19,6 +19,8 @@ public class ModContainerTypes {
 
     public static final RegistryObject<ContainerType<ForgeTier1Container>> FORGE_TIER1 = CONTAINER_TYPES.register("forge_tier1", () -> IForgeContainerType.create(ForgeTier1Container::new));
     public static final RegistryObject<ContainerType<ForgeTier2Container>> FORGE_TIER2 = CONTAINER_TYPES.register("forge_tier2", () -> IForgeContainerType.create(ForgeTier2Container::new));
+    public static final RegistryObject<ContainerType<ForgeTier3Container>> FORGE_TIER3 = CONTAINER_TYPES.register("forge_tier3", () -> IForgeContainerType.create(ForgeTier3Container::new));
+    public static final RegistryObject<ContainerType<ForgeTier4Container>> FORGE_TIER4 = CONTAINER_TYPES.register("forge_tier4", () -> IForgeContainerType.create(ForgeTier4Container::new));
     public static final RegistryObject<ContainerType<CrusherContainer>> CRUSHER = CONTAINER_TYPES.register("crusher", () -> IForgeContainerType.create(CrusherContainer::new));
     public static final RegistryObject<ContainerType<CokeOvenContainer>> COKE_OVEN = CONTAINER_TYPES.register("coke_oven", () -> IForgeContainerType.create(CokeOvenContainer::new));
     public static final RegistryObject<ContainerType<ChemicalCentrifugeContainer>> CHEMICAL_CENTRIFUGE = CONTAINER_TYPES.register("chemical_centrifuge", () -> IForgeContainerType.create(ChemicalCentrifugeContainer::new));

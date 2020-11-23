@@ -199,6 +199,8 @@
 
   "block.industrialmetallurgy.forge_tier1": "Iron Forge (Tier 1)",
   "block.industrialmetallurgy.forge_tier2": "Steel Forge (Tier 2)",
+  "block.industrialmetallurgy.forge_tier3": "Cobalt Forge (Tier 3)",
+  "block.industrialmetallurgy.forge_tier4": "Tungsten Forge (Tier 4)",
   "block.industrialmetallurgy.crusher": "Crusher",
   "block.industrialmetallurgy.coke_oven": "Coke Oven",
   "block.industrialmetallurgy.chemical_centrifuge": "Chemical Centrifuge",

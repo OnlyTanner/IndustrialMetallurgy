@@ -224,12 +224,14 @@ public class RegistryHandler {
     // Other Resources
     public static final RegistryObject<Block> OIL_SAND = BLOCKS.register("oil_sand", OilSandBlock::new);
     // Machines
-    public static final RegistryObject<Block> IRON_FORGE_CORE = BLOCKS.register("iron_forge_core", OilSandBlock::new);
-    public static final RegistryObject<Block> STEEL_FORGE_CORE = BLOCKS.register("steel_forge_core", OilSandBlock::new);
-    public static final RegistryObject<Block> COBALT_FORGE_CORE = BLOCKS.register("cobalt_forge_core", OilSandBlock::new);
-    public static final RegistryObject<Block> TUNGSTEN_FORGE_CORE = BLOCKS.register("tungsten_forge_core", OilSandBlock::new);
+    public static final RegistryObject<Block> IRON_FORGE_CORE = BLOCKS.register("iron_forge_core", MetalBlock::new);
+    public static final RegistryObject<Block> STEEL_FORGE_CORE = BLOCKS.register("steel_forge_core", MetalBlock::new);
+    public static final RegistryObject<Block> COBALT_FORGE_CORE = BLOCKS.register("cobalt_forge_core", MetalBlock::new);
+    public static final RegistryObject<Block> TUNGSTEN_FORGE_CORE = BLOCKS.register("tungsten_forge_core", MetalBlock::new);
     public static final RegistryObject<Block> FORGE_TIER1 = BLOCKS.register("forge_tier1", () -> new ForgeTier1Block(Block.Properties.from(Blocks.FURNACE)));
     public static final RegistryObject<Block> FORGE_TIER2 = BLOCKS.register("forge_tier2", () -> new ForgeTier2Block(Block.Properties.from(Blocks.FURNACE)));
+    public static final RegistryObject<Block> FORGE_TIER3 = BLOCKS.register("forge_tier3", () -> new ForgeTier3Block(Block.Properties.from(Blocks.FURNACE)));
+    public static final RegistryObject<Block> FORGE_TIER4 = BLOCKS.register("forge_tier4", () -> new ForgeTier4Block(Block.Properties.from(Blocks.FURNACE)));
     public static final RegistryObject<Block> CRUSHER = BLOCKS.register("crusher", () -> new CrusherBlock(Block.Properties.from(Blocks.FURNACE)));
     public static final RegistryObject<Block> COKE_OVEN = BLOCKS.register("coke_oven", () -> new CokeOvenBlock(Block.Properties.from(Blocks.FURNACE)));
     public static final RegistryObject<Block> CHEMICAL_CENTRIFUGE = BLOCKS.register("chemical_centrifuge", () -> new ChemicalCentrifugeBlock(Block.Properties.from(Blocks.FURNACE)));
@@ -293,6 +295,8 @@ public class RegistryHandler {
     public static final RegistryObject<Item> TUNGSTEN_FORGE_CORE_ITEM = ITEMS.register("tungsten_forge_core", () -> new BlockItemBase(TUNGSTEN_FORGE_CORE.get()));
     public static final RegistryObject<Item> FORGE_TIER1_ITEM = ITEMS.register("forge_tier1", () -> new BlockItemBase(FORGE_TIER1.get()));
     public static final RegistryObject<Item> FORGE_TIER2_ITEM = ITEMS.register("forge_tier2", () -> new BlockItemBase(FORGE_TIER2.get()));
+    public static final RegistryObject<Item> FORGE_TIER3_ITEM = ITEMS.register("forge_tier3", () -> new BlockItemBase(FORGE_TIER3.get()));
+    public static final RegistryObject<Item> FORGE_TIER4_ITEM = ITEMS.register("forge_tier4", () -> new BlockItemBase(FORGE_TIER4.get()));
     public static final RegistryObject<Item> CRUSHER_ITEM = ITEMS.register("crusher", () -> new BlockItemBase(CRUSHER.get()));
     public static final RegistryObject<Item> COKE_OVEN_ITEM = ITEMS.register("coke_oven", () -> new BlockItemBase(COKE_OVEN.get()));
     public static final RegistryObject<Item> CHEMICAL_CENTRIFUGE_ITEM = ITEMS.register("chemical_centrifuge", () -> new BlockItemBase(CHEMICAL_CENTRIFUGE.get()));

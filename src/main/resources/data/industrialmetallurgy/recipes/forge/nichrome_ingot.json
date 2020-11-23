@@ -1,7 +1,7 @@
 {
   "type": "industrialmetallurgy:forge",
   "output": {
-    "item": "industrialmetallurgy:cobalt_steel_ingot"
+    "item": "industrialmetallurgy:nichrome_ingot"
   },
   "input": [
     {
@@ -11,14 +11,6 @@
     {
       "item": "industrialmetallurgy:cobalt_nugget",
       "count": 1
-    },
-    {
-      "item": "industrialmetallurgy:welding_flux",
-      "count": 1
-    },
-    {
-      "item": "industrialmetallurgy:chromium_nugget",
-      "count": 2
     }
   ],
   "tier": "steel"

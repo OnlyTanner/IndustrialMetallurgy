@@ -1,0 +1,17 @@
+{
+  "type": "industrialmetallurgy:forge",
+  "output": {
+    "item": "industrialmetallurgy:copper_tungsten_ingot"
+  },
+  "input": [
+    {
+      "item": "industrialmetallurgy:copper_ingot",
+      "count": 1
+    },
+    {
+      "item": "industrialmetallurgy:tungsten_ingot",
+      "count": 1
+    }
+  ],
+  "tier": "cobalt"
+}

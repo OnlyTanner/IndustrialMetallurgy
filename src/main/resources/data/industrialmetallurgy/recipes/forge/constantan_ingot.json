@@ -1,21 +1,17 @@
 {
   "type": "industrialmetallurgy:forge",
   "output": {
-    "item": "industrialmetallurgy:invar_ingot"
+    "item": "industrialmetallurgy:constantan_ingot"
   },
   "input": [
     {
-      "item": "minecraft:iron_ingot",
+      "item": "industrialmetallurgy:copper_ingot",
       "count": 1
     },
     {
       "item": "industrialmetallurgy:nickel_ingot",
       "count": 1
-    },
-    {
-      "item": "industrialmetallurgy:manganese_nugget",
-      "count": 1
     }
   ],
-  "tier": "iron"
+  "tier": "steel"
 }

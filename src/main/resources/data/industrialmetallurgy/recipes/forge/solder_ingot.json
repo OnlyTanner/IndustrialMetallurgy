@@ -1,0 +1,21 @@
+{
+  "type": "industrialmetallurgy:forge",
+  "output": {
+    "item": "industrialmetallurgy:solder_ingot"
+  },
+  "input": [
+    {
+      "item": "industrialmetallurgy:lead_ingot",
+      "count": 1
+    },
+    {
+      "item": "industrialmetallurgy:tin_ingot",
+      "count": 1
+    },
+    {
+      "item": "industrialmetallurgy:copper_nugget",
+      "count": 1
+    }
+  ],
+  "tier": "steel"
+}

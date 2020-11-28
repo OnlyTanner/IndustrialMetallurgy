@@ -43,7 +43,7 @@ import java.util.stream.Collectors;
 public abstract class AdvancedForgeTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider, IEnergyStorage {
 
     public static final int NUM_INPUT_SLOTS = 4;
-    public static final int OUTPUT_ID = 5;
+    public static final int OUTPUT_ID = 4;
     protected ITextComponent customName;
     public int currentSmeltTime;
     public int currentTemperature;

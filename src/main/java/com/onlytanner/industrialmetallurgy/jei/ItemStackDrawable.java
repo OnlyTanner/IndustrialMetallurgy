@@ -17,7 +17,7 @@ public class ItemStackDrawable implements IDrawableStatic {
 
     @Override
     public void draw(MatrixStack matrixStack, int xOffset, int yOffset) {
-        draw(matrixStack, xOffset, yOffset);
+        draw(matrixStack, xOffset, yOffset, 0, 0, 0, 0);
     }
 
     @Override

@@ -1,7 +1,7 @@
 {
   "type": "industrialmetallurgy:forge",
   "output": {
-    "item": "industrialmetallurgy:nichrome_ingot"
+    "item": "industrialmetallurgy:nitinol_ingot"
   },
   "input": [
     {
@@ -9,12 +9,8 @@
       "count": 1
     },
     {
-      "item": "industrialmetallurgy:chromium_nugget",
-      "count": 2
-    },
-    {
-      "item": "minecraft:iron_nugget",
-      "count": 2
+      "item": "industrialmetallurgy:titanium_ingot",
+      "count": 1
     }
   ],
   "tier": "steel"

@@ -1,0 +1,17 @@
+{
+  "type": "industrialmetallurgy:forge",
+  "output": {
+    "item": "industrialmetallurgy:electrum_ingot"
+  },
+  "input": [
+    {
+      "item": "minecraft:gold_ingot",
+      "count": 1
+    },
+    {
+      "item": "industrialmetallurgy:silver_ingot",
+      "count": 1
+    }
+  ],
+  "tier": "cobalt"
+}

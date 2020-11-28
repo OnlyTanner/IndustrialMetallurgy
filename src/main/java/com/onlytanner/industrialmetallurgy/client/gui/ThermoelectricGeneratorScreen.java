@@ -14,7 +14,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class ThermoelectricGeneratorScreen extends ContainerScreen<ThermoelectricGeneratorContainer> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(IndustrialMetallurgy.MOD_ID, "textures/gui/container/thermoelectric_generator.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(IndustrialMetallurgy.MOD_ID, "textures/gui/container/thermoelectric_generator.png");
 
     private final int FLAME_X = 80, FLAME_Y = 17, FLAME_SIZE = 16;
     private final int ENERGY_X = 152, ENERGY_Y = 8, ENERGY_WIDTH = 16, ENERGY_HEIGHT = 70;

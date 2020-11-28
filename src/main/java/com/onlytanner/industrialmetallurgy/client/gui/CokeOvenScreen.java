@@ -14,7 +14,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class CokeOvenScreen extends ContainerScreen<CokeOvenContainer> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(IndustrialMetallurgy.MOD_ID, "textures/gui/container/coke_oven.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(IndustrialMetallurgy.MOD_ID, "textures/gui/container/coke_oven.png");
 
     private final int FLAME_X = 84, FLAME_Y = 35, FLAME_SIZE = 15;
 

@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class SolderingStationScreen extends ContainerScreen<SolderingStationContainer> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(IndustrialMetallurgy.MOD_ID, "textures/gui/container/soldering_station.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(IndustrialMetallurgy.MOD_ID, "textures/gui/container/soldering_station.png");
 
     private final int PROGRESS_X = 101, PROGRESS_Y = 48, PROGRESS_WIDTH = 24, PROGRESS_HEIGHT = 17;
     private final int ENERGY_X = 8, ENERGY_Y = 8, ENERGY_WIDTH = 16, ENERGY_HEIGHT = 70;

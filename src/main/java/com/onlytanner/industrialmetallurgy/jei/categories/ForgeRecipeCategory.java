@@ -31,7 +31,7 @@ public class ForgeRecipeCategory implements IRecipeCategory<ForgeRecipe> {
 
     @Override
     public String getTitle() {
-        return "Forge";
+        return "Forging";
     }
 
     @Override

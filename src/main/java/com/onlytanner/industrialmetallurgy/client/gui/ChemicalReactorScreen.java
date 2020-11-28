@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class ChemicalReactorScreen extends ContainerScreen<ChemicalReactorContainer> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(IndustrialMetallurgy.MOD_ID, "textures/gui/container/chemical_reactor.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(IndustrialMetallurgy.MOD_ID, "textures/gui/container/chemical_reactor.png");
 
     private final int PROGRESS_X = 98, PROGRESS_Y = 47, PROGRESS_WIDTH = 9, PROGRESS_HEIGHT = 28;
     private final int ENERGY_X = 8, ENERGY_Y = 8, ENERGY_WIDTH = 16, ENERGY_HEIGHT = 70;
